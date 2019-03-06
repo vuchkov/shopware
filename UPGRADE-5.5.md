@@ -2,13 +2,47 @@
 
 This changelog references changes done in Shopware 5.5 patch versions.
 
+## 5.5.8
+
+[View all changes from v5.5.7...v5.5.8](https://github.com/shopware/shopware/compare/v5.5.7...v5.5.8)
+
+### Additions
+
+* Added new config `alwaysShowMainFeatures` to show the template from `mainfeatures` in the whole checkout process
+* Added configuration for displaying shipping costs pre calculation in off canvas shopping cart
+
+### Changes
+
+* Changed deprecation on `Shopware\Bundle\SearchBundleDBAL\PriceHelperInterface`. It was deprecated since 5.3.0, that deprecation got removed
+* Changed url plugin to resolve base-url on CLI
+* Changed variant switch to consider url parameters without value
+* Changed `CategoryProvider` to skip excluded categories from sitemap 
+* Changed `CookieSubscriber` to clear session value for `userInfo` after a login
+* Changed article REST api to properly deal with configuration option positions
+* Changed shipping costs pre calculation display configuration
+* Changed `HreflangService` to only consider active subshops
+* Changed HTTPCache to fix issues with the first request of a URL when debugging is active
+* Changed availability filter for ES condition
+
+### Deprecations
+
+* Deprecated the class `Shopware_Components_Benchmark_Point`. It will be removed in 5.6 without replacement.
+* Deprecated the class `Shopware_Components_Benchmark_Container`. It will be removed in 5.6 without replacement.
+
 ## 5.5.7
 
 [View all changes from v5.5.6...v5.5.7](https://github.com/shopware/shopware/compare/v5.5.6...v5.5.7)
 
 ### Additions
 
-* Added license synchronization button in Plugin Manager
+* Added a license synchronization button in Plugin Manager
+* Added a standardized way to filter certain entities from being exported to the sitemap, or have custom URLs exported as well (see paragraph "Excluding URLs from sitemap and adding custom URLs" below)
+* Added new blocks `frontend_listing_actions_paging_inner` to `listing/actions/action-pagination.tpl` and `frontend_listing_actions_sort_inner` to `listing/actions/action-sorting.tpl`
+* Added `shopId` to the `Shopware_Controllers_Seo_filterCounts` Event
+* Added `laststock` to "Apply Standard Data"
+* Added blocks "frontend_index_header_css_screen_stylesheet" and `frontend_index_header_javascript_jquery_lib_file`
+* Added button to order module detail window, to open customer directly
+* Added new option to AdvancedMenu to improve performance when not using customer groups
 
 ### Changes
 
@@ -17,8 +51,20 @@ This changelog references changes done in Shopware 5.5 patch versions.
 * Changed `StaticUrlProvider` to prevent duplicate URLs
 * Changed minibasket to also update amount/number badge when the last product is being removed from offcanvas basket
 * Changed libraries in Updater-app to most recent versions
+* Changed initial BI teaser to only show after a few days
 * Changed `jquery.datepicker.js` to initialize component value by element value on init 
-* Changed following services to lower-case:
+* Changed return array of `\Shopware\Bundle\ESIndexingBundle\TextMapping\TextMappingES5::getNotAnalyzedField` to fix warning thrown on indexing in an Elasticsearch 5 server
+* Changed double cache testing in advanced menu
+* Changed `ReflectionHelper` to improve support for Composer projects
+* Changed filters in blog categories can now be hidden in mobile view
+* Changed plugin CLI commands to clear relevant caches
+* Changed jQuery preloader plugin to fix reset function
+* Changed SQL query in risk management to avoid block nested loops
+* Changed `GarbageCollector` to consider links
+* Changed the type of the `docId` column in `s_order_documents` to VARCHAR, the models and backend module have been changed accordingly
+* Changed pluginPath assignment in `\Shopware\Commands\PluginDeleteCommand::execute` to delete plugins located in "/custom/plugins/" correctly
+* Changed the backend search for chars like 'ß'
+* Changed following service ids to lower-case:
     * `Loader`
     * `Hooks`
     * `Modelconfig`
@@ -38,6 +84,11 @@ This changelog references changes done in Shopware 5.5 patch versions.
     * `\Shopware\Components\Plugin\XmlPluginInfoReader`
     * `\Shopware\Components\Plugin\XmlConfigDefinitionReader`
     They have been replaced in Shopware 5.6 with new implementations in the namespace [Shopware\Components\Plugin\XmlReader](https://github.com/shopware/shopware/tree/5.6/engine/Shopware/Components/Plugin/XmlReader)
+
+### Removals
+
+* Removed `appendSession` parameter from router due to possible security implications. Use the `OptinService` to store the session name and id internally and use the generated hash in combination with a ListenerService instead to restore the session where necessary
+* Removed duplicate folder renaming in `PluginExtractor`
 
 ### Excluding URLs from sitemap and adding custom URLs
 
