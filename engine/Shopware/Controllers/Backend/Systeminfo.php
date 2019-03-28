@@ -25,8 +25,6 @@
 use Shopware\Components\CSRFWhitelistAware;
 
 /**
- * Shopware Systeminfo Controller
- *
  * This controller reads out all necessary configs.
  */
 class Shopware_Controllers_Backend_Systeminfo extends Shopware_Controllers_Backend_ExtJs implements CSRFWhitelistAware
@@ -176,9 +174,9 @@ class Shopware_Controllers_Backend_Systeminfo extends Shopware_Controllers_Backe
             ];
         }
 
-        $this->View()->success = true;
-        $this->View()->data = $optimizerResult;
-        $this->View()->total = count($optimizerResult);
+        $this->View()->assign('success', true);
+        $this->View()->assign('data', $optimizerResult);
+        $this->View()->assign('total', count($optimizerResult));
     }
 
     /**

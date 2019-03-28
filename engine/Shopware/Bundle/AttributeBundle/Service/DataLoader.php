@@ -26,11 +26,6 @@ namespace Shopware\Bundle\AttributeBundle\Service;
 
 use Doctrine\DBAL\Connection;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.com)
- */
 class DataLoader
 {
     /**
@@ -43,10 +38,6 @@ class DataLoader
      */
     private $mapping;
 
-    /**
-     * @param Connection   $connection
-     * @param TableMapping $mapping
-     */
     public function __construct(Connection $connection, TableMapping $mapping)
     {
         $this->connection = $connection;

@@ -28,10 +28,6 @@ use Shopware\Components\Api\Exception as ApiException;
 
 /**
  * Shop API Resource
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class Shop extends Resource
 {
@@ -79,10 +75,8 @@ class Shop extends Resource
     }
 
     /**
-     * @param int   $offset
-     * @param int   $limit
-     * @param array $criteria
-     * @param array $orderBy
+     * @param int $offset
+     * @param int $limit
      *
      * @return array
      */
@@ -111,8 +105,6 @@ class Shop extends Resource
     }
 
     /**
-     * @param array $params
-     *
      * @throws \Shopware\Components\Api\Exception\ValidationException
      * @throws \Exception
      *
@@ -139,8 +131,7 @@ class Shop extends Resource
     }
 
     /**
-     * @param int   $id
-     * @param array $params
+     * @param int $id
      *
      * @throws \Shopware\Components\Api\Exception\ValidationException
      * @throws \Shopware\Components\Api\Exception\NotFoundException
@@ -157,7 +148,7 @@ class Shop extends Resource
             throw new ApiException\ParameterMissingException();
         }
 
-        /** @var \Shopware\Models\Shop\Shop $shop */
+        /** @var \Shopware\Models\Shop\Shop|null $shop */
         $shop = $this->getRepository()->find($id);
 
         if (!$shop) {
@@ -193,7 +184,7 @@ class Shop extends Resource
             throw new ApiException\ParameterMissingException();
         }
 
-        /** @var \Shopware\Models\Shop\Shop $shop */
+        /** @var \Shopware\Models\Shop\Shop|null $shop */
         $shop = $this->getRepository()->find($id);
 
         if (!$shop) {

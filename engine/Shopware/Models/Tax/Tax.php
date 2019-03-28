@@ -52,7 +52,7 @@ class Tax extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -90,8 +90,6 @@ class Tax extends ModelEntity
     }
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -100,8 +98,6 @@ class Tax extends ModelEntity
     }
 
     /**
-     * Set tax
-     *
      * @param float $tax
      *
      * @return Tax
@@ -114,8 +110,6 @@ class Tax extends ModelEntity
     }
 
     /**
-     * Get tax
-     *
      * @return float
      */
     public function getTax()
@@ -124,8 +118,6 @@ class Tax extends ModelEntity
     }
 
     /**
-     * Set description
-     *
      * @param string $name
      *
      * @return Tax
@@ -138,8 +130,6 @@ class Tax extends ModelEntity
     }
 
     /**
-     * Get description
-     *
      * @return string
      */
     public function getName()

@@ -31,17 +31,9 @@ use Shopware\Recovery\Install\Struct\LicenseInformation;
 use Shopware\Recovery\Install\Struct\LicenseUnpackRequest;
 use Shopware\Recovery\Install\Struct\ShopwareEdition;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class LocalLicenseUnpackService implements LicenseUnpackService
 {
     /**
-     * @param LicenseUnpackRequest $request
-     * @param TranslationService   $translation
-     *
      * @throws LicenseHostException
      * @throws LicenseProductKeyException
      * @throws LicenseInvalidException

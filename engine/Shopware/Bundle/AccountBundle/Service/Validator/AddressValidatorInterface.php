@@ -27,21 +27,14 @@ namespace Shopware\Bundle\AccountBundle\Service\Validator;
 use Shopware\Components\Api\Exception\ValidationException;
 use Shopware\Models\Customer\Address;
 
-/**
- * Interface AddressValidatorInterface
- */
 interface AddressValidatorInterface
 {
     /**
-     * @param Address $address
-     *
      * @throws ValidationException
      */
     public function validate(Address $address);
 
     /**
-     * @param Address $address
-     *
      * @return bool
      */
     public function isValid(Address $address);

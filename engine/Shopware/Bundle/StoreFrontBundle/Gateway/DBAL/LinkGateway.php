@@ -28,11 +28,6 @@ use Doctrine\DBAL\Connection;
 use Shopware\Bundle\StoreFrontBundle\Gateway;
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class LinkGateway implements Gateway\LinkGatewayInterface
 {
     /**
@@ -60,11 +55,6 @@ class LinkGateway implements Gateway\LinkGatewayInterface
      */
     private $connection;
 
-    /**
-     * @param Connection            $connection
-     * @param FieldHelper           $fieldHelper
-     * @param Hydrator\LinkHydrator $linkHydrator
-     */
     public function __construct(
         Connection $connection,
         FieldHelper $fieldHelper,

@@ -26,11 +26,6 @@ use Shopware\Bundle\SearchBundle\ProductSearchResult;
 use Shopware\Bundle\SearchBundle\SearchTermPreProcessorInterface;
 use Shopware\Bundle\StoreFrontBundle\Struct\ShopContextInterface;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Shopware_Controllers_Frontend_Search extends Enlight_Controller_Action
 {
     /**
@@ -198,8 +193,6 @@ class Shopware_Controllers_Frontend_Search extends Enlight_Controller_Action
     }
 
     /**
-     * @param ProductSearchResult $result
-     *
      * @return array|null
      */
     private function convertProducts(ProductSearchResult $result)

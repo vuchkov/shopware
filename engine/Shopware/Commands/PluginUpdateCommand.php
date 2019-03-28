@@ -31,11 +31,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class PluginUpdateCommand extends PluginCommand
 {
     /**
@@ -59,6 +54,12 @@ class PluginUpdateCommand extends PluginCommand
                 InputOption::VALUE_REQUIRED,
                 'Batch update several plugins. Possible values are all, inactive, active, installed, uninstalled'
             )
+            ->addOption(
+                'no-refresh',
+                null,
+                InputOption::VALUE_NONE,
+                'Do not refresh plugin list.'
+            )
             ->setHelp(<<<'EOF'
 The <info>%command.name%</info> updates a plugin.
 EOF
@@ -72,6 +73,10 @@ EOF
     {
         /** @var InstallerService $pluginManager */
         $pluginManager = $this->container->get('shopware_plugininstaller.plugin_manager');
+        if (!$input->getOption('no-refresh')) {
+            $pluginManager->refreshPluginList();
+            $output->writeln('Successfully refreshed');
+        }
 
         $pluginNames = $input->getArgument('plugin');
 
@@ -94,9 +99,7 @@ EOF
     }
 
     /**
-     * @param InstallerService $pluginManager
-     * @param string           $batchUpdate
-     * @param OutputInterface  $output
+     * @param string $batchUpdate
      *
      * @return int 0 if everything went fine, or an error code
      */
@@ -151,10 +154,7 @@ EOF
     }
 
     /**
-     * @param InstallerService $pluginManager
-     * @param string           $pluginName
-     * @param InputInterface   $input
-     * @param OutputInterface  $output
+     * @param string $pluginName
      *
      * @return int 0 if everything went fine, or an error code
      */

@@ -24,11 +24,6 @@
 
 namespace Shopware\Components\Migrations;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 abstract class AbstractMigration
 {
     public const MODUS_UPDATE = 'update';
@@ -44,9 +39,6 @@ abstract class AbstractMigration
      */
     protected $sql = [];
 
-    /**
-     * @param \PDO $connection
-     */
     public function __construct(\PDO $connection)
     {
         $this->connection = $connection;
@@ -64,17 +56,11 @@ abstract class AbstractMigration
         return $this;
     }
 
-    /**
-     * @return \PDO
-     */
     public function getConnection(): \PDO
     {
         return $this->connection;
     }
 
-    /**
-     * @return string
-     */
     public function getLabel(): string
     {
         $result = [];
@@ -89,9 +75,6 @@ abstract class AbstractMigration
         return $result[1];
     }
 
-    /**
-     * @return int
-     */
     public function getVersion(): int
     {
         $result = [];
@@ -109,8 +92,6 @@ abstract class AbstractMigration
 
     /**
      * @param string $sql
-     *
-     * @return AbstractMigration
      */
     public function addSql($sql): AbstractMigration
     {
@@ -122,9 +103,6 @@ abstract class AbstractMigration
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function getSql(): array
     {
         return $this->sql;

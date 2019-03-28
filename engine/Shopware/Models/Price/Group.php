@@ -32,7 +32,7 @@ use Shopware\Components\Model\ModelEntity;
  * Shopware Price Model
  *
  * @ORM\Table(name="s_core_pricegroups")
- * @ORM\Entity
+ * @ORM\Entity()
  */
 class Group extends ModelEntity
 {
@@ -47,7 +47,7 @@ class Group extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -65,8 +65,6 @@ class Group extends ModelEntity
     }
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -75,8 +73,6 @@ class Group extends ModelEntity
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      *
      * @return Group
@@ -89,8 +85,6 @@ class Group extends ModelEntity
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getName()

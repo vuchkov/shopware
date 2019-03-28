@@ -33,9 +33,6 @@ use Shopware\Models\Customer\Customer;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormInterface;
 
-/**
- * Register controller
- */
 class Shopware_Controllers_Frontend_Register extends Enlight_Controller_Action
 {
     /**
@@ -144,10 +141,10 @@ class Shopware_Controllers_Frontend_Register extends Enlight_Controller_Action
         }
 
         $errors['occurred'] = (
-            !empty($errors['personal']) ||
-            !empty($errors['shipping']) ||
-            !empty($errors['billing']) ||
-            !empty($errors['captcha'])
+            !empty($errors['personal'])
+            || !empty($errors['shipping'])
+            || !empty($errors['billing'])
+            || !empty($errors['captcha'])
         );
 
         if ($errors['occurred']) {
@@ -305,8 +302,8 @@ class Shopware_Controllers_Frontend_Register extends Enlight_Controller_Action
             'emailConfirmation' => $errors['emailConfirmation'] ?: false,
         ];
 
-        $this->Response()->setHeader('Content-type', 'application/json', true);
-        $this->Response()->setBody(json_encode($errors));
+        $this->Response()->headers->set('content-type', 'application/json', true);
+        $this->Response()->setContent(json_encode($errors));
     }
 
     public function ajaxValidatePasswordAction()
@@ -322,14 +319,11 @@ class Shopware_Controllers_Frontend_Register extends Enlight_Controller_Action
             'passwordConfirmation' => $errors['passwordConfirmation'] ?: false,
         ];
 
-        $this->Response()->setHeader('Content-type', 'application/json', true);
-        $this->Response()->setBody(json_encode($errors));
+        $this->Response()->headers->set('content-type', 'application/json', true);
+        $this->Response()->setContent(json_encode($errors));
     }
 
     /**
-     * @param array    $data
-     * @param Customer $customer
-     *
      * @throws Enlight_Event_Exception
      */
     private function saveRegisterSuccess(array $data, Customer $customer)
@@ -357,8 +351,7 @@ class Shopware_Controllers_Frontend_Register extends Enlight_Controller_Action
     /**
      * Validates the captcha in the request
      *
-     * @param string                             $captchaName
-     * @param Enlight_Controller_Request_Request $request
+     * @param string $captchaName
      *
      * @return bool
      */
@@ -419,8 +412,6 @@ class Shopware_Controllers_Frontend_Register extends Enlight_Controller_Action
     }
 
     /**
-     * @param FormInterface $form
-     *
      * @return array
      */
     private function getFormErrors(FormInterface $form)
@@ -442,8 +433,6 @@ class Shopware_Controllers_Frontend_Register extends Enlight_Controller_Action
     }
 
     /**
-     * @param array $data
-     *
      * @return bool
      */
     private function isShippingProvided(array $data)
@@ -528,10 +517,6 @@ class Shopware_Controllers_Frontend_Register extends Enlight_Controller_Action
         return $register;
     }
 
-    /**
-     * @param array    $data
-     * @param Customer $customer
-     */
     private function writeSession(array $data, Customer $customer)
     {
         /** @var Enlight_Components_Session_Namespace $session */
@@ -546,8 +531,6 @@ class Shopware_Controllers_Frontend_Register extends Enlight_Controller_Action
     }
 
     /**
-     * @param Customer $customer
-     *
      * @throws Exception
      */
     private function loginCustomer(Customer $customer)
@@ -559,8 +542,6 @@ class Shopware_Controllers_Frontend_Register extends Enlight_Controller_Action
 
     /**
      * Redirects after registration to the corresponding controllers and actions
-     *
-     * @param array $params
      */
     private function redirectCustomer(array $params = [])
     {
@@ -577,8 +558,6 @@ class Shopware_Controllers_Frontend_Register extends Enlight_Controller_Action
     }
 
     /**
-     * @param array $data
-     *
      * @return Form
      */
     private function createCustomerForm(array $data)
@@ -591,8 +570,6 @@ class Shopware_Controllers_Frontend_Register extends Enlight_Controller_Action
     }
 
     /**
-     * @param array $data
-     *
      * @return Form
      */
     private function createBillingForm(array $data)
@@ -605,8 +582,6 @@ class Shopware_Controllers_Frontend_Register extends Enlight_Controller_Action
     }
 
     /**
-     * @param array $data
-     *
      * @return Form
      */
     private function createShippingForm(array $data)
@@ -630,9 +605,6 @@ class Shopware_Controllers_Frontend_Register extends Enlight_Controller_Action
         return $this->get('legacy_struct_converter')->convertCountryStructList($countries);
     }
 
-    /**
-     * @param Customer $customer
-     */
     private function sendRegistrationMail(Customer $customer)
     {
         try {

@@ -26,11 +26,6 @@ namespace Shopware\Recovery\Install;
 
 use Shopware\Recovery\Install\Service\TranslationService;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class MenuHelper
 {
     /**
@@ -48,11 +43,6 @@ class MenuHelper
      */
     private $translations;
 
-    /**
-     * @param \Slim\Slim         $slim
-     * @param TranslationService $translations
-     * @param array              $entries
-     */
     public function __construct(\Slim\Slim $slim, TranslationService $translations, array $entries)
     {
         $this->entries = $entries;

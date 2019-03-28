@@ -27,11 +27,6 @@ namespace Shopware\Tests\Functional\Components\Api;
 use Shopware\Components\Api\Resource\Country;
 use Shopware\Models\Country\State;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class CountryTest extends TestCase
 {
     /**
@@ -170,8 +165,6 @@ class CountryTest extends TestCase
     /**
      * @depends testCreateWithState
      *
-     * @param \Shopware\Models\Country\Country $country
-     *
      * @return \Shopware\Models\Country\Country
      */
     public function testGetOne(\Shopware\Models\Country\Country $country)
@@ -198,8 +191,6 @@ class CountryTest extends TestCase
 
     /**
      * @depends testGetOne
-     *
-     * @param \Shopware\Models\Country\Country $country
      *
      * @return \Shopware\Models\Country\Country
      */
@@ -259,8 +250,6 @@ class CountryTest extends TestCase
     /**
      * @depends testUpdate
      *
-     * @param \Shopware\Models\Country\Country $country
-     *
      * @return \Shopware\Models\Country\Country
      */
     public function testGetList(\Shopware\Models\Country\Country $country)
@@ -277,8 +266,6 @@ class CountryTest extends TestCase
 
     /**
      * @depends testGetList
-     *
-     * @param \Shopware\Models\Country\Country $country
      */
     public function testDelete(\Shopware\Models\Country\Country $country)
     {

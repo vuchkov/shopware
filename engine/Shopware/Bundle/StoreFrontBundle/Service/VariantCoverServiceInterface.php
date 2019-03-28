@@ -26,19 +26,13 @@ namespace Shopware\Bundle\StoreFrontBundle\Service;
 
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 interface VariantCoverServiceInterface
 {
     /**
      * Returns a list of variant specified covers.
      * The list is indexed by the product number.
      *
-     * @param Struct\BaseProduct[]        $products
-     * @param Struct\ShopContextInterface $context
+     * @param Struct\BaseProduct[] $products
      *
      * @return Struct\Media[] indexed by product number
      */

@@ -30,9 +30,9 @@ use Shopware\Components\Model\ModelEntity;
 /**
  * Shopware rule model represents a acl rule in shopware.
  *
- * @ORM\Entity
+ * @ORM\Entity()
  * @ORM\Table(name="s_core_acl_roles")
- * @ORM\HasLifecycleCallbacks
+ * @ORM\HasLifecycleCallbacks()
  */
 class Rule extends ModelEntity
 {
@@ -40,7 +40,7 @@ class Rule extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -111,7 +111,7 @@ class Rule extends ModelEntity
      * Returns the instance of the Shopware\Models\User\Resource model which
      * contains all data about the assigned resource.
      *
-     * @return \Shopware\Models\User\Resource
+     * @return \Shopware\Models\User\Resource|null
      */
     public function getResource()
     {
@@ -122,7 +122,7 @@ class Rule extends ModelEntity
      * Returns the instance of the Shopware\Models\User\Privilege model which
      * contains all data about the assigned privilege.
      *
-     * @return \Shopware\Models\User\Privilege
+     * @return \Shopware\Models\User\Privilege|null
      */
     public function getPrivilege()
     {

@@ -34,9 +34,6 @@ class StoreFrontEmotionDeviceConfiguration implements StoreFrontEmotionDeviceCon
      */
     private $deviceConfiguration;
 
-    /**
-     * @param DeviceConfigurationInterface $deviceConfiguration
-     */
     public function __construct(DeviceConfigurationInterface $deviceConfiguration)
     {
         $this->deviceConfiguration = $deviceConfiguration;
@@ -71,10 +68,8 @@ class StoreFrontEmotionDeviceConfiguration implements StoreFrontEmotionDeviceCon
             function (array $config) use ($context) {
                 $ids = array_filter(explode('|', $config['customer_stream_ids']));
 
-                return
-                    $config['customer_stream_ids'] === null
-                    ||
-                    !empty(array_intersect($context->getActiveCustomerStreamIds(), $ids))
+                return $config['customer_stream_ids'] === null
+                    || !empty(array_intersect($context->getActiveCustomerStreamIds(), $ids))
                 ;
             }
         );
@@ -92,8 +87,6 @@ class StoreFrontEmotionDeviceConfiguration implements StoreFrontEmotionDeviceCon
     }
 
     /**
-     * @param array $configurations
-     *
      * @return array
      */
     private function getReplacements(array $configurations)

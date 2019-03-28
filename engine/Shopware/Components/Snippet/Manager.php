@@ -28,11 +28,6 @@ use Shopware\Models\Plugin\Plugin;
 use Shopware\Models\Shop\Locale;
 use Shopware\Models\Shop\Shop;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Shopware_Components_Snippet_Manager extends Enlight_Components_Snippet_Manager
 {
     /**
@@ -46,7 +41,7 @@ class Shopware_Components_Snippet_Manager extends Enlight_Components_Snippet_Man
     protected $snippetConfig;
 
     /**
-     * @var Shopware\Models\Shop\Locale
+     * @var Shopware\Models\Shop\Locale|null
      */
     protected $locale;
 
@@ -56,7 +51,7 @@ class Shopware_Components_Snippet_Manager extends Enlight_Components_Snippet_Man
     protected $shop;
 
     /**
-     * @var Enlight_Config_Adapter_File
+     * @var Enlight_Config_Adapter_File|null
      */
     protected $fileAdapter;
 
@@ -75,11 +70,6 @@ class Shopware_Components_Snippet_Manager extends Enlight_Components_Snippet_Man
      */
     private $fallbackLocale;
 
-    /**
-     * @param ModelManager $modelManager
-     * @param array        $pluginDirectories
-     * @param array        $snippetConfig
-     */
     public function __construct(ModelManager $modelManager, array $pluginDirectories, array $snippetConfig)
     {
         $this->snippetConfig = $snippetConfig;
@@ -151,7 +141,6 @@ class Shopware_Components_Snippet_Manager extends Enlight_Components_Snippet_Man
     /**
      * Set locale instance
      *
-     * @param Locale $locale
      *
      * @return Shopware_Components_Snippet_Manager
      */
@@ -166,7 +155,6 @@ class Shopware_Components_Snippet_Manager extends Enlight_Components_Snippet_Man
     /**
      * Set shop instance
      *
-     * @param Shop $shop
      *
      * @return Shopware_Components_Snippet_Manager
      */
@@ -396,7 +384,7 @@ class Shopware_Components_Snippet_Manager extends Enlight_Components_Snippet_Man
      */
     private function requiresFallback($instance)
     {
-        if (!$instance instanceof  Enlight_Components_Snippet_Namespace) {
+        if (!$instance instanceof Enlight_Components_Snippet_Namespace) {
             return false;
         }
         if ($instance->getFallback()) {

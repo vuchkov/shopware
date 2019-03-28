@@ -29,9 +29,6 @@ use Shopware\Bundle\AccountBundle\Form\Account\ResetPasswordFormType;
 use Shopware\Bundle\StaticContentBundle\Exception\EsdNotFoundException;
 use Shopware\Models\Customer\Customer;
 
-/**
- * Account controller
- */
 class Shopware_Controllers_Frontend_Account extends Enlight_Controller_Action
 {
     /**
@@ -305,8 +302,8 @@ class Shopware_Controllers_Frontend_Account extends Enlight_Controller_Action
 
             if (!empty($checkData['checkPayment']['sErrorMessages']) || empty($checkData['sProcessed'])) {
                 if (empty($sourceIsCheckoutConfirm)) {
-                    $this->View()->sErrorFlag = $checkData['checkPayment']['sErrorFlag'];
-                    $this->View()->sErrorMessages = $checkData['checkPayment']['sErrorMessages'];
+                    $this->View()->assign('sErrorFlag', $checkData['checkPayment']['sErrorFlag']);
+                    $this->View()->assign('sErrorMessages', $checkData['checkPayment']['sErrorMessages']);
                 }
 
                 return $this->forward('payment');
@@ -692,8 +689,6 @@ class Shopware_Controllers_Frontend_Account extends Enlight_Controller_Action
     }
 
     /**
-     * @param array $orderData
-     *
      * @return array
      */
     private function applyTrackingUrl(array $orderData)
@@ -749,9 +744,9 @@ class Shopware_Controllers_Frontend_Account extends Enlight_Controller_Action
 
         $this->deleteExpiredOptInItems();
 
-        /** @var \Shopware\Models\CommentConfirm\CommentConfirm $confirmModel */
+        /** @var \Shopware\Models\CommentConfirm\CommentConfirm|null $confirmModel */
         $confirmModel = $this->get('models')
-            ->getRepository('Shopware\Models\CommentConfirm\CommentConfirm')
+            ->getRepository(\Shopware\Models\CommentConfirm\CommentConfirm::class)
             ->findOneBy(['hash' => $hash, 'type' => 'swPassword']);
 
         if (!$confirmModel) {
@@ -763,7 +758,7 @@ class Shopware_Controllers_Frontend_Account extends Enlight_Controller_Action
             );
         }
 
-        /** @var Customer $customer */
+        /** @var Customer|null $customer */
         $customer = $this->get('models')->find(\Shopware\Models\Customer\Customer::class, $confirmModel->getData());
         if (!$customer) {
             throw new Exception(

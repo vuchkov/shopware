@@ -29,7 +29,7 @@ use Shopware\Components\Model\ModelEntity;
 
 /**
  * @ORM\Table(name="s_core_config_element_translations")
- * @ORM\Entity
+ * @ORM\Entity()
  */
 class ElementTranslation extends ModelEntity
 {
@@ -55,7 +55,7 @@ class ElementTranslation extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -89,8 +89,6 @@ class ElementTranslation extends ModelEntity
     private $localeId;
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -99,8 +97,6 @@ class ElementTranslation extends ModelEntity
     }
 
     /**
-     * Set description
-     *
      * @param string $description
      *
      * @return ElementTranslation
@@ -113,8 +109,6 @@ class ElementTranslation extends ModelEntity
     }
 
     /**
-     * Get description
-     *
      * @return string
      */
     public function getDescription()
@@ -123,8 +117,6 @@ class ElementTranslation extends ModelEntity
     }
 
     /**
-     * Set label
-     *
      * @param string $label
      *
      * @return ElementTranslation
@@ -137,8 +129,6 @@ class ElementTranslation extends ModelEntity
     }
 
     /**
-     * Get label
-     *
      * @return string
      */
     public function getLabel()
@@ -155,8 +145,6 @@ class ElementTranslation extends ModelEntity
     }
 
     /**
-     * Set element
-     *
      * @param \Shopware\Models\Config\Element $element
      *
      * @return ElementTranslation

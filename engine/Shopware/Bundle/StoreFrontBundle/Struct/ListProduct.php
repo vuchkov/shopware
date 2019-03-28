@@ -32,11 +32,6 @@ use Shopware\Bundle\StoreFrontBundle\Struct\Product\PriceRule;
 use Shopware\Bundle\StoreFrontBundle\Struct\Product\Unit;
 use Shopware\Bundle\StoreFrontBundle\Struct\Product\VoteAverage;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class ListProduct extends BaseProduct
 {
     /**
@@ -305,7 +300,7 @@ class ListProduct extends BaseProduct
     protected $cover;
 
     /**
-     * @var PriceGroup
+     * @var PriceGroup|null
      */
     protected $priceGroup;
 
@@ -469,16 +464,13 @@ class ListProduct extends BaseProduct
         $this->shippingFree = $shippingFree;
     }
 
-    /**
-     * @param Unit $unit
-     */
     public function setUnit(Unit $unit)
     {
         $this->unit = $unit;
     }
 
     /**
-     * @return Unit
+     * @return Unit|null
      */
     public function getUnit()
     {
@@ -526,7 +518,7 @@ class ListProduct extends BaseProduct
     }
 
     /**
-     * @return \Shopware\Bundle\StoreFrontBundle\Struct\Product\Manufacturer
+     * @return \Shopware\Bundle\StoreFrontBundle\Struct\Product\Manufacturer|null
      */
     public function getManufacturer()
     {
@@ -542,7 +534,7 @@ class ListProduct extends BaseProduct
     }
 
     /**
-     * @return \Shopware\Bundle\StoreFrontBundle\Struct\Media
+     * @return \Shopware\Bundle\StoreFrontBundle\Struct\Media|null
      */
     public function getCover()
     {
@@ -558,7 +550,7 @@ class ListProduct extends BaseProduct
     }
 
     /**
-     * @return \Shopware\Bundle\StoreFrontBundle\Struct\Product\Price
+     * @return \Shopware\Bundle\StoreFrontBundle\Struct\Product\Price|null
      */
     public function getCheapestPrice()
     {
@@ -728,7 +720,7 @@ class ListProduct extends BaseProduct
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return \DateTimeInterface|null
      */
     public function getReleaseDate()
     {
@@ -836,7 +828,7 @@ class ListProduct extends BaseProduct
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return \DateTimeInterface|null
      */
     public function getCreatedAt()
     {
@@ -852,7 +844,7 @@ class ListProduct extends BaseProduct
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return \DateTimeInterface|null
      */
     public function getUpdatedAt()
     {
@@ -868,7 +860,7 @@ class ListProduct extends BaseProduct
     }
 
     /**
-     * @return PriceGroup
+     * @return PriceGroup|null
      */
     public function getPriceGroup()
     {
@@ -900,7 +892,7 @@ class ListProduct extends BaseProduct
     }
 
     /**
-     * @return \Shopware\Bundle\StoreFrontBundle\Struct\Product\PriceRule
+     * @return \Shopware\Bundle\StoreFrontBundle\Struct\Product\PriceRule|null
      */
     public function getCheapestPriceRule()
     {
@@ -1068,7 +1060,7 @@ class ListProduct extends BaseProduct
     }
 
     /**
-     * @return VoteAverage
+     * @return VoteAverage|null
      */
     public function getVoteAverage()
     {
@@ -1152,10 +1144,8 @@ class ListProduct extends BaseProduct
      */
     public function hasDifferentPrices()
     {
-        return
-            $this->getCustomerPriceCount() > 1
-            ||
-            $this->getFallbackPriceCount() > 1
+        return $this->getCustomerPriceCount() > 1
+            || $this->getFallbackPriceCount() > 1
         ;
     }
 
@@ -1200,9 +1190,6 @@ class ListProduct extends BaseProduct
         $this->categories = $categories;
     }
 
-    /**
-     * @param Price $price
-     */
     public function setListingPrice(Price $price)
     {
         $this->listingPrice = $price;

@@ -29,9 +29,6 @@ use Shopware\Bundle\StoreFrontBundle\Struct\ListProduct;
 use Shopware\Bundle\StoreFrontBundle\Struct\Product\Price;
 use Shopware\Bundle\StoreFrontBundle\Struct\Property\Option;
 
-/**
- * Class Product
- */
 class Product extends ListProduct
 {
     /**
@@ -100,8 +97,6 @@ class Product extends ListProduct
     protected $filterConfiguration = [];
 
     /**
-     * @param ListProduct $listProduct
-     *
      * @return Product
      */
     public static function createFromListProduct(ListProduct $listProduct)
@@ -111,6 +106,7 @@ class Product extends ListProduct
             $listProduct->getVariantId(),
             $listProduct->getNumber()
         );
+
         foreach ($listProduct as $key => $value) {
             $product->$key = $value;
         }

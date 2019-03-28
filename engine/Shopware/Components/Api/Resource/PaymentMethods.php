@@ -31,10 +31,6 @@ use Shopware\Models\Plugin\Plugin;
 
 /**
  * Payment API Resource
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class PaymentMethods extends Resource
 {
@@ -76,10 +72,8 @@ class PaymentMethods extends Resource
     }
 
     /**
-     * @param int   $offset
-     * @param int   $limit
-     * @param array $filter
-     * @param array $orderBy
+     * @param int $offset
+     * @param int $limit
      *
      * @return array
      */
@@ -102,8 +96,6 @@ class PaymentMethods extends Resource
     }
 
     /**
-     * @param array $params
-     *
      * @throws \Shopware\Components\Api\Exception\ValidationException
      * @throws \Exception
      *
@@ -134,8 +126,7 @@ class PaymentMethods extends Resource
     }
 
     /**
-     * @param int   $id
-     * @param array $params
+     * @param int $id
      *
      * @throws \Shopware\Components\Api\Exception\ValidationException
      * @throws \Shopware\Components\Api\Exception\NotFoundException
@@ -151,7 +142,7 @@ class PaymentMethods extends Resource
             throw new ApiException\ParameterMissingException('id');
         }
 
-        /** @var PaymentModel $payment */
+        /** @var PaymentModel|null $payment */
         $payment = $this->getRepository()->find($id);
 
         if (!$payment) {
@@ -188,7 +179,7 @@ class PaymentMethods extends Resource
             throw new ApiException\ParameterMissingException('id');
         }
 
-        /** @var PaymentModel $payment */
+        /** @var PaymentModel|null $payment */
         $payment = $this->getRepository()->find($id);
 
         if (!$payment) {

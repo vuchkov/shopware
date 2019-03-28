@@ -28,11 +28,6 @@ use Shopware\Bundle\StoreFrontBundle\Gateway;
 use Shopware\Bundle\StoreFrontBundle\Service;
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class ConfiguratorService implements Service\ConfiguratorServiceInterface
 {
     const CONFIGURATOR_TYPE_STANDARD = 0;
@@ -49,10 +44,6 @@ class ConfiguratorService implements Service\ConfiguratorServiceInterface
      */
     private $configuratorGateway;
 
-    /**
-     * @param Gateway\ProductConfigurationGatewayInterface $productConfigurationGateway
-     * @param Gateway\ConfiguratorGatewayInterface         $configuratorGateway
-     */
     public function __construct(
         Gateway\ProductConfigurationGatewayInterface $productConfigurationGateway,
         Gateway\ConfiguratorGatewayInterface $configuratorGateway
@@ -91,7 +82,7 @@ class ConfiguratorService implements Service\ConfiguratorServiceInterface
         $combinations = $this->configuratorGateway->getProductCombinations($product);
 
         $media = [];
-        if ($configurator->getType() === self::CONFIGURATOR_TYPE_PICTURE) {
+        if (((int) $configurator->getType()) === self::CONFIGURATOR_TYPE_PICTURE) {
             $media = $this->configuratorGateway->getConfiguratorMedia(
                 $product,
                 $context
@@ -118,8 +109,7 @@ class ConfiguratorService implements Service\ConfiguratorServiceInterface
 
                 $option->setActive(
                     $isValid
-                    ||
-                    ($onlyOneGroup && isset($combinations[$option->getId()]))
+                    || ($onlyOneGroup && isset($combinations[$option->getId()]))
                 );
 
                 if (isset($media[$option->getId()])) {

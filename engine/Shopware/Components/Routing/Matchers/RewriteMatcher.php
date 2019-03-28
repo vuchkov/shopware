@@ -29,11 +29,6 @@ use Shopware\Components\QueryAliasMapper;
 use Shopware\Components\Routing\Context;
 use Shopware\Components\Routing\MatcherInterface;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class RewriteMatcher implements MatcherInterface
 {
     /**
@@ -55,10 +50,6 @@ class RewriteMatcher implements MatcherInterface
      */
     private $queryAliasMapper;
 
-    /**
-     * @param Connection       $connection
-     * @param QueryAliasMapper $queryAliasMapper
-     */
     public function __construct(Connection $connection, QueryAliasMapper $queryAliasMapper)
     {
         $this->connection = $connection;

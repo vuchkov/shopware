@@ -27,11 +27,6 @@ namespace Shopware\Bundle\SearchBundleDBAL\SearchTerm;
 use Doctrine\DBAL\Connection;
 use Shopware\Components\MemoryLimit;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class SearchIndexer implements SearchIndexerInterface
 {
     /**
@@ -55,10 +50,7 @@ class SearchIndexer implements SearchIndexerInterface
     private $batchSize;
 
     /**
-     * @param \Shopware_Components_Config $config
-     * @param Connection                  $connection
-     * @param TermHelperInterface         $termHelper
-     * @param int                         $batchSize
+     * @param int $batchSize
      */
     public function __construct(
         \Shopware_Components_Config $config,
@@ -340,8 +332,6 @@ class SearchIndexer implements SearchIndexerInterface
     }
 
     /**
-     * @param array $keywords
-     *
      * @return array
      */
     private function mapCategoryKeywords(array $keywords)

@@ -26,11 +26,6 @@ namespace Shopware\Components\DependencyInjection\Bridge;
 
 use Shopware\Components\DependencyInjection\Container;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Front
 {
     /**
@@ -39,9 +34,6 @@ class Front
      * front dispatcher. After the controller path is set to the dispatcher,
      * the plugin namespace of the front resource is set.
      *
-     * @param Container                   $container
-     * @param \Enlight_Event_EventManager $eventManager
-     * @param array                       $options
      *
      * @throws \Exception
      *

@@ -27,11 +27,6 @@ namespace Shopware\Bundle\AttributeBundle\Repository\Searcher;
 use Shopware\Bundle\AttributeBundle\Repository\SearchCriteria;
 use Shopware\Models\Article\Detail;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.com)
- */
 class ProductSearcher extends GenericSearcher
 {
     /**
@@ -54,8 +49,6 @@ class ProductSearcher extends GenericSearcher
     }
 
     /**
-     * @param SearchCriteria $criteria
-     *
      * @return array
      */
     protected function getSearchFields(SearchCriteria $criteria)

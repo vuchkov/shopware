@@ -810,11 +810,11 @@ class Repository extends ModelRepository
      * Helper function to create the query builder for the "getArticleDetailForTableConfiguratorOptionCombinationQuery" function.
      * This function can be hooked to modify the query builder of the query object.
      *
-     * @param int     $articleId
-     * @param int     $firstOptionId
-     * @param int     $secondOptionId
-     * @param Article $article
-     * @param string  $customerGroupKey
+     * @param int           $articleId
+     * @param int           $firstOptionId
+     * @param int           $secondOptionId
+     * @param array|Article $article
+     * @param string        $customerGroupKey
      *
      * @return \Doctrine\ORM\QueryBuilder
      */
@@ -1251,11 +1251,7 @@ class Repository extends ModelRepository
      * of the configurator. To display the options in the listing the configurator listing needs
      * an id query to allow an store paging.
      *
-     * @param int  $articleId
-     * @param null $filter
-     * @param null $sort
-     * @param null $offset
-     * @param null $limit
+     * @param int $articleId
      *
      * @return \Doctrine\ORM\Query
      */
@@ -1274,9 +1270,9 @@ class Repository extends ModelRepository
      * Helper function to create the query builder for the "getConfiguratorListIdsQuery" function.
      * This function can be hooked to modify the query builder of the query object.
      *
-     * @param int  $articleId
-     * @param null $filter
-     * @param null $sort
+     * @param int                                          $articleId
+     * @param array|null                                   $filter
+     * @param string|\Doctrine\ORM\Query\Expr\OrderBy|null $sort
      *
      * @return \Doctrine\ORM\QueryBuilder
      */
@@ -1284,7 +1280,7 @@ class Repository extends ModelRepository
     {
         $builder = $this->getEntityManager()->createQueryBuilder();
         $builder->select('details.id')
-                ->from('Shopware\Models\Article\Detail', 'details')
+                ->from(\Shopware\Models\Article\Detail::class, 'details')
                 ->where('details.articleId = ?1')
                 ->setParameter(1, $articleId);
 
@@ -1310,7 +1306,6 @@ class Repository extends ModelRepository
      * Returns an instance of the \Doctrine\ORM\Query object which selects the article details
      *
      * @param int[] $ids
-     * @param null  $sort
      *
      * @return \Doctrine\ORM\Query
      */
@@ -1325,8 +1320,8 @@ class Repository extends ModelRepository
      * Helper function to create the query builder for the "getDetailsByArticleIdQuery" function.
      * This function can be hooked to modify the query builder of the query object.
      *
-     * @param int[] $ids
-     * @param null  $sort
+     * @param int[]                                        $ids
+     * @param string|\Doctrine\ORM\Query\Expr\OrderBy|null $sort
      *
      * @return \Doctrine\ORM\QueryBuilder
      */
@@ -1748,7 +1743,6 @@ class Repository extends ModelRepository
      * The passed article ids are excluded.
      *
      * @param int[]|null $ids
-     * @param null       $filter
      * @param int|null   $offset
      * @param int|null   $limit
      *
@@ -1770,7 +1764,6 @@ class Repository extends ModelRepository
      * This function can be hooked to modify the query builder of the query object.
      *
      * @param int[]|null $ids
-     * @param null       $filter
      *
      * @internal param null $filter
      *
@@ -1870,7 +1863,6 @@ class Repository extends ModelRepository
      * description. The passed supplier ids are excluded.
      *
      * @param int[]|null $ids
-     * @param null       $filter
      * @param int|null   $offset
      * @param int|null   $limit
      *
@@ -1921,7 +1913,6 @@ class Repository extends ModelRepository
      * Returns an instance of the \Doctrine\ORM\Query object which select a list of supplier.
      *
      * @param array    $filter
-     * @param array    $orderBy
      * @param int|null $limit
      * @param int|null $offset
      *
@@ -1944,7 +1935,6 @@ class Repository extends ModelRepository
      * This function can be hooked to modify the query builder of the query object.
      *
      * @param array $filter
-     * @param array $orderBy
      *
      * @return \Doctrine\ORM\QueryBuilder
      */
@@ -2042,10 +2032,7 @@ class Repository extends ModelRepository
     /**
      * Returns an instance of the \Doctrine\ORM\Query object which selects all articles with registered notifications
      *
-     * @param null      $filter
-     * @param null      $offset
      * @param int|null  $limit
-     * @param null      $order
      * @param bool|null $summarize
      *
      * @return \Doctrine\ORM\Query

@@ -26,11 +26,6 @@ namespace Shopware\Bundle\StoreFrontBundle\Gateway\DBAL\Hydrator;
 
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class PropertyHydrator extends Hydrator
 {
     /**
@@ -43,10 +38,6 @@ class PropertyHydrator extends Hydrator
      */
     private $mediaHydrator;
 
-    /**
-     * @param AttributeHydrator $attributeHydrator
-     * @param MediaHydrator     $mediaHydrator
-     */
     public function __construct(
         AttributeHydrator $attributeHydrator,
         MediaHydrator $mediaHydrator
@@ -56,8 +47,6 @@ class PropertyHydrator extends Hydrator
     }
 
     /**
-     * @param array $data
-     *
      * @return Struct\Property\Set[]
      */
     public function hydrateValues(array $data)
@@ -108,8 +97,6 @@ class PropertyHydrator extends Hydrator
     }
 
     /**
-     * @param array $data
-     *
      * @return Struct\Property\Group
      */
     public function hydrateGroup(array $data)
@@ -130,8 +117,6 @@ class PropertyHydrator extends Hydrator
     }
 
     /**
-     * @param array $data
-     *
      * @return Struct\Property\Option
      */
     public function hydrateOption(array $data)
@@ -158,8 +143,6 @@ class PropertyHydrator extends Hydrator
     }
 
     /**
-     * @param array $data
-     *
      * @return Struct\Property\Set
      */
     private function hydrateSet(array $data)
@@ -182,8 +165,6 @@ class PropertyHydrator extends Hydrator
 
     /**
      * Sort groups by position in set
-     *
-     * @param array $data
      */
     private function sortGroups(array &$data)
     {

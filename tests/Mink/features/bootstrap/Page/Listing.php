@@ -22,7 +22,7 @@
  * our trademarks remain entirely with us.
  */
 
-namespace  Shopware\Tests\Mink\Page;
+namespace Shopware\Tests\Mink\Page;
 
 use Behat\Mink\Element\NodeElement;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
@@ -71,8 +71,7 @@ class Listing extends Page implements HelperSelectorInterface
     /**
      * Opens the listing page
      *
-     * @param array $params
-     * @param bool  $autoPage
+     * @param bool $autoPage
      */
     public function openListing(array $params, $autoPage = true)
     {
@@ -123,8 +122,6 @@ class Listing extends Page implements HelperSelectorInterface
     /**
      * Sets the article filter
      *
-     * @param FilterGroup $filterGroups
-     * @param array       $properties
      *
      * @throws \Exception
      */
@@ -193,8 +190,6 @@ class Listing extends Page implements HelperSelectorInterface
     /**
      * Checks the properties of a product box
      *
-     * @param ArticleBox $articleBox
-     * @param array      $properties
      *
      * @throws \Exception
      */
@@ -222,8 +217,8 @@ class Listing extends Page implements HelperSelectorInterface
      *
      * @see http://docs.behat.org/en/v2.5/cookbook/using_spin_functions.html#adding-a-timeout
      *
-     * @param $lambda
-     * @param int $wait
+     * @param callable $lambda
+     * @param int      $wait
      *
      * @throws \Exception
      *
@@ -278,8 +273,6 @@ class Listing extends Page implements HelperSelectorInterface
     /**
      * Sets the filters
      *
-     * @param FilterGroup $filterGroups
-     * @param array       $properties
      *
      * @throws \Exception
      */
@@ -329,8 +322,8 @@ class Listing extends Page implements HelperSelectorInterface
      *
      * @see http://docs.behat.org/en/v2.5/cookbook/using_spin_functions.html#adding-a-timeout
      *
-     * @param $lambda
-     * @param int $wait
+     * @param callable $lambda
+     * @param int      $wait
      *
      * @return bool
      */

@@ -33,9 +33,6 @@ use Shopware\Bundle\PluginInstallerBundle\Struct\ListingResultStruct;
 use Shopware\Bundle\PluginInstallerBundle\Struct\PluginStruct;
 use Shopware\Bundle\PluginInstallerBundle\Struct\StructHydrator;
 
-/**
- * Class PluginLocalService
- */
 class PluginLocalService
 {
     /**
@@ -48,10 +45,6 @@ class PluginLocalService
      */
     private $hydrator;
 
-    /**
-     * @param Connection     $connection
-     * @param StructHydrator $hydrator
-     */
     public function __construct(Connection $connection, StructHydrator $hydrator)
     {
         $this->connection = $connection;
@@ -59,8 +52,6 @@ class PluginLocalService
     }
 
     /**
-     * @param ListingRequest $context
-     *
      * @throws \Exception
      *
      * @return ListingResultStruct
@@ -91,8 +82,6 @@ class PluginLocalService
     }
 
     /**
-     * @param PluginsByTechnicalNameRequest $context
-     *
      * @return PluginStruct
      */
     public function getPlugin(PluginsByTechnicalNameRequest $context)
@@ -103,8 +92,6 @@ class PluginLocalService
     }
 
     /**
-     * @param PluginsByTechnicalNameRequest $context
-     *
      * @throws \Exception
      *
      * @return PluginStruct[]
@@ -143,10 +130,6 @@ class PluginLocalService
         return $statement->fetchAll(\PDO::FETCH_KEY_PAIR);
     }
 
-    /**
-     * @param ListingRequest $context
-     * @param QueryBuilder   $builder
-     */
     private function addSortings(ListingRequest $context, QueryBuilder $builder)
     {
         foreach ($context->getSortings() as $sort) {
@@ -163,9 +146,6 @@ class PluginLocalService
     }
 
     /**
-     * @param array       $plugins
-     * @param BaseRequest $context
-     *
      * @throws \Exception
      *
      * @return PluginStruct[]

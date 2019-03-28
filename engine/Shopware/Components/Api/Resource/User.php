@@ -34,10 +34,6 @@ use Shopware\Models\User\User as UserModel;
 
 /**
  * User API Resource
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class User extends Resource
 {
@@ -80,15 +76,15 @@ class User extends Resource
             ->where('users.id = ?1')
             ->setParameter(1, $id);
 
-        /** @var UserModel $user */
+        /** @var UserModel|null $user */
         $user = $builder->getQuery()->getOneOrNullResult($this->getResultMode());
 
         if (!$user) {
             throw new ApiException\NotFoundException(sprintf('User by id %s not found', $id));
         }
 
-        if (!$this->hasPrivilege('create', 'usermanager') &&
-            !$this->hasPrivilege('update', 'usermanager')) {
+        if (!$this->hasPrivilege('create', 'usermanager')
+            && !$this->hasPrivilege('update', 'usermanager')) {
             if (is_array($user)) {
                 unset($user['apiKey'], $user['sessionId'], $user['password'], $user['encoder']);
             } else {
@@ -105,10 +101,8 @@ class User extends Resource
     /**
      * Returns a list of user objects.
      *
-     * @param int   $offset
-     * @param int   $limit
-     * @param array $criteria
-     * @param array $orderBy
+     * @param int $offset
+     * @param int $limit
      *
      * @return array
      */
@@ -132,8 +126,8 @@ class User extends Resource
 
         $users = $paginator->getIterator()->getArrayCopy();
 
-        if (!$this->hasPrivilege('create', 'usermanager') &&
-            !$this->hasPrivilege('update', 'usermanager')) {
+        if (!$this->hasPrivilege('create', 'usermanager')
+            && !$this->hasPrivilege('update', 'usermanager')) {
             foreach ($users as &$user) {
                 unset($user['apiKey'], $user['sessionId'], $user['password'], $user['encoder']);
             }
@@ -146,8 +140,6 @@ class User extends Resource
     }
 
     /**
-     * @param array $params
-     *
      * @return UserModel
      */
     public function create(array $params)
@@ -170,8 +162,7 @@ class User extends Resource
     }
 
     /**
-     * @param int   $id
-     * @param array $params
+     * @param int $id
      *
      * @throws \Shopware\Components\Api\Exception\NotFoundException
      * @throws \Shopware\Components\Api\Exception\ParameterMissingException
@@ -198,7 +189,7 @@ class User extends Resource
             ->where('user.id = ?1')
             ->setParameter(1, $id);
 
-        /** @var UserModel $user */
+        /** @var UserModel|null $user */
         $user = $builder->getQuery()->getOneOrNullResult(self::HYDRATE_OBJECT);
 
         if (!$user) {
@@ -234,7 +225,7 @@ class User extends Resource
             throw new ApiException\ParameterMissingException();
         }
 
-        /** @var UserModel $user */
+        /** @var UserModel|null $user */
         $user = $this->getRepository()->find($id);
 
         if (!$user) {
@@ -248,8 +239,8 @@ class User extends Resource
     }
 
     /**
-     * @param string      $privilege
-     * @param string|null $resource
+     * @param string                                   $privilege
+     * @param string|\Zend_Acl_Resource_Interface|null $resource
      *
      * @throws ApiException\PrivilegeException
      */
@@ -301,9 +292,6 @@ class User extends Resource
     }
 
     /**
-     * @param array     $data
-     * @param UserModel $user
-     *
      * @throws ApiException\CustomValidationException
      *
      * @return array
@@ -404,7 +392,7 @@ class User extends Resource
     {
         $localeRepository = Shopware()->Models()->getRepository(Locale::class);
 
-        /** @var \Shopware\Models\Shop\Locale $locale */
+        /** @var \Shopware\Models\Shop\Locale|null $locale */
         $locale = $localeRepository->findOneByLocale($locale);
         if (!$locale) {
             return null;

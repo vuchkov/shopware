@@ -35,6 +35,7 @@ use Shopware\Bundle\StoreFrontBundle\Struct\Configurator\Option;
 use Shopware\Bundle\StoreFrontBundle\Struct\ListProduct;
 use Shopware\Bundle\StoreFrontBundle\Struct\Shop;
 use Shopware\Bundle\StoreFrontBundle\Struct\ShopContextInterface;
+use Shopware_Components_Config;
 
 class ProductListingVariationLoader
 {
@@ -59,7 +60,7 @@ class ProductListingVariationLoader
     private $listingPriceHelper;
 
     /**
-     * @var \Shopware_Components_Config
+     * @var Shopware_Components_Config
      */
     private $config;
 
@@ -68,7 +69,7 @@ class ProductListingVariationLoader
         IdentifierSelector $identifierSelector,
         ContextServiceInterface $contextService,
         ListingPriceHelper $listingPriceHelper,
-        \Shopware_Components_Config $config
+        Shopware_Components_Config $config
     ) {
         $this->connection = $connection;
         $this->identifierSelector = $identifierSelector;
@@ -78,10 +79,7 @@ class ProductListingVariationLoader
     }
 
     /**
-     * @param Shop              $shop
-     * @param ListProduct[]     $products
-     * @param array             $configurations
-     * @param VariantFacet|null $variantFacet
+     * @param ListProduct[] $products
      *
      * @return array
      */
@@ -146,9 +144,7 @@ class ProductListingVariationLoader
     }
 
     /**
-     * @param ListProduct[]     $products
-     * @param array             $configurations
-     * @param VariantFacet|null $variantFacet
+     * @param ListProduct[] $products
      *
      * @return array
      */
@@ -186,8 +182,6 @@ class ProductListingVariationLoader
     /**
      * Builds the visibility for the variant listings
      *
-     * @param Product      $product
-     * @param VariantFacet $facet
      *
      * @return array
      */
@@ -205,7 +199,6 @@ class ProductListingVariationLoader
     /**
      * Combines all array elements with all array elements
      *
-     * @param array $array
      *
      * @return array
      */
@@ -230,15 +223,15 @@ class ProductListingVariationLoader
 
         $c = $this->arrayCombinations(array_keys($consider));
 
-        //flip keys for later intersection
+        // Flip keys for later intersection
         $keys = array_flip(array_keys($consider));
 
         $result = [];
         foreach ($c as $combination) {
-            //flip combination to use key intersect
+            // Flip combination to use key intersect
             $combination = array_flip($combination);
 
-            //all options of groups will be combined together
+            // All options of groups will be combined together
             $full = array_intersect_key($groups, $combination);
 
             $first = array_intersect_key($groups, array_diff_key($keys, $combination));
@@ -247,7 +240,7 @@ class ProductListingVariationLoader
                 return $a->getId() > $b->getId();
             });
 
-            //create unique group key
+            // Create unique group key
             $groupKey = array_map(function (Group $group) {
                 return $group->getId();
             }, $full);
@@ -283,9 +276,8 @@ class ProductListingVariationLoader
     /**
      * Builds all possible combinations of an nested array
      *
-     * @param array   $groups
-     * @param Group[] $onlyFirst
-     * @param array   $availability
+     * @param Group[] $groups
+     * @param int[]   $onlyFirst
      *
      * @return array
      */
@@ -297,14 +289,14 @@ class ProductListingVariationLoader
 
         /** @var Group $group */
         foreach ($groups as $index => $group) {
-            //check if options of this group only be combined with the first element
+            // Check if options of this group only be combined with the first element
             $isFirst = in_array($group->getId(), $onlyFirst, true);
             $new = [];
 
             foreach ($result as $item) {
                 $options = array_values($group->getOptions());
 
-                //sort by ids ascending - forces always same order
+                // Sort by ids ascending - forces always same order
                 usort($options, function (Option $a, Option $b) {
                     return $a->getId() > $b->getId();
                 });
@@ -338,7 +330,7 @@ class ProductListingVariationLoader
 
                     $new[] = $tmp;
 
-                    //in case that options of this group should only combined with the first element, break combination loop
+                    // In case that options of this group should only combined with the first element, break combination loop
                     if ($isFirst) {
                         break;
                     }
@@ -492,6 +484,7 @@ class ProductListingVariationLoader
         $query->innerJoin('availableVariant', 's_article_configurator_option_relations', 'relations', 'relations.article_id = availableVariant.id');
         $query->innerJoin('relations', 's_article_configurator_options', 'options', 'relations.option_id = options.id');
         $query->andWhere('availableVariant.active = 1');
+        $query->andWhere('availableVariant.id IN (:variants)');
 
         $availability = $query->execute()->fetchAll(\PDO::FETCH_GROUP);
 
@@ -545,11 +538,6 @@ class ProductListingVariationLoader
     }
 
     /**
-     * @param array             $configuration
-     * @param array             $prices
-     * @param array             $combinations
-     * @param VariantFacet|null $variantFacet
-     *
      * @return array
      */
     private function getCombinationPrices(array $configuration, array $prices, array $combinations, VariantFacet $variantFacet = null)
@@ -607,11 +595,6 @@ class ProductListingVariationLoader
     }
 
     /**
-     * @param array             $configuration
-     * @param array             $availabilities
-     * @param array             $combinations
-     * @param VariantFacet|null $variantFacet
-     *
      * @return array
      */
     private function getCombinationAvailability(array $configuration, array $availabilities, array $combinations, VariantFacet $variantFacet = null)
@@ -660,8 +643,6 @@ class ProductListingVariationLoader
     }
 
     /**
-     * @param Shop $shop
-     *
      * @return array
      */
     private function getPriceContexts(Shop $shop)

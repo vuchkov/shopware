@@ -30,11 +30,6 @@ use Shopware\Bundle\SearchBundle\Criteria;
 use Shopware\Bundle\SearchBundle\ProductNumberSearchResult;
 use Shopware\Bundle\StoreFrontBundle\Struct\Shop;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class SearchTermLogger implements SearchTermLoggerInterface
 {
     /**
@@ -42,9 +37,6 @@ class SearchTermLogger implements SearchTermLoggerInterface
      */
     private $connection;
 
-    /**
-     * @param Connection $connection
-     */
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
@@ -52,10 +44,6 @@ class SearchTermLogger implements SearchTermLoggerInterface
 
     /**
      * Traces the search result into the s_statistic_search
-     *
-     * @param Criteria                  $criteria
-     * @param ProductNumberSearchResult $result
-     * @param Shop                      $shop
      */
     public function logResult(
         Criteria $criteria,

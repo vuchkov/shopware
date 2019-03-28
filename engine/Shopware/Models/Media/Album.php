@@ -45,14 +45,12 @@ use Shopware\Components\Model\ModelEntity;
  *   - PRIMARY KEY (`id`)
  * </code>
  *
- * @category   Shopware
  *
- * @copyright  Copyright (c) 20, shopware AG (http://www.shopware.de)
  * @license    http://enlight.de/license     New BSD License
  *
- * @ORM\Entity
+ * @ORM\Entity()
  * @ORM\Table(name="s_media_album")
- * @ORM\HasLifecycleCallbacks
+ * @ORM\HasLifecycleCallbacks()
  */
 class Album extends ModelEntity
 {
@@ -84,7 +82,7 @@ class Album extends ModelEntity
      *
      * @var int
      *
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -106,7 +104,7 @@ class Album extends ModelEntity
      *
      * @ORM\Column(name="parentID", type="integer", nullable=true)
      */
-    private $parentId = null;
+    private $parentId;
 
     /**
      * Position of the album to configure the display order
@@ -315,7 +313,7 @@ class Album extends ModelEntity
     /**
      * Returns the album settings
      *
-     * @return \Shopware\Models\Media\Settings
+     * @return \Shopware\Models\Media\Settings|null
      */
     public function getSettings()
     {
@@ -340,7 +338,7 @@ class Album extends ModelEntity
      * Model lifecycle callback function, fired when the model is removed from the database.
      * All assigned media set to the unsorted album.
      *
-     * @ORM\PreRemove
+     * @ORM\PreRemove()
      *
      * @throws \Zend_Db_Adapter_Exception
      */

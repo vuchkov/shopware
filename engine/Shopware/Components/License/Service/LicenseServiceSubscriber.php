@@ -32,11 +32,6 @@ use Shopware\Components\License\Struct\LicenseUnpackRequest;
 use Shopware\Components\License\Struct\ShopwareEdition;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class LicenseServiceSubscriber implements SubscriberInterface
 {
     /**
@@ -44,11 +39,6 @@ class LicenseServiceSubscriber implements SubscriberInterface
      */
     private $container;
 
-    /**
-     * LicenseServiceSubscriber constructor.
-     *
-     * @param ContainerInterface $container
-     */
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
@@ -64,9 +54,6 @@ class LicenseServiceSubscriber implements SubscriberInterface
         ];
     }
 
-    /**
-     * @param Enlight_Event_EventArgs $args
-     */
     public function onPostDispatchBackendIndex(Enlight_Event_EventArgs $args)
     {
         /** @var Enlight_View_Default $view */

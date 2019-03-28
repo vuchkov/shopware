@@ -26,9 +26,6 @@ namespace Shopware\Components\Form;
 
 use Shopware\Components\Form\Interfaces\Element;
 
-/**
- * Class Base
- */
 class Base implements Element
 {
     /**
@@ -99,7 +96,6 @@ class Base implements Element
      * Helper function to set the object
      * data by array data.
      *
-     * @param array $array
      *
      * @return $this
      */

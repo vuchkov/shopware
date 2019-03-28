@@ -27,17 +27,12 @@ namespace Shopware\Components\Log\Processor;
 
 /**
  * ShopwareEnvironmentProcessor.
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class ShopwareEnvironmentProcessor
 {
     /**
      * Adds request, shop and session info
      *
-     * @param array $record
      *
      * @return array
      */
@@ -89,8 +84,6 @@ class ShopwareEnvironmentProcessor
      * Filters sensitive data from GET and POST
      *
      * @param array $data
-     *
-     * @return mixed
      */
     private function filterRequestUserData($data)
     {

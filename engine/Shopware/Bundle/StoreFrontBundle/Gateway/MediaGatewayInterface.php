@@ -26,11 +26,6 @@ namespace Shopware\Bundle\StoreFrontBundle\Gateway;
 
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 interface MediaGatewayInterface
 {
     /**
@@ -39,8 +34,7 @@ interface MediaGatewayInterface
      *
      * @see \Shopware\Bundle\StoreFrontBundle\Gateway\ProductMediaGatewayInterface::get()
      *
-     * @param array                       $ids
-     * @param Struct\ShopContextInterface $context
+     * @param array $ids
      *
      * @return Struct\Media[] Indexed by the media id
      */
@@ -52,8 +46,7 @@ interface MediaGatewayInterface
      *
      * @see \Shopware\Bundle\StoreFrontBundle\Gateway\ProductMediaGatewayInterface::get()
      *
-     * @param int                         $id
-     * @param Struct\ShopContextInterface $context
+     * @param int $id
      *
      * @return Struct\Media
      */

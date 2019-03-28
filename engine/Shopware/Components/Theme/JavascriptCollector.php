@@ -27,11 +27,6 @@ namespace Shopware\Components\Theme;
 use Doctrine\Common\Collections\ArrayCollection;
 use Shopware\Models\Shop;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.com)
- */
 class JavascriptCollector
 {
     /**
@@ -44,10 +39,6 @@ class JavascriptCollector
      */
     private $eventManager;
 
-    /**
-     * @param Inheritance                 $inheritance
-     * @param \Enlight_Event_EventManager $eventManager
-     */
     public function __construct(
         Inheritance $inheritance,
         \Enlight_Event_EventManager $eventManager
@@ -57,9 +48,6 @@ class JavascriptCollector
     }
 
     /**
-     * @param Shop\Template $template
-     * @param Shop\Shop     $shop
-     *
      * @throws \Exception
      *
      * @return string[] returns array with absolute javascript files paths
@@ -133,9 +121,6 @@ class JavascriptCollector
     }
 
     /**
-     * @param Shop\Shop     $shop
-     * @param Shop\Template $template
-     *
      * @throws \Enlight_Event_Exception
      * @throws \Exception
      *

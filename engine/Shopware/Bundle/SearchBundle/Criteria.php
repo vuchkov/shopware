@@ -35,10 +35,6 @@ use Shopware\Bundle\StoreFrontBundle\Struct\Extendable;
  *
  * Each of this sorting, facet and condition classes are handled by their
  * own handler classes which implemented for each gateway engine.
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class Criteria extends Extendable
 {
@@ -100,7 +96,7 @@ class Criteria extends Extendable
     }
 
     /**
-     * @param int $limit
+     * @param int|null $limit
      *
      * @return $this
      */
@@ -189,8 +185,6 @@ class Criteria extends Extendable
     }
 
     /**
-     * @param FacetInterface $facet
-     *
      * @return $this
      */
     public function addFacet(FacetInterface $facet)
@@ -201,8 +195,6 @@ class Criteria extends Extendable
     }
 
     /**
-     * @param ConditionInterface $condition
-     *
      * @return $this
      */
     public function addCondition(ConditionInterface $condition)
@@ -213,8 +205,6 @@ class Criteria extends Extendable
     }
 
     /**
-     * @param ConditionInterface $condition
-     *
      * @return $this
      */
     public function addBaseCondition(ConditionInterface $condition)
@@ -225,8 +215,6 @@ class Criteria extends Extendable
     }
 
     /**
-     * @param SortingInterface $sorting
-     *
      * @return $this
      */
     public function addSorting(SortingInterface $sorting)

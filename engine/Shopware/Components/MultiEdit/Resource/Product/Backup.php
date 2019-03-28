@@ -26,8 +26,6 @@ namespace Shopware\Components\MultiEdit\Resource\Product;
 
 /**
  * The backup class creates and loads backups
- *
- * Class Backup
  */
 class Backup
 {
@@ -216,7 +214,7 @@ class Backup
     public function restore($id, $offset = 0)
     {
         $entityManager = $this->getDqlHelper()->getEntityManager();
-        /** @var \Shopware\Models\MultiEdit\Backup $backup */
+        /** @var \Shopware\Models\MultiEdit\Backup|null $backup */
         $backup = $entityManager->find(\Shopware\Models\MultiEdit\Backup::class, $id);
 
         if (!$backup) {
@@ -295,7 +293,7 @@ class Backup
     public function delete($id)
     {
         $entityManager = $this->getDqlHelper()->getEntityManager();
-        /** @var \Shopware\Models\MultiEdit\Backup $backup */
+        /** @var \Shopware\Models\MultiEdit\Backup|null $backup */
         $backup = $entityManager->find(\Shopware\Models\MultiEdit\Backup::class, $id);
 
         if (!$backup) {
@@ -446,8 +444,6 @@ class Backup
      * @param string $table
      *
      * @throws \RuntimeException
-     *
-     * @return mixed
      */
     protected function getPrefixFromTable($table)
     {
@@ -466,8 +462,6 @@ class Backup
      * @param string $table
      *
      * @throws \RuntimeException
-     *
-     * @return mixed
      */
     protected function getAffectedColumns($table)
     {

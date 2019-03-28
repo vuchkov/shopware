@@ -27,11 +27,6 @@ namespace Shopware\Components;
 use Doctrine\DBAL\Connection;
 use Shopware\Components\License\Struct\LicenseInformation;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class LicenseInstaller
 {
     /**
@@ -39,17 +34,12 @@ class LicenseInstaller
      */
     private $connection;
 
-    /**
-     * @param Connection $pdo
-     */
     public function __construct(Connection $pdo)
     {
         $this->connection = $pdo;
     }
 
     /**
-     * @param LicenseInformation $license
-     *
      * @throws \RuntimeException
      */
     public function installLicense(LicenseInformation $license)

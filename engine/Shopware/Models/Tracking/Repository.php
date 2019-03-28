@@ -35,8 +35,7 @@ class Repository extends ModelRepository
      * Returns an Banner Statistic Model.Either a new one or an existing one. If no date given
      * the current date will be used.
      *
-     * @param int                     $bannerId
-     * @param \DateTimeInterface|null $date
+     * @param int $bannerId
      *
      * @return Banner
      */
@@ -45,7 +44,7 @@ class Repository extends ModelRepository
         if ($date === null) {
             $date = new \DateTime();
         }
-        /** @var Banner $bannerStatistics */
+        /** @var Banner|null $bannerStatistics */
         $bannerStatistics = $this->findOneBy(['bannerId' => $bannerId, 'displayDate' => $date]);
 
         // If no Entry for this day exists - create a new one

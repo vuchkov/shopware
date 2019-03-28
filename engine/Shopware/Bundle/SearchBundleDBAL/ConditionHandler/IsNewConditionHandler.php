@@ -30,11 +30,6 @@ use Shopware\Bundle\SearchBundleDBAL\ConditionHandlerInterface;
 use Shopware\Bundle\SearchBundleDBAL\QueryBuilder;
 use Shopware\Bundle\StoreFrontBundle\Struct\ShopContextInterface;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class IsNewConditionHandler implements ConditionHandlerInterface
 {
     /**
@@ -42,9 +37,6 @@ class IsNewConditionHandler implements ConditionHandlerInterface
      */
     private $config;
 
-    /**
-     * @param \Shopware_Components_Config $config
-     */
     public function __construct(\Shopware_Components_Config $config)
     {
         $this->config = $config;

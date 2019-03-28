@@ -24,7 +24,7 @@
 
 namespace Shopware\Bundle\SearchBundleES\FacetHandler;
 
-use ONGR\ElasticsearchDSL\Aggregation\FilterAggregation;
+use ONGR\ElasticsearchDSL\Aggregation\Bucketing\FilterAggregation;
 use ONGR\ElasticsearchDSL\Search;
 use Shopware\Bundle\SearchBundle\Criteria;
 use Shopware\Bundle\SearchBundle\CriteriaPartInterface;
@@ -43,9 +43,6 @@ class CombinedConditionFacetHandler implements HandlerInterface, ResultHydratorI
      */
     private $combinedConditionQueryBuilder;
 
-    /**
-     * @param CombinedConditionQueryBuilder $combinedConditionQueryBuilder
-     */
     public function __construct(CombinedConditionQueryBuilder $combinedConditionQueryBuilder)
     {
         $this->combinedConditionQueryBuilder = $combinedConditionQueryBuilder;

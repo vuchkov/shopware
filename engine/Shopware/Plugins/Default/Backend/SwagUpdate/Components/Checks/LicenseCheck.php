@@ -29,11 +29,6 @@ use Enlight_Components_Snippet_Namespace as SnippetNamespace;
 use ShopwarePlugins\SwagUpdate\Components\CheckInterface;
 use ShopwarePlugins\SwagUpdate\Components\Validation;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.com)
- */
 class LicenseCheck implements CheckInterface
 {
     const CHECK_TYPE = 'licensecheck';
@@ -59,10 +54,8 @@ class LicenseCheck implements CheckInterface
     private $endpoint;
 
     /**
-     * @param Connection       $connection
-     * @param string           $endpoint
-     * @param string           $shopwareVersion
-     * @param SnippetNamespace $namespace
+     * @param string $endpoint
+     * @param string $shopwareVersion
      */
     public function __construct(Connection $connection, $endpoint, $shopwareVersion, SnippetNamespace $namespace)
     {

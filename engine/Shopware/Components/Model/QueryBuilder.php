@@ -30,15 +30,11 @@ use Doctrine\ORM\QueryBuilder as BaseQueryBuilder;
 
 /**
  * The Shopware QueryBuilder is an extension of the standard Doctrine QueryBuilder.
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class QueryBuilder extends BaseQueryBuilder
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $alias;
 
@@ -103,8 +99,6 @@ class QueryBuilder extends BaseQueryBuilder
      *
      * @deprecated This method is deprecated since 5.4.
      *
-     * @param array $parameters
-     *
      * @return QueryBuilder this QueryBuilder instance
      */
     public function addParameters(array $parameters)
@@ -154,7 +148,6 @@ class QueryBuilder extends BaseQueryBuilder
      *      )));
      * </code>
      *
-     * @param array $filter
      *
      * @return QueryBuilder
      */
@@ -253,7 +246,7 @@ class QueryBuilder extends BaseQueryBuilder
      */
     public function addOrderBy($orderBy, $order = null)
     {
-        /** @var array<string, mixed> $select */
+        /** @var array<int, mixed|null> $select */
         $select = $this->getDQLPart('select');
         if (is_array($orderBy)) {
             foreach ($orderBy as $order) {
@@ -261,14 +254,13 @@ class QueryBuilder extends BaseQueryBuilder
                     continue;
                 }
 
-                if (isset($select[0])
+                if (isset($select[0], $this->alias)
                     && $select[0]->count() === 1
-                    && isset($this->alias)
                     && strpos($order['property'], '.') === false) {
                     $order['property'] = $this->alias . '.' . $order['property'];
                 }
 
-                if (isset($order['direction']) && $order['direction'] == 'DESC') {
+                if (isset($order['direction']) && $order['direction'] === 'DESC') {
                     $order['direction'] = 'DESC';
                 } else {
                     $order['direction'] = 'ASC';

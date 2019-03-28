@@ -30,9 +30,6 @@ use SensioLabs\Behat\PageObjectExtension\PageObject\Element;
 use SensioLabs\Behat\PageObjectExtension\PageObject\Factory;
 use Shopware\Tests\Mink\Helper;
 
-/**
- * Class MultipleElement
- */
 abstract class MultipleElement extends Element implements \Countable, \Iterator, \Shopware\Tests\Mink\HelperSelectorInterface
 {
     /** @var string */
@@ -41,12 +38,6 @@ abstract class MultipleElement extends Element implements \Countable, \Iterator,
     /** @var NodeElement[] array */
     private $siblings;
 
-    /**
-     * Constructor
-     *
-     * @param Session $session
-     * @param Factory $factory
-     */
     public function __construct(Session $session, Factory $factory)
     {
         parent::__construct($session, $factory);
@@ -92,7 +83,6 @@ abstract class MultipleElement extends Element implements \Countable, \Iterator,
     /**
      * Have to be called after get the MultipleElement to find all its siblings
      *
-     * @param \Behat\Mink\Element\Element $parent
      *
      * @return $this
      */

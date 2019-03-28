@@ -30,11 +30,9 @@ use Shopware\Components\Model\ModelEntity;
 /**
  * Shopware Article SeoCategory Model
  *
- * @category Shopware
  *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  *
- * @ORM\Entity
+ * @ORM\Entity()
  * @ORM\Table(name="s_articles_categories_seo")
  */
 class SeoCategory extends ModelEntity
@@ -67,7 +65,7 @@ class SeoCategory extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -142,7 +140,7 @@ class SeoCategory extends ModelEntity
     }
 
     /**
-     * @return \Shopware\Models\Shop\Shop
+     * @return \Shopware\Models\Shop\Shop|null
      */
     public function getShop()
     {

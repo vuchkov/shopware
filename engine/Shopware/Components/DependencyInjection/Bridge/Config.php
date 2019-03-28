@@ -26,18 +26,11 @@ namespace Shopware\Components\DependencyInjection\Bridge;
 
 use Shopware\Components\ShopwareReleaseStruct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Config
 {
     /**
-     * @param \Zend_Cache_Core                         $cache
      * @param \Enlight_Components_Db_Adapter_Pdo_Mysql $db
      * @param array                                    $config
-     * @param ShopwareReleaseStruct                    $release
      *
      * @return \Shopware_Components_Config|null
      */

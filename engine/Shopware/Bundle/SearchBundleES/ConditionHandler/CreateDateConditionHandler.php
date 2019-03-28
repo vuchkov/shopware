@@ -24,7 +24,8 @@
 
 namespace Shopware\Bundle\SearchBundleES\ConditionHandler;
 
-use ONGR\ElasticsearchDSL\Query\RangeQuery;
+use ONGR\ElasticsearchDSL\Query\Compound\BoolQuery;
+use ONGR\ElasticsearchDSL\Query\TermLevel\RangeQuery;
 use ONGR\ElasticsearchDSL\Search;
 use Shopware\Bundle\SearchBundle\Condition\CreateDateCondition;
 use Shopware\Bundle\SearchBundle\Criteria;
@@ -51,8 +52,9 @@ class CreateDateConditionHandler implements PartialConditionHandlerInterface
         Search $search,
         ShopContextInterface $context
     ) {
-        $search->addFilter(
-            $this->createQuery($criteriaPart)
+        $search->addQuery(
+            $this->createQuery($criteriaPart),
+            BoolQuery::FILTER
         );
     }
 
@@ -71,8 +73,6 @@ class CreateDateConditionHandler implements PartialConditionHandlerInterface
     }
 
     /**
-     * @param CriteriaPartInterface $criteriaPart
-     *
      * @return RangeQuery
      */
     private function createQuery(CriteriaPartInterface $criteriaPart)

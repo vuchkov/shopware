@@ -27,11 +27,6 @@ namespace Shopware\Bundle\StoreFrontBundle\Gateway\DBAL;
 use Doctrine\DBAL\Connection;
 use Shopware\Bundle\StoreFrontBundle\Gateway;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class CustomerGroupGateway implements Gateway\CustomerGroupGatewayInterface
 {
     /**
@@ -59,11 +54,6 @@ class CustomerGroupGateway implements Gateway\CustomerGroupGatewayInterface
      */
     private $connection;
 
-    /**
-     * @param Connection                     $connection
-     * @param FieldHelper                    $fieldHelper
-     * @param Hydrator\CustomerGroupHydrator $customerGroupHydrator
-     */
     public function __construct(
         Connection $connection,
         FieldHelper $fieldHelper,

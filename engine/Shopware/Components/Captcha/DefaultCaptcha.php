@@ -48,13 +48,6 @@ class DefaultCaptcha implements CaptchaInterface
      */
     private $templateManager;
 
-    /**
-     * DefaultCaptcha constructor.
-     *
-     * @param ContainerInterface          $container
-     * @param \Shopware_Components_Config $config
-     * @param \Enlight_Template_Manager   $templateManager
-     */
     public function __construct(
         ContainerInterface $container,
         \Shopware_Components_Config $config,

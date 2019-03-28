@@ -31,7 +31,7 @@ use Shopware\Components\Model\ModelEntity;
  * Locale Model Entity
  *
  * @ORM\Table(name="s_core_locales")
- * @ORM\Entity
+ * @ORM\Entity()
  */
 class Locale extends ModelEntity
 {
@@ -39,7 +39,7 @@ class Locale extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -66,8 +66,6 @@ class Locale extends ModelEntity
     private $territory;
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -76,8 +74,6 @@ class Locale extends ModelEntity
     }
 
     /**
-     * Set locale
-     *
      * @param string $locale
      *
      * @return Locale
@@ -90,8 +86,6 @@ class Locale extends ModelEntity
     }
 
     /**
-     * Get locale
-     *
      * @return string
      */
     public function getLocale()
@@ -100,8 +94,6 @@ class Locale extends ModelEntity
     }
 
     /**
-     * Set language
-     *
      * @param string $language
      *
      * @return Locale
@@ -114,8 +106,6 @@ class Locale extends ModelEntity
     }
 
     /**
-     * Get language
-     *
      * @return string
      */
     public function getLanguage()
@@ -124,8 +114,6 @@ class Locale extends ModelEntity
     }
 
     /**
-     * Set territory
-     *
      * @param string $territory
      *
      * @return Locale
@@ -138,8 +126,6 @@ class Locale extends ModelEntity
     }
 
     /**
-     * Get territory
-     *
      * @return string
      */
     public function getTerritory()

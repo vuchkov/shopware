@@ -28,9 +28,6 @@ use Enlight\Event\SubscriberInterface;
 use Shopware\Models\Shop\Shop;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * Class ConfigLoader
- */
 class ConfigLoader implements SubscriberInterface
 {
     /**
@@ -38,9 +35,6 @@ class ConfigLoader implements SubscriberInterface
      */
     private $container;
 
-    /**
-     * @param ContainerInterface $container
-     */
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
@@ -58,8 +52,6 @@ class ConfigLoader implements SubscriberInterface
     }
 
     /**
-     * @param \Enlight_Event_EventArgs $args
-     *
      * @throws \Exception
      */
     public function onDispatch(\Enlight_Event_EventArgs $args)

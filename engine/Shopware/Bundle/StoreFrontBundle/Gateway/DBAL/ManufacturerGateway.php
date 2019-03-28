@@ -27,15 +27,9 @@ namespace Shopware\Bundle\StoreFrontBundle\Gateway\DBAL;
 use Doctrine\DBAL\Connection;
 use PDO;
 use Shopware\Bundle\StoreFrontBundle\Gateway;
-use Shopware\Bundle\StoreFrontBundle\Service\Core\MediaService;
 use Shopware\Bundle\StoreFrontBundle\Service\MediaServiceInterface;
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class ManufacturerGateway implements Gateway\ManufacturerGatewayInterface
 {
     /**
@@ -63,17 +57,6 @@ class ManufacturerGateway implements Gateway\ManufacturerGatewayInterface
      */
     private $connection;
 
-    /**
-     * @var MediaServiceInterface
-     */
-    private $mediaService;
-
-    /**
-     * @param Connection                    $connection
-     * @param FieldHelper                   $fieldHelper
-     * @param Hydrator\ManufacturerHydrator $manufacturerHydrator
-     * @param MediaServiceInterface         $mediaService
-     */
     public function __construct(
         Connection $connection,
         FieldHelper $fieldHelper,

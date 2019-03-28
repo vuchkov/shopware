@@ -29,11 +29,6 @@ use Enlight_Components_Snippet_Namespace as SnippetNamespace;
 use ShopwarePlugins\SwagUpdate\Components\CheckInterface;
 use ShopwarePlugins\SwagUpdate\Components\Validation;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.com)
- */
 class MySQLVersionCheck implements CheckInterface
 {
     const CHECK_TYPE = 'mysqlversion';
@@ -48,10 +43,6 @@ class MySQLVersionCheck implements CheckInterface
      */
     private $namespace;
 
-    /**
-     * @param Connection       $connection
-     * @param SnippetNamespace $namespace
-     */
     public function __construct(Connection $connection, SnippetNamespace $namespace)
     {
         $this->connection = $connection;

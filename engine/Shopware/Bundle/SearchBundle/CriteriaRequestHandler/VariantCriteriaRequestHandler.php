@@ -33,9 +33,6 @@ use Shopware\Bundle\SearchBundle\CriteriaRequestHandlerInterface;
 use Shopware\Bundle\SearchBundleDBAL\VariantHelperInterface;
 use Shopware\Bundle\StoreFrontBundle\Struct\ShopContextInterface;
 
-/**
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class VariantCriteriaRequestHandler implements CriteriaRequestHandlerInterface
 {
     /**
@@ -48,30 +45,17 @@ class VariantCriteriaRequestHandler implements CriteriaRequestHandlerInterface
      */
     private $variantHelper;
 
-    /**
-     * @param Connection             $connection
-     * @param VariantHelperInterface $variantHelper
-     */
     public function __construct(Connection $connection, VariantHelperInterface $variantHelper)
     {
         $this->connection = $connection;
         $this->variantHelper = $variantHelper;
     }
 
-    /**
-     * @param Request              $request
-     * @param Criteria             $criteria
-     * @param ShopContextInterface $context
-     */
     public function handleRequest(Request $request, Criteria $criteria, ShopContextInterface $context)
     {
         $this->addVariantCondition($request, $criteria);
     }
 
-    /**
-     * @param Request  $request
-     * @param Criteria $criteria
-     */
     private function addVariantCondition(Request $request, Criteria $criteria)
     {
         $filters = $request->getParam('variants', []);

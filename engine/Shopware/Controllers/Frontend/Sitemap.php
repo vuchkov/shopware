@@ -26,11 +26,6 @@ use Shopware\Components\Model\QueryBuilder;
 use Shopware\Models\Shop\DetachedShop;
 use Shopware\Models\Site\Site;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Shopware_Controllers_Frontend_Sitemap extends Enlight_Controller_Action
 {
     /**
@@ -56,7 +51,8 @@ class Shopware_Controllers_Frontend_Sitemap extends Enlight_Controller_Action
      */
     private function getCategoryTree()
     {
-        $categoryTree = $this->container->get('modules')->sCategories()->sGetWholeCategoryTree();
+        $shop = $this->container->get('shop');
+        $categoryTree = $this->container->get('modules')->sCategories()->sGetWholeCategoryTree(null, null, $shop->getId());
 
         $categoryTranslations = $this->fetchTranslations('category', $this->getTranslationKeys(
             $categoryTree,
@@ -68,9 +64,6 @@ class Shopware_Controllers_Frontend_Sitemap extends Enlight_Controller_Action
     }
 
     /**
-     * @param array $categoryTree
-     * @param array $translations
-     *
      * @return array
      */
     private function translateCategoryTree(array $categoryTree, array $translations)
@@ -138,7 +131,6 @@ class Shopware_Controllers_Frontend_Sitemap extends Enlight_Controller_Action
     }
 
     /**
-     * @param array  $array
      * @param string $keyField
      * @param string $recursiveField
      *
@@ -201,7 +193,6 @@ class Shopware_Controllers_Frontend_Sitemap extends Enlight_Controller_Action
      * Recursive helper function to convert a site to correct sitemap format
      *
      * @param array $site
-     * @param array $translations
      *
      * @return array
      */
@@ -256,8 +247,7 @@ class Shopware_Controllers_Frontend_Sitemap extends Enlight_Controller_Action
     }
 
     /**
-     * @param int   $objectKey
-     * @param array $translations
+     * @param int $objectKey
      *
      * @return array
      */

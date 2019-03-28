@@ -26,16 +26,9 @@ namespace Shopware\Components\DependencyInjection\Bridge;
 
 use Shopware\Components\DependencyInjection\Container;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Locale
 {
     /**
-     * @param Container $container
-     *
      * @return \Zend_Locale
      */
     public function factory(Container $container)

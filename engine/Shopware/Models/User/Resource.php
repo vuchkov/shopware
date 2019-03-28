@@ -41,8 +41,8 @@ use Shopware\Components\Model\ModelEntity;
  * </code>
  *
  * @ORM\Table(name="s_core_acl_resources")
- * @ORM\Entity
- * @ORM\HasLifecycleCallbacks
+ * @ORM\Entity()
+ * @ORM\HasLifecycleCallbacks()
  */
 class Resource extends ModelEntity implements \Zend_Acl_Resource_Interface
 {
@@ -50,7 +50,7 @@ class Resource extends ModelEntity implements \Zend_Acl_Resource_Interface
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -88,8 +88,6 @@ class Resource extends ModelEntity implements \Zend_Acl_Resource_Interface
     }
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -98,8 +96,6 @@ class Resource extends ModelEntity implements \Zend_Acl_Resource_Interface
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      *
      * @return \Shopware\Models\User\Resource
@@ -112,8 +108,6 @@ class Resource extends ModelEntity implements \Zend_Acl_Resource_Interface
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getName()
@@ -173,7 +167,7 @@ class Resource extends ModelEntity implements \Zend_Acl_Resource_Interface
      *
      * Removes the released resource.
      *
-     * @ORM\PreRemove
+     * @ORM\PreRemove()
      */
     public function onRemove()
     {

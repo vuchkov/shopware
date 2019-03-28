@@ -22,7 +22,7 @@
  * our trademarks remain entirely with us.
  */
 
-namespace  Shopware\Tests\Mink\Page;
+namespace Shopware\Tests\Mink\Page;
 
 use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
 use Shopware\Tests\Mink\Element\NotePosition;
@@ -52,9 +52,6 @@ class Note extends Page
         Helper::throwException($message);
     }
 
-    /**
-     * @param array $items
-     */
     public function fillNoteWithProducts(array $items)
     {
         $originalPath = $this->path;
@@ -67,10 +64,6 @@ class Note extends Page
         $this->path = $originalPath;
     }
 
-    /**
-     * @param NotePosition $notePositions
-     * @param array        $items
-     */
     public function checkNoteProducts(NotePosition $notePositions, array $items)
     {
         foreach ($items as &$item) {
@@ -89,5 +82,18 @@ class Note extends Page
             }
             Helper::throwException($messages);
         }
+    }
+
+    /**
+     * Its ok to be on the note index page, we're being redirected here.
+     * {@inheritdoc}
+     */
+    protected function verifyUrl(array $urlParameters = [])
+    {
+        if (strpos($this->getDriver()->getCurrentUrl(), '/note') !== false) {
+            return;
+        }
+
+        parent::verifyUrl($urlParameters);
     }
 }

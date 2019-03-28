@@ -26,11 +26,6 @@ namespace Shopware\Bundle\StoreFrontBundle\Service;
 
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 interface ShopPageServiceInterface
 {
     /**
@@ -38,9 +33,6 @@ interface ShopPageServiceInterface
      * please refer to the linked classes.
      *
      * @see \Shopware\Bundle\StoreFrontBundle\Gateway\ShopPageGatewayInterface::getList()
-     *
-     * @param array                       $ids
-     * @param Struct\ShopContextInterface $context
      *
      * @return Struct\ShopPage[] Indexed by the shop page id
      */

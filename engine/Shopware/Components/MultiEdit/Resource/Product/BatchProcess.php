@@ -29,8 +29,6 @@ use Shopware\Models\MultiEdit\Queue;
 
 /**
  * The batch process resource handles the batch processes for updating products
- *
- * Class BatchProcess
  */
 class BatchProcess
 {
@@ -297,7 +295,7 @@ class BatchProcess
         $entityManager = $this->getDqlHelper()->getEntityManager();
         $connection = $entityManager->getConnection();
 
-        /** @var \Shopware\Models\MultiEdit\Queue $queue */
+        /** @var \Shopware\Models\MultiEdit\Queue|null $queue */
         $queue = $entityManager->find(Queue::class, $queueId);
 
         if (!$queue) {

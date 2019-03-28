@@ -29,11 +29,6 @@ use Shopware\Bundle\AttributeBundle\Repository\Reader\GenericReader;
 use Shopware\Bundle\AttributeBundle\Repository\Searcher\GenericSearcher;
 use Shopware\Components\Model\ModelManager;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Registry implements RegistryInterface
 {
     /**
@@ -46,10 +41,6 @@ class Registry implements RegistryInterface
      */
     private $entityManager;
 
-    /**
-     * @param IteratorAggregate $repositories
-     * @param ModelManager      $entityManager
-     */
     public function __construct(IteratorAggregate $repositories, ModelManager $entityManager)
     {
         $this->repositories = iterator_to_array($repositories, false);

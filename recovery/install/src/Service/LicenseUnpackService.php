@@ -27,17 +27,9 @@ namespace Shopware\Recovery\Install\Service;
 use Shopware\Recovery\Install\Struct\LicenseInformation;
 use Shopware\Recovery\Install\Struct\LicenseUnpackRequest;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 interface LicenseUnpackService
 {
     /**
-     * @param LicenseUnpackRequest $request
-     * @param TranslationService   $translation
-     *
      * @return LicenseInformation
      */
     public function evaluateLicense(LicenseUnpackRequest $request, TranslationService $translation);

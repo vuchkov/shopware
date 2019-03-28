@@ -22,11 +22,6 @@
  * our trademarks remain entirely with us.
  */
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Shopware_Tests_Controllers_Backend_RiskManagementTest extends Enlight_Components_Test_Controller_TestCase
 {
     /**
@@ -63,8 +58,6 @@ class Shopware_Tests_Controllers_Backend_RiskManagementTest extends Enlight_Comp
      * This test tests the creating of a new premium-article.
      * The response has to contain the id of the created article.
      * This function is called before testEditPremiumArticle and testDeletePremiumArticle
-     *
-     * @return mixed
      */
     public function testCreateRule()
     {
@@ -108,7 +101,7 @@ class Shopware_Tests_Controllers_Backend_RiskManagementTest extends Enlight_Comp
      * a premium-article.
      * The testCreatePremiumArticle method is called before.
      *
-     * @param $lastId The id of the last created article
+     * @param string $lastId The id of the last created article
      * @depends testCreateRule
      */
     public function testEditRule($lastId)
@@ -137,7 +130,7 @@ class Shopware_Tests_Controllers_Backend_RiskManagementTest extends Enlight_Comp
      *
      * @depends testCreateRule
      *
-     * @param $lastId
+     * @param string $lastId
      */
     public function testDeleteRule($lastId)
     {

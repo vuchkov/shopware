@@ -27,11 +27,6 @@ namespace Shopware\Bundle\StoreFrontBundle\Struct;
 use Shopware\Bundle\StoreFrontBundle\Struct\Configurator\Group;
 use Shopware\Bundle\StoreFrontBundle\Struct\Property\Set;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Product extends ListProduct
 {
     /**
@@ -80,8 +75,6 @@ class Product extends ListProduct
     protected $configuration = [];
 
     /**
-     * @param ListProduct $listProduct
-     *
      * @return Product
      */
     public static function createFromListProduct(ListProduct $listProduct)
@@ -140,7 +133,7 @@ class Product extends ListProduct
     }
 
     /**
-     * @return \Shopware\Bundle\StoreFrontBundle\Struct\Property\Set
+     * @return \Shopware\Bundle\StoreFrontBundle\Struct\Property\Set|null
      */
     public function getPropertySet()
     {

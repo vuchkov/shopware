@@ -28,9 +28,6 @@ use Enlight_Hook_HookExecutionContext as HookExecutionContext;
 use Enlight_Hook_HookHandler as HookHandler;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class HookManagerTest extends TestCase
 {
     const TEST_NAME_ARG = 'Test Name';
@@ -945,9 +942,8 @@ class HookManagerTest extends TestCase
     }
 
     /**
-     * @param string        $methodName
-     * @param string        $hookType
-     * @param callable|null $callback
+     * @param string $methodName
+     * @param string $hookType
      */
     private function addHookListener($methodName, $hookType, callable $callback = null)
     {
@@ -971,9 +967,6 @@ class HookManagerTest extends TestCase
         return $proxy;
     }
 
-    /**
-     * @param \Enlight_Hook_HookArgs $args
-     */
     private function assertHookArgs(\Enlight_Hook_HookArgs $args)
     {
         $this->assertEquals(self::TEST_NAME_ARG, $args->name);

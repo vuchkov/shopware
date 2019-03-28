@@ -22,11 +22,6 @@
  * our trademarks remain entirely with us.
  */
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Shopware_Components_SeoIndex extends Enlight_Class
 {
     /**
@@ -143,8 +138,6 @@ class Shopware_Components_SeoIndex extends Enlight_Class
      * Count categories for the current shop
      *
      * @param int $shopId
-     *
-     * @return mixed
      */
     public function countCategories($shopId)
     {

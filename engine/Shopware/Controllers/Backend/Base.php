@@ -27,6 +27,7 @@ use Shopware\Components\CSRFWhitelistAware;
 use Shopware\Components\StateTranslatorService;
 use Shopware\Models\Document\Document;
 use Shopware\Models\Shop\Locale;
+use Shopware\Models\Tax\Tax;
 
 /**
  * Backend Controller for the Shopware global configured stores.
@@ -98,10 +99,10 @@ class Shopware_Controllers_Backend_Base extends Shopware_Controllers_Backend_Ext
      */
     public function getTaxesAction()
     {
-        /** @var Shopware\Components\Model\ModelRepository $repository */
-        $repository = Shopware()->Models()->getRepository(\Shopware\Models\Tax\Tax::class);
+        /** @var \Shopware\Models\Tax\Repository $repository */
+        $repository = Shopware()->Models()->getRepository(Tax::class);
 
-        $query = $repository->queryBy(
+        $query = $repository->getTaxQuery(
             $this->Request()->getParam('filter', []),
             $this->Request()->getParam('sort', []),
             $this->Request()->getParam('limit'),
@@ -964,9 +965,9 @@ class Shopware_Controllers_Backend_Base extends Shopware_Controllers_Backend_Ext
         /** @var \Shopware\Components\Validator\EmailValidatorInterface $emailValidator */
         $emailValidator = $this->container->get('validator.email');
         if ($emailValidator->isValid($email)) {
-            $this->Response()->setBody(1);
+            $this->Response()->setContent(1);
         } else {
-            $this->Response()->setBody('');
+            $this->Response()->setContent('');
         }
     }
 
@@ -1035,8 +1036,6 @@ class Shopware_Controllers_Backend_Base extends Shopware_Controllers_Backend_Ext
     /**
      * Add the table alias to the passed filter and sort parameters.
      *
-     * @param array $properties
-     * @param array $fields
      *
      * @return array
      */
@@ -1059,8 +1058,6 @@ class Shopware_Controllers_Backend_Base extends Shopware_Controllers_Backend_Ext
     /**
      * Prepares the sort params for the variant search
      *
-     * @param array $properties
-     * @param array $fields
      *
      * @return array
      */
@@ -1092,8 +1089,6 @@ class Shopware_Controllers_Backend_Base extends Shopware_Controllers_Backend_Ext
      * Adds the additional text for variants
      *
      * @param array $data
-     *
-     * @return mixed
      */
     private function addAdditionalTextForVariant($data)
     {
@@ -1149,8 +1144,6 @@ class Shopware_Controllers_Backend_Base extends Shopware_Controllers_Backend_Ext
     /**
      * Helper function to generate the additional text dynamically
      *
-     * @param array $data
-     * @param array $variantsWithoutAdditionalText
      *
      * @return array
      */

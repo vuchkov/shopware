@@ -28,11 +28,6 @@ use Shopware\Bundle\SearchBundle\Criteria;
 use Shopware\Bundle\SearchBundle\ProductSearchResult;
 use Shopware\Bundle\StoreFrontBundle\Struct\ShopContextInterface;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 interface VariantListingPriceServiceInterface
 {
     /**
@@ -40,10 +35,6 @@ interface VariantListingPriceServiceInterface
      * in the listing, to the specific variant price. Refer also to the linked classes.
      *
      * @see \Shopware\Bundle\StoreFrontBundle\Gateway\VariantCheapestPriceGatewayInterface::get()
-     *
-     * @param Criteria             $criteria
-     * @param ProductSearchResult  $result
-     * @param ShopContextInterface $context
      */
     public function updatePrices(Criteria $criteria, ProductSearchResult $result, ShopContextInterface $context);
 }

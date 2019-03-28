@@ -55,7 +55,6 @@ class Store extends BaseStore
      * @param string   $root
      * @param string[] $cacheCookies
      * @param bool     $lookupOptimization
-     * @param array    $ignoredUrlParameters
      */
     public function __construct(
         $root,
@@ -172,8 +171,6 @@ class Store extends BaseStore
      * When saving a page, also save the page's cacheKey in an optimized version
      * so we can look it up more quickly
      *
-     * @param Request  $request
-     * @param Response $response
      *
      * @return string
      */
@@ -202,7 +199,7 @@ class Store extends BaseStore
             // but save a lot of reads when invalidating
             $content[$cacheKey] = $headerKey;
 
-            if (!false === $this->save($key, json_encode($content))) {
+            if (!$this->save($key, json_encode($content))) {
                 throw new \RuntimeException(sprintf('Could not write cacheKey "%s"', $key));
             }
         }
@@ -233,7 +230,6 @@ class Store extends BaseStore
      * Verify the URL parameters for a better cache hit rate
      * Removes ignored URL parameters set in the Shopware configuration.
      *
-     * @param Request $request
      *
      * @return string
      */
@@ -391,5 +387,7 @@ class Store extends BaseStore
         }
 
         @chmod($path, 0666 & ~umask());
+
+        return true;
     }
 }

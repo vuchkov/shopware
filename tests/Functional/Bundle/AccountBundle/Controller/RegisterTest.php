@@ -27,11 +27,6 @@ namespace Shopware\Tests\Functional\Bundle\AccountBundle\Controller;
 use Doctrine\DBAL\Connection;
 use Shopware\Models\Customer\Customer;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class RegisterTest extends \Enlight_Components_Test_Controller_TestCase
 {
     const TEST_MAIL = 'unittest@mail.com';
@@ -409,8 +404,6 @@ class RegisterTest extends \Enlight_Components_Test_Controller_TestCase
     }
 
     /**
-     * @param \Enlight_Controller_Response_Response $response
-     *
      * @return string|null
      */
     private function getHeaderLocation(\Enlight_Controller_Response_Response $response)

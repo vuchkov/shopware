@@ -28,11 +28,6 @@ use Doctrine\DBAL\Connection;
 use Shopware\Bundle\StoreFrontBundle\Gateway;
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class TaxGateway implements Gateway\TaxGatewayInterface
 {
     /**
@@ -60,11 +55,6 @@ class TaxGateway implements Gateway\TaxGatewayInterface
      */
     private $connection;
 
-    /**
-     * @param Connection           $connection
-     * @param FieldHelper          $fieldHelper
-     * @param Hydrator\TaxHydrator $taxHydrator
-     */
     public function __construct(
         Connection $connection,
         FieldHelper $fieldHelper,

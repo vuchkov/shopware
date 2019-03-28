@@ -40,7 +40,7 @@ class Shop extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
@@ -236,9 +236,6 @@ class Shop extends ModelEntity
      */
     protected $attribute;
 
-    /**
-     * Class constructor.
-     */
     public function __construct()
     {
         $this->currencies = new ArrayCollection();
@@ -366,7 +363,7 @@ class Shop extends ModelEntity
     }
 
     /**
-     * @return Template
+     * @return Template|null
      */
     public function getTemplate()
     {
@@ -398,7 +395,7 @@ class Shop extends ModelEntity
     }
 
     /**
-     * @return \Shopware\Models\Category\Category
+     * @return \Shopware\Models\Category\Category|null
      */
     public function getCategory()
     {
@@ -494,7 +491,7 @@ class Shop extends ModelEntity
     }
 
     /**
-     * @return \Shopware\Models\Shop\Shop
+     * @return \Shopware\Models\Shop\Shop|null
      */
     public function getMain()
     {
@@ -526,7 +523,7 @@ class Shop extends ModelEntity
     }
 
     /**
-     * @return \Shopware\Models\Shop\Shop
+     * @return \Shopware\Models\Shop\Shop|null
      */
     public function getFallback()
     {
@@ -625,8 +622,6 @@ class Shop extends ModelEntity
 
     /**
      * @param string $name
-     *
-     * @return mixed
      */
     public function get($name)
     {
@@ -728,8 +723,6 @@ class Shop extends ModelEntity
     }
 
     /**
-     * @param Template $template
-     *
      * @throws \Exception
      */
     private function registerTheme(Template $template)

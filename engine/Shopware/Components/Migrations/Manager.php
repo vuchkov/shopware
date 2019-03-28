@@ -33,10 +33,6 @@ namespace Shopware\Components\Migrations;
  * $migrationManager = new Manager($conn, '/path/to/migrations');
  * $migrationManager->run();
  * </code>
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class Manager
 {
@@ -51,7 +47,6 @@ class Manager
     protected $migrationPath;
 
     /**
-     * @param \PDO   $connection
      * @param string $migrationPath
      */
     public function __construct(\PDO $connection, $migrationPath)
@@ -62,8 +57,6 @@ class Manager
     }
 
     /**
-     * @param \PDO $connection
-     *
      * @return Manager
      */
     public function setConnection(\PDO $connection)
@@ -93,9 +86,6 @@ class Manager
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getMigrationPath()
     {
         return $this->migrationPath;
@@ -206,8 +196,7 @@ class Manager
     /**
      * Applies given $migration to database
      *
-     * @param AbstractMigration $migration
-     * @param string            $modus
+     * @param string $modus
      *
      * @throws \Exception
      */

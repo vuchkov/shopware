@@ -30,11 +30,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class SettingsLabelsFindMissingCommand extends ShopwareCommand
 {
     /**
@@ -77,7 +72,7 @@ class SettingsLabelsFindMissingCommand extends ShopwareCommand
             return 1;
         }
 
-        /** @var Locale $locale */
+        /** @var Locale|null $locale */
         $locale = $this->container->get('models')
             ->getRepository(\Shopware\Models\Shop\Locale::class)
             ->findOneByLocale($input->getArgument('locale'));
@@ -95,7 +90,6 @@ class SettingsLabelsFindMissingCommand extends ShopwareCommand
     /**
      * Exports form labels from the database into a php file containing an array
      *
-     * @param OutputInterface              $output
      * @param \Shopware\Models\Shop\Locale $locale
      * @param string                       $dir
      *
@@ -133,9 +127,8 @@ class SettingsLabelsFindMissingCommand extends ShopwareCommand
     /**
      * Exports element labels from the database into a php file containing an array
      *
-     * @param OutputInterface $output
-     * @param Locale          $locale
-     * @param string          $dir
+     * @param Locale $locale
+     * @param string $dir
      *
      * @throws \Exception
      */

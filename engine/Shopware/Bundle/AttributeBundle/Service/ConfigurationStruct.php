@@ -24,11 +24,6 @@
 
 namespace Shopware\Bundle\AttributeBundle\Service;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.com)
- */
 class ConfigurationStruct implements \JsonSerializable
 {
     /**
@@ -196,7 +191,7 @@ class ConfigurationStruct implements \JsonSerializable
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getPosition()
     {

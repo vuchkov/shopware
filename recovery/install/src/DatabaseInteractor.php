@@ -24,10 +24,6 @@
 
 /**
  * Shopware SwagAboCommerce Plugin - Bootstrap
- *
- * @category Shopware
- *
- * @copyright Copyright (c) 2014, shopware AG (http://www.shopware.de)
  */
 
 namespace Shopware\Recovery\Install;
@@ -45,17 +41,12 @@ class DatabaseInteractor
      */
     private $IOHelper;
 
-    /**
-     * @param IOHelper $IOHelper
-     */
     public function __construct(IOHelper $IOHelper)
     {
         $this->IOHelper = $IOHelper;
     }
 
     /**
-     * @param DatabaseConnectionInformation $connectionInformation
-     *
      * @return DatabaseConnectionInformation
      */
     public function askDatabaseConnectionInformation(
@@ -80,8 +71,6 @@ class DatabaseInteractor
     }
 
     /**
-     * @param \PDO $connection
-     *
      * @return string
      */
     public function createDatabase(\PDO $connection)
@@ -97,7 +86,6 @@ class DatabaseInteractor
 
     /**
      * @param string $databaseName
-     * @param \PDO   $pdo
      *
      * @return bool
      */
@@ -124,7 +112,6 @@ class DatabaseInteractor
     /**
      * Facade for asking questions
      *
-     * @param Question $question
      *
      * @return string
      */

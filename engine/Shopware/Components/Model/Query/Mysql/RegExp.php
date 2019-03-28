@@ -31,8 +31,6 @@ use Doctrine\ORM\Query\SqlWalker;
 
 /**
  * Custom query extension to allow regex comparison in DQL
- *
- * Class RegExp
  */
 class RegExp extends FunctionNode
 {
@@ -41,8 +39,6 @@ class RegExp extends FunctionNode
 
     /**
      * Parse
-     *
-     * @param Parser $parser
      */
     public function parse(Parser $parser)
     {
@@ -57,7 +53,6 @@ class RegExp extends FunctionNode
     /**
      * Return SQL expression
      *
-     * @param SqlWalker $sqlWalker
      *
      * @return string
      */

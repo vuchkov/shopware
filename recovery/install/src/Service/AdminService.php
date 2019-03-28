@@ -26,11 +26,6 @@ namespace Shopware\Recovery\Install\Service;
 
 use Shopware\Recovery\Install\Struct\AdminUser;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class AdminService
 {
     /**
@@ -38,17 +33,12 @@ class AdminService
      */
     private $connection;
 
-    /**
-     * @param \PDO $connection
-     */
     public function __construct(\PDO $connection)
     {
         $this->connection = $connection;
     }
 
     /**
-     * @param AdminUser $user
-     *
      * @throws \RuntimeException
      */
     public function createAdmin(AdminUser $user)
@@ -91,8 +81,6 @@ EOT;
     }
 
     /**
-     * @param AdminUser $user
-     *
      * @return int
      */
     private function getLocaleId(AdminUser $user)

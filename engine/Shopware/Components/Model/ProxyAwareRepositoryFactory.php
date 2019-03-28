@@ -63,8 +63,7 @@ class ProxyAwareRepositoryFactory implements RepositoryFactory
     }
 
     /**
-     * @param EntityManagerInterface $entityManager
-     * @param string                 $entityName
+     * @param string $entityName
      *
      * @return ObjectRepository
      */
@@ -73,6 +72,7 @@ class ProxyAwareRepositoryFactory implements RepositoryFactory
         /* @var \Doctrine\ORM\Mapping\ClassMetadata $metadata */
         $metadata = $entityManager->getClassMetadata($entityName);
 
+        /** @var string|null $repositoryClassName */
         $repositoryClassName = $metadata->customRepositoryClassName;
         if ($repositoryClassName === null) {
             $repositoryClassName = $entityManager->getConfiguration()->getDefaultRepositoryClassName();

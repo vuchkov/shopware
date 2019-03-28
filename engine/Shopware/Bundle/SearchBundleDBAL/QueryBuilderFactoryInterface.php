@@ -27,11 +27,6 @@ namespace Shopware\Bundle\SearchBundleDBAL;
 use Shopware\Bundle\SearchBundle\Criteria;
 use Shopware\Bundle\StoreFrontBundle\Struct\ShopContextInterface;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 interface QueryBuilderFactoryInterface
 {
     /**
@@ -40,8 +35,6 @@ interface QueryBuilderFactoryInterface
      *
      * Adds the sorting and conditions of the provided criteria.
      *
-     * @param Criteria             $criteria
-     * @param ShopContextInterface $context
      *
      * @return QueryBuilder
      */
@@ -50,8 +43,6 @@ interface QueryBuilderFactoryInterface
     /**
      * Generates the product selection query of the product number search
      *
-     * @param Criteria             $criteria
-     * @param ShopContextInterface $context
      *
      * @return QueryBuilder
      */
@@ -63,8 +54,6 @@ interface QueryBuilderFactoryInterface
      *
      * Adds only the conditions of the provided criteria.
      *
-     * @param Criteria             $criteria
-     * @param ShopContextInterface $context
      *
      * @return QueryBuilder
      */

@@ -35,10 +35,6 @@ use Shopware\Components\Model\ModelManager;
 use Shopware\Models\Category\Category;
 
 /**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.com)
- *
  * @deprecated Will be removed in Shopware 5.6
  */
 class SitemapXMLRepository
@@ -74,11 +70,7 @@ class SitemapXMLRepository
     private $batchSize;
 
     /**
-     * @param ProductNumberSearchInterface       $productNumberSearch
-     * @param StoreFrontCriteriaFactoryInterface $storeFrontCriteriaFactory
-     * @param ModelManager                       $em
-     * @param ContextServiceInterface            $contextService
-     * @param int                                $batchSize
+     * @param int $batchSize
      */
     public function __construct(
         ProductNumberSearchInterface $productNumberSearch,
@@ -187,7 +179,6 @@ class SitemapXMLRepository
     /**
      * Reads all product urls recursive
      *
-     * @param Criteria $criteria
      *
      * @return array
      */
@@ -441,8 +432,8 @@ class SitemapXMLRepository
      * Helper function to filter emotion campaigns
      * Returns false, if the campaign starts later or is outdated
      *
-     * @param null $from
-     * @param null $to
+     * @param \DateTimeInterface|null $from
+     * @param \DateTimeInterface|null $to
      *
      * @return bool
      */

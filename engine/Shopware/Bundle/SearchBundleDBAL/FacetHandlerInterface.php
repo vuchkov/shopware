@@ -31,19 +31,12 @@ use Shopware\Bundle\StoreFrontBundle\Struct;
 
 /**
  * @deprecated since version 5.3, to be removed in 6.0 - Use \Shopware\Bundle\SearchBundleDBAL\PartialFacetHandlerInterface instead
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 interface FacetHandlerInterface
 {
     /**
      * Generates the facet data for the passed query, criteria and context object.
      *
-     * @param FacetInterface              $facet
-     * @param Criteria                    $criteria
-     * @param Struct\ShopContextInterface $context
      *
      * @return FacetResultInterface|FacetResultInterface[]|null
      */
@@ -56,7 +49,6 @@ interface FacetHandlerInterface
     /**
      * Checks if the passed facet can be handled by this class.
      *
-     * @param FacetInterface $facet
      *
      * @return bool
      */

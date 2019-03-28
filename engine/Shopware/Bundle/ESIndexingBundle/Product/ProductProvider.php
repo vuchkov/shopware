@@ -27,6 +27,7 @@ namespace Shopware\Bundle\ESIndexingBundle\Product;
 use Doctrine\DBAL\Connection;
 use Shopware\Bundle\AttributeBundle\Service\CrudService;
 use Shopware\Bundle\ESIndexingBundle\IdentifierSelector;
+use Shopware\Bundle\ESIndexingBundle\ProviderInterface;
 use Shopware\Bundle\ESIndexingBundle\Struct\Product;
 use Shopware\Bundle\SearchBundleDBAL\VariantHelperInterface;
 use Shopware\Bundle\StoreFrontBundle\Gateway\DBAL\FieldHelper;
@@ -42,11 +43,10 @@ use Shopware\Bundle\StoreFrontBundle\Struct\BaseProduct;
 use Shopware\Bundle\StoreFrontBundle\Struct\Configurator\Group;
 use Shopware\Bundle\StoreFrontBundle\Struct\ListProduct;
 use Shopware\Bundle\StoreFrontBundle\Struct\Product\PriceRule;
-use Shopware\Bundle\StoreFrontBundle\Struct\ProductContextInterface;
 use Shopware\Bundle\StoreFrontBundle\Struct\Shop;
 use Shopware\Bundle\StoreFrontBundle\Struct\ShopContextInterface;
 
-class ProductProvider implements ProductProviderInterface
+class ProductProvider implements ProviderInterface, ProductProviderInterface
 {
     /**
      * @var ContextServiceInterface
@@ -239,10 +239,10 @@ class ProductProvider implements ProductProviderInterface
                         $product->setAvailability($availability[$number]);
                     }
                 }
-            } else {
-                if (!$product->isMainVariant()) {
-                    continue;
-                }
+            } elseif (!$product->isMainVariant()) {
+                continue;
+            } elseif ($listProduct->getStock() < $listProduct->getUnit()->getMinPurchase()) {
+                $product->setHasAvailableVariant(false);
             }
 
             if (isset($average[$number])) {
@@ -291,8 +291,6 @@ class ProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param \DateTimeInterface|null $date
-     *
      * @return string|null
      */
     private function formatDate(\DateTimeInterface $date = null)
@@ -339,8 +337,7 @@ class ProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param ListProduct[]        $products
-     * @param ShopContextInterface $context
+     * @param ListProduct[] $products
      *
      * @return array[]
      */
@@ -428,7 +425,6 @@ class ProductProvider implements ProductProviderInterface
             }
             $rules = $priceRules[$number];
 
-            /** @var ProductContextInterface $context */
             foreach ($contexts as $context) {
                 $customerGroup = $context->getCurrentCustomerGroup()->getKey();
                 $key = $customerGroup . '_' . $context->getCurrency()->getId();
@@ -440,6 +436,8 @@ class ProductProvider implements ProductProviderInterface
 
                 /* @var PriceRule $rule */
                 $product->setCheapestPriceRule($rule);
+
+                /* @var ProductContextInterface $context */
                 $this->priceCalculationService->calculateProduct($product, $context);
 
                 if ($product->getCheapestPrice()) {
@@ -471,7 +469,6 @@ class ProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param Shop    $shop
      * @param Product $product
      *
      * @return bool
@@ -487,8 +484,6 @@ class ProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param Shop $shop
-     *
      * @return array
      */
     private function getPriceContexts(Shop $shop)
@@ -542,8 +537,6 @@ class ProductProvider implements ProductProviderInterface
     }
 
     /**
-     * @param array $attributes
-     *
      * @return array
      */
     private function parseAttributes(array $attributes)

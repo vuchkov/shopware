@@ -26,11 +26,6 @@ namespace Shopware\Recovery\Common\Archive;
 
 use ZipArchive;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Zip extends Adapter
 {
     /**
@@ -40,7 +35,6 @@ class Zip extends Adapter
 
     /**
      * @param string $fileName
-     * @param null   $flags
      *
      * @throws \Exception
      */
@@ -81,8 +75,6 @@ class Zip extends Adapter
 
     /**
      * @param string $name
-     *
-     * @return mixed
      */
     public function getContents($name)
     {
@@ -91,8 +83,6 @@ class Zip extends Adapter
 
     /**
      * @param int $position
-     *
-     * @return mixed
      */
     public function getEntry($position)
     {

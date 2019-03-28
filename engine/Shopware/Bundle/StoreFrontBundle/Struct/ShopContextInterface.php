@@ -29,11 +29,6 @@ use Shopware\Bundle\StoreFrontBundle\Struct\Country\State;
 use Shopware\Bundle\StoreFrontBundle\Struct\Customer\Group;
 use Shopware\Bundle\StoreFrontBundle\Struct\Product\PriceGroup;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 interface ShopContextInterface
 {
     /**
@@ -96,7 +91,7 @@ interface ShopContextInterface
      *
      * @param int $taxId
      *
-     * @return Tax
+     * @return Tax|null
      */
     public function getTaxRule($taxId);
 

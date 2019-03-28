@@ -30,10 +30,6 @@ use Shopware\Components\Routing\GeneratorInterface;
 
 /**
  * @see \Enlight_Controller_Router_Default
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class DefaultGenerator implements GeneratorInterface
 {
@@ -48,8 +44,7 @@ class DefaultGenerator implements GeneratorInterface
     protected $separator;
 
     /**
-     * @param EnlightDispatcher $dispatcher
-     * @param string            $separator
+     * @param string $separator
      */
     public function __construct(EnlightDispatcher $dispatcher, $separator = '/')
     {

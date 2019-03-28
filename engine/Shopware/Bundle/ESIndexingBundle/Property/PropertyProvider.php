@@ -33,9 +33,6 @@ use Shopware\Bundle\StoreFrontBundle\Struct\Property\Group;
 use Shopware\Bundle\StoreFrontBundle\Struct\Shop;
 use Shopware\Bundle\StoreFrontBundle\Struct\ShopContextInterface;
 
-/**
- * Class PropertyProvider
- */
 class PropertyProvider implements PropertyProviderInterface
 {
     /**
@@ -58,12 +55,6 @@ class PropertyProvider implements PropertyProviderInterface
      */
     private $hydrator;
 
-    /**
-     * @param Connection              $connection
-     * @param ContextServiceInterface $contextService
-     * @param FieldHelper             $fieldHelper
-     * @param PropertyHydrator        $hydrator
-     */
     public function __construct(
         Connection $connection,
         ContextServiceInterface $contextService,
@@ -120,8 +111,6 @@ class PropertyProvider implements PropertyProviderInterface
     }
 
     /**
-     * @param ShopContextInterface $context
-     *
      * @return \Doctrine\DBAL\Query\QueryBuilder
      */
     private function getQuery(ShopContextInterface $context)

@@ -22,9 +22,6 @@
  * our trademarks remain entirely with us.
  */
 
-/**
- * Custom controller
- */
 class Shopware_Controllers_Frontend_Custom extends Enlight_Controller_Action
 {
     /**
@@ -57,7 +54,7 @@ class Shopware_Controllers_Frontend_Custom extends Enlight_Controller_Action
         }
 
         if (!empty($staticPage['html'])) {
-            $this->View()->sContent = $staticPage['html'];
+            $this->View()->assign('sContent', $staticPage['html']);
         }
 
         for ($i = 1; $i <= 3; ++$i) {

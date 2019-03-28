@@ -41,8 +41,8 @@ use Shopware\Components\Model\ModelEntity;
  * </code>
  *
  * @ORM\Table(name="s_core_acl_privileges")
- * @ORM\Entity
- * @ORM\HasLifecycleCallbacks
+ * @ORM\Entity()
+ * @ORM\HasLifecycleCallbacks()
  */
 class Privilege extends ModelEntity
 {
@@ -50,7 +50,7 @@ class Privilege extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -81,8 +81,6 @@ class Privilege extends ModelEntity
     private $resource;
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -117,8 +115,6 @@ class Privilege extends ModelEntity
     }
 
     /**
-     * Set resourceId
-     *
      * @param int|null $resourceId
      *
      * @return Privilege
@@ -136,8 +132,6 @@ class Privilege extends ModelEntity
     }
 
     /**
-     * Get resourceId
-     *
      * @return int
      */
     public function getResourceId()
@@ -146,8 +140,6 @@ class Privilege extends ModelEntity
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      *
      * @return Privilege
@@ -160,8 +152,6 @@ class Privilege extends ModelEntity
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getName()
@@ -175,7 +165,7 @@ class Privilege extends ModelEntity
      *
      * Removes the released privileges.
      *
-     * @ORM\PreRemove
+     * @ORM\PreRemove()
      */
     public function onRemove()
     {

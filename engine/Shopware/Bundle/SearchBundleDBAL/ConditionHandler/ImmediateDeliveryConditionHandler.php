@@ -34,11 +34,6 @@ use Shopware\Bundle\SearchBundleDBAL\QueryBuilder;
 use Shopware\Bundle\SearchBundleDBAL\VariantHelperInterface;
 use Shopware\Bundle\StoreFrontBundle\Struct\ShopContextInterface;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class ImmediateDeliveryConditionHandler implements ConditionHandlerInterface, CriteriaAwareInterface
 {
     const STATE_INCLUDES_IMMEDIATE_DELIVERY_VARIANTS = 'ImmediateDeliveryVariants';
@@ -90,9 +85,6 @@ class ImmediateDeliveryConditionHandler implements ConditionHandlerInterface, Cr
         }
     }
 
-    /**
-     * @param Criteria $criteria
-     */
     public function setCriteria(Criteria $criteria)
     {
         $this->criteria = $criteria;

@@ -24,11 +24,6 @@
 
 namespace Shopware\Recovery\Install\Service;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class DatabaseService
 {
     /**
@@ -36,9 +31,6 @@ class DatabaseService
      */
     private $connection;
 
-    /**
-     * @param \PDO $connection
-     */
     public function __construct(\PDO $connection)
     {
         $this->connection = $connection;

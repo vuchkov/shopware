@@ -73,12 +73,6 @@ class ArticleSliderComponentHandler implements ComponentHandlerInterface
      */
     private $additionalTextService;
 
-    /**
-     * @param StoreFrontCriteriaFactoryInterface $criteriaFactory
-     * @param RepositoryInterface                $productStreamRepository
-     * @param ShopwareConfig                     $shopwareConfig
-     * @param AdditionalTextServiceInterface     $additionalTextService
-     */
     public function __construct(
         StoreFrontCriteriaFactoryInterface $criteriaFactory,
         RepositoryInterface $productStreamRepository,
@@ -195,7 +189,7 @@ class ArticleSliderComponentHandler implements ComponentHandlerInterface
 
                 $products = [];
                 foreach ($productNumbers as $productNumber) {
-                    /** @var ListProduct $product */
+                    /** @var ListProduct|null $product */
                     $product = $listProducts[$productNumber];
                     if (!$product) {
                         continue;
@@ -209,9 +203,6 @@ class ArticleSliderComponentHandler implements ComponentHandlerInterface
         }
     }
 
-    /**
-     * @param ListProduct $product
-     */
     private function switchPrice(ListProduct $product)
     {
         $prices = array_values($product->getPrices());
@@ -227,9 +218,6 @@ class ArticleSliderComponentHandler implements ComponentHandlerInterface
     }
 
     /**
-     * @param Element              $element
-     * @param ShopContextInterface $context
-     *
      * @return \Shopware\Bundle\SearchBundle\Criteria
      */
     private function generateCriteria(Element $element, ShopContextInterface $context)

@@ -41,11 +41,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class StoreDownloadCommand extends StoreCommand
 {
     /**
@@ -170,9 +165,8 @@ class StoreDownloadCommand extends StoreCommand
     }
 
     /**
-     * @param PluginStruct $plugin
-     * @param string       $domain
-     * @param string       $version
+     * @param string $domain
+     * @param string $version
      *
      * @throws \Exception
      */
@@ -198,9 +192,8 @@ class StoreDownloadCommand extends StoreCommand
     }
 
     /**
-     * @param PluginStruct $plugin
-     * @param string       $version
-     * @param string       $domain
+     * @param string $version
+     * @param string $domain
      *
      * @throws \Exception
      */
@@ -214,7 +207,6 @@ class StoreDownloadCommand extends StoreCommand
     }
 
     /**
-     * @param PluginStruct      $plugin
      * @param string            $domain
      * @param string            $version
      * @param AccessTokenStruct $token
@@ -243,7 +235,6 @@ class StoreDownloadCommand extends StoreCommand
     }
 
     /**
-     * @param PluginStruct      $plugin
      * @param string            $domain
      * @param string            $version
      * @param AccessTokenStruct $token
@@ -297,7 +288,7 @@ class StoreDownloadCommand extends StoreCommand
     }
 
     /**
-     * @return AccessTokenStruct
+     * @return AccessTokenStruct|null
      */
     private function checkAuthentication()
     {

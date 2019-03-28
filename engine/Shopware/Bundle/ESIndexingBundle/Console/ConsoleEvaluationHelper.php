@@ -58,9 +58,6 @@ class ConsoleEvaluationHelper implements EvaluationHelperInterface
      */
     private $success = 0;
 
-    /**
-     * @param OutputInterface $output
-     */
     public function setOutput(OutputInterface $output)
     {
         $this->output = $output;
@@ -69,7 +66,7 @@ class ConsoleEvaluationHelper implements EvaluationHelperInterface
     }
 
     /**
-     * @param bool $active
+     * {@inheritdoc}
      */
     public function setActive($active)
     {
@@ -79,7 +76,7 @@ class ConsoleEvaluationHelper implements EvaluationHelperInterface
     }
 
     /**
-     * @return bool
+     * {@inheritdoc}
      */
     public function getActive()
     {
@@ -87,7 +84,7 @@ class ConsoleEvaluationHelper implements EvaluationHelperInterface
     }
 
     /**
-     * @param bool $stopOnError
+     * {@inheritdoc}
      */
     public function setStopOnError($stopOnError)
     {
@@ -97,7 +94,7 @@ class ConsoleEvaluationHelper implements EvaluationHelperInterface
     }
 
     /**
-     * @return bool
+     * {@inheritdoc}
      */
     public function getStopOnError()
     {
@@ -105,7 +102,7 @@ class ConsoleEvaluationHelper implements EvaluationHelperInterface
     }
 
     /**
-     * @param array $data
+     * {@inheritdoc}
      */
     public function addResult(array $data)
     {
@@ -142,8 +139,6 @@ class ConsoleEvaluationHelper implements EvaluationHelperInterface
     }
 
     /**
-     * @param array $item
-     *
      * @throws \Exception
      */
     private function handleItem(array $item)
@@ -173,8 +168,6 @@ class ConsoleEvaluationHelper implements EvaluationHelperInterface
     }
 
     /**
-     * @param array $item
-     *
      * @throws \Exception
      */
     private function abort(array $item)

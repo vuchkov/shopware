@@ -24,16 +24,9 @@
 
 namespace Shopware\Bundle\PluginInstallerBundle\Service;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.com)
- */
 class PluginZipDetector
 {
     /**
-     * @param \ZipArchive $archive
-     *
      * @return bool
      */
     public function isLegacyPlugin(\ZipArchive $archive)
@@ -45,8 +38,6 @@ class PluginZipDetector
     }
 
     /**
-     * @param \ZipArchive $archive
-     *
      * @return bool
      */
     public function isPlugin(\ZipArchive $archive)

@@ -42,10 +42,6 @@ use Shopware\Models\Tax\Tax;
 
 /**
  * Order API Resource
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class Order extends Resource
 {
@@ -134,10 +130,8 @@ class Order extends Resource
     }
 
     /**
-     * @param int   $offset
-     * @param int   $limit
-     * @param array $criteria
-     * @param array $orderBy
+     * @param int $offset
+     * @param int $limit
      *
      * @return array
      */
@@ -180,8 +174,6 @@ class Order extends Resource
     }
 
     /**
-     * @param array $params
-     *
      * @throws ApiException\ValidationException
      *
      * @return OrderModel
@@ -252,8 +244,7 @@ class Order extends Resource
     }
 
     /**
-     * @param int   $id
-     * @param array $params
+     * @param int $id
      *
      * @throws \Shopware\Components\Api\Exception\ValidationException
      * @throws \Shopware\Components\Api\Exception\NotFoundException
@@ -293,7 +284,6 @@ class Order extends Resource
     /**
      * Helper method to prepare the order data
      *
-     * @param array $params
      *
      * @throws ApiException\NotFoundException
      * @throws ApiException\ParameterMissingException
@@ -430,7 +420,6 @@ class Order extends Resource
     /**
      * Helper method to prepare the order detail data
      *
-     * @param array $params
      *
      * @throws ApiException\NotFoundException
      * @throws ApiException\ValidationException
@@ -484,8 +473,8 @@ class Order extends Resource
             }
 
             // If no order number was specified for the details we use the one from the order if there is one
-            if ((!array_key_exists('number', $detail) || $detail['number'] !== $params['number']) &&
-                !empty($params['number'])) {
+            if ((!array_key_exists('number', $detail) || $detail['number'] !== $params['number'])
+                && !empty($params['number'])) {
                 $detail['number'] = $params['number'];
             }
 
@@ -528,7 +517,6 @@ class Order extends Resource
     /**
      * Helper method to prepare the order data
      *
-     * @param array $params
      *
      * @throws \Shopware\Components\Api\Exception\NotFoundException
      *
@@ -593,7 +581,6 @@ class Order extends Resource
     /**
      * Helper method to prepare the order detail data
      *
-     * @param array $params
      *
      * @throws \Shopware\Components\Api\Exception\NotFoundException|ApiException\CustomValidationException
      *
@@ -663,9 +650,6 @@ class Order extends Resource
     }
 
     /**
-     * @param array      $params
-     * @param OrderModel $order
-     *
      * @throws ApiException\NotFoundException
      * @throws ApiException\ValidationException
      * @throws ApiException\ParameterMissingException

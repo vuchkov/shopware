@@ -26,11 +26,6 @@ namespace Shopware\Bundle\StoreFrontBundle\Gateway;
 
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 interface ListProductGatewayInterface
 {
     /**
@@ -38,9 +33,6 @@ interface ListProductGatewayInterface
      * please refer to the linked classes.
      *
      * @see \Shopware\Bundle\StoreFrontBundle\Gateway\ListProductGatewayInterface::get()
-     *
-     * @param array                       $numbers
-     * @param Struct\ShopContextInterface $context
      *
      * @return Struct\ListProduct[] Indexed by the product order number
      */
@@ -66,8 +58,7 @@ interface ListProductGatewayInterface
      * - Manufacturer
      * - Unit of the variant
      *
-     * @param string                      $number
-     * @param Struct\ShopContextInterface $context
+     * @param string $number
      *
      * @return Struct\ListProduct
      */

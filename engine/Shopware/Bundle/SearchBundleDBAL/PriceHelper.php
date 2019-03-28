@@ -24,13 +24,10 @@
 
 namespace Shopware\Bundle\SearchBundleDBAL;
 
-use Shopware\Bundle\StoreFrontBundle\Struct;
+use Shopware\Bundle\StoreFrontBundle\Struct\ProductContextInterface;
+use Shopware\Bundle\StoreFrontBundle\Struct\ShopContextInterface;
+use Shopware_Components_Config;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class PriceHelper implements PriceHelperInterface
 {
     const STATE_INCLUDES_CHEAPEST_PRICE = 'cheapest_price';
@@ -40,14 +37,11 @@ class PriceHelper implements PriceHelperInterface
     const STATE_INCLUDES_AVAILABLE_VARIANT = 'available_variant';
 
     /**
-     * @var \Shopware_Components_Config
+     * @var Shopware_Components_Config
      */
     private $config;
 
-    /**
-     * @param \Shopware_Components_Config $config
-     */
-    public function __construct(\Shopware_Components_Config $config)
+    public function __construct(Shopware_Components_Config $config)
     {
         $this->config = $config;
     }
@@ -55,7 +49,7 @@ class PriceHelper implements PriceHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function getSelection(Struct\ProductContextInterface $context)
+    public function getSelection(ProductContextInterface $context)
     {
         $fallback = $context->getFallbackCustomerGroup();
         $current = $context->getCurrentCustomerGroup();
@@ -102,7 +96,7 @@ class PriceHelper implements PriceHelperInterface
      */
     public function joinPrices(
         QueryBuilder $query,
-        Struct\ShopContextInterface $context
+        ShopContextInterface $context
     ) {
         if ($query->hasState(self::STATE_INCLUDES_CHEAPEST_PRICE)) {
             return;
@@ -132,7 +126,7 @@ class PriceHelper implements PriceHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function joinDefaultPrices(QueryBuilder $query, Struct\ShopContextInterface $context)
+    public function joinDefaultPrices(QueryBuilder $query, ShopContextInterface $context)
     {
         if ($query->hasState(self::STATE_INCLUDES_DEFAULT_PRICE)) {
             return;
@@ -203,11 +197,10 @@ SQL;
     /**
      * Builds the tax cases for the price selection query
      *
-     * @param Struct\ProductContextInterface $context
      *
      * @return string
      */
-    private function buildTaxCase(Struct\ProductContextInterface $context)
+    private function buildTaxCase(ShopContextInterface $context)
     {
         $cases = [];
         foreach ($context->getTaxRules() as $rule) {

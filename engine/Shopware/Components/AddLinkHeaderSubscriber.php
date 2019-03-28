@@ -55,9 +55,6 @@ class AddLinkHeaderSubscriber implements SubscriberInterface
         $this->webLinkManager = $webLinkManager;
     }
 
-    /**
-     * @return array
-     */
     public static function getSubscribedEvents(): array
     {
         return [
@@ -65,9 +62,6 @@ class AddLinkHeaderSubscriber implements SubscriberInterface
         ];
     }
 
-    /**
-     * @param Enlight_Event_EventArgs $args
-     */
     public function onDispatchLoopShutdown(Enlight_Event_EventArgs $args): void
     {
         /** @var \Enlight_Controller_Request_Request $request */
@@ -82,11 +76,16 @@ class AddLinkHeaderSubscriber implements SubscriberInterface
         /** @var \Enlight_Controller_Response_Response $response */
         $response = $args->get('response');
 
-        if ($linkProvider = $this->webLinkManager->getLinkProvider()) {
-            if (!$linkProvider instanceof LinkProviderInterface || !$links = $linkProvider->getLinks()) {
-                return;
-            }
-            $response->setHeader('Link', $this->serializer->serialize($links));
+        $linkProvider = $this->webLinkManager->getLinkProvider();
+        if (!$linkProvider instanceof LinkProviderInterface) {
+            return;
         }
+
+        $links = $linkProvider->getLinks();
+        if (empty($links)) {
+            return;
+        }
+
+        $response->headers->set('link', $this->serializer->serialize($links));
     }
 }

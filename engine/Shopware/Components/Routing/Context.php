@@ -29,15 +29,9 @@ use Shopware\Models\Shop\Shop as ShopwareShop;
 use Shopware_Components_Config as ShopwareConfig;
 
 /**
- * Class Context
- *
  * @see http://php.net/manual/en/reflectionclass.iscloneable.php
  * @see http://api.symfony.com/2.0/Symfony/Component/Routing/RequestContext.html
  * @see \Enlight_Controller_Request_Request
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class Context implements \JsonSerializable
 {
@@ -117,7 +111,6 @@ class Context implements \JsonSerializable
      * @param string $host
      * @param string $baseUrl
      * @param bool   $secure
-     * @param array  $globalParams
      */
     public function __construct($host = 'localhost', $baseUrl = '', $secure = false, array $globalParams = [])
     {
@@ -144,7 +137,7 @@ class Context implements \JsonSerializable
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getHost()
     {
@@ -152,7 +145,7 @@ class Context implements \JsonSerializable
     }
 
     /**
-     * @param string $host
+     * @param string|null $host
      */
     public function setHost($host)
     {
@@ -226,7 +219,7 @@ class Context implements \JsonSerializable
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getShopId()
     {
@@ -262,16 +255,12 @@ class Context implements \JsonSerializable
 
     /**
      * @param string $name
-     * @param mixed  $param
      */
     public function setParam($name, $param)
     {
         $this->params[$name] = $param;
     }
 
-    /**
-     * @param array $params
-     */
     public function setParams(array $params)
     {
         $this->params = $params;
@@ -298,7 +287,6 @@ class Context implements \JsonSerializable
 
     /**
      * @param string $name
-     * @param mixed  $globalParam
      */
     public function setGlobalParam($name, $globalParam)
     {
@@ -348,8 +336,6 @@ class Context implements \JsonSerializable
     }
 
     /**
-     * @param EnlightRequest $request
-     *
      * @return Context
      */
     public static function createFromEnlightRequest(EnlightRequest $request)
@@ -363,8 +349,6 @@ class Context implements \JsonSerializable
 
     /**
      * @see \Enlight_Controller_Router::setGlobalParam
-     *
-     * @param EnlightRequest $request
      *
      * @return array
      */
@@ -384,9 +368,6 @@ class Context implements \JsonSerializable
         return $globalParams;
     }
 
-    /**
-     * @param EnlightRequest $request
-     */
     public function updateFromEnlightRequest(EnlightRequest $request)
     {
         $this->setHost($request->getHttpHost());
@@ -397,9 +378,6 @@ class Context implements \JsonSerializable
     }
 
     /**
-     * @param ShopwareShop   $shop
-     * @param ShopwareConfig $config
-     *
      * @return Context
      */
     public static function createFromShop(ShopwareShop $shop, ShopwareConfig $config)

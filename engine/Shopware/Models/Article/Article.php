@@ -33,13 +33,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Shopware Article Model
  *
- * @category Shopware
  *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  *
  * @ORM\Entity(repositoryClass="Repository")
  * @ORM\Table(name="s_articles")
- * @ORM\HasLifecycleCallbacks
+ * @ORM\HasLifecycleCallbacks()
  */
 class Article extends ModelEntity
 {
@@ -48,8 +46,8 @@ class Article extends ModelEntity
      *
      * @var \Shopware\Models\Tax\Tax
      *
-     * @Assert\NotBlank
-     * @Assert\Valid
+     * @Assert\NotBlank()
+     * @Assert\Valid()
      *
      * @var \Shopware\Models\Tax\Tax
      *
@@ -63,12 +61,12 @@ class Article extends ModelEntity
      *
      * @ORM\ManyToMany(targetEntity="Shopware\Models\Category\Category")
      * @ORM\JoinTable(name="s_articles_categories",
-     *      joinColumns={
-     *          @ORM\JoinColumn(name="articleID", referencedColumnName="id")
-     *      },
-     *      inverseJoinColumns={
-     *          @ORM\JoinColumn(name="categoryID", referencedColumnName="id")
-     *      }
+     *     joinColumns={
+     *         @ORM\JoinColumn(name="articleID", referencedColumnName="id")
+     *     },
+     *     inverseJoinColumns={
+     *         @ORM\JoinColumn(name="categoryID", referencedColumnName="id")
+     *     }
      * )
      */
     protected $categories;
@@ -78,12 +76,12 @@ class Article extends ModelEntity
      *
      * @ORM\ManyToMany(targetEntity="Shopware\Models\Category\Category")
      * @ORM\JoinTable(name="s_articles_categories_ro",
-     *      joinColumns={
-     *          @ORM\JoinColumn(name="articleID", referencedColumnName="id")
-     *      },
-     *      inverseJoinColumns={
-     *          @ORM\JoinColumn(name="categoryID", referencedColumnName="id")
-     *      }
+     *     joinColumns={
+     *         @ORM\JoinColumn(name="articleID", referencedColumnName="id")
+     *     },
+     *     inverseJoinColumns={
+     *         @ORM\JoinColumn(name="categoryID", referencedColumnName="id")
+     *     }
      * )
      */
     protected $allCategories;
@@ -92,10 +90,10 @@ class Article extends ModelEntity
      * @var ArrayCollection<\Shopware\Models\Article\SeoCategory>
      *
      * @ORM\OneToMany(
-     *      targetEntity="Shopware\Models\Article\SeoCategory",
-     *      mappedBy="article",
-     *      orphanRemoval=true,
-     *      cascade={"persist"}
+     *     targetEntity="Shopware\Models\Article\SeoCategory",
+     *     mappedBy="article",
+     *     orphanRemoval=true,
+     *     cascade={"persist"}
      * )
      */
     protected $seoCategories;
@@ -105,12 +103,12 @@ class Article extends ModelEntity
      *
      * @ORM\ManyToMany(targetEntity="Shopware\Models\Customer\Group")
      * @ORM\JoinTable(name="s_articles_avoid_customergroups",
-     *      joinColumns={
-     *          @ORM\JoinColumn(name="articleID", referencedColumnName="id")
-     *      },
-     *      inverseJoinColumns={
-     *          @ORM\JoinColumn(name="customergroupID", referencedColumnName="id", unique=true)
-     *      }
+     *     joinColumns={
+     *         @ORM\JoinColumn(name="articleID", referencedColumnName="id")
+     *     },
+     *     inverseJoinColumns={
+     *         @ORM\JoinColumn(name="customergroupID", referencedColumnName="id", unique=true)
+     *     }
      * )
      */
     protected $customerGroups;
@@ -120,12 +118,12 @@ class Article extends ModelEntity
      *
      * @ORM\ManyToMany(targetEntity="Shopware\Models\ProductStream\ProductStream")
      * @ORM\JoinTable(name="s_product_streams_articles",
-     *      joinColumns={
-     *          @ORM\JoinColumn(name="article_id", referencedColumnName="id")
-     *      },
-     *      inverseJoinColumns={
-     *          @ORM\JoinColumn(name="stream_id", referencedColumnName="id")
-     *      }
+     *     joinColumns={
+     *         @ORM\JoinColumn(name="article_id", referencedColumnName="id")
+     *     },
+     *     inverseJoinColumns={
+     *         @ORM\JoinColumn(name="stream_id", referencedColumnName="id")
+     *     }
      * )
      */
     protected $relatedProductStreams;
@@ -145,12 +143,12 @@ class Article extends ModelEntity
      *
      * @ORM\ManyToMany(targetEntity="Shopware\Models\Article\Article")
      * @ORM\JoinTable(name="s_articles_relationships",
-     *      joinColumns={
-     *          @ORM\JoinColumn(name="articleID", referencedColumnName="id")
-     *      },
-     *      inverseJoinColumns={
-     *          @ORM\JoinColumn(name="relatedarticle", referencedColumnName="id")
-     *      }
+     *     joinColumns={
+     *         @ORM\JoinColumn(name="articleID", referencedColumnName="id")
+     *     },
+     *     inverseJoinColumns={
+     *         @ORM\JoinColumn(name="relatedarticle", referencedColumnName="id")
+     *     }
      * )
      */
     protected $related;
@@ -160,12 +158,12 @@ class Article extends ModelEntity
      *
      * @ORM\ManyToMany(targetEntity="Shopware\Models\Article\Article")
      * @ORM\JoinTable(name="s_articles_similar",
-     *      joinColumns={
-     *          @ORM\JoinColumn(name="articleID", referencedColumnName="id")
-     *      },
-     *      inverseJoinColumns={
-     *          @ORM\JoinColumn(name="relatedarticle", referencedColumnName="id")
-     *      }
+     *     joinColumns={
+     *         @ORM\JoinColumn(name="articleID", referencedColumnName="id")
+     *     },
+     *     inverseJoinColumns={
+     *         @ORM\JoinColumn(name="relatedarticle", referencedColumnName="id")
+     *     }
      * )
      */
     protected $similar;
@@ -175,7 +173,7 @@ class Article extends ModelEntity
      *
      * @var Supplier
      *
-     * @Assert\Valid
+     * @Assert\Valid()
      *
      * @ORM\ManyToOne(targetEntity="Shopware\Models\Article\Supplier", inversedBy="articles", cascade={"persist"})
      * @ORM\JoinColumn(name="supplierID", referencedColumnName="id")
@@ -187,7 +185,7 @@ class Article extends ModelEntity
      *
      * @var ArrayCollection<\Shopware\Models\Article\Detail>
      *
-     * @Assert\Valid
+     * @Assert\Valid()
      *
      * @ORM\OneToMany(targetEntity="Shopware\Models\Article\Detail", mappedBy="article", cascade={"persist"})
      * @ORM\OrderBy({"position" = "ASC"})
@@ -199,8 +197,8 @@ class Article extends ModelEntity
      *
      * @var Detail
      *
-     * @Assert\NotBlank
-     * @Assert\Valid
+     * @Assert\NotBlank()
+     * @Assert\Valid()
      *
      * @ORM\OneToOne(targetEntity="Shopware\Models\Article\Detail", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="main_detail_id", referencedColumnName="id")
@@ -212,7 +210,7 @@ class Article extends ModelEntity
      *
      * @var ArrayCollection<\Shopware\Models\Article\Link>
      *
-     * @Assert\Valid
+     * @Assert\Valid()
      *
      * @ORM\OneToMany(targetEntity="Shopware\Models\Article\Link", mappedBy="article", orphanRemoval=true, cascade={"persist"})
      */
@@ -223,7 +221,7 @@ class Article extends ModelEntity
      *
      * @var ArrayCollection<\Shopware\Models\Article\Download>
      *
-     * @Assert\Valid
+     * @Assert\Valid()
      *
      * @ORM\OneToMany(targetEntity="Shopware\Models\Article\Download", mappedBy="article", orphanRemoval=true, cascade={"persist"})
      */
@@ -234,7 +232,7 @@ class Article extends ModelEntity
      *
      * @var ArrayCollection<\Shopware\Models\Article\Image>
      *
-     * @Assert\Valid
+     * @Assert\Valid()
      *
      * @ORM\OneToMany(targetEntity="Shopware\Models\Article\Image", mappedBy="article", orphanRemoval=true, cascade={"persist"})
      * @ORM\OrderBy({"position" = "ASC"})
@@ -275,12 +273,12 @@ class Article extends ModelEntity
      *
      * @ORM\ManyToMany(targetEntity="Shopware\Models\Property\Value", inversedBy="articles", cascade={"persist"})
      * @ORM\JoinTable(name="s_filter_articles",
-     *      joinColumns={
-     *          @ORM\JoinColumn(name="articleID", referencedColumnName="id")
-     *      },
-     *      inverseJoinColumns={
-     *          @ORM\JoinColumn(name="valueID", referencedColumnName="id")
-     *      }
+     *     joinColumns={
+     *         @ORM\JoinColumn(name="articleID", referencedColumnName="id")
+     *     },
+     *     inverseJoinColumns={
+     *         @ORM\JoinColumn(name="valueID", referencedColumnName="id")
+     *     }
      * )
      */
     protected $propertyValues;
@@ -307,7 +305,7 @@ class Article extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -357,7 +355,7 @@ class Article extends ModelEntity
     /**
      * @var string
      *
-     * @Assert\NotBlank
+     * @Assert\NotBlank()
      *
      * @ORM\Column(name="name", type="string", length=100, nullable=false)
      */
@@ -438,8 +436,8 @@ class Article extends ModelEntity
     /**
      * @var bool
      *
-     * @deprecated Since version 5.4, to be removed in 6.0
-     * @ORM\Column(name="laststock", type="boolean", nullable=false)
+     * @deprecated 5.6 will be removed in 5.8
+     * @ORM\Column(name="laststock", type="boolean", nullable=true)
      */
     private $lastStock = false;
 
@@ -505,8 +503,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -515,8 +511,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      *
      * @return Article
@@ -529,8 +523,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getName()
@@ -539,8 +531,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Set description
-     *
      * @param string $description
      *
      * @return Article
@@ -553,8 +543,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Get description
-     *
      * @return string
      */
     public function getDescription()
@@ -563,8 +551,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Set descriptionLong
-     *
      * @param string $descriptionLong
      *
      * @return Article
@@ -577,8 +563,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Get descriptionLong
-     *
      * @return string
      */
     public function getDescriptionLong()
@@ -587,8 +571,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Set date
-     *
      * @param \DateTimeInterface|string $added
      *
      * @return Article
@@ -605,8 +587,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Get date
-     *
      * @return \DateTimeInterface
      */
     public function getAdded()
@@ -615,8 +595,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Set active
-     *
      * @param bool $active
      *
      * @return Article
@@ -629,8 +607,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Get active
-     *
      * @return bool
      */
     public function getActive()
@@ -639,8 +615,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Set pseudoSales
-     *
      * @param int $pseudoSales
      *
      * @return Article
@@ -653,8 +627,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Get pseudoSales
-     *
      * @return int
      */
     public function getPseudoSales()
@@ -663,8 +635,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Set highlight
-     *
      * @param bool $highlight
      *
      * @return Article
@@ -677,8 +647,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Get highlight
-     *
      * @return bool
      */
     public function getHighlight()
@@ -687,8 +655,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Set keywords
-     *
      * @param string $keywords
      *
      * @return Article
@@ -701,8 +667,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Get keywords
-     *
      * @return string
      */
     public function getKeywords()
@@ -711,8 +675,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Set metaTitle
-     *
      * @param string $metaTitle
      *
      * @return Article
@@ -725,8 +687,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Get metaTitle
-     *
      * @return string
      */
     public function getMetaTitle()
@@ -735,8 +695,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Set changed
-     *
      * @param \DateTimeInterface|string $changed
      *
      * @return Article
@@ -753,8 +711,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Get changed
-     *
      * @return \DateTimeInterface
      */
     public function getChanged()
@@ -763,8 +719,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Set priceGroupActive
-     *
      * @param bool $priceGroupActive
      *
      * @return Article
@@ -777,8 +731,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Get priceGroupActive
-     *
      * @return bool
      */
     public function getPriceGroupActive()
@@ -787,7 +739,7 @@ class Article extends ModelEntity
     }
 
     /**
-     * Set lastStock
+     * @deprecated 5.6 will be removed in 5.7
      *
      * @param bool $lastStock
      *
@@ -801,7 +753,7 @@ class Article extends ModelEntity
     }
 
     /**
-     * Get lastStock
+     * @deprecated 5.6 will be removed in 5.7
      *
      * @return bool
      */
@@ -811,8 +763,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Set notification
-     *
      * @param bool $notification
      *
      * @return Article
@@ -825,8 +775,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Get notification
-     *
      * @return bool
      */
     public function getNotification()
@@ -835,8 +783,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Set template
-     *
      * @param string $template
      *
      * @return Article
@@ -849,8 +795,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Get template
-     *
      * @return string
      */
     public function getTemplate()
@@ -859,8 +803,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Set mode
-     *
      * @param int $mode
      *
      * @return Article
@@ -873,8 +815,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * Get mode
-     *
      * @return int
      */
     public function getMode()
@@ -911,8 +851,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * @param ArticleCategory $category
-     *
      * @return Article
      */
     public function addCategory(ArticleCategory $category)
@@ -925,8 +863,6 @@ class Article extends ModelEntity
     }
 
     /**
-     * @param ArticleCategory $category
-     *
      * @return Article
      */
     public function removeCategory(ArticleCategory $category)
@@ -957,7 +893,7 @@ class Article extends ModelEntity
     }
 
     /**
-     * @return \Shopware\Models\Property\Group
+     * @return \Shopware\Models\Property\Group|null
      */
     public function getPropertyGroup()
     {
@@ -1134,7 +1070,7 @@ class Article extends ModelEntity
     }
 
     /**
-     * @return Detail
+     * @return Detail|null
      */
     public function getMainDetail()
     {
@@ -1257,7 +1193,7 @@ class Article extends ModelEntity
     }
 
     /**
-     * @return Configurator\Set
+     * @return Configurator\Set|null
      */
     public function getConfiguratorSet()
     {

@@ -26,18 +26,12 @@ namespace Shopware\Bundle\StoreFrontBundle\Gateway\DBAL\Hydrator;
 
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class TaxHydrator extends Hydrator
 {
     /**
      * Creates a new tax struct and assigns the passed
      * data array.
      *
-     * @param array $data
      *
      * @return \Shopware\Bundle\StoreFrontBundle\Struct\Tax
      */
@@ -56,7 +50,6 @@ class TaxHydrator extends Hydrator
      * Creates a new tax struct and assigns the passed
      * data array.
      *
-     * @param array $data
      *
      * @return \Shopware\Bundle\StoreFrontBundle\Struct\Tax
      */

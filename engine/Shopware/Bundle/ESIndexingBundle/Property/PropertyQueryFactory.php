@@ -27,9 +27,6 @@ namespace Shopware\Bundle\ESIndexingBundle\Property;
 use Doctrine\DBAL\Connection;
 use Shopware\Bundle\ESIndexingBundle\LastIdQuery;
 
-/**
- * Class PropertyQueryFactory
- */
 class PropertyQueryFactory
 {
     /**
@@ -37,9 +34,6 @@ class PropertyQueryFactory
      */
     private $connection;
 
-    /**
-     * @param Connection $connection
-     */
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;

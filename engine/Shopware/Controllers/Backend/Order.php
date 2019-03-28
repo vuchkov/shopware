@@ -47,12 +47,6 @@ use Shopware\Models\Payment\Payment;
 use Shopware\Models\Shop\Shop;
 use Shopware\Models\Tax\Tax;
 
-/**
- * Backend Controller for the order backend module.
- *
- * Displays all orders in an Ext.grid.Panel and allows to delete,
- * add and edit orders.
- */
 class Shopware_Controllers_Backend_Order extends Shopware_Controllers_Backend_ExtJs implements CSRFWhitelistAware
 {
     /**
@@ -1172,12 +1166,12 @@ class Shopware_Controllers_Backend_Order extends Shopware_Controllers_Backend_Ex
         $orderId = $orderModel[0]['documentId'];
 
         $response = $this->Response();
-        $response->setHeader('Cache-Control', 'public');
-        $response->setHeader('Content-Description', 'File Transfer');
-        $response->setHeader('Content-disposition', 'attachment; filename=' . $orderId . '.pdf');
-        $response->setHeader('Content-Type', 'application/pdf');
-        $response->setHeader('Content-Transfer-Encoding', 'binary');
-        $response->setHeader('Content-Length', $filesystem->getSize($file));
+        $response->headers->set('cache-control', 'public', true);
+        $response->headers->set('content-description', 'File Transfer');
+        $response->headers->set('content-disposition', 'attachment; filename=' . $orderId . '.pdf');
+        $response->headers->set('content-type', 'application/pdf');
+        $response->headers->set('content-transfer-encoding', 'binary');
+        $response->headers->set('content-length', $filesystem->getSize($file));
         $response->sendHeaders();
         $response->sendResponse();
 
@@ -1402,7 +1396,6 @@ class Shopware_Controllers_Backend_Order extends Shopware_Controllers_Backend_Ex
     /**
      * Prepare address data - loads countryModel from a given countryId
      *
-     * @param array $data
      *
      * @return array
      */
@@ -1495,8 +1488,6 @@ class Shopware_Controllers_Backend_Order extends Shopware_Controllers_Backend_Ex
      * Helper function to select a single order.
      *
      * @param int $id
-     *
-     * @return mixed
      */
     private function getOrder($id)
     {
@@ -1509,7 +1500,6 @@ class Shopware_Controllers_Backend_Order extends Shopware_Controllers_Backend_Ex
     /**
      * Simple helper function which actually merges a given array of document-paths
      *
-     * @param array $paths
      *
      * @return string The created document's url
      */
@@ -1531,7 +1521,7 @@ class Shopware_Controllers_Backend_Order extends Shopware_Controllers_Backend_Ex
 
         $pdf->Output($hash . '.pdf', 'D');
 
-        $this->Response()->setHeader('Content-Type', 'application/x-download');
+        $this->Response()->headers->set('content-type', 'application/x-download');
     }
 
     /**
@@ -1625,8 +1615,7 @@ class Shopware_Controllers_Backend_Order extends Shopware_Controllers_Backend_Ex
     }
 
     /**
-     * @param int   $documentTypeId
-     * @param Order $order
+     * @param int $documentTypeId
      *
      * @return array
      */
@@ -1683,15 +1672,13 @@ class Shopware_Controllers_Backend_Order extends Shopware_Controllers_Backend_Ex
             ];
         }
 
-        return[];
+        return [];
     }
 
     /**
      * Adds the requested attachments to the given $mail object
      *
-     * @param Enlight_Components_Mail $mail
-     * @param int|string              $orderId
-     * @param array                   $attachments
+     * @param int|string $orderId
      *
      * @return Enlight_Components_Mail
      */
@@ -1951,7 +1938,6 @@ class Shopware_Controllers_Backend_Order extends Shopware_Controllers_Backend_Ex
     /**
      * Internal helper function which insert the order association data into the passed data array.
      *
-     * @param array $data
      *
      * @return array
      */

@@ -26,10 +26,6 @@ use Shopware\Components\NumberRangeIncrementerInterface;
 
 /**
  * Shopware document generator
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class Shopware_Components_Document extends Enlight_Class implements Enlight_Hook
 {
@@ -336,8 +332,6 @@ class Shopware_Components_Document extends Enlight_Class implements Enlight_Hook
     }
 
     /**
-     * Set renderer
-     *
      * @param string $renderer
      */
     public function setRenderer($renderer)
@@ -604,8 +598,6 @@ class Shopware_Components_Document extends Enlight_Class implements Enlight_Hook
     }
 
     /**
-     * @param Shopware_Models_Document_Order $order
-     *
      * @throws \Exception
      */
     protected function setOrder(Shopware_Models_Document_Order $order)
@@ -624,8 +616,6 @@ class Shopware_Components_Document extends Enlight_Class implements Enlight_Hook
 
     /**
      * Set object configuration from array
-     *
-     * @param array $config
      */
     protected function setConfig(array $config)
     {

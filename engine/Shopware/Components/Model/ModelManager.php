@@ -39,10 +39,6 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Global Manager which is responsible for initializing the adapter classes.
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class ModelManager extends EntityManager
 {
@@ -64,9 +60,7 @@ class ModelManager extends EntityManager
     /**
      * Factory method to create EntityManager instances.
      *
-     * @param Connection    $conn
-     * @param Configuration $config
-     * @param EventManager  $eventManager
+     * @param EventManager $eventManager
      *
      * @throws \Doctrine\ORM\ORMException
      *
@@ -108,15 +102,12 @@ class ModelManager extends EntityManager
     /**
      * Returns the total count of the passed query builder.
      *
-     * @param Query $query
      *
      * @return int|null
      */
     public function getQueryCount(Query $query)
     {
-        $pagination = $this->createPaginator($query);
-
-        return $pagination->count();
+        return $this->createPaginator($query)->count();
     }
 
     /**
@@ -128,8 +119,6 @@ class ModelManager extends EntityManager
      * As of SW 4.2 $paginator->setUseOutputWalkers(false) will be set here.
      *
      * @since 4.1.4
-     *
-     * @param Query $query
      *
      * @return Paginator
      */
@@ -222,10 +211,9 @@ class ModelManager extends EntityManager
     /**
      * Helper function to add mysql specified command to increase the sql performance.
      *
-     * @param Query $query
-     * @param null  $index        Name of the forced index
-     * @param bool  $straightJoin true or false. Allow to add STRAIGHT_JOIN select condition
-     * @param bool  $sqlNoCache
+     * @param mixed|null $index        Name of the forced index
+     * @param bool       $straightJoin true or false. Allow to add STRAIGHT_JOIN select condition
+     * @param bool       $sqlNoCache
      *
      * @return Query
      */

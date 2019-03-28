@@ -34,11 +34,6 @@ use Shopware\Bundle\SearchBundle\SortingInterface;
 use Shopware\Bundle\StoreFrontBundle\Struct\ShopContextInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class QueryBuilderFactory implements QueryBuilderFactoryInterface
 {
     /**
@@ -62,12 +57,6 @@ class QueryBuilderFactory implements QueryBuilderFactoryInterface
     private $conditionHandlers;
 
     /**
-     * @param Connection                  $connection
-     * @param \Enlight_Event_EventManager $eventManager
-     * @param IteratorAggregate           $conditionHandlers
-     * @param IteratorAggregate           $sortingHandlers
-     * @param ContainerInterface          $container
-     *
      * @throws \RuntimeException
      * @throws \Enlight_Event_Exception
      */
@@ -194,10 +183,6 @@ class QueryBuilderFactory implements QueryBuilderFactoryInterface
     }
 
     /**
-     * @param Criteria             $criteria
-     * @param QueryBuilder         $query
-     * @param ShopContextInterface $context
-     *
      * @throws \Exception
      */
     private function addConditions(Criteria $criteria, QueryBuilder $query, ShopContextInterface $context)
@@ -209,10 +194,6 @@ class QueryBuilderFactory implements QueryBuilderFactoryInterface
     }
 
     /**
-     * @param Criteria             $criteria
-     * @param QueryBuilder         $query
-     * @param ShopContextInterface $context
-     *
      * @throws \Exception
      */
     private function addSorting(Criteria $criteria, QueryBuilder $query, ShopContextInterface $context)
@@ -225,8 +206,6 @@ class QueryBuilderFactory implements QueryBuilderFactoryInterface
     }
 
     /**
-     * @param SortingInterface $sorting
-     *
      * @throws \Exception
      *
      * @return SortingHandlerInterface
@@ -243,8 +222,6 @@ class QueryBuilderFactory implements QueryBuilderFactoryInterface
     }
 
     /**
-     * @param ConditionInterface $condition
-     *
      * @throws \Exception
      *
      * @return ConditionHandlerInterface
@@ -299,8 +276,7 @@ class QueryBuilderFactory implements QueryBuilderFactoryInterface
     }
 
     /**
-     * @param ArrayCollection $objects
-     * @param string          $class
+     * @param string $class
      *
      * @throws \RuntimeException
      */

@@ -22,6 +22,8 @@
  * our trademarks remain entirely with us.
  */
 
+use Symfony\Component\HttpFoundation\Response;
+
 /**
  * Test case for Enlight controller.
  *
@@ -129,7 +131,7 @@ abstract class Enlight_Components_Test_Controller_TestCase extends Enlight_Compo
 
         $front->dispatch();
 
-        if ($followRedirects && $this->Response()->getHttpResponseCode() === 302) {
+        if ($followRedirects && $this->Response()->getStatusCode() === Response::HTTP_FOUND) {
             $link = parse_url($this->Response()->getHeader('Location'), PHP_URL_PATH);
             $this->resetResponse();
             $cookies = $this->Response()->getCookies();
@@ -198,7 +200,7 @@ abstract class Enlight_Components_Test_Controller_TestCase extends Enlight_Compo
      */
     public function resetRequest()
     {
-        if ($this->_request instanceof Enlight_Controller_Request_Request) {
+        if ($this->_request instanceof Enlight_Controller_Request_RequestTestCase) {
             $this->_request->clearQuery()
                     ->clearPost()
                     ->clearCookies();
@@ -266,7 +268,7 @@ abstract class Enlight_Components_Test_Controller_TestCase extends Enlight_Compo
     public function Request()
     {
         if ($this->_request === null) {
-            $this->_request = new Enlight_Controller_Request_RequestTestCase();
+            $this->_request = Enlight_Controller_Request_RequestTestCase::createFromGlobals();
         }
 
         return $this->_request;

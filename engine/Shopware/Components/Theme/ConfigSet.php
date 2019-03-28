@@ -48,10 +48,6 @@ namespace Shopware\Components\Theme;
  *   }
  *
  * </code>
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class ConfigSet
 {
@@ -71,11 +67,8 @@ class ConfigSet
     protected $values;
 
     /**
-     * Class constructor which allows to set the internal values in the class construct.
-     *
      * @param string $description
      * @param string $name
-     * @param array  $values
      */
     public function __construct($name = '', array $values = [], $description = '')
     {
@@ -85,8 +78,6 @@ class ConfigSet
     }
 
     /**
-     * @param mixed $description
-     *
      * @return $this
      */
     public function setDescription($description)
@@ -96,17 +87,12 @@ class ConfigSet
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getDescription()
     {
         return $this->description;
     }
 
     /**
-     * @param mixed $name
-     *
      * @return $this
      */
     public function setName($name)
@@ -116,9 +102,6 @@ class ConfigSet
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getName()
     {
         return $this->name;

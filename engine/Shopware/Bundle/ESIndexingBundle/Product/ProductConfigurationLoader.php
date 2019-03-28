@@ -28,6 +28,7 @@ use Doctrine\DBAL\Connection;
 use Shopware\Bundle\StoreFrontBundle\Gateway\DBAL\FieldHelper;
 use Shopware\Bundle\StoreFrontBundle\Gateway\DBAL\Hydrator\ConfiguratorHydrator;
 use Shopware\Bundle\StoreFrontBundle\Struct\ShopContextInterface;
+use Shopware_Components_Config;
 
 class ProductConfigurationLoader
 {
@@ -47,12 +48,16 @@ class ProductConfigurationLoader
     private $fieldHelper;
 
     /**
-     * @var \Shopware_Components_Config
+     * @var Shopware_Components_Config
      */
     private $config;
 
-    public function __construct(Connection $connection, ConfiguratorHydrator $hydrator, FieldHelper $fieldHelper, \Shopware_Components_Config $config)
-    {
+    public function __construct(
+        Connection $connection,
+        ConfiguratorHydrator $hydrator,
+        FieldHelper $fieldHelper,
+        Shopware_Components_Config $config
+    ) {
         $this->connection = $connection;
         $this->hydrator = $hydrator;
         $this->fieldHelper = $fieldHelper;
@@ -62,7 +67,6 @@ class ProductConfigurationLoader
     /**
      * Get possible combinations of all products
      *
-     * @param array $articleIds
      *
      * @return array
      */
@@ -108,8 +112,6 @@ class ProductConfigurationLoader
     /**
      * Fetches  all groups with all options for provided products
      *
-     * @param array                $articleIds
-     * @param ShopContextInterface $context
      *
      * @return array<int, array<\Shopware\Bundle\StoreFrontBundle\Struct\Configurator\Group>>
      */

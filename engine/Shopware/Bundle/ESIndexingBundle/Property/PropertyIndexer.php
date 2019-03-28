@@ -27,12 +27,10 @@ namespace Shopware\Bundle\ESIndexingBundle\Property;
 use Elasticsearch\Client;
 use Shopware\Bundle\ESIndexingBundle\Console\ProgressHelperInterface;
 use Shopware\Bundle\ESIndexingBundle\DataIndexerInterface;
+use Shopware\Bundle\ESIndexingBundle\ProviderInterface;
 use Shopware\Bundle\ESIndexingBundle\Struct\ShopIndex;
 use Shopware\Bundle\StoreFrontBundle\Struct\Property\Group;
 
-/**
- * Class PropertyIndexer
- */
 class PropertyIndexer implements DataIndexerInterface
 {
     /**
@@ -41,7 +39,7 @@ class PropertyIndexer implements DataIndexerInterface
     private $client;
 
     /**
-     * @var PropertyProviderInterface
+     * @var ProviderInterface
      */
     private $provider;
 
@@ -50,25 +48,16 @@ class PropertyIndexer implements DataIndexerInterface
      */
     private $queryFactory;
 
-    /**
-     * @param Client                    $client
-     * @param PropertyQueryFactory      $queryFactory
-     * @param PropertyProviderInterface $provider
-     */
     public function __construct(
         Client $client,
         PropertyQueryFactory $queryFactory,
-        PropertyProviderInterface $provider
+        ProviderInterface $provider
     ) {
         $this->client = $client;
         $this->provider = $provider;
         $this->queryFactory = $queryFactory;
     }
 
-    /**
-     * @param ShopIndex               $index
-     * @param ProgressHelperInterface $progress
-     */
     public function populate(ShopIndex $index, ProgressHelperInterface $progress)
     {
         $query = $this->queryFactory->createQuery(100);
@@ -82,8 +71,7 @@ class PropertyIndexer implements DataIndexerInterface
     }
 
     /**
-     * @param ShopIndex $index
-     * @param int[]     $groupIds
+     * @param int[] $groupIds
      */
     public function indexProperties(ShopIndex $index, $groupIds)
     {

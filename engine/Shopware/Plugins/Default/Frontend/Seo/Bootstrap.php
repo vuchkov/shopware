@@ -62,8 +62,6 @@ class Shopware_Plugins_Frontend_Seo_Bootstrap extends Shopware_Components_Plugin
 
     /**
      * Optimize Sourcecode / Apply SEO rules
-     *
-     * @param Enlight_Controller_ActionEventArgs $args
      */
     public function onPostDispatch(Enlight_Controller_ActionEventArgs $args)
     {
@@ -143,18 +141,19 @@ class Shopware_Plugins_Frontend_Seo_Bootstrap extends Shopware_Components_Plugin
         $view->extendsTemplate('frontend/plugins/seo/index.tpl');
 
         if (!empty($metaRobots)) {
-            $view->SeoMetaRobots = $metaRobots;
+            $view->assign('SeoMetaRobots', $metaRobots);
         }
         if (!empty($metaDescription)) {
-            $view->SeoMetaDescription = $metaDescription;
+            $view->assign('SeoMetaDescription', $metaDescription);
         }
 
         if ($this->get('config')->get('hrefLangEnabled')) {
             $context = $this->get('shopware_storefront.context_service')->getShopContext();
 
             $params = $request->getParams();
+            $sCategoryContent = $view->getAssign('sCategoryContent');
 
-            if ($sCategoryContent = $view->getAssign('sCategoryContent')) {
+            if ($sCategoryContent && $request->getControllerName() === 'listing' && isset($sCategoryContent['canonicalParams']) && is_array($sCategoryContent['canonicalParams'])) {
                 $params = $sCategoryContent['canonicalParams'];
             }
 
@@ -167,7 +166,6 @@ class Shopware_Plugins_Frontend_Seo_Bootstrap extends Shopware_Components_Plugin
     /**
      * Remove html-comments / whitespaces
      *
-     * @param Enlight_Event_EventArgs $args
      *
      * @return mixed|string
      */
@@ -218,10 +216,10 @@ class Shopware_Plugins_Frontend_Seo_Bootstrap extends Shopware_Components_Plugin
             return $event->getReturn();
         }
 
-        foreach ($controller->Response()->getHeaders() as $header) {
-            if ($header['name'] === 'Content-Type' && strpos($header['value'], 'application/javascript') === 0) {
-                return false;
-            }
+        $contentType = $controller->Response()->headers->get('content-type', 'text/html');
+
+        if (strpos($contentType, 'text/html') !== 0) {
+            return false;
         }
 
         if (!$controller->View()->hasTemplate() || in_array(strtolower($controller->Request()->getModuleName()), ['backend', 'api'])) {

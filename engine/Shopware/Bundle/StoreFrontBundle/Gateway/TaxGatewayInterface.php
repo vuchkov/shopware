@@ -26,11 +26,6 @@ namespace Shopware\Bundle\StoreFrontBundle\Gateway;
 
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 interface TaxGatewayInterface
 {
     /**
@@ -45,10 +40,6 @@ interface TaxGatewayInterface
      *  - State
      * - The above rules are prioritized, from first to last.
      *
-     * @param Struct\Customer\Group     $customerGroup
-     * @param Struct\Country\Area|null  $area
-     * @param Struct\Country|null       $country
-     * @param Struct\Country\State|null $state
      *
      * @return Struct\Tax[] Indexed by 'tax_' + id
      */

@@ -34,12 +34,6 @@ use Shopware\Bundle\MediaBundle\OptimizerServiceInterface;
  * This is a generator which creates image objects
  * based on the passed image path which will be used
  * for further manipulation.
- *
- * Class Basic
- *
- * @category    Shopware
- *
- * @copyright   Copyright (c) shopware AG (http://www.shopware.de)
  */
 class Basic implements GeneratorInterface
 {
@@ -58,11 +52,6 @@ class Basic implements GeneratorInterface
      */
     private $optimizerService;
 
-    /**
-     * @param \Shopware_Components_Config $config
-     * @param MediaServiceInterface       $mediaService
-     * @param OptimizerServiceInterface   $optimizerService
-     */
     public function __construct(\Shopware_Components_Config $config, MediaServiceInterface $mediaService, OptimizerServiceInterface $optimizerService)
     {
         $this->fixGdImageBlur = $config->get('thumbnailNoiseFilter');
@@ -166,9 +155,8 @@ class Basic implements GeneratorInterface
     /**
      * Calculate image proportion and set the new resolution
      *
-     * @param array $originalSize
-     * @param int   $width
-     * @param int   $height
+     * @param int $width
+     * @param int $height
      *
      * @return array
      */

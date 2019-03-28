@@ -27,11 +27,6 @@ namespace Shopware\Bundle\StoreFrontBundle\Service\Core;
 use Shopware\Bundle\StoreFrontBundle\Service;
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class MarketingService implements Service\MarketingServiceInterface
 {
     /**
@@ -39,9 +34,6 @@ class MarketingService implements Service\MarketingServiceInterface
      */
     private $config;
 
-    /**
-     * @param \Shopware_Components_Config $config
-     */
     public function __construct(\Shopware_Components_Config $config)
     {
         $this->config = $config;

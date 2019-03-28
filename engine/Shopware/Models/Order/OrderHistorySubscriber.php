@@ -28,11 +28,6 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class OrderHistorySubscriber implements EventSubscriber
 {
     /**
@@ -45,9 +40,6 @@ class OrderHistorySubscriber implements EventSubscriber
         return [Events::preUpdate];
     }
 
-    /**
-     * @param PreUpdateEventArgs $eventArgs
-     */
     public function preUpdate(PreUpdateEventArgs $eventArgs)
     {
         $order = $eventArgs->getEntity();
@@ -58,8 +50,8 @@ class OrderHistorySubscriber implements EventSubscriber
 
         // Order or payment status changed?
         if (
-            !$eventArgs->hasChangedField('paymentStatus') &&
-            !$eventArgs->hasChangedField('orderStatus')
+            !$eventArgs->hasChangedField('paymentStatus')
+            && !$eventArgs->hasChangedField('orderStatus')
         ) {
             return;
         }
@@ -101,8 +93,8 @@ class OrderHistorySubscriber implements EventSubscriber
      */
     private function hasIdentity()
     {
-        return Shopware()->Container()->initialized('auth') &&
-            Shopware()->Container()->get('Auth')->getIdentity() &&
-            Shopware()->Container()->get('Auth')->getIdentity()->id;
+        return Shopware()->Container()->initialized('auth')
+            && Shopware()->Container()->get('Auth')->getIdentity()
+            && Shopware()->Container()->get('Auth')->getIdentity()->id;
     }
 }

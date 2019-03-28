@@ -26,11 +26,6 @@ namespace Shopware\Plugin\Debug\Components;
 
 use Shopware\Components\Logger;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class TemplateVarCollector implements CollectorInterface
 {
     /**
@@ -38,11 +33,11 @@ class TemplateVarCollector implements CollectorInterface
      */
     protected $eventManager;
 
+    /**
+     * @var array
+     */
     protected $results = [];
 
-    /**
-     * @param \Enlight_Event_EventManager $eventManager
-     */
     public function __construct(\Enlight_Event_EventManager $eventManager)
     {
         $this->eventManager = $eventManager;
@@ -57,11 +52,6 @@ class TemplateVarCollector implements CollectorInterface
         $this->eventManager->registerListener($event);
     }
 
-    /**
-     * @param Logger $log
-     *
-     * @return mixed
-     */
     public function logResults(Logger $log)
     {
         foreach ($this->results as $result) {
@@ -72,8 +62,6 @@ class TemplateVarCollector implements CollectorInterface
     /**
      * Listener method of the Enlight_Plugins_ViewRenderer_PostRender event.
      * Logs the template of the given Enlight_Event_EventArgs.
-     *
-     * @param \Enlight_Event_EventArgs $args
      */
     public function onAfterRenderView(\Enlight_Event_EventArgs $args)
     {
@@ -123,8 +111,8 @@ class TemplateVarCollector implements CollectorInterface
     /**
      * Encode data method
      *
-     * @param     $data
-     * @param int $length
+     * @param array|string|object $data
+     * @param int                 $length
      *
      * @return array|string
      */

@@ -26,8 +26,6 @@ namespace Shopware\Components\MultiEdit\Resource\Product;
 
 /**
  * Handles request for values suggested to the user
- *
- * Class Value
  */
 class Value
 {
@@ -36,9 +34,6 @@ class Value
      */
     protected $dqlHelper;
 
-    /**
-     * @param DqlHelper $dqlHelper
-     */
     public function __construct(DqlHelper $dqlHelper)
     {
         $this->dqlHelper = $dqlHelper;

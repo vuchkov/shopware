@@ -34,10 +34,6 @@ use Shopware\Models\Shop\Shop as ShopModel;
 
 /**
  * Address API Resource
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class Address extends Resource
 {
@@ -77,7 +73,7 @@ class Address extends Resource
 
         $query = $this->getRepository()->getOne($id);
 
-        /** @var \Shopware\Models\Customer\Address $address $address */
+        /** @var \Shopware\Models\Customer\Address|null $address $address */
         $address = $query->getOneOrNullResult($this->getResultMode());
 
         if (!$address) {
@@ -88,10 +84,8 @@ class Address extends Resource
     }
 
     /**
-     * @param int   $offset
-     * @param int   $limit
-     * @param array $criteria
-     * @param array $orderBy
+     * @param int $offset
+     * @param int $limit
      *
      * @return array
      */
@@ -114,8 +108,6 @@ class Address extends Resource
     }
 
     /**
-     * @param array $params
-     *
      * @throws ApiException\CustomValidationException
      * @throws ApiException\NotFoundException
      *
@@ -158,8 +150,7 @@ class Address extends Resource
     }
 
     /**
-     * @param int   $id
-     * @param array $params
+     * @param int $id
      *
      * @throws \Shopware\Components\Api\Exception\ValidationException
      * @throws \Shopware\Components\Api\Exception\NotFoundException
@@ -175,7 +166,7 @@ class Address extends Resource
             throw new ApiException\ParameterMissingException();
         }
 
-        /** @var \Shopware\Models\Customer\Address $address */
+        /** @var \Shopware\Models\Customer\Address|null $address */
         $address = $this->getRepository()->findOneBy(['id' => $id]);
 
         if (!$address) {
@@ -216,7 +207,7 @@ class Address extends Resource
             throw new ApiException\ParameterMissingException();
         }
 
-        /** @var \Shopware\Models\Customer\Address $address */
+        /** @var \Shopware\Models\Customer\Address|null $address */
         $address = $this->getRepository()->findOneBy(['id' => $id]);
 
         if (!$address) {
@@ -251,7 +242,6 @@ class Address extends Resource
     /**
      * Resolves ids to models
      *
-     * @param array    $data
      * @param int|null $customerId
      * @param bool     $filter
      *

@@ -26,11 +26,6 @@ namespace Shopware\Bundle\AttributeBundle\Service;
 
 use Doctrine\DBAL\Types\Type;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.com)
- */
 class TypeMapping
 {
     const TYPE_STRING = 'string';
@@ -158,11 +153,6 @@ class TypeMapping
      */
     private $snippets;
 
-    /**
-     * TypeMapping constructor.
-     *
-     * @param \Shopware_Components_Snippet_Manager $snippets
-     */
     public function __construct(\Shopware_Components_Snippet_Manager $snippets)
     {
         $this->snippets = $snippets;
@@ -225,8 +215,6 @@ class TypeMapping
     }
 
     /**
-     * @param Type $type
-     *
      * @return string
      */
     public function dbalToUnified(Type $type)

@@ -28,11 +28,6 @@ use Shopware\Bundle\StoreFrontBundle\Gateway;
 use Shopware\Bundle\StoreFrontBundle\Service;
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class PropertyService implements Service\PropertyServiceInterface
 {
     /**
@@ -40,9 +35,6 @@ class PropertyService implements Service\PropertyServiceInterface
      */
     private $productPropertyGateway;
 
-    /**
-     * @param Gateway\ProductPropertyGatewayInterface $productPropertyGateway
-     */
     public function __construct(Gateway\ProductPropertyGatewayInterface $productPropertyGateway)
     {
         $this->productPropertyGateway = $productPropertyGateway;

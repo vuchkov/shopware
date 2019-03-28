@@ -27,9 +27,6 @@ namespace Shopware\Components\Cart;
 use Shopware\Components\Cart\Struct\DiscountContext;
 use Shopware\Components\Cart\Struct\Price;
 
-/**
- * Class BasketHelper
- */
 class BasketHelper implements BasketHelperInterface
 {
     /**
@@ -42,10 +39,6 @@ class BasketHelper implements BasketHelperInterface
      */
     private $basketQueryHelper;
 
-    /**
-     * @param ProportionalTaxCalculatorInterface $calculator
-     * @param BasketQueryHelperInterface         $basketQueryHelper
-     */
     public function __construct(
         ProportionalTaxCalculatorInterface $calculator,
         BasketQueryHelperInterface $basketQueryHelper

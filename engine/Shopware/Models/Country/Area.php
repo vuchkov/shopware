@@ -28,7 +28,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Shopware\Components\Model\ModelEntity;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity()
  * @ORM\Table(name="s_core_countries_areas")
  */
 class Area extends ModelEntity
@@ -48,7 +48,7 @@ class Area extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -68,8 +68,6 @@ class Area extends ModelEntity
     private $active = null;
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -78,8 +76,6 @@ class Area extends ModelEntity
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      *
      * @return Area
@@ -92,8 +88,6 @@ class Area extends ModelEntity
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getName()
@@ -102,8 +96,6 @@ class Area extends ModelEntity
     }
 
     /**
-     * Set active
-     *
      * @param int $active
      *
      * @return Area
@@ -116,8 +108,6 @@ class Area extends ModelEntity
     }
 
     /**
-     * Get active
-     *
      * @return int
      */
     public function getActive()

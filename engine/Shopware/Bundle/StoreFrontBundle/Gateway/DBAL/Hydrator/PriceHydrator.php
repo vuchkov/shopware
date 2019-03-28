@@ -26,11 +26,6 @@ namespace Shopware\Bundle\StoreFrontBundle\Gateway\DBAL\Hydrator;
 
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class PriceHydrator extends Hydrator
 {
     /**
@@ -53,12 +48,6 @@ class PriceHydrator extends Hydrator
      */
     private $productHydrator;
 
-    /**
-     * @param CustomerGroupHydrator $customerGroupHydrator
-     * @param UnitHydrator          $unitHydrator
-     * @param ProductHydrator       $productHydrator
-     * @param AttributeHydrator     $attributeHydrator
-     */
     public function __construct(
         CustomerGroupHydrator $customerGroupHydrator,
         UnitHydrator $unitHydrator,
@@ -72,8 +61,6 @@ class PriceHydrator extends Hydrator
     }
 
     /**
-     * @param array $data
-     *
      * @return \Shopware\Bundle\StoreFrontBundle\Struct\Product\PriceRule
      */
     public function hydratePriceRule(array $data)
@@ -103,7 +90,6 @@ class PriceHydrator extends Hydrator
      * This function uses the normally hydrate function of this class
      * and adds additionally the product unit information to the price.
      *
-     * @param array $data
      *
      * @return Struct\Product\PriceRule
      */
@@ -144,8 +130,6 @@ class PriceHydrator extends Hydrator
     }
 
     /**
-     * @param array $data
-     *
      * @return Struct\Product\PriceDiscount
      */
     public function hydratePriceDiscount(array $data)

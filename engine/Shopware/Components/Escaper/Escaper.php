@@ -26,10 +26,6 @@ namespace Shopware\Components\Escaper;
 
 /**
  * @see https://github.com/zendframework/zend-escaper/blob/master/src/Escaper.php
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class Escaper implements EscaperInterface
 {
@@ -38,9 +34,6 @@ class Escaper implements EscaperInterface
      */
     private $escaper;
 
-    /**
-     * @param \Zend\Escaper\Escaper $escaper
-     */
     public function __construct(\Zend\Escaper\Escaper $escaper)
     {
         $this->escaper = $escaper;

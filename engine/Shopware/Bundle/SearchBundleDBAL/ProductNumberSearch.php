@@ -32,11 +32,6 @@ use Shopware\Bundle\StoreFrontBundle\Struct\BaseProduct;
 use Shopware\Bundle\StoreFrontBundle\Struct\ShopContextInterface;
 use Shopware\Components\DependencyInjection\Container;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class ProductNumberSearch implements SearchBundle\ProductNumberSearchInterface
 {
     /**
@@ -54,12 +49,6 @@ class ProductNumberSearch implements SearchBundle\ProductNumberSearchInterface
      */
     private $eventManager;
 
-    /**
-     * @param QueryBuilderFactoryInterface $queryBuilderFactory
-     * @param \Enlight_Event_EventManager  $eventManager
-     * @param IteratorAggregate            $facetHandlers
-     * @param Container                    $container
-     */
     public function __construct(
         QueryBuilderFactoryInterface $queryBuilderFactory,
         \Enlight_Event_EventManager $eventManager,
@@ -82,8 +71,6 @@ class ProductNumberSearch implements SearchBundle\ProductNumberSearchInterface
      * The search gateway has to implement an event which plugin can be listened to,
      * to add their own handler classes.
      *
-     * @param SearchBundle\Criteria $criteria
-     * @param ShopContextInterface  $context
      *
      * @return SearchBundle\ProductNumberSearchResult
      */
@@ -104,8 +91,6 @@ class ProductNumberSearch implements SearchBundle\ProductNumberSearchInterface
     }
 
     /**
-     * @param QueryBuilder $query
-     *
      * @return array
      */
     private function getProducts(QueryBuilder $query)
@@ -143,9 +128,6 @@ class ProductNumberSearch implements SearchBundle\ProductNumberSearchInterface
     }
 
     /**
-     * @param SearchBundle\Criteria $criteria
-     * @param ShopContextInterface  $context
-     *
      * @throws \Exception
      *
      * @return SearchBundle\FacetResultInterface[]
@@ -216,8 +198,6 @@ class ProductNumberSearch implements SearchBundle\ProductNumberSearchInterface
     }
 
     /**
-     * @param SearchBundle\FacetInterface $facet
-     *
      * @throws \Exception
      *
      * @return FacetHandlerInterface
@@ -234,8 +214,7 @@ class ProductNumberSearch implements SearchBundle\ProductNumberSearchInterface
     }
 
     /**
-     * @param ArrayCollection $objects
-     * @param string[]        $classes
+     * @param string[] $classes
      */
     private function assertCollectionIsInstanceOf(ArrayCollection $objects, $classes)
     {

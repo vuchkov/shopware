@@ -24,16 +24,10 @@
 
 use Shopware\Components\CSRFWhitelistAware;
 
-/**
- * Shopware Backend Controller
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Shopware_Controllers_Backend_Index extends Enlight_Controller_Action implements CSRFWhitelistAware
 {
     const MIN_DAYS_INSTALLATION_SURVEY = 14;
+    const MIN_DAYS_BI_TEASER = 10;
 
     /**
      * @var Shopware_Plugins_Backend_Auth_Bootstrap
@@ -258,7 +252,7 @@ class Shopware_Controllers_Backend_Index extends Enlight_Controller_Action imple
             ->getArrayResult();
 
         $menuItems = $this->buildTree($nodes);
-        $this->View()->menu = $menuItems;
+        $this->View()->assign('menu', $menuItems);
     }
 
     /**
@@ -279,7 +273,6 @@ class Shopware_Controllers_Backend_Index extends Enlight_Controller_Action imple
     }
 
     /**
-     * @param array    $nodes
      * @param int|null $parentId
      *
      * @return array
@@ -325,8 +318,7 @@ class Shopware_Controllers_Backend_Index extends Enlight_Controller_Action imple
         if (!$installationSurvey || !$installationDate) {
             return false;
         }
-        $now = new \DateTime();
-        $interval = $installationDate->diff($now);
+        $interval = $installationDate->diff(new \DateTime());
 
         return $interval->days >= self::MIN_DAYS_INSTALLATION_SURVEY;
     }
@@ -345,7 +337,17 @@ class Shopware_Controllers_Backend_Index extends Enlight_Controller_Action imple
 
         $shopwareVersionText = $this->container->getParameter('shopware.release.version_text');
 
-        return $shopwareVersionText !== '___VERSION_TEXT___' && $configRepository->getConfigsCount() === 0;
+        $waitingOver = true;
+        $installationDate = \DateTime::createFromFormat('Y-m-d H:i', $this->container->get('config')->get('installationDate'));
+        if ($installationDate) {
+            $interval = $installationDate->diff(new \DateTime());
+
+            if ($interval->days < self::MIN_DAYS_BI_TEASER) {
+                $waitingOver = false;
+            }
+        }
+
+        return $waitingOver && $shopwareVersionText !== '___VERSION_TEXT___' && $configRepository->getConfigsCount() === 0;
     }
 
     /**

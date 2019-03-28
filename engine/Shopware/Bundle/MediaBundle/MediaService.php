@@ -30,9 +30,6 @@ use Shopware\Bundle\MediaBundle\Strategy\StrategyInterface;
 use Shopware\Models\Shop\Shop;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * Class MediaService
- */
 class MediaService implements MediaServiceInterface
 {
     /**
@@ -61,11 +58,6 @@ class MediaService implements MediaServiceInterface
     private $config;
 
     /**
-     * @param FilesystemInterface $filesystem
-     * @param StrategyInterface   $strategy
-     * @param ContainerInterface  $container
-     * @param array               $config
-     *
      * @throws \Exception
      */
     public function __construct(FilesystemInterface $filesystem, StrategyInterface $strategy, ContainerInterface $container, array $config)

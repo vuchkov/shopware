@@ -31,11 +31,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class DatabaseSetupCommand extends ShopwareCommand
 {
     private $validSteps = [
@@ -167,8 +162,6 @@ class DatabaseSetupCommand extends ShopwareCommand
     }
 
     /**
-     * @param array $dbConfig
-     *
      * @return string
      */
     private function buildConnectionString(array $dbConfig)
@@ -197,8 +190,6 @@ class DatabaseSetupCommand extends ShopwareCommand
     }
 
     /**
-     * @param array $dbConfig
-     *
      * @return \PDO
      */
     private function createConnection(array $dbConfig)
@@ -227,8 +218,6 @@ class DatabaseSetupCommand extends ShopwareCommand
     }
 
     /**
-     * @param InputInterface $input
-     *
      * @return string
      */
     private function parseUrl(InputInterface $input)

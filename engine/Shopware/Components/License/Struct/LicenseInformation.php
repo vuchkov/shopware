@@ -24,11 +24,6 @@
 
 namespace Shopware\Components\License\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class LicenseInformation
 {
     /**
@@ -81,9 +76,6 @@ class LicenseInformation
      */
     public $creation;
 
-    /**
-     * @param array $values
-     */
     public function __construct(array $values = [])
     {
         foreach ($values as $name => $value) {

@@ -31,11 +31,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class SnippetsToSqlCommand extends ShopwareCommand
 {
     /**
@@ -107,11 +102,6 @@ class SnippetsToSqlCommand extends ShopwareCommand
         return 0;
     }
 
-    /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     * @param QueryHandler    $queryLoader
-     */
     protected function exportDefaultPlugins(InputInterface $input, OutputInterface $output, QueryHandler $queryLoader)
     {
         $pluginDirectories = $this->container->getParameter('shopware.plugin_directories');
@@ -131,11 +121,6 @@ class SnippetsToSqlCommand extends ShopwareCommand
         $output->writeln('<info>Default Plugin snippets processed correctly</info>');
     }
 
-    /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     * @param QueryHandler    $queryLoader
-     */
     protected function exportPlugins(InputInterface $input, OutputInterface $output, QueryHandler $queryLoader)
     {
         $pluginRepository = $this->container->get('shopware.model_manager')->getRepository(Plugin::class);
@@ -159,11 +144,6 @@ class SnippetsToSqlCommand extends ShopwareCommand
         $output->writeln('<info>Plugin snippets processed correctly</info>');
     }
 
-    /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     * @param QueryHandler    $queryLoader
-     */
     private function exportCoreSnippets(InputInterface $input, OutputInterface $output, QueryHandler $queryLoader)
     {
         $queries = $queryLoader->loadToQuery(null, $input->getOption('update') !== 'false');
@@ -172,9 +152,8 @@ class SnippetsToSqlCommand extends ShopwareCommand
     }
 
     /**
-     * @param QueryHandler $queryLoader
-     * @param string       $path
-     * @param string       $file
+     * @param string $path
+     * @param string $file
      */
     private function exportPluginSnippets(QueryHandler $queryLoader, $path, $file)
     {

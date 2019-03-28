@@ -32,11 +32,6 @@ use Shopware\Bundle\SearchBundleDBAL\VariantHelperInterface;
 use Shopware\Bundle\StoreFrontBundle\Gateway;
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class VariantCheapestPriceGateway implements Gateway\VariantCheapestPriceGatewayInterface
 {
     /**
@@ -74,13 +69,6 @@ class VariantCheapestPriceGateway implements Gateway\VariantCheapestPriceGateway
      */
     private $variantHelper;
 
-    /**
-     * @param Connection                  $connection
-     * @param FieldHelper                 $fieldHelper
-     * @param Hydrator\PriceHydrator      $priceHydrator
-     * @param \Shopware_Components_Config $config
-     * @param VariantHelperInterface      $variantHelper
-     */
     public function __construct(
         Connection $connection,
         FieldHelper $fieldHelper,
@@ -231,8 +219,6 @@ class VariantCheapestPriceGateway implements Gateway\VariantCheapestPriceGateway
     /**
      * Pre selection of the cheapest prices.
      *
-     * @param QueryBuilder $mainQuery
-     * @param Criteria     $criteria
      *
      * @return QueryBuilder
      */

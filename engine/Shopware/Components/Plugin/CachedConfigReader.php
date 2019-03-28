@@ -27,11 +27,6 @@ namespace Shopware\Components\Plugin;
 use Shopware\Models\Shop\Shop;
 use Zend_Cache_Core as Cache;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.com)
- */
 class CachedConfigReader implements ConfigReader
 {
     /**
@@ -44,10 +39,6 @@ class CachedConfigReader implements ConfigReader
      */
     private $cache;
 
-    /**
-     * @param ConfigReader $reader
-     * @param Cache        $cache
-     */
     public function __construct(ConfigReader $reader, Cache $cache)
     {
         $this->reader = $reader;

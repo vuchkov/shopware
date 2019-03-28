@@ -35,7 +35,7 @@ class Repository extends EntityRepository
     /**
      * @param int $shopId
      *
-     * @return BenchmarkConfig
+     * @return BenchmarkConfig|null
      */
     public function getConfigForShop($shopId)
     {
@@ -45,9 +45,6 @@ class Repository extends EntityRepository
         return $return;
     }
 
-    /**
-     * @param array $newConfigs
-     */
     public function saveShopConfigs(array $newConfigs)
     {
         $savedConfigs = $this->getShopConfigs();
@@ -86,9 +83,6 @@ class Repository extends EntityRepository
         $this->getEntityManager()->flush();
     }
 
-    /**
-     * @param BenchmarkConfig $config
-     */
     public function save(BenchmarkConfig $config)
     {
         $em = $this->getEntityManager();

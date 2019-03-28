@@ -126,13 +126,11 @@ class SendStatisticsCommand extends ShopwareCommand
     }
 
     /**
-     * @param BenchmarkConfig $shopConfig
-     *
      * @return bool
      */
     private function isShopValid(BenchmarkConfig $shopConfig)
     {
-        return $shopConfig->isActive() &&
-            $shopConfig->getLastSent()->add(new \DateInterval('P1D')) < new \DateTime('now', new \DateTimeZone('UTC'));
+        return $shopConfig->isActive()
+            && $shopConfig->getLastSent()->add(new \DateInterval('P1D')) < new \DateTime('now', new \DateTimeZone('UTC'));
     }
 }

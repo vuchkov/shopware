@@ -29,7 +29,7 @@ use Shopware\Components\Model\ModelEntity;
 
 /**
  * @ORM\Table(name="s_core_config_form_translations")
- * @ORM\Entity
+ * @ORM\Entity()
  */
 class FormTranslation extends ModelEntity
 {
@@ -55,7 +55,7 @@ class FormTranslation extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -89,8 +89,6 @@ class FormTranslation extends ModelEntity
     private $localeId;
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -119,8 +117,6 @@ class FormTranslation extends ModelEntity
     }
 
     /**
-     * Set description
-     *
      * @param string $description
      *
      * @return FormTranslation
@@ -133,8 +129,6 @@ class FormTranslation extends ModelEntity
     }
 
     /**
-     * Get description
-     *
      * @return string
      */
     public function getDescription()

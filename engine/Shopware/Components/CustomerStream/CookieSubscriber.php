@@ -28,6 +28,7 @@ use Doctrine\DBAL\Connection;
 use Enlight\Event\SubscriberInterface;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Cookie;
 
 class CookieSubscriber implements SubscriberInterface
 {
@@ -41,10 +42,6 @@ class CookieSubscriber implements SubscriberInterface
      */
     private $container;
 
-    /**
-     * @param Connection         $connection
-     * @param ContainerInterface $container
-     */
     public function __construct(Connection $connection, ContainerInterface $container)
     {
         $this->connection = $connection;
@@ -76,12 +73,7 @@ class CookieSubscriber implements SubscriberInterface
             $session->offsetSet('auto-user', null);
         }
 
-        $controller->Response()->setCookie(
-            'slt',
-            null,
-            strtotime('-1 Year'),
-            $request->getBasePath() . '/'
-        );
+        $controller->Response()->headers->setCookie(new Cookie('slt', null, strtotime('-1 Year'), $request->getBasePath() . '/'));
     }
 
     public function checkCookie(\Enlight_Controller_EventArgs $args)
@@ -157,13 +149,9 @@ class CookieSubscriber implements SubscriberInterface
 
         $session = $this->container->get('session');
         $session->offsetSet('auto-user', null);
+        $session->offsetSet('userInfo', null);
 
-        $response->setCookie(
-            'slt',
-            $token,
-            $expire,
-            $request->getBasePath() . '/'
-        );
+        $response->headers->setCookie(new Cookie('slt', $token, $expire, $request->getBasePath() . '/'));
 
         $this->connection->update('s_user', ['login_token' => $token], ['id' => $id]);
     }

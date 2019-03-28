@@ -25,6 +25,11 @@ This changelog references changes done in Shopware 5.6 patch versions.
 * Added service `\Doctrine\Common\Annotations\Reader` as `models.annotations_reader`
 * Added `shopware.controller.blacklisted_controllers` parameter to the DI container to blacklist controllers for dispatching
 * Added default table options of Doctrine to config
+* Added better ExtJS file auto-loading. See [Improved ExtJS auto-loading](###Improved ExtJS auto-loading) for more details
+* Added configuration to show the voucher field on checkout confirm page
+* Added information text to detail page of category filter 
+* Added string type cast in return statement of method `sOrder::sGetOrdernumber`
+* Added configuration to decide whether user basket should be cleared after logout or not
 
 ### Changes
 
@@ -54,6 +59,22 @@ This changelog references changes done in Shopware 5.6 patch versions.
 * Changed the `Regex`-Constraint on `\Shopware\Models\Article\Detail::$number` to a new `OrderNumber`-Constraint to be more configurable
 * Changed interface `Shopware\Bundle\SearchBundleDBAL\VariantHelperInterface` to contain new method `joinVariants(QueryBuilder $query)` which was already a necessary part of the default implementation
 * Changed Doctrine orm version to 2.6.3
+* Changed mpdf to 7.1.9
+* Changed `type` of `logMailAddress` config in `s_core_config_elements` to `textarea`
+* Changed mail error handler to consider multiple recipient addresses
+* Changed `Shopware_Controllers_Frontend_Note` forwards to redirects
+* Changed display mode of voucher field on the shopping cart page into a configurable display mode
+* Changed symfony form request handler to `Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationRequestHandler`
+* Changed `.htaccess`-file to no longer contain references to PHP5
+* Changed following tables 
+    * `s_core_customergroups`
+    * `s_article_configurator_template_prices`
+    * `s_articles_prices`
+    * `s_campaigns_mailings` to varchar limit of 15 for customer group key.
+* Changed plugin initialization to alphabetical by default
+* Changed elasticsearch/elasticsearch to 5.4.0
+* Changed ongr/elasticsearch-dsl to 5.0.6
+* Changed the generation of the Robots.txt
 
 ### Removals
 
@@ -68,11 +89,65 @@ This changelog references changes done in Shopware 5.6 patch versions.
     * `Shopware\Components\Plugin\XmlMenuReader`
 * Removed `storeType` `php` from Plugin config.xml
 * Removed the unspecific request params assignment to view in `\Shopware_Controllers_Widgets_Listing::productsAction` and `\Shopware_Controllers_Widgets_Listing::streamAction`. Use a *PostDispatchEvent to assign necessary variables in a plugin.
+* Removed voucher field from additional feature
+* Removed following classes without replacement
+    * `Shopware\Bundle\FormBundle\Extension\EnlightRequestExtension`
+    * `Shopware\Bundle\FormBundle\EnlightRequestHandler`
+* Removed checkbox show in all categories on the category filter detail page
+* Removed category filter facet from filter listing in category settings 
+* Removed category filter from category page in frontend
+* Removed deprecated `Shopware_Controllers_Backend_Deprecated`
+* Removed deprecated `Shopware` constants
+    * Removed `Shopware::VERSION` use the DIC-Parameter `shopware.release.version` instead
+    * Removed `Shopware::VERSION_TEXT` use the DIC-Parameter `shopware.release.version_text` instead
+    * Removed `Shopware::REVISION` use the DIC-Parameter `shopwqare.release.REVISION` instead
+* Removed deprecated `Kernel` constants
+    * Removed `Kernel::VERSION` use the DIC-Parameter `shopware.release.version` instead
+    * Removed `Kernel::VERSION_TEXT` use the DIC-Parameter `shopware.release.version_text` instead
+    * Removed `Kernel::REVISION` use the DIC-Parameter `shopware.release.revision` instead
+* Removed deprecated `Shopware_Controllers_Frontend_SitemapMobileXml`
+* Removed deprecated `Shopware\Components\SitemapXMLRepository`
+* Removed deprecated `$legacyGroups` in `Shopware\Components\SitemapXMLRepository`
+* Removed deprecated older `Shopware\Models\Order\Document\Document`
+* Removed deprecations of `Shopware\Components\Api\Resource\Article`
+* Removed deprecations of `Shopware\Components\Api\Resource\Variant`
+* Removed deprecated `Shopware_Components_Benchmark_Point`
+* Removed deprecated `Shopware_Components_Benchmark_Container`
+* Removed unused `Shopware\Bundle\SearchBundleES\DependencyInjection\CompilerPassSearchHandlerCompilerPass` which was not used at all.
+* Removed method `Enlight_Controller_Response_ResponseHttp::insert` 
+* Removed method `Shopware\Kernel::transformEnlightResponseToSymfonyResponse` 
 
 ### Deprecations
 
-* Deprecated `Shopware\Bundle\ESIndexingBundle::getNotAnalyzedField`. It will be removed in 5.7, use the getKeywordField instead.
-* Deprecated `Shopware\Bundle\ESIndexingBundle::getAttributeRawField`. It will be removed in 5.7, use the getKeywordField instead.
+* Deprecated `Shopware\Bundle\ESIndexingBundle\TextMappingInterface::getNotAnalyzedField`. It will be removed in 5.7, use the getKeywordField instead.
+* Deprecated `Shopware\Bundle\ESIndexingBundle\TextMappingInterface::getAttributeRawField`. It will be removed in 5.7, use the getKeywordField instead.
+* Deprecated `Shopware\Bundle\ESIndexingBundle\Product\ProductProviderInterface`. It will be removed in 5.7, use the `Shopware\Bundle\ESIndexingBundle\ProviderInterface` instead.
+* Deprecated `Shopware\Bundle\ESIndexingBundle\Property\PropertyProviderInterface`. It will be removed in 5.7, use the `Shopware\Bundle\ESIndexingBundle\ProviderInterface` instead.
+* Deprecated `Shopware\Components\Model\ModelRepository::queryAll`. It will be removed in 5.7, use findBy([], null, $limit, $offset) instead
+* Deprecated `Shopware\Components\Model\ModelRepository::queryBy`. It will be removed in 5.7, use findBy instead
+* Deprecated `Shopware\Bundle\ESIndexingBundle\EsClientLogger`. Use `Shopware\Bundle\ESIndexingBundle\EsClient` instead.
+* Deprecated `shopware_elastic_search.client.logger`. Use `shopware_elastic_search.client` instead.
+* Deprecated `Shopware\Models\Article\Article::getAttributeRawField`. It will be removed in 5.7, , use `Shopware\Models\Article\Detail::getAttributeRawField `.
+* Deprecated `Shopware\Models\Article\Article::setLastStock`. It will be removed in 5.7, , use `Shopware\Models\Article\Detail::setLastStock`.
+* Deprecated `Shopware\Models\Article\Article::lastStock`. It will be removed in 5.8, use `Shopware\Models\Article\Detail::lastStock`.
+* Deprecated `EsSearch::addFilter`. Use `EsSearch::addQuery(BuilderInterface, BoolQuery::FILTER)` instead.
+* Deprecated `EsSearch::getFilters`. Use `EsSearch::getQueries(BuilderInterface, BoolQuery::FILTER)` instead.
+* Deprecated `Enlight_Controller_Response_ResponseHttp::setRawHeader`
+* Deprecated `Enlight_Controller_Response_ResponseHttp::clearRawHeader`
+* Deprecated `Enlight_Controller_Response_ResponseHttp::clearRawHeaders`
+* Deprecated `Enlight_Controller_Response_ResponseHttp::outputBody`
+
+### Improved ExtJS auto-loading
+
+Previous to Shopware 5.6, only ExtJS files from the `Shopware.apps.Base` were loaded globally, so you can use them globally in your apps. 
+Additional to that, when loading up a module like e.g. "ProductStream", all files from `Shopware.apps.ProductStream` were loaded on top.
+Using files from others apps, such as `Shopware.apps.Article` inside of the `Shopware.apps.ProductStream` application, required you to implement some special code in order to do so.
+Also, when using an ExtJS store in your plugin configuration, you were only able to use stores from `Shopware.apps.Base`, none of the other stores.
+
+We've improved our auto-loading of ExtJS files, so you don't have to worry about this anymore.
+Instead of failing, because you used files of an application, that didn't get loaded yet, we're simply loading the missing application now.
+This way you don't have to worry about using others applications files anymore, as well as worrying about which stores can be used
+in your plugin configuration.
 
 ### Controller Registration using DI-Tag
 
@@ -113,8 +188,29 @@ class Test extends Controller
     {
         // Do something with $this->connection
     }
+    
+    public function detailAction(int $productNumber = null, ListProductServiceInterface $listProductService, ContextServiceInterface $contextService)
+    {
+        if (!$productNumber) {
+            throw new \RuntimeException('No product number provided');
+        }
+        
+        $this->View()->assign('product', $listProductService->getList([$productNumber], $contextService->getShopContext()));
+    }
 }
 ```
+
+### Autowire of controller actions parameters
+
+The new controllers tagged with `shopware.controller` tag, can now have parameters in action methods. Possible parameters are
+
+* Services (e.g ListProductService $listProductService)
+* $request (e.g Request $request)
+* $requestParameters (e.g int $limit = 0  /action?limit=5)
+
+### Enlight_Controller_Request_RequestHttp is now extending Symfony\Component\HttpFoundation\Request and Enlight_Controller_Response_ResponseHttp extends Symfony\Component\HttpFoundation\Response
+
+The request and response instances in Shopware now extend from Symfony Request / Response.
 
 ### Custom validation of order numbers (SKU)
 
@@ -153,3 +249,73 @@ return [
 Providing this value via config makes it unnecessary for Doctrine to figure the version out by itself, thus reducing the number of database calls Shopware makes per request by one.
 
 If you are running a MariaDB database, you should prefix the `serverVersion` with `mariadb`- (e.g.: `mariadb-10.2.12`).
+
+
+### Payment Token
+
+Some internet security software packages open a new clean browser without cookies for payments.
+After returning from the payment provider, the customer will be redirected to the home page, because the new browser instance does not contain the previous session.
+For this reason there is now a service to generate a token, which can be added to the returning url (e.g /payment_paypal/return?paymentId=test123&swPaymentToken=abc123def).
+This parameter will be resolved in the PreDispatch.
+If the user is not logged in, but the URL contains a valid token, he will get back his former session and will be redirected to the original URL, but without the token
+
+Example implementation:
+
+```php
+<?php
+
+use \Shopware\Components\Cart\PaymentTokenService;
+
+class MyPaymentController extends Controller {
+
+    public function gatewayAction()
+    {
+        // do some payment things
+        $token = $this->get('shopware.components.cart.payment_token')->generate();
+        
+        $returnParamters = [
+            'controller' => 'payment_paypal',
+            'action' => 'return',
+            PaymentTokenService::TYPE_PAYMENT_TOKEN => $token
+        ];
+        $returnLink = $this->router->assemble($returnParamters);
+        
+        $redirectUrl = $this->paymentProviderApi->createPayment($cart, $returnLink);
+        
+        $this->redirect($redirectUrl);
+    }
+}
+```
+
+### Replaced Codemirror with Ace-Editor
+
+Codemirror has been replaced with Ace-Editor. For compatibility reason, Ace-Editor supports all xtypes / classes from Codemirror.
+Following modes are available
+    * css
+    * html
+    * javascript
+    * json
+    * less
+    * mysql
+    * php
+    * sass
+    * scss
+    * smarty
+    * sql
+    * text
+    * xml
+    * xquery
+    
+## Improved Robots.txt
+
+robots.txt shows now all links from all language shops.
+To remove or add entries overwrite the blocks `frontend_robots_txt_disallows_output`, `frontend_robots_txt_allows_output` and call methods `setAllow`, `setDisallow`, `removeAllow`, `removeDisallow`
+
+Example:
+
+```smarty
+{block name="frontend_robots_txt_disallows_output"}
+    {$robotsTxt->removeDisallow('/ticket')}
+    {$smarty.block.parent}
+{/block}
+```

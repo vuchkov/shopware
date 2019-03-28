@@ -28,9 +28,6 @@ use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * Class MediaMigration
- */
 class MediaMigration
 {
     /**
@@ -45,10 +42,7 @@ class MediaMigration
     /**
      * Batch migration
      *
-     * @param MediaServiceInterface $fromFilesystem
-     * @param MediaServiceInterface $toFileSystem
-     * @param OutputInterface       $output
-     * @param bool                  $skipScan
+     * @param bool $skipScan
      */
     public function migrate(MediaServiceInterface $fromFilesystem, MediaServiceInterface $toFileSystem, OutputInterface $output, $skipScan = false)
     {
@@ -85,9 +79,7 @@ class MediaMigration
     /**
      * Migrate a single file
      *
-     * @param string                $path
-     * @param MediaServiceInterface $fromFilesystem
-     * @param MediaServiceInterface $toFileSystem
+     * @param string $path
      *
      * @throws \RuntimeException
      */
@@ -124,9 +116,8 @@ class MediaMigration
     }
 
     /**
-     * @param MediaServiceInterface $toFileSystem
-     * @param string                $path
-     * @param resource              $contents
+     * @param string   $path
+     * @param resource $contents
      *
      * @return bool
      */
@@ -147,10 +138,7 @@ class MediaMigration
     }
 
     /**
-     * @param string                $directory
-     * @param MediaServiceInterface $fromFilesystem
-     * @param MediaServiceInterface $toFilesystem
-     * @param ProgressBar           $progressBar
+     * @param string $directory
      */
     private function migrateFilesIn($directory, MediaServiceInterface $fromFilesystem, MediaServiceInterface $toFilesystem, ProgressBar $progressBar)
     {
@@ -182,8 +170,7 @@ class MediaMigration
     }
 
     /**
-     * @param string                $directory
-     * @param MediaServiceInterface $filesystem
+     * @param string $directory
      *
      * @return int
      */

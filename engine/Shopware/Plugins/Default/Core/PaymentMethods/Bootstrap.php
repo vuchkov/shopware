@@ -22,11 +22,6 @@
  * our trademarks remain entirely with us.
  */
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Shopware_Plugins_Core_PaymentMethods_Bootstrap extends Shopware_Components_Plugin_Bootstrap
 {
     /**
@@ -112,10 +107,6 @@ class Shopware_Plugins_Core_PaymentMethods_Bootstrap extends Shopware_Components
 
     /**
      * Add View path to Smarty
-     *
-     * @param Enlight_Event_EventArgs $arguments
-     *
-     * @return mixed
      */
     public function addPaths(Enlight_Event_EventArgs $arguments)
     {
@@ -128,8 +119,6 @@ class Shopware_Plugins_Core_PaymentMethods_Bootstrap extends Shopware_Components
 
     /**
      * Called when the BackendOrderPostDispatch Event is triggered
-     *
-     * @param Enlight_Event_EventArgs $args
      */
     public function onBackendOrderPostDispatch(Enlight_Event_EventArgs $args)
     {
@@ -150,8 +139,6 @@ class Shopware_Plugins_Core_PaymentMethods_Bootstrap extends Shopware_Components
 
     /**
      * Called when the BackendCustomerPostDispatch Event is triggered
-     *
-     * @param Enlight_Event_EventArgs $args
      */
     public function onBackendCustomerPostDispatch(Enlight_Event_EventArgs $args)
     {

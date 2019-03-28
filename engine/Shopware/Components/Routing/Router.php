@@ -27,11 +27,6 @@ namespace Shopware\Components\Routing;
 use Enlight_Controller_Request_Request as EnlightRequest;
 use Enlight_Controller_Router as EnlightRouter;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Router extends EnlightRouter implements RouterInterface
 {
     /**
@@ -62,9 +57,7 @@ class Router extends EnlightRouter implements RouterInterface
     /**
      * The DI constructor of shopware router
      *
-     * @param Context               $context
      * @param MatcherInterface[]    $matchers
-     * @param array                 $generators
      * @param PreFilterInterface[]  $preFilters
      * @param PostFilterInterface[] $postFilters
      */
@@ -86,8 +79,6 @@ class Router extends EnlightRouter implements RouterInterface
 
     /**
      * Switch the context
-     *
-     * @param Context $context
      */
     public function setContext(Context $context)
     {
@@ -183,6 +174,7 @@ class Router extends EnlightRouter implements RouterInterface
                 $userParams = $preFilter->preFilter($userParams, $context);
             }
         }
+        /** @var array|string|false $url */
         $url = false;
         foreach ($this->generators as $route) {
             if ($route instanceof GeneratorInterface) {
@@ -269,8 +261,6 @@ class Router extends EnlightRouter implements RouterInterface
     }
 
     /**
-     * @param EnlightRequest $request
-     *
      * @deprecated Use self::match()
      *
      * @return EnlightRequest

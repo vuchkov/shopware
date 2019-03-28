@@ -28,11 +28,6 @@ use Doctrine\DBAL\Connection;
 use Shopware\Bundle\StoreFrontBundle\Gateway;
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class CountryGateway implements Gateway\CountryGatewayInterface
 {
     /**
@@ -60,11 +55,6 @@ class CountryGateway implements Gateway\CountryGatewayInterface
      */
     private $connection;
 
-    /**
-     * @param Connection               $connection
-     * @param FieldHelper              $fieldHelper
-     * @param Hydrator\CountryHydrator $countryHydrator
-     */
     public function __construct(
         Connection $connection,
         FieldHelper $fieldHelper,
@@ -242,8 +232,6 @@ class CountryGateway implements Gateway\CountryGatewayInterface
     }
 
     /**
-     * @param Struct\ShopContextInterface $context
-     *
      * @return \Doctrine\DBAL\Query\QueryBuilder
      */
     private function createStateQuery(Struct\ShopContextInterface $context)

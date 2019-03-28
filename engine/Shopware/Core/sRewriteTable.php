@@ -34,10 +34,6 @@ use Shopware\Models\Shop\Shop;
 
 /**
  * Deprecated Shopware Class that handles url rewrites
- *
- * @category  Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class sRewriteTable
 {
@@ -571,9 +567,8 @@ class sRewriteTable
     }
 
     /**
-     * @param ShopContextInterface $context
-     * @param int|null             $offset
-     * @param int|null             $limit
+     * @param int|null $offset
+     * @param int|null $limit
      *
      * @throws Exception
      * @throws SmartyException
@@ -651,11 +646,9 @@ class sRewriteTable
     }
 
     /**
-     * @param Shopware_Components_Translation $translator
-     * @param int                             $shopId
-     * @param int                             $fallbackShopId
-     * @param array                           $campaign
-     * @param string                          $routerCampaignTemplate
+     * @param int    $shopId
+     * @param int    $fallbackShopId
+     * @param string $routerCampaignTemplate
      *
      * @throws Exception
      * @throws SmartyException
@@ -683,9 +676,8 @@ class sRewriteTable
     /**
      * Create CMS rewrite rules, used in multiple locations
      *
-     * @param int                       $offset
-     * @param int                       $limit
-     * @param ShopContextInterface|null $context
+     * @param int $offset
+     * @param int $limit
      *
      * @throws \Exception
      */
@@ -965,8 +957,8 @@ class sRewriteTable
             $hasSpecificSubShopPath = $this->hasSpecificShopPath($org_path, $path, $shopId);
 
             // If our current form is specific for this subshop OR if we are for all shops and no other form is specific, write URL
-            if (!empty($form['shopIds']) ||
-                (empty($form['shopIds']) && !$hasSpecificSubShopPath)) {
+            if (!empty($form['shopIds'])
+                || (empty($form['shopIds']) && !$hasSpecificSubShopPath)) {
                 $this->sInsertUrl($org_path, $path);
             }
         }
@@ -1006,8 +998,8 @@ class sRewriteTable
             $hasSpecificSubShopPath = $this->hasSpecificShopPath($org_path, $path, $shopId);
 
             // If our current site is specific for this subshop OR if we are for all shops and no other site is specific, write URL
-            if (!empty($form['shopIds']) ||
-                (empty($form['shopIds']) && !$hasSpecificSubShopPath)) {
+            if (!empty($form['shopIds'])
+                || (empty($form['shopIds']) && !$hasSpecificSubShopPath)) {
                 $this->sInsertUrl($org_path, $path);
             }
         }
@@ -1016,10 +1008,7 @@ class sRewriteTable
     /**
      * Map product core translation including fallback fields for given product
      *
-     * @param array $product
-     * @param array $objectData
-     * @param array $objectDataFallback
-     * @param array $fieldMappings      array(productFieldName => objectDataFieldName)
+     * @param array $fieldMappings array(productFieldName => objectDataFieldName)
      *
      * @return array
      */
@@ -1092,8 +1081,6 @@ class sRewriteTable
     }
 
     /**
-     * @param ShopContextInterface|null $context
-     *
      * @throws \Exception
      *
      * @return ShopContextInterface
@@ -1160,8 +1147,6 @@ class sRewriteTable
     }
 
     /**
-     * @param array $matches
-     *
      * @return bool
      */
     private function checkSpecificShopForm(array $matches)
@@ -1181,8 +1166,6 @@ class sRewriteTable
     }
 
     /**
-     * @param array $matches
-     *
      * @return bool
      */
     private function checkSpecificShopSite(array $matches)

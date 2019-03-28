@@ -31,11 +31,6 @@ use Shopware\Models\Customer\Address;
 use Shopware\Models\Customer\Customer;
 use Symfony\Component\DomCrawler\Crawler;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class AddressTest extends \Enlight_Components_Test_Controller_TestCase
 {
     /**
@@ -292,7 +287,6 @@ class AddressTest extends \Enlight_Components_Test_Controller_TestCase
     /**
      * @param string $method
      * @param string $url
-     * @param array  $data
      *
      * @return Crawler
      */
@@ -309,7 +303,15 @@ class AddressTest extends \Enlight_Components_Test_Controller_TestCase
         $this->dispatch($url);
 
         if ($this->Response()->isRedirect()) {
-            $parts = parse_url($this->Response()->getHeaders()[0]['value']);
+            $location = null;
+
+            foreach ($this->Response()->getHeaders() as $header) {
+                if ($header['name'] === 'location') {
+                    $location = $header['value'];
+                }
+            }
+
+            $parts = parse_url($location);
             $followUrl = $parts['path'];
 
             if (isset($parts['query'])) {
@@ -406,8 +408,6 @@ class AddressTest extends \Enlight_Components_Test_Controller_TestCase
     }
 
     /**
-     * @param Country $country
-     *
      * @return State
      */
     private static function createState(Country $country)

@@ -25,16 +25,15 @@
 namespace Shopware;
 
 use Enlight_Controller_Request_RequestHttp as EnlightRequest;
-use Enlight_Controller_Response_ResponseHttp as EnlightResponse;
 use Shopware\Bundle\AttributeBundle\DependencyInjection\Compiler\StaticResourcesCompilerPass;
 use Shopware\Bundle\BenchmarkBundle\DependencyInjection\Compiler\MatcherCompilerPass;
+use Shopware\Bundle\ControllerBundle\DependencyInjection\Compiler\ControllerCompilerPass;
 use Shopware\Bundle\ControllerBundle\DependencyInjection\Compiler\RegisterControllerCompilerPass;
 use Shopware\Bundle\FormBundle\DependencyInjection\CompilerPass\AddConstraintValidatorsPass;
 use Shopware\Bundle\FormBundle\DependencyInjection\CompilerPass\FormPass;
 use Shopware\Bundle\PluginInstallerBundle\Service\PluginInitializer;
 use Shopware\Components\ConfigLoader;
 use Shopware\Components\DependencyInjection\Compiler\ConfigureApiResourcesPass;
-use Shopware\Components\DependencyInjection\Compiler\ControllerCompilerPass;
 use Shopware\Components\DependencyInjection\Compiler\DoctrineEventSubscriberCompilerPass;
 use Shopware\Components\DependencyInjection\Compiler\EventListenerCompilerPass;
 use Shopware\Components\DependencyInjection\Compiler\EventSubscriberCompilerPass;
@@ -49,9 +48,9 @@ use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
-use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
+use Symfony\Component\HttpKernel\DependencyInjection\RegisterControllerArgumentLocatorsPass;
 use Symfony\Component\HttpKernel\Event\PostResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Kernel as SymfonyKernel;
@@ -61,34 +60,17 @@ use Symfony\Component\HttpKernel\TerminableInterface;
 /**
  * Middleware class between the old Shopware bootstrap mechanism
  * and the Symfony Kernel handling
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class Kernel implements HttpKernelInterface, TerminableInterface
 {
-    /**
-     * @Deprecated Since 5.4, to be removed in 5.6
-     *
-     * Use the following parameters from the DIC instead:
-     *      'shopware.release.version'
-     *      'shopware.release.revision'
-     *      'shopware.release.version_text'
-     *      'shopware.release' (a Struct containing all the parameters below)
-     */
-    const VERSION = \Shopware::VERSION;
-    const VERSION_TEXT = \Shopware::VERSION_TEXT;
-    const REVISION = \Shopware::REVISION;
-
     /**
      * Shopware Version definition. Is being replaced by the correct release information in release packages.
      * Is available in the DIC as parameter 'shopware.release.*' or a Struct containing all the parameters below.
      */
     protected $release = [
-        'version' => self::VERSION,
-        'version_text' => self::VERSION_TEXT,
-        'revision' => self::REVISION,
+        'version' => '___VERSION___',
+        'version_text' => '___VERSION_TEXT___',
+        'revision' => '___REVISION___',
     ];
 
     /**
@@ -104,7 +86,7 @@ class Kernel implements HttpKernelInterface, TerminableInterface
     protected $config;
 
     /**
-     * @var Container
+     * @var Container|null
      */
     protected $container;
 
@@ -207,23 +189,19 @@ class Kernel implements HttpKernelInterface, TerminableInterface
             $response = clone $front->Response();
 
             $response->clearHeaders()
-                ->clearRawHeaders()
                 ->clearBody();
 
-            $response->setHttpResponseCode(200);
+            $response->setStatusCode(SymfonyResponse::HTTP_OK);
             $enlightRequest->setDispatched();
             $dispatcher->dispatch($enlightRequest, $response);
         }
 
-        $response = $this->transformEnlightResponseToSymfonyResponse($response);
         $response->prepare($request);
 
         return $response;
     }
 
     /**
-     * @param SymfonyRequest $request
-     *
      * @return EnlightRequest
      */
     public function transformSymfonyRequestToEnlightRequest(SymfonyRequest $request)
@@ -231,57 +209,7 @@ class Kernel implements HttpKernelInterface, TerminableInterface
         // Overwrite superglobals with state of the SymfonyRequest
         $request->overrideGlobals();
 
-        // Create enlight request from global state
-        $enlightRequest = new EnlightRequest();
-
-        // Let the symfony request handle the trusted proxies
-        $enlightRequest->setRemoteAddress($request->getClientIp());
-        $enlightRequest->setSecure($request->isSecure());
-
-        return $enlightRequest;
-    }
-
-    /**
-     * @param EnlightResponse $response
-     *
-     * @throws \InvalidArgumentException
-     *
-     * @return SymfonyResponse
-     */
-    public function transformEnlightResponseToSymfonyResponse(EnlightResponse $response)
-    {
-        $rawHeaders = $response->getHeaders();
-        $headers = [];
-        foreach ($rawHeaders as $header) {
-            if (!isset($headers[$header['name']]) || !empty($header['replace'])) {
-                header_remove($header['name']);
-                $headers[$header['name']] = [$header['value']];
-            } else {
-                $headers[$header['name']][] = $header['value'];
-            }
-        }
-
-        $symfonyResponse = new SymfonyResponse(
-            $response->getBody(),
-            $response->getHttpResponseCode(),
-            $headers
-        );
-
-        foreach ($response->getCookies() as $cookieContent) {
-            $sfCookie = new Cookie(
-                $cookieContent['name'],
-                $cookieContent['value'],
-                $cookieContent['expire'],
-                $cookieContent['path'],
-                $cookieContent['domain'],
-                (bool) $cookieContent['secure'],
-                (bool) $cookieContent['httpOnly']
-            );
-
-            $symfonyResponse->headers->setCookie($sfCookie);
-        }
-
-        return $symfonyResponse;
+        return EnlightRequest::createFromGlobals();
     }
 
     /**
@@ -331,7 +259,6 @@ class Kernel implements HttpKernelInterface, TerminableInterface
     /**
      * Sets the php settings from the config
      *
-     * @param array  $settings
      * @param string $prefix
      */
     public function setPhpSettings(array $settings, $prefix = '')
@@ -414,9 +341,6 @@ class Kernel implements HttpKernelInterface, TerminableInterface
         return $this->getRootDir() . '/var/log';
     }
 
-    /**
-     * @param ContainerBuilder $container
-     */
     public function addResources(ContainerBuilder $container)
     {
         $files = [
@@ -500,9 +424,9 @@ class Kernel implements HttpKernelInterface, TerminableInterface
         $this->plugins = $initializer->initializePlugins();
 
         /*
-         * @deprecated since 5.5, sorting will be default in Shopware 5.6
+         * @deprecated since 5.5, is true by default since 5.6 will be removed in Shopware 5.7
          */
-        if ($this->config['backward_compatibility']['predictable_plugin_order'] !== false) {
+        if ($this->config['backward_compatibility']['predictable_plugin_order'] === true) {
             ksort($this->plugins);
         }
 
@@ -674,6 +598,7 @@ class Kernel implements HttpKernelInterface, TerminableInterface
         $loader->load('SitemapBundle/services.xml');
         $loader->load('StaticContentBundle/services.xml');
         $loader->load('ControllerBundle/services.xml');
+        $loader->load('MailBundle/services.xml');
 
         if (is_file($file = __DIR__ . '/Components/DependencyInjection/services_local.xml')) {
             $loader->load($file);
@@ -692,6 +617,7 @@ class Kernel implements HttpKernelInterface, TerminableInterface
         $container->addCompilerPass(new MatcherCompilerPass());
         $container->addCompilerPass(new ConfigureApiResourcesPass());
         $container->addCompilerPass(new ControllerCompilerPass());
+        $container->addCompilerPass(new RegisterControllerArgumentLocatorsPass('argument_resolver.service', 'shopware.controller'));
 
         $container->setParameter('active_plugins', $this->activePlugins);
 
@@ -702,9 +628,8 @@ class Kernel implements HttpKernelInterface, TerminableInterface
      * Adds all shopware configuration as di container parameter.
      * Each shopware configuration has the alias "shopware."
      *
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
-     * @param string                                                  $alias
-     * @param array                                                   $options
+     * @param string $alias
+     * @param array  $options
      */
     protected function addShopwareConfig(ContainerBuilder $container, $alias, $options)
     {
@@ -781,9 +706,6 @@ class Kernel implements HttpKernelInterface, TerminableInterface
         return sha1($string);
     }
 
-    /**
-     * @param ContainerBuilder $container
-     */
     private function loadPlugins(ContainerBuilder $container)
     {
         if (count($this->plugins) === 0) {

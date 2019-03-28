@@ -35,13 +35,11 @@ use Shopware\Components\Model\ModelEntity;
  * A grid element may extend over several cells. The grid elements can be filled with components
  * from the component library, such as banners, items or text elements.
  *
- * @category   Shopware
  *
- * @copyright  Copyright (c) shopware AG (http://www.shopware.de)
  *
  * @ORM\Entity(repositoryClass="Repository")
  * @ORM\Table(name="s_emotion")
- * @ORM\HasLifecycleCallbacks
+ * @ORM\HasLifecycleCallbacks()
  */
 class Emotion extends ModelEntity
 {
@@ -54,12 +52,12 @@ class Emotion extends ModelEntity
      *
      * @ORM\ManyToMany(targetEntity="Shopware\Models\Category\Category", inversedBy="emotions")
      * @ORM\JoinTable(name="s_emotion_categories",
-     *      joinColumns={
-     *          @ORM\JoinColumn(name="emotion_id", referencedColumnName="id")
-     *      },
-     *      inverseJoinColumns={
-     *          @ORM\JoinColumn(name="category_id", referencedColumnName="id")
-     *      }
+     *     joinColumns={
+     *         @ORM\JoinColumn(name="emotion_id", referencedColumnName="id")
+     *     },
+     *     inverseJoinColumns={
+     *         @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     *     }
      * )
      */
     protected $categories;
@@ -124,7 +122,7 @@ class Emotion extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -205,21 +203,21 @@ class Emotion extends ModelEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="seo_title", type="string",length=255, nullable=false)
+     * @ORM\Column(name="seo_title", type="string", length=255, nullable=false)
      */
     private $seoTitle;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="seo_keywords", type="string",length=255, nullable=false)
+     * @ORM\Column(name="seo_keywords", type="string", length=255, nullable=false)
      */
     private $seoKeywords;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="seo_description", type="string",length=255, nullable=false)
+     * @ORM\Column(name="seo_description", type="string", length=255, nullable=false)
      */
     private $seoDescription;
 
@@ -294,13 +292,13 @@ class Emotion extends ModelEntity
      *
      * @ORM\ManyToMany(targetEntity="Shopware\Models\Shop\Shop")
      * @ORM\JoinTable(name="s_emotion_shops",
-     *      joinColumns={
-     *          @ORM\JoinColumn(name="emotion_id", referencedColumnName="id"
-     *      )},
-     *      inverseJoinColumns={
-     *          @ORM\JoinColumn(name="shop_id", referencedColumnName="id")
-     *      }
-     * )
+     *     joinColumns={
+     *         @ORM\JoinColumn(name="emotion_id", referencedColumnName="id"
+     *         )},
+     *         inverseJoinColumns={
+     *             @ORM\JoinColumn(name="shop_id", referencedColumnName="id")
+     *         }
+     *     )
      */
     private $shops;
 
@@ -543,7 +541,7 @@ class Emotion extends ModelEntity
     }
 
     /**
-     * @return \Shopware\Models\Attribute\Emotion
+     * @return \Shopware\Models\Attribute\Emotion|null
      */
     public function getAttribute()
     {

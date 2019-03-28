@@ -26,9 +26,10 @@ namespace Shopware\Bundle\SearchBundleES\FacetHandler;
 
 use Doctrine\DBAL\Connection;
 use Elasticsearch\Client;
-use ONGR\ElasticsearchDSL\Aggregation\TermsAggregation;
-use ONGR\ElasticsearchDSL\Query\IdsQuery;
-use ONGR\ElasticsearchDSL\Query\TermQuery;
+use ONGR\ElasticsearchDSL\Aggregation\Bucketing\TermsAggregation;
+use ONGR\ElasticsearchDSL\Query\Compound\BoolQuery;
+use ONGR\ElasticsearchDSL\Query\TermLevel\IdsQuery;
+use ONGR\ElasticsearchDSL\Query\TermLevel\TermQuery;
 use ONGR\ElasticsearchDSL\Search;
 use ONGR\ElasticsearchDSL\Sort\FieldSort;
 use Shopware\Bundle\ESIndexingBundle\IndexFactoryInterface;
@@ -79,13 +80,6 @@ class PropertyFacetHandler implements HandlerInterface, ResultHydratorInterface
      */
     private $indexFactory;
 
-    /**
-     * @param QueryAliasMapper      $queryAliasMapper
-     * @param Client                $client
-     * @param Connection            $connection
-     * @param StructHydrator        $hydrator
-     * @param IndexFactoryInterface $indexFactory
-     */
     public function __construct(
         QueryAliasMapper $queryAliasMapper,
         Client $client,
@@ -149,8 +143,8 @@ class PropertyFacetHandler implements HandlerInterface, ResultHydratorInterface
         $groupIds = $this->getGroupIds($ids);
 
         $search = new Search();
-        $search->addFilter(new IdsQuery($groupIds));
-        $search->addFilter(new TermQuery('filterable', true));
+        $search->addQuery(new IdsQuery($groupIds), BoolQuery::FILTER);
+        $search->addQuery(new TermQuery('filterable', true), BoolQuery::FILTER);
         $search->addSort(new FieldSort('name', 'asc'));
         $search->setFrom(0);
         $search->setSize(self::AGGREGATION_SIZE);
@@ -274,8 +268,6 @@ class PropertyFacetHandler implements HandlerInterface, ResultHydratorInterface
     }
 
     /**
-     * @param Criteria $criteria
-     *
      * @return array
      */
     private function getFilteredValues(Criteria $criteria)

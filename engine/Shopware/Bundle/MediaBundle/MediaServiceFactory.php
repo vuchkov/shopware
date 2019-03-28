@@ -31,9 +31,6 @@ use League\Flysystem\Filesystem;
 use Shopware\Bundle\MediaBundle\Adapters\AdapterFactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * Class MediaServiceFactory
- */
 class MediaServiceFactory
 {
     /**
@@ -51,11 +48,6 @@ class MediaServiceFactory
      */
     private $adapterFactories;
 
-    /**
-     * @param ContainerInterface $container
-     * @param IteratorAggregate  $adapterFactories
-     * @param array              $cdnConfig
-     */
     public function __construct(ContainerInterface $container, IteratorAggregate $adapterFactories, array $cdnConfig)
     {
         $this->container = $container;
@@ -116,8 +108,6 @@ class MediaServiceFactory
     }
 
     /**
-     * @param array $config
-     *
      * @return AdapterInterface
      */
     private function getAdapter(array $config)

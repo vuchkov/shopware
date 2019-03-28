@@ -29,11 +29,6 @@ use Doctrine\DBAL\Schema\Column;
 use Shopware\Components\Model\DBAL\Types\DateStringType;
 use Shopware\Components\Model\DBAL\Types\DateTimeStringType;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.com)
- */
 class DataPersister
 {
     /**
@@ -51,11 +46,6 @@ class DataPersister
      */
     private $dataLoader;
 
-    /**
-     * @param Connection   $connection
-     * @param TableMapping $mapping
-     * @param DataLoader   $dataLoader
-     */
     public function __construct(Connection $connection, TableMapping $mapping, DataLoader $dataLoader)
     {
         $this->connection = $connection;
@@ -259,8 +249,6 @@ class DataPersister
     }
 
     /**
-     * @param Column $column
-     *
      * @return bool
      */
     private function isDateColumn(Column $column)

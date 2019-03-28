@@ -28,10 +28,6 @@ use Shopware\Bundle\StoreFrontBundle\Struct\Category;
 
 /**
  * Shopware Class that handles categories
- *
- * @category  Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class sCategories
 {
@@ -161,8 +157,7 @@ class sCategories
     }
 
     /**
-     * @param Category $category
-     * @param array    $childrenCounts
+     * @param array $childrenCounts
      *
      * @return array
      */
@@ -224,9 +219,8 @@ class sCategories
      * Returns the leaf category to which the
      * product belongs, inside the category subtree.
      *
-     * @param int  $articleId Id of the product to look for
-     * @param int  $parentId  Category subtree root id. If null, the shop category is used.
-     * @param null $shopId
+     * @param int $articleId Id of the product to look for
+     * @param int $parentId  Category subtree root id. If null, the shop category is used.
      *
      * @return int id of the leaf category, or 0 if none found
      */
@@ -316,16 +310,17 @@ class sCategories
      *
      * @param int $parentId Id of the root category, defaults to the current shop category
      * @param int $depth    Depth to use, defaults to null (unlimited depth)
+     * @param int $shopId   Needed for shop limitation
      *
      * @return array Category tree for the provided args
      */
-    public function sGetWholeCategoryTree($parentId = null, $depth = null)
+    public function sGetWholeCategoryTree($parentId = null, $depth = null, $shopId = null)
     {
         if ($parentId === null) {
             $parentId = $this->baseId;
         }
 
-        $result = $this->repository->getActiveChildrenTree($parentId, $this->customerGroupId, $depth);
+        $result = $this->repository->getActiveChildrenTree($parentId, $this->customerGroupId, $depth, $shopId);
         $result = $this->mapCategoryTree($result);
 
         return $result;
@@ -360,7 +355,6 @@ class sCategories
      */
     public function getProductBoxLayout($categoryId)
     {
-        /** @var \Shopware\Models\Category\Category $category */
         $category = $this->repository->find($categoryId);
 
         if (!$category) {

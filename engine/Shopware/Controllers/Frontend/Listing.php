@@ -28,18 +28,10 @@ use Shopware\Bundle\SearchBundle\ProductNumberSearchResult;
 use Shopware\Bundle\SearchBundle\StoreFrontCriteriaFactoryInterface;
 use Shopware\Bundle\StoreFrontBundle\Service\CustomFacetServiceInterface;
 use Shopware\Bundle\StoreFrontBundle\Struct\Product\Manufacturer;
-use Shopware\Bundle\StoreFrontBundle\Struct\ProductContextInterface;
 use Shopware\Bundle\StoreFrontBundle\Struct\Search\CustomFacet;
 use Shopware\Bundle\StoreFrontBundle\Struct\Search\CustomSorting;
 use Shopware\Bundle\StoreFrontBundle\Struct\ShopContextInterface;
 
-/**
- * Listing controller
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Shopware_Controllers_Frontend_Listing extends Enlight_Controller_Action
 {
     /**
@@ -124,7 +116,7 @@ class Shopware_Controllers_Frontend_Listing extends Enlight_Controller_Action
     {
         $manufacturerId = $this->Request()->getParam('sSupplier');
 
-        /** @var ProductContextInterface $context */
+        /** @var ShopContextInterface $context */
         $context = $this->get('shopware_storefront.context_service')->getShopContext();
 
         /** @var \Shopware\Bundle\StoreFrontBundle\Service\CustomSortingServiceInterface $service */
@@ -158,7 +150,7 @@ class Shopware_Controllers_Frontend_Listing extends Enlight_Controller_Action
             $criteria
         );
 
-        /** @var Manufacturer $manufacturer */
+        /** @var Manufacturer|null $manufacturer */
         $manufacturer = $this->get('shopware_storefront.manufacturer_service')->get(
             $manufacturerId,
             $this->get('shopware_storefront.context_service')->getShopContext()
@@ -246,9 +238,8 @@ class Shopware_Controllers_Frontend_Listing extends Enlight_Controller_Action
     }
 
     /**
-     * @param string               $categoryId
-     * @param ShopContextInterface $context
-     * @param string               $streamId
+     * @param string $categoryId
+     * @param string $streamId
      *
      * @return bool
      */
@@ -289,8 +280,7 @@ class Shopware_Controllers_Frontend_Listing extends Enlight_Controller_Action
 
         $checkRedirect = (
             ($hasEmotion && $this->Request()->getParam('sPage'))
-            ||
-            (!$hasEmotion)
+            || (!$hasEmotion)
         );
 
         if (!empty($categoryContent['external'])) {
@@ -335,7 +325,6 @@ class Shopware_Controllers_Frontend_Listing extends Enlight_Controller_Action
      * Result can be merged with "sCategoryContent" to override relevant seo category data with
      * manufacturer data.
      *
-     * @param Manufacturer $manufacturer
      *
      * @return array
      */
@@ -377,7 +366,7 @@ class Shopware_Controllers_Frontend_Listing extends Enlight_Controller_Action
 
         if (!array_key_exists($defaultShopCategoryId, $categoryPath)) {
             $this->Request()->setQuery('sCategory', $defaultShopCategoryId);
-            $this->Response()->setHttpResponseCode(404);
+            $this->Response()->setStatusCode(404);
 
             return false;
         }
@@ -407,7 +396,6 @@ class Shopware_Controllers_Frontend_Listing extends Enlight_Controller_Action
     /**
      * Determines if the product listing has to be loaded/shown at all
      *
-     * @param array $emotions
      *
      * @return bool
      */
@@ -430,7 +418,6 @@ class Shopware_Controllers_Frontend_Listing extends Enlight_Controller_Action
     /**
      * Filters the device types down to which have to show the product listing
      *
-     * @param array $emotions
      *
      * @return int[]
      */
@@ -462,7 +449,7 @@ class Shopware_Controllers_Frontend_Listing extends Enlight_Controller_Action
             return;
         }
 
-        /** @var CustomSorting $default */
+        /** @var CustomSorting|null $default */
         $default = array_shift($sortings);
 
         if (!$default) {
@@ -506,12 +493,13 @@ class Shopware_Controllers_Frontend_Listing extends Enlight_Controller_Action
         $facetFilter = $this->get('shopware_product_stream.facet_filter');
         $facetFilter->add($criteria);
 
+        $criteria->removeFacet('category');
+
         return $criteria;
     }
 
     /**
-     * @param int   $categoryId
-     * @param array $categoryContent
+     * @param int $categoryId
      *
      * @throws \Enlight_Exception
      */
@@ -545,7 +533,7 @@ class Shopware_Controllers_Frontend_Listing extends Enlight_Controller_Action
         $viewData = $this->View()->getAssign();
 
         if ($this->Request()->getParam('sRss') || $this->Request()->getParam('sAtom')) {
-            $this->Response()->setHeader('Content-Type', 'text/xml');
+            $this->Response()->headers->set('content-type', 'text/xml');
             $type = $this->Request()->getParam('sRss') ? 'rss' : 'atom';
             $this->View()->loadTemplate('frontend/listing/' . $type . '.tpl');
         }

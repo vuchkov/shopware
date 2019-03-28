@@ -35,10 +35,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Media API Resource
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class Media extends Resource
 {
@@ -89,10 +85,8 @@ class Media extends Resource
     }
 
     /**
-     * @param int   $offset
-     * @param int   $limit
-     * @param array $criteria
-     * @param array $orderBy
+     * @param int $offset
+     * @param int $limit
      *
      * @return array
      */
@@ -120,8 +114,6 @@ class Media extends Resource
     }
 
     /**
-     * @param array $params
-     *
      * @throws \Shopware\Components\Api\Exception\ValidationException
      * @throws \Exception
      *
@@ -158,8 +150,7 @@ class Media extends Resource
     }
 
     /**
-     * @param int   $id
-     * @param array $params
+     * @param int $id
      *
      * @throws \Shopware\Components\Api\Exception\NotFoundException
      * @throws \Shopware\Components\Api\Exception\ParameterMissingException
@@ -175,7 +166,7 @@ class Media extends Resource
             throw new ApiException\ParameterMissingException('id');
         }
 
-        /** @var MediaModel $media */
+        /** @var MediaModel|null $media */
         $media = $this->getRepository()->find($id);
 
         if (!$media) {
@@ -214,7 +205,7 @@ class Media extends Resource
             throw new ApiException\ParameterMissingException('id');
         }
 
-        /** @var MediaModel $media */
+        /** @var MediaModel|null $media */
         $media = $this->getRepository()->find($id);
 
         if (!$media) {
@@ -256,7 +247,7 @@ class Media extends Resource
         $media->setCreated(new \DateTime());
         $media->setUserId(0);
 
-        /** @var Album $album */
+        /** @var Album|null $album */
         $album = $this->getManager()->find(Album::class, $albumId);
         if (!$album) {
             // Cleanup temporary file
@@ -419,7 +410,6 @@ class Media extends Resource
     }
 
     /**
-     * @param array      $params
      * @param MediaModel $media
      *
      * @throws \Shopware\Components\Api\Exception\CustomValidationException

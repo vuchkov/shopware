@@ -24,9 +24,6 @@
 
 namespace Shopware\Bundle\ESIndexingBundle;
 
-/**
- * Class TextMapping
- */
 interface TextMappingInterface
 {
     /**
@@ -48,8 +45,6 @@ interface TextMappingInterface
 
     /**
      * @deprecated Will be removed with Shopware 5.7
-     *
-     * @return array
      */
     public function getAttributeRawField(): array;
 }

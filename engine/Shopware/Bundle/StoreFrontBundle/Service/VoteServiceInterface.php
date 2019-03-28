@@ -26,11 +26,6 @@ namespace Shopware\Bundle\StoreFrontBundle\Service;
 
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 interface VoteServiceInterface
 {
     /**
@@ -38,9 +33,6 @@ interface VoteServiceInterface
      * please refer to the linked classes.
      *
      * @see \Shopware\Bundle\StoreFrontBundle\Gateway\VoteAverageGatewayInterface::get()
-     *
-     * @param Struct\BaseProduct          $product
-     * @param Struct\ShopContextInterface $context
      *
      * @return Struct\Product\VoteAverage
      */
@@ -52,8 +44,7 @@ interface VoteServiceInterface
      *
      * @see \Shopware\Bundle\StoreFrontBundle\Gateway\VoteGatewayInterface::get()
      *
-     * @param Struct\BaseProduct[]        $products
-     * @param Struct\ShopContextInterface $context
+     * @param Struct\BaseProduct[] $products
      *
      * @return array indexed by the product order number, each array element contains a \Shopware\Bundle\StoreFrontBundle\Struct\Vote array
      */
@@ -65,9 +56,6 @@ interface VoteServiceInterface
      *
      * @see \Shopware\Bundle\StoreFrontBundle\Gateway\VoteGatewayInterface::get()
      *
-     * @param Struct\BaseProduct          $product
-     * @param Struct\ShopContextInterface $context
-     *
      * @return Struct\Product\Vote[]
      */
     public function get(Struct\BaseProduct $product, Struct\ShopContextInterface $context);
@@ -78,8 +66,7 @@ interface VoteServiceInterface
      *
      * @see \Shopware\Bundle\StoreFrontBundle\Gateway\VoteAverageGatewayInterface::get()
      *
-     * @param Struct\BaseProduct[]        $products
-     * @param Struct\ShopContextInterface $context
+     * @param Struct\BaseProduct[] $products
      *
      * @return Struct\Product\VoteAverage[] Indexed by the product order number
      */

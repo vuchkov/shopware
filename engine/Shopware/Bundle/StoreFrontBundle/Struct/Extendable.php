@@ -24,11 +24,6 @@
 
 namespace Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 abstract class Extendable extends Struct implements \JsonSerializable
 {
     /**
@@ -42,8 +37,7 @@ abstract class Extendable extends Struct implements \JsonSerializable
      * Adds a new attribute struct into the class storage.
      * The passed name is used as unique identifier and has to be stored too.
      *
-     * @param string    $name
-     * @param Attribute $attribute
+     * @param string $name
      */
     public function addAttribute($name, Attribute $attribute)
     {
@@ -66,7 +60,7 @@ abstract class Extendable extends Struct implements \JsonSerializable
      *
      * @param string $name
      *
-     * @return Attribute
+     * @return Attribute|null
      */
     public function getAttribute($name)
     {

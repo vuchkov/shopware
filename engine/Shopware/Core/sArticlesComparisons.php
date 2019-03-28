@@ -25,11 +25,6 @@
 use Shopware\Bundle\StoreFrontBundle\Service\ContextServiceInterface;
 use Shopware\Components\DependencyInjection\Container;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class sArticlesComparisons
 {
     /**
@@ -62,10 +57,6 @@ class sArticlesComparisons
      */
     private $contextService;
 
-    /**
-     * @param sArticles $articleModule
-     * @param Container $container
-     */
     public function __construct(sArticles $articleModule, Container $container)
     {
         $this->articleModule = $articleModule;

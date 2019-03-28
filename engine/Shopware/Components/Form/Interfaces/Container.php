@@ -26,9 +26,6 @@ namespace Shopware\Components\Form\Interfaces;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-/**
- * Interface Container
- */
 interface Container
 {
     /**
@@ -45,8 +42,5 @@ interface Container
      */
     public function getElements();
 
-    /**
-     * @param Element $element
-     */
     public function addElement(Element $element);
 }

@@ -30,7 +30,7 @@ use Shopware\Components\Model\ModelEntity;
 
 /**
  * @ORM\Table(name="s_core_config_elements")
- * @ORM\Entity
+ * @ORM\Entity()
  */
 class Element extends ModelEntity
 {
@@ -50,7 +50,7 @@ class Element extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -149,8 +149,6 @@ class Element extends ModelEntity
     }
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -159,8 +157,6 @@ class Element extends ModelEntity
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      *
      * @return Element
@@ -173,8 +169,6 @@ class Element extends ModelEntity
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getName()
@@ -183,10 +177,6 @@ class Element extends ModelEntity
     }
 
     /**
-     * Set value
-     *
-     * @param mixed $value
-     *
      * @return Element
      */
     public function setValue($value)
@@ -196,19 +186,12 @@ class Element extends ModelEntity
         return $this;
     }
 
-    /**
-     * Get value
-     *
-     * @return mixed
-     */
     public function getValue()
     {
         return $this->value;
     }
 
     /**
-     * Set description
-     *
      * @param string $description
      *
      * @return Element
@@ -221,8 +204,6 @@ class Element extends ModelEntity
     }
 
     /**
-     * Get description
-     *
      * @return string
      */
     public function getDescription()
@@ -231,8 +212,6 @@ class Element extends ModelEntity
     }
 
     /**
-     * Set label
-     *
      * @param string $label
      *
      * @return Element
@@ -245,8 +224,6 @@ class Element extends ModelEntity
     }
 
     /**
-     * Get label
-     *
      * @return string
      */
     public function getLabel()
@@ -270,9 +247,6 @@ class Element extends ModelEntity
         return $this->form;
     }
 
-    /**
-     * @param array $options
-     */
     public function setOptions(array $options)
     {
         $fields = ['label', 'value', 'description', 'required', 'scope', 'position'];

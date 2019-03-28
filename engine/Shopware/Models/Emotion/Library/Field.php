@@ -28,11 +28,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Shopware\Components\Model\ModelEntity;
 
 /**
- * @category   Shopware
- *
- * @copyright  Copyright (c) shopware AG (http://www.shopware.de)
- *
- * @ORM\Entity
+ * @ORM\Entity()
  * @ORM\Table(name="s_library_component_field")
  */
 class Field extends ModelEntity
@@ -43,7 +39,7 @@ class Field extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;

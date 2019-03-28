@@ -51,12 +51,8 @@ use Shopware\Models\Property\Group as PropertyGroup;
 use Shopware\Models\Shop\Repository;
 use Shopware\Models\Shop\Shop;
 use Shopware\Models\Tax\Tax;
+use Symfony\Component\HttpFoundation\Cookie;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_ExtJs implements CSRFWhitelistAware
 {
     /**
@@ -1317,8 +1313,6 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
 
     /**
      * Event listener function of the product store of the backend module.
-     *
-     * @return mixed
      */
     public function deleteAction()
     {
@@ -1591,7 +1585,7 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
     {
         $variantId = $this->Request()->getPost('articleDetailId');
 
-        /** @var Detail $variant */
+        /** @var Detail|null $variant */
         $variant = Shopware()->Models()->getRepository(Detail::class)->find($variantId);
         if (!$variant) {
             $this->View()->assign([
@@ -1621,7 +1615,7 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
     {
         $esdId = $this->Request()->getPost('id');
 
-        /** @var Esd $esd */
+        /** @var Esd|null $esd */
         $esd = Shopware()->Models()->getRepository(Esd::class)->find($esdId);
         if (!$esd) {
             $this->View()->assign([
@@ -1762,7 +1756,7 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
     {
         $esdId = $this->Request()->getParam('esdId');
 
-        /** @var Esd $esd */
+        /** @var Esd|null $esd */
         $esd = Shopware()->Models()->getRepository(Esd::class)->find($esdId);
 
         if (!$esd) {
@@ -1849,9 +1843,7 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
      */
     public function uploadEsdFileAction()
     {
-        $fileBag = new \Symfony\Component\HttpFoundation\FileBag($_FILES);
-        /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
-        $file = $fileBag->get('fileId');
+        $file = $this->Request()->files->get('fileId');
 
         if ($file === null) {
             $this->View()->assign(['success' => false]);
@@ -1885,7 +1877,7 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
         }
 
         $filesystem = $this->container->get('shopware.filesystem.private');
-        $destinationPath = $this->container->get('config')->offsetGet('esdKey') . '/' . $file->getClientOriginalName();
+        $destinationPath = $this->container->get('config')->offsetGet('esdKey') . '/' . ltrim($file->getClientOriginalName(), '.');
 
         $upstream = fopen($file->getRealPath(), 'rb');
         $filesystem->writeStream($destinationPath, $upstream);
@@ -1924,10 +1916,10 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
         $this->Front()->Plugins()->ViewRenderer()->setNoRender();
 
         $response = $this->Response();
-        $response->setHeader('Content-Type', $mimeType);
-        $response->setHeader('Content-Disposition', sprintf('attachment; filename="%s"', basename($path)));
-        $response->setHeader('Content-Length', $meta['size']);
-        $response->setHeader('Content-Transfer-Encoding', 'binary');
+        $response->headers->set('content-type', $mimeType);
+        $response->headers->set('content-disposition', sprintf('attachment; filename="%s"', basename($path)));
+        $response->headers->set('content-length', $meta['size']);
+        $response->headers->set('content-transfer-encoding', 'binary');
         $response->sendHeaders();
         $response->sendResponse();
 
@@ -1949,15 +1941,8 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
     public function getChartData()
     {
         $productId = $this->Request()->getParam('articleId');
-        $format = 'month';
-
-        if ($format === 'month') {
-            $dateFormat = '%Y%m';
-            $limit = 12;
-        } else {
-            $dateFormat = '%Y%m%d';
-            $limit = 32;
-        }
+        $dateFormat = '%Y%m';
+        $limit = 12;
 
         $sql = sprintf("
             SELECT
@@ -2143,7 +2128,7 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
         );
 
         /* @var Shop $shop */
-        $this->Response()->setCookie('shop', $shopId, 0, $shop->getBasePath());
+        $this->Response()->headers->setCookie(new Cookie('shop', $shopId, 0, $shop->getBasePath()));
         $this->redirect($url);
     }
 
@@ -2770,8 +2755,7 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
             $data['prices'] = $prices;
 
             // unset configuratorOptions and images. These are variant specific and are going to be recreated later
-            unset($data['images']);
-            unset($data['configuratorOptions']);
+            unset($data['images'], $data['configuratorOptions']);
 
             if (!empty($data['unitId'])) {
                 $data['unit'] = Shopware()->Models()->find(Unit::class, $data['unitId']);
@@ -2992,8 +2976,6 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
      *
      * @param array   $data
      * @param Article $article
-     *
-     * @return mixed
      */
     protected function saveArticle($data, $article)
     {
@@ -3136,9 +3118,8 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
      * the cross join sql for all possible variants.
      * Returns an array with the sql and all used group ids
      *
-     * @param array $groups
-     * @param int   $offset
-     * @param int   $limit
+     * @param int $offset
+     * @param int $limit
      *
      * @return array
      */
@@ -3409,8 +3390,6 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
      * the generated product variants.
      *
      * @param Article $article
-     *
-     * @return mixed
      */
     protected function getDetailDataForVariantGeneration($article)
     {
@@ -3471,8 +3450,6 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
 
     /**
      * Copies all translations from an product into the respective configurator template
-     *
-     * @param Template $template
      */
     protected function createConfiguratorTemplateTranslations(Template $template)
     {
@@ -3553,8 +3530,6 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
      *
      * @param array   $data
      * @param Article $article
-     *
-     * @return mixed
      */
     protected function prepareConfiguratorTemplateData($data, $article)
     {
@@ -3589,8 +3564,6 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
      * The configured customer groups are not allowed to set the product in the store front.
      *
      * @param array $data
-     *
-     * @return mixed
      */
     protected function prepareAvoidCustomerGroups($data)
     {
@@ -3936,8 +3909,6 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
      *
      * @param array   $data
      * @param Article $article
-     *
-     * @return mixed
      */
     protected function prepareMainPricesAssociatedData($data, $article)
     {
@@ -4184,10 +4155,7 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
      * Start function for number generation. Iterates the different commands,
      * resolves the cursor or counter and starts the recursive
      *
-     * @param Article $article
-     * @param Detail  $detail
-     * @param array   $commands
-     * @param int     $counter
+     * @param int $counter
      *
      * @return string
      */
@@ -4418,8 +4386,6 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
     /**
      * @param array $detailData
      * @param array $article
-     *
-     * @return mixed
      */
     private function setDetailDataReferences($detailData, $article)
     {
@@ -4493,8 +4459,6 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
     }
 
     /**
-     * @param array $result
-     *
      * @return ListProduct[]
      */
     private function buildListProducts(array $result)
@@ -4518,7 +4482,6 @@ class Shopware_Controllers_Backend_Article extends Shopware_Controllers_Backend_
     }
 
     /**
-     * @param array         $data
      * @param ListProduct[] $products
      *
      * @return array

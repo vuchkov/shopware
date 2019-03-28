@@ -28,9 +28,6 @@ use Doctrine\DBAL\Connection;
 use Shopware\Bundle\StoreFrontBundle\Gateway\ShopGatewayInterface;
 use Shopware\Bundle\StoreFrontBundle\Struct\Shop;
 
-/**
- * Class IdentifierSelector
- */
 class IdentifierSelector
 {
     /**
@@ -43,10 +40,6 @@ class IdentifierSelector
      */
     private $shopGateway;
 
-    /**
-     * @param Connection           $connection
-     * @param ShopGatewayInterface $shopGateway
-     */
     public function __construct(
         Connection $connection,
         ShopGatewayInterface $shopGateway

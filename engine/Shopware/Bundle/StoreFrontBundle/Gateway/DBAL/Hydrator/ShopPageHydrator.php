@@ -26,11 +26,6 @@ namespace Shopware\Bundle\StoreFrontBundle\Gateway\DBAL\Hydrator;
 
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class ShopPageHydrator extends Hydrator
 {
     /**
@@ -38,17 +33,12 @@ class ShopPageHydrator extends Hydrator
      */
     private $attributeHydrator;
 
-    /**
-     * @param AttributeHydrator $attributeHydrator
-     */
     public function __construct(AttributeHydrator $attributeHydrator)
     {
         $this->attributeHydrator = $attributeHydrator;
     }
 
     /**
-     * @param array $data
-     *
      * @return Struct\ShopPage
      */
     public function hydrate(array $data)
@@ -63,10 +53,6 @@ class ShopPageHydrator extends Hydrator
         return $page;
     }
 
-    /**
-     * @param Struct\ShopPage $shopPage
-     * @param array           $data
-     */
     private function assignData(Struct\ShopPage $shopPage, array $data)
     {
         $shopPage->setId((int) $data['__page_id']);

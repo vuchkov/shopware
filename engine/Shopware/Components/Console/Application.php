@@ -37,11 +37,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Application extends BaseApplication
 {
     /**
@@ -59,14 +54,11 @@ class Application extends BaseApplication
      */
     private $skipDatabase = false;
 
-    /**
-     * @param Kernel $kernel
-     */
     public function __construct(Kernel $kernel)
     {
         $this->kernel = $kernel;
 
-        parent::__construct('Shopware', $kernel->getRelease()['version'] . ' - ' . '/' . $kernel->getEnvironment() . ($kernel->isDebug() ? '/debug' : ''));
+        parent::__construct('Shopware', $kernel->getRelease()['version'] . ' - /' . $kernel->getEnvironment() . ($kernel->isDebug() ? '/debug' : ''));
 
         $this->getDefinition()->addOption(new InputOption('--process-isolation', null, InputOption::VALUE_NONE, 'Launch commands from shell as a separate process.'));
         $this->getDefinition()->addOption(new InputOption('--env', '-e', InputOption::VALUE_REQUIRED, 'The Environment name.', $kernel->getEnvironment()));
@@ -144,9 +136,6 @@ class Application extends BaseApplication
         return $exitCode;
     }
 
-    /**
-     * @param OutputInterface $output
-     */
     protected function registerCommands(OutputInterface $output)
     {
         $this->registerTaggedServiceIds();

@@ -27,9 +27,6 @@ use Shopware\Models\User\User;
 use Shopware\Models\Widget\View;
 use Shopware\Models\Widget\Widget;
 
-/**
- * Backend widget controller
- */
 class Shopware_Controllers_Backend_Widgets extends Shopware_Controllers_Backend_ExtJs
 {
     /**
@@ -741,8 +738,7 @@ class Shopware_Controllers_Backend_Widgets extends Shopware_Controllers_Backend_
     }
 
     /**
-     * @param Locale $locale
-     * @param int    $limit
+     * @param int $limit
      *
      * @return array
      */

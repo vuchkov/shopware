@@ -27,9 +27,6 @@ use Shopware\Components\License\Struct\LicenseInformation;
 use Shopware\Components\License\Struct\LicenseUnpackRequest;
 use Shopware\Components\LicenseInstaller;
 
-/**
- * Shopware core license management
- */
 class Shopware_Controllers_Backend_CoreLicense extends Shopware_Controllers_Backend_ExtJs
 {
     /** @var array Contains the possible Exception names thrown by LocalLicenseUnpackService */
@@ -242,7 +239,6 @@ class Shopware_Controllers_Backend_CoreLicense extends Shopware_Controllers_Back
     /**
      * Creates a readable string from a minified license key.
      *
-     * @param LicenseInformation $licenseInformation
      *
      * @return LicenseInformation
      */

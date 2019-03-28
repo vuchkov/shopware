@@ -33,11 +33,6 @@ use Shopware\Bundle\SearchBundleDBAL\QueryBuilderFactoryInterface;
 use Shopware\Bundle\StoreFrontBundle\Struct\ShopContextInterface;
 use Shopware\Components\QueryAliasMapper;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class ShippingFreeFacetHandler implements PartialFacetHandlerInterface
 {
     /**
@@ -55,11 +50,6 @@ class ShippingFreeFacetHandler implements PartialFacetHandlerInterface
      */
     private $fieldName;
 
-    /**
-     * @param QueryBuilderFactoryInterface         $queryBuilderFactory
-     * @param \Shopware_Components_Snippet_Manager $snippetManager
-     * @param QueryAliasMapper                     $queryAliasMapper
-     */
     public function __construct(
         QueryBuilderFactoryInterface $queryBuilderFactory,
         \Shopware_Components_Snippet_Manager $snippetManager,

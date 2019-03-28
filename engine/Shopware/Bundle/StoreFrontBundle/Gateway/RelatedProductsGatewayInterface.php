@@ -26,11 +26,6 @@ namespace Shopware\Bundle\StoreFrontBundle\Gateway;
 
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 interface RelatedProductsGatewayInterface
 {
     /**
@@ -61,7 +56,6 @@ interface RelatedProductsGatewayInterface
      *
      * Example result: array('SW101', 'SW102')
      *
-     * @param Struct\BaseProduct $product
      *
      * @return array Array of order numbers
      */

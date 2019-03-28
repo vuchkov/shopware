@@ -30,10 +30,6 @@ use Monolog\Handler\ChromePHPHandler as BaseChromePhpHandler;
 
 /**
  * ChromePhpHandler.
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class ChromePhpHandler extends BaseChromePhpHandler
 {
@@ -43,14 +39,10 @@ class ChromePhpHandler extends BaseChromePhpHandler
     private $headers = [];
 
     /**
-     * @var \Enlight_Controller_Response_ResponseHttp
+     * @var \Enlight_Controller_Response_ResponseHttp|null
      */
     private $response;
 
-    /**
-     * @param Request  $request
-     * @param Response $response
-     */
     public function setUp(Request $request, Response $response)
     {
         if (!$this->acceptsRequest($request)) {
@@ -62,7 +54,7 @@ class ChromePhpHandler extends BaseChromePhpHandler
 
         $this->response = $response;
         foreach ($this->headers as $header => $content) {
-            $this->response->setHeader($header, $content, true);
+            $this->response->headers->set($header, $content, true);
         }
 
         $this->headers = [];
@@ -70,8 +62,6 @@ class ChromePhpHandler extends BaseChromePhpHandler
 
     /**
      * Adds the headers to the response once it's created
-     *
-     * @param \Enlight_Controller_EventArgs $args
      */
     public function onRouteStartUp(\Enlight_Controller_EventArgs $args)
     {
@@ -82,8 +72,6 @@ class ChromePhpHandler extends BaseChromePhpHandler
     }
 
     /**
-     * @param Request $request
-     *
      * @return bool
      */
     public function acceptsRequest(Request $request)
@@ -101,7 +89,7 @@ class ChromePhpHandler extends BaseChromePhpHandler
         }
 
         if ($this->response) {
-            $this->response->setHeader($header, $content, true);
+            $this->response->headers->set($header, $content, true);
         } else {
             $this->headers[$header] = $content;
         }

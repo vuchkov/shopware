@@ -31,10 +31,6 @@ use Shopware\Models\Media\Media as MediaModel;
 
 /**
  * Supplier API Resource
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class Manufacturer extends Resource
 {
@@ -64,7 +60,7 @@ class Manufacturer extends Resource
 
         $query = $this->getRepository()->getDetailQuery($id);
 
-        /** @var \Shopware\Models\Article\Supplier $manufacturer */
+        /** @var \Shopware\Models\Article\Supplier|null $manufacturer */
         $manufacturer = $query->getOneOrNullResult($this->getResultMode());
 
         if (!$manufacturer) {
@@ -75,10 +71,8 @@ class Manufacturer extends Resource
     }
 
     /**
-     * @param int   $offset
-     * @param int   $limit
-     * @param array $criteria
-     * @param array $orderBy
+     * @param int $offset
+     * @param int $limit
      *
      * @return array
      */
@@ -101,8 +95,6 @@ class Manufacturer extends Resource
     }
 
     /**
-     * @param array $params
-     *
      * @throws \Shopware\Components\Api\Exception\ValidationException
      *
      * @return \Shopware\Models\Article\Supplier
@@ -136,8 +128,7 @@ class Manufacturer extends Resource
     }
 
     /**
-     * @param int   $id
-     * @param array $params
+     * @param int $id
      *
      * @throws \Shopware\Components\Api\Exception\ValidationException
      * @throws \Shopware\Components\Api\Exception\NotFoundException
@@ -153,7 +144,7 @@ class Manufacturer extends Resource
             throw new ApiException\ParameterMissingException();
         }
 
-        /** @var \Shopware\Models\Article\Supplier $manufacturer */
+        /** @var \Shopware\Models\Article\Supplier|null $manufacturer */
         $manufacturer = $this->getRepository()->findOneBy(['id' => $id]);
 
         if (!$manufacturer) {
@@ -190,7 +181,7 @@ class Manufacturer extends Resource
             throw new ApiException\ParameterMissingException();
         }
 
-        /** @var \Shopware\Models\Article\Supplier $manufacturer */
+        /** @var \Shopware\Models\Article\Supplier|null $manufacturer */
         $manufacturer = $this->getRepository()->findOneBy(['id' => $id]);
 
         if (!$manufacturer) {
@@ -204,8 +195,6 @@ class Manufacturer extends Resource
     }
 
     /**
-     * @param array $params
-     *
      * @throws ApiException\CustomValidationException
      *
      * @return array
@@ -229,9 +218,6 @@ class Manufacturer extends Resource
     }
 
     /**
-     * @param array             $data
-     * @param ManufacturerModel $manufacturerModel
-     *
      * @throws ApiException\CustomValidationException
      *
      * @return array

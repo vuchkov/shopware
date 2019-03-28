@@ -31,7 +31,7 @@ use Shopware\Models\Media\Media;
 /**
  * Shopware Article Property Model
  *
- * @ORM\Entity
+ * @ORM\Entity()
  * @ORM\Table(name="s_filter_values")
  */
 class Value extends ModelEntity
@@ -48,7 +48,7 @@ class Value extends ModelEntity
     /**
      * @var int
      *
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -92,8 +92,8 @@ class Value extends ModelEntity
      *
      * @ORM\ManyToMany(targetEntity="Shopware\Models\Article\Article", mappedBy="propertyValues")
      * @ORM\JoinTable(name="s_filter_articles",
-     *      joinColumns={@ORM\JoinColumn(name="valueID", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="articleID", referencedColumnName="id")}
+     *     joinColumns={@ORM\JoinColumn(name="valueID", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="articleID", referencedColumnName="id")}
      * )
      */
     private $articles;
@@ -114,8 +114,6 @@ class Value extends ModelEntity
     private $media;
 
     /**
-     * Class constructor.
-     *
      * @param \Shopware\Models\Property\Option $option
      * @param string                           $value
      */
@@ -127,8 +125,6 @@ class Value extends ModelEntity
     }
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -137,8 +133,6 @@ class Value extends ModelEntity
     }
 
     /**
-     * Set value
-     *
      * @param string $value
      *
      * @return Value
@@ -151,8 +145,6 @@ class Value extends ModelEntity
     }
 
     /**
-     * Get value
-     *
      * @return string
      */
     public function getValue()
@@ -161,8 +153,6 @@ class Value extends ModelEntity
     }
 
     /**
-     * Set position
-     *
      * @param int $position
      *
      * @return \Shopware\Models\Property\Value
@@ -175,8 +165,6 @@ class Value extends ModelEntity
     }
 
     /**
-     * Get position
-     *
      * @return int
      */
     public function getPosition()

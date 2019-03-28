@@ -27,11 +27,6 @@ namespace Shopware\Components\HttpClient;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException as GuzzleClientException;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class GuzzleHttpClient implements HttpClientInterface
 {
     /**
@@ -39,10 +34,6 @@ class GuzzleHttpClient implements HttpClientInterface
      */
     private $guzzleClient;
 
-    /**
-     * @param GuzzleFactory $guzzleFactory
-     * @param array         $guzzleConfig
-     */
     public function __construct(GuzzleFactory $guzzleFactory, array $guzzleConfig = [])
     {
         $this->guzzleClient = $guzzleFactory->createClient($guzzleConfig);

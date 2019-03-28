@@ -27,21 +27,14 @@ namespace Shopware\Components\Auth\Validator;
 use Shopware\Components\Api\Exception\ValidationException;
 use Shopware\Models\User\User;
 
-/**
- * Interface UserValidatorInterface
- */
 interface UserValidatorInterface
 {
     /**
-     * @param User $user
-     *
      * @throws ValidationException
      */
     public function validate(User $user);
 
     /**
-     * @param User $user
-     *
      * @return bool
      */
     public function isValid(User $user);

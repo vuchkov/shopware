@@ -28,11 +28,6 @@ use Doctrine\DBAL\Connection;
 use Shopware\Bundle\StoreFrontBundle\Gateway;
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class VoteGateway implements Gateway\VoteGatewayInterface
 {
     /**
@@ -65,12 +60,6 @@ class VoteGateway implements Gateway\VoteGatewayInterface
      */
     private $config;
 
-    /**
-     * @param Connection                  $connection
-     * @param FieldHelper                 $fieldHelper
-     * @param Hydrator\VoteHydrator       $voteHydrator
-     * @param \Shopware_Components_Config $config
-     */
     public function __construct(
         Connection $connection,
         FieldHelper $fieldHelper,

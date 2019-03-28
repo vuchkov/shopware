@@ -27,11 +27,6 @@ namespace Shopware\Components\Routing\GeneratorFilters;
 use Shopware\Components\Routing\Context;
 use Shopware\Components\Routing\PreFilterInterface;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class FrontendPreFilter implements PreFilterInterface
 {
     /**
@@ -51,7 +46,7 @@ class FrontendPreFilter implements PreFilterInterface
             $params = array_merge(['controller' => null], $params);
         }
 
-        unset($params['sUseSSL'], $params['fullPath'], $params['appendSession'], $params['forceSecure'],
+        unset($params['sUseSSL'], $params['fullPath'], $params['forceSecure'],
             $params['sCoreId'], $params['rewriteOld'], $params['rewriteAlias'], $params['rewriteUrl']);
 
         if (isset($params['controller']) && $params['controller'] === 'detail' && $context->isRemoveCategory()) {

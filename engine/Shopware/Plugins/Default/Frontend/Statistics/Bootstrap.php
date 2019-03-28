@@ -22,6 +22,8 @@
  * our trademarks remain entirely with us.
  */
 
+use Symfony\Component\HttpFoundation\Cookie;
+
 /**
  * Shopware Statistics Plugin
  */
@@ -220,7 +222,6 @@ ShopWiki;Bot;WebAlta;;abachobot;architext;ask jeeves;frooglebot;googlebot;lycos;
     /**
      * Refresh visitor log
      *
-     * @param Enlight_Controller_Request_Request $request
      *
      * @throws \Exception
      */
@@ -364,7 +365,7 @@ ShopWiki;Bot;WebAlta;;abachobot;architext;ask jeeves;frooglebot;googlebot;lycos;
                     } else {
                         $valid = 0;
                     }
-                    $response->setCookie('partner', $row['idcode'], $valid, '/');
+                    $response->headers->setCookie(new Cookie('partner', $row['idcode'], $valid, '/'));
                 }
                 Shopware()->Session()->sPartner = $partner;
             }

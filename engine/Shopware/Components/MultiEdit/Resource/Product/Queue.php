@@ -28,8 +28,6 @@ use Shopware\Models\MultiEdit\QueueArticle;
 
 /**
  * The queue class will handle the queues
- *
- * Class Queue
  */
 class Queue
 {
@@ -48,11 +46,6 @@ class Queue
      */
     protected $backupResource;
 
-    /**
-     * @param DqlHelper $dqlHelper
-     * @param Filter    $filter
-     * @param Backup    $backup
-     */
     public function __construct(
         DqlHelper $dqlHelper,
         Filter $filter,
@@ -92,8 +85,6 @@ class Queue
      *
      * @param int $queueId
      * @param int $number
-     *
-     * @return mixed
      */
     public function pop($queueId, $number)
     {

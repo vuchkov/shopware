@@ -67,14 +67,14 @@ class Shopware_Models_Document_Order extends Enlight_Class implements Enlight_Ho
     /**
      * Billingdata for this order / user (s_order_billingaddress)
      *
-     * @var ArrayObject
+     * @var ArrayObject|null
      */
     protected $_billing;
 
     /**
      * Shippingdata for this order / user (s_order_shippingaddress)
      *
-     * @var ArrayObject
+     * @var ArrayObject|null
      */
     protected $_shipping;
 
@@ -226,7 +226,7 @@ class Shopware_Models_Document_Order extends Enlight_Class implements Enlight_Ho
         $array['_paymentInstances'] = $array['_paymentInstances']->getArrayCopy();
         $array['_dispatch'] = $array['_dispatch']->getArrayCopy();
         $array['_currency'] = $array['_currency']->getArrayCopy();
-        //$array["_order"] = current($array["_order"]);
+
         return $array;
     }
 
@@ -516,7 +516,7 @@ class Shopware_Models_Document_Order extends Enlight_Class implements Enlight_Ho
 
                 if ($this->_net == true) {
                     $position['netto'] = round($position['price'], 2);
-                    $position['price'] = round($position['price'], 2) * (1 + $position['tax'] / 100);
+                    $position['price'] = Shopware()->Container()->get('shopware.cart.net_rounding')->round($position['price'], $position['tax']);
                 } else {
                     $position['netto'] = $position['price'] / (100 + $position['tax']) * 100;
                 }
@@ -564,7 +564,7 @@ class Shopware_Models_Document_Order extends Enlight_Class implements Enlight_Ho
             $this->_amount += $position['amount'];
 
             if (!empty($position['tax'])) {
-                $this->_tax[number_format((float) $position['tax'], 2)] += round($position['amount'] / ($position['tax'] + 100) * $position['tax'], 2);
+                $this->_tax[number_format((float) $position['tax'], 2)] += round($position['amount'] - $position['amount_netto'], 2);
             }
             if ($position['amount'] <= 0) {
                 $this->_discount += $position['amount'];
@@ -757,9 +757,6 @@ class Shopware_Models_Document_Order extends Enlight_Class implements Enlight_Ho
         ];
     }
 
-    /**
-     * @param array $parameters
-     */
     private function setParameters(array $parameters)
     {
         $this->_positions = $parameters['positions'];

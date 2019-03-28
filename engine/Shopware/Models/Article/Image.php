@@ -31,7 +31,7 @@ use Shopware\Models\Article\Image\Mapping;
 use Shopware\Models\Media\Media;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity()
  * @ORM\Table(name="s_articles_img")
  */
 class Image extends ModelEntity
@@ -51,7 +51,7 @@ class Image extends ModelEntity
      *
      * @var \Shopware\Models\Attribute\ArticleImage
      *
-     * @ORM\OneToOne(targetEntity="Shopware\Models\Attribute\ArticleImage", mappedBy="articleImage", orphanRemoval=true,cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Shopware\Models\Attribute\ArticleImage", mappedBy="articleImage", orphanRemoval=true, cascade={"persist"})
      */
     protected $attribute;
 
@@ -91,7 +91,7 @@ class Image extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -197,9 +197,6 @@ class Image extends ModelEntity
      */
     private $children;
 
-    /**
-     * Class constructor which initials the array collections.
-     */
     public function __construct()
     {
         $this->mappings = new ArrayCollection();
@@ -207,8 +204,6 @@ class Image extends ModelEntity
     }
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()

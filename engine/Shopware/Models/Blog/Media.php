@@ -28,7 +28,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Shopware\Components\Model\ModelEntity;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity()
  * @ORM\Table(name="s_blog_media")
  */
 class Media extends ModelEntity
@@ -57,7 +57,7 @@ class Media extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -84,8 +84,6 @@ class Media extends ModelEntity
     private $preview;
 
     /**
-     * Get Id
-     *
      * @return int
      */
     public function getId()
@@ -94,8 +92,6 @@ class Media extends ModelEntity
     }
 
     /**
-     * Get Preview
-     *
      * @return int
      */
     public function getPreview()
@@ -104,8 +100,6 @@ class Media extends ModelEntity
     }
 
     /**
-     * Set Preview
-     *
      * @param int $preview
      */
     public function setPreview($preview)
@@ -114,8 +108,6 @@ class Media extends ModelEntity
     }
 
     /**
-     * Get Blog
-     *
      * @return \Shopware\Models\Blog\Blog
      */
     public function getBlog()
@@ -124,8 +116,6 @@ class Media extends ModelEntity
     }
 
     /**
-     * Set Blog
-     *
      * @param \Shopware\Models\Blog\Blog $blog
      */
     public function setBlog($blog)

@@ -26,11 +26,6 @@ namespace Shopware\Components\Slug;
 
 use Cocur\Slugify\SlugifyInterface;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class CocurSlugifyAdapter implements SlugInterface
 {
     /**
@@ -38,9 +33,6 @@ class CocurSlugifyAdapter implements SlugInterface
      */
     private $slugify;
 
-    /**
-     * @param SlugifyInterface $slugify
-     */
     public function __construct(SlugifyInterface $slugify)
     {
         $this->slugify = $slugify;

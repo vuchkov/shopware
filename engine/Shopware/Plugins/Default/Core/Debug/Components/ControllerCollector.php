@@ -26,11 +26,6 @@ namespace Shopware\Plugin\Debug\Components;
 
 use Shopware\Components\Logger;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class ControllerCollector implements CollectorInterface
 {
     /**
@@ -58,10 +53,6 @@ class ControllerCollector implements CollectorInterface
      */
     protected $startMemory;
 
-    /**
-     * @param \Enlight_Event_EventManager $eventManager
-     * @param Utils                       $utils
-     */
     public function __construct(\Enlight_Event_EventManager $eventManager, Utils $utils)
     {
         $this->eventManager = $eventManager;
@@ -75,8 +66,6 @@ class ControllerCollector implements CollectorInterface
 
     /**
      * Get total execution time in controller
-     *
-     * @param Logger $log
      */
     public function logResults(Logger $log)
     {
@@ -90,8 +79,6 @@ class ControllerCollector implements CollectorInterface
     /**
      * Logs all controller events into the internal log object.
      * Each logged events contains the event name, the execution time and the allocated peak of memory.
-     *
-     * @param \Enlight_Event_EventArgs $args
      */
     public function onBenchmarkEvent(\Enlight_Event_EventArgs $args)
     {

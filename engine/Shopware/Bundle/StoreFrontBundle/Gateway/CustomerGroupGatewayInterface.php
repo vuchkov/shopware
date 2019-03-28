@@ -26,11 +26,6 @@ namespace Shopware\Bundle\StoreFrontBundle\Gateway;
 
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 interface CustomerGroupGatewayInterface
 {
     /**
@@ -38,8 +33,6 @@ interface CustomerGroupGatewayInterface
      * please refer to the linked classes.
      *
      * @see \Shopware\Bundle\StoreFrontBundle\Gateway\CustomerGroupGatewayInterface::get()
-     *
-     * @param array $keys
      *
      * @return Struct\Customer\Group[] Indexed by the customer group key
      */

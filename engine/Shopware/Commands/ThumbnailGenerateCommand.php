@@ -40,10 +40,6 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * This class is used as a command to generate thumbnails from media albums.
  * If no album is defined, thumbnails from all album medias are created.
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class ThumbnailGenerateCommand extends ShopwareCommand
 {
@@ -150,8 +146,6 @@ class ThumbnailGenerateCommand extends ShopwareCommand
     }
 
     /**
-     * @param Album $album
-     *
      * @throws Exception
      */
     private function createAlbumThumbnails(Album $album)
@@ -193,7 +187,6 @@ class ThumbnailGenerateCommand extends ShopwareCommand
     /**
      * Check each single thumbnail to skip already existing thumbnails
      *
-     * @param Media $media
      *
      * @throws Exception
      */
@@ -229,8 +222,6 @@ class ThumbnailGenerateCommand extends ShopwareCommand
     }
 
     /**
-     * @param Media $media
-     *
      * @throws Exception
      *
      * @return bool

@@ -30,8 +30,6 @@ use Shopware\Models\Property\Option;
 use Shopware\Models\Property\Value;
 
 /**
- * Backend search controller
- *
  * This controller provides the global search in the Shopware backend. The
  * search has the ability to provides search results from the different
  * areas starting from articles to orders
@@ -80,8 +78,6 @@ class Shopware_Controllers_Backend_Search extends Shopware_Controllers_Backend_E
 
     /**
      * Sanitizes the passed term and queries the different areas of the search
-     *
-     * @return mixed
      */
     public function indexAction()
     {

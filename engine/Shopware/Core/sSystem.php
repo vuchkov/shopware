@@ -167,7 +167,7 @@ class sSystem
      */
     public function __construct(Enlight_Controller_Request_Request $request = null)
     {
-        $request = $request ?: new Enlight_Controller_Request_RequestHttp();
+        $request = $request ?: Enlight_Controller_Request_RequestHttp::createFromGlobals();
         $this->postWrapper = new PostWrapper($request);
         $this->getWrapper = new GetWrapper($request);
         $this->cookieWrapper = new CookieWrapper($request);
@@ -207,9 +207,6 @@ class sSystem
      * @deprecated Use Shopware()->Modules()->Core()->(method name)
      *
      * @param string $name
-     * @param null   $params
-     *
-     * @return mixed
      */
     public function __call($name, $params = null)
     {

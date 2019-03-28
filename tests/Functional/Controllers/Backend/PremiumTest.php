@@ -22,11 +22,6 @@
  * our trademarks remain entirely with us.
  */
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Shopware_Tests_Controllers_Backend_PremiumTest extends Enlight_Components_Test_Controller_TestCase
 {
     private $premiumData = [
@@ -84,7 +79,7 @@ class Shopware_Tests_Controllers_Backend_PremiumTest extends Enlight_Components_
      * The response has to contain the id of the created article.
      * This function is called before testEditPremiumArticle and testDeletePremiumArticle
      *
-     * @return mixed
+     * @return string
      */
     public function testCreatePremiumArticle()
     {
@@ -107,7 +102,7 @@ class Shopware_Tests_Controllers_Backend_PremiumTest extends Enlight_Components_
      * a premium-article.
      * The testCreatePremiumArticle method is called before.
      *
-     * @param $lastId The id of the last created article
+     * @param string $lastId The id of the last created article
      * @depends testCreatePremiumArticle
      */
     public function testEditPremiumArticle($lastId)
@@ -134,7 +129,7 @@ class Shopware_Tests_Controllers_Backend_PremiumTest extends Enlight_Components_
      *
      * @depends testCreatePremiumArticle
      *
-     * @param $lastId
+     * @param string $lastId
      */
     public function testDeletePremiumArticle($lastId)
     {

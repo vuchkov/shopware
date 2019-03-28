@@ -26,11 +26,6 @@ namespace Shopware\Bundle\AttributeBundle\Service;
 
 use Doctrine\DBAL\Connection;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.com)
- */
 class SchemaOperator
 {
     /**
@@ -48,10 +43,6 @@ class SchemaOperator
      */
     private $nameBlacklist;
 
-    /**
-     * @param Connection   $connection
-     * @param TableMapping $tableMapping
-     */
     public function __construct(Connection $connection, TableMapping $tableMapping)
     {
         $this->connection = $connection;

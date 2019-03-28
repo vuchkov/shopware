@@ -47,12 +47,6 @@ use Shopware\Components\CacheManager;
  * trademark license. Therefore any rights, title and interest in
  * our trademarks remain entirely with us.
  */
-
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Shopware_Controllers_Backend_Cache extends Shopware_Controllers_Backend_ExtJs
 {
     /**
@@ -167,7 +161,7 @@ class Shopware_Controllers_Backend_Cache extends Shopware_Controllers_Backend_Ex
 
         $query = $repository->getShopsWithThemes(['shop.id' => $shopId]);
 
-        /** @var \Shopware\Models\Shop\Shop $shop */
+        /** @var \Shopware\Models\Shop\Shop|null $shop */
         $shop = $query->getResult(
             AbstractQuery::HYDRATE_OBJECT
         )[0];

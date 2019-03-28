@@ -30,11 +30,6 @@ use Shopware\Bundle\SearchBundle\Criteria;
 use Shopware\Bundle\SearchBundle\StoreFrontCriteriaFactoryInterface;
 use Shopware\Bundle\StoreFrontBundle\Struct\ShopContextInterface;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.com)
- */
 class CriteriaFactory implements CriteriaFactoryInterface
 {
     /**
@@ -42,18 +37,12 @@ class CriteriaFactory implements CriteriaFactoryInterface
      */
     private $criteriaFactory;
 
-    /**
-     * @param StoreFrontCriteriaFactoryInterface $criteriaFactory
-     */
     public function __construct(StoreFrontCriteriaFactoryInterface $criteriaFactory)
     {
         $this->criteriaFactory = $criteriaFactory;
     }
 
     /**
-     * @param Request              $request
-     * @param ShopContextInterface $context
-     *
      * @return Criteria
      */
     public function createCriteria(Request $request, ShopContextInterface $context)

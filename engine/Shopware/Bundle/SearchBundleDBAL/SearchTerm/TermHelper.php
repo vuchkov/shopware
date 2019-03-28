@@ -24,11 +24,6 @@
 
 namespace Shopware\Bundle\SearchBundleDBAL\SearchTerm;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class TermHelper implements TermHelperInterface
 {
     /**
@@ -111,7 +106,6 @@ class TermHelper implements TermHelperInterface
     /**
      * Filter out bad keywords before starting search
      *
-     * @param array $words
      *
      * @return array|bool
      */
@@ -124,7 +118,7 @@ class TermHelper implements TermHelperInterface
         $result = [];
 
         foreach ($words as $word) {
-            if ($this->filterBadWordFromString($word)) {
+            if (mb_strlen($word) >= $this->config->get('minSearchIndexLength') && $this->filterBadWordFromString($word)) {
                 $result[] = $word;
             }
         }

@@ -28,9 +28,6 @@ use Shopware\Models\User\Role;
 use Shopware\Models\User\Rule;
 use Shopware\Models\User\User;
 
-/*
- * Backend Controller for the backend user management
- */
 class Shopware_Controllers_Backend_UserManager extends Shopware_Controllers_Backend_ExtJs
 {
     /**
@@ -59,9 +56,9 @@ class Shopware_Controllers_Backend_UserManager extends Shopware_Controllers_Back
         $calledAction = $this->Request()->getActionName();
 
         if (
-            Shopware()->Plugins()->Backend()->Auth()->shouldAuth() &&
-            $this->isPasswordConfirmProtectedAction($calledAction) &&
-            !$this->container->get('backendsession')->offsetGet('passwordVerified')
+            Shopware()->Plugins()->Backend()->Auth()->shouldAuth()
+            && $this->isPasswordConfirmProtectedAction($calledAction)
+            && !$this->container->get('backendsession')->offsetGet('passwordVerified')
         ) {
             return $this->forward('passwordConfirmationRequired');
         }
@@ -95,9 +92,9 @@ class Shopware_Controllers_Backend_UserManager extends Shopware_Controllers_Back
         $backendSession = $this->container->get('backendsession');
 
         if (
-            Shopware()->Plugins()->Backend()->Auth()->shouldAuth() &&
-            $this->isPasswordConfirmProtectedAction($calledAction) &&
-            $backendSession->offsetGet('passwordVerified')
+            Shopware()->Plugins()->Backend()->Auth()->shouldAuth()
+            && $this->isPasswordConfirmProtectedAction($calledAction)
+            && $backendSession->offsetGet('passwordVerified')
         ) {
             $backendSession->offsetUnset('passwordVerified');
         }
@@ -730,9 +727,9 @@ class Shopware_Controllers_Backend_UserManager extends Shopware_Controllers_Back
      * Internal helper function which converts a resource shopware model
      * to an tree panel node with checkboxes.
      *
-     * @param \Shopware\Models\User\Resource $resource
-     * @param \Shopware\Models\User\Role     $role
-     * @param array                          $resourceAdmins
+     * @param \Shopware\Models\User\Resource|null $resource
+     * @param \Shopware\Models\User\Role|null     $role
+     * @param array                               $resourceAdmins
      *
      * @return array
      */
@@ -778,9 +775,9 @@ class Shopware_Controllers_Backend_UserManager extends Shopware_Controllers_Back
      * Internal helper function which converts a privilege shopware model
      * to an tree panel node with checkboxes.
      *
-     * @param array                           $resourceNode
-     * @param \Shopware\Models\User\Privilege $privilege
-     * @param \Shopware\Models\User\Role      $role
+     * @param array                                $resourceNode
+     * @param \Shopware\Models\User\Privilege|null $privilege
+     * @param \Shopware\Models\User\Role|null      $role
      *
      * @return array
      */
@@ -801,7 +798,7 @@ class Shopware_Controllers_Backend_UserManager extends Shopware_Controllers_Back
         ];
 
         if ($role) {
-            if ($role->getPrivileges()->contains($privilege) || $role->getAdmin() === 1) {
+            if ($role->getAdmin() === 1 || $role->getPrivileges()->contains($privilege)) {
                 $privilegeNode['checked'] = true;
                 $resourceNode['expanded'] = true;
             }

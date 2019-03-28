@@ -22,11 +22,6 @@
  * our trademarks remain entirely with us.
  */
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Shopware_Tests_Controllers_Backend_CustomerTest extends Enlight_Components_Test_Controller_TestCase
 {
     /** @var \Shopware\Models\Customer\Customer $repository */
@@ -309,7 +304,7 @@ class Shopware_Tests_Controllers_Backend_CustomerTest extends Enlight_Components
         $response = $this->dispatch('backend/' . $newLocation[1]);
 
         $cookie = $this->getCookie($response, 'session-1');
-        $this->assertTrue(strpos($headerLocation, $cookie['value']) !== false);
+        $this->assertNotEmpty($cookie);
         $this->assertEquals(0, $cookie['expire']);
     }
 

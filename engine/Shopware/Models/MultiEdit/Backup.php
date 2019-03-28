@@ -30,9 +30,7 @@ use Shopware\Components\Model\ModelEntity;
 /**
  * Shopware SwagMultiEdit Plugin - Backup Model
  *
- * @category Shopware
  *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  *
  * @ORM\Entity(repositoryClass="Repository")
  * @ORM\Table(name="s_multi_edit_backup")
@@ -45,7 +43,7 @@ class Backup extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;

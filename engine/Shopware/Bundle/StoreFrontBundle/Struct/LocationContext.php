@@ -29,10 +29,6 @@ use Shopware\Bundle\StoreFrontBundle\Struct\Country\State;
 
 /**
  * @deprecated since version 5.2, to be removed in 6.0 - Use ShopContext instead
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class LocationContext extends Extendable implements LocationContextInterface
 {
@@ -51,11 +47,6 @@ class LocationContext extends Extendable implements LocationContextInterface
      */
     protected $state;
 
-    /**
-     * @param Area|null    $area
-     * @param Country|null $country
-     * @param State|null   $state
-     */
     public function __construct(Area $area = null, Country $country = null, State $state = null)
     {
         $this->area = $area;

@@ -26,11 +26,6 @@ namespace Shopware\Bundle\StoreFrontBundle\Struct;
 
 use Shopware\Models\Category\Category as CategoryEntity;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Category extends Extendable
 {
     /**
@@ -139,8 +134,6 @@ class Category extends Extendable
     protected $hideSortings;
 
     /**
-     * @param CategoryEntity $category
-     *
      * @return Category
      */
     public static function createFromCategoryEntity(CategoryEntity $category)
@@ -374,7 +367,7 @@ class Category extends Extendable
     }
 
     /**
-     * @return \Shopware\Bundle\StoreFrontBundle\Struct\Media
+     * @return \Shopware\Bundle\StoreFrontBundle\Struct\Media|null
      */
     public function getMedia()
     {
@@ -485,9 +478,6 @@ class Category extends Extendable
         return $this->productStream;
     }
 
-    /**
-     * @param ProductStream|null $productStream
-     */
     public function setProductStream(ProductStream $productStream = null)
     {
         $this->productStream = $productStream;

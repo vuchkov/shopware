@@ -26,11 +26,6 @@ namespace Shopware\Recovery\Install\Service;
 
 use Shopware\Recovery\Install\Struct\Shop;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class CurrencyService
 {
     private $currencySettings = [
@@ -58,17 +53,12 @@ class CurrencyService
      */
     private $connection;
 
-    /**
-     * @param \PDO $connection
-     */
     public function __construct(\PDO $connection)
     {
         $this->connection = $connection;
     }
 
     /**
-     * @param Shop $shop
-     *
      * @throws \RuntimeException
      */
     public function updateCurrency(Shop $shop)

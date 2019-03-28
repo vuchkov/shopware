@@ -22,7 +22,7 @@
  * our trademarks remain entirely with us.
  */
 
-namespace  Shopware\Tests\Mink\Page;
+namespace Shopware\Tests\Mink\Page;
 
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Exception\ResponseTextException;
@@ -126,8 +126,6 @@ class CheckoutConfirm extends Page implements \Shopware\Tests\Mink\HelperSelecto
 
     /**
      * Changes the payment method
-     *
-     * @param array $data
      */
     public function changePaymentMethod(array $data = [])
     {
@@ -137,8 +135,6 @@ class CheckoutConfirm extends Page implements \Shopware\Tests\Mink\HelperSelecto
 
     /**
      * Changes the billing address
-     *
-     * @param array $data
      */
     public function changeBillingAddress(array $data = [])
     {
@@ -152,8 +148,6 @@ class CheckoutConfirm extends Page implements \Shopware\Tests\Mink\HelperSelecto
 
     /**
      * Changes the shipping address
-     *
-     * @param array $data
      */
     public function changeShippingAddress(array $data = [])
     {
@@ -167,8 +161,6 @@ class CheckoutConfirm extends Page implements \Shopware\Tests\Mink\HelperSelecto
 
     /**
      * Changes the shipping method
-     *
-     * @param array $data
      */
     public function changeShippingMethod(array $data = [])
     {
@@ -213,7 +205,7 @@ class CheckoutConfirm extends Page implements \Shopware\Tests\Mink\HelperSelecto
     /**
      * Creates a new address and saves it
      *
-     * @param $values
+     * @param array $values
      */
     public function createArbitraryAddress($values)
     {
@@ -225,7 +217,7 @@ class CheckoutConfirm extends Page implements \Shopware\Tests\Mink\HelperSelecto
     /**
      * Changes the values in a modal address form and saves the form
      *
-     * @param $values
+     * @param array $values
      */
     public function changeModalAddress($values)
     {

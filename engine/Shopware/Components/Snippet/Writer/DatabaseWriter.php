@@ -26,11 +26,6 @@ namespace Shopware\Components\Snippet\Writer;
 
 use Doctrine\DBAL\Connection;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class DatabaseWriter
 {
     /**
@@ -50,9 +45,6 @@ class DatabaseWriter
      */
     private $force;
 
-    /**
-     * @param Connection $db
-     */
     public function __construct(Connection $db)
     {
         $this->db = $db;

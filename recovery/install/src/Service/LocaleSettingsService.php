@@ -26,11 +26,6 @@ namespace Shopware\Recovery\Install\Service;
 
 use Pimple\Container;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class LocaleSettingsService
 {
     /**
@@ -43,10 +38,6 @@ class LocaleSettingsService
      */
     private $container;
 
-    /**
-     * @param \PDO      $connection
-     * @param Container $container
-     */
     public function __construct(\PDO $connection, Container $container)
     {
         $this->connection = $connection;

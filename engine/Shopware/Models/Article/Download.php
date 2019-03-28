@@ -29,7 +29,7 @@ use Shopware\Components\Model\ModelEntity;
 
 /**
  * @ORM\Table(name="s_articles_downloads")
- * @ORM\Entity
+ * @ORM\Entity()
  */
 class Download extends ModelEntity
 {
@@ -56,7 +56,7 @@ class Download extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -90,8 +90,6 @@ class Download extends ModelEntity
     private $size;
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -100,8 +98,6 @@ class Download extends ModelEntity
     }
 
     /**
-     * Set article
-     *
      * @param Article $article
      *
      * @return Download
@@ -114,8 +110,6 @@ class Download extends ModelEntity
     }
 
     /**
-     * Get article
-     *
      * @return Article
      */
     public function getArticle()
@@ -124,8 +118,6 @@ class Download extends ModelEntity
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      *
      * @return Download
@@ -138,8 +130,6 @@ class Download extends ModelEntity
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getName()
@@ -148,8 +138,6 @@ class Download extends ModelEntity
     }
 
     /**
-     * Set file
-     *
      * @param string $file
      *
      * @return Download
@@ -162,8 +150,6 @@ class Download extends ModelEntity
     }
 
     /**
-     * Get file
-     *
      * @return string
      */
     public function getFile()
@@ -172,8 +158,6 @@ class Download extends ModelEntity
     }
 
     /**
-     * Set size
-     *
      * @param float $size
      *
      * @return Download
@@ -186,8 +170,6 @@ class Download extends ModelEntity
     }
 
     /**
-     * Get size
-     *
      * @return float
      */
     public function getSize()

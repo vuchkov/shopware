@@ -27,15 +27,8 @@ namespace Shopware\Bundle\ESIndexingBundle;
 use Shopware\Bundle\ESIndexingBundle\Console\ProgressHelperInterface;
 use Shopware\Bundle\ESIndexingBundle\Struct\ShopIndex;
 
-/**
- * Interface DataIndexerInterface
- */
 interface DataIndexerInterface
 {
-    /**
-     * @param ShopIndex               $index
-     * @param ProgressHelperInterface $progress
-     */
     public function populate(ShopIndex $index, ProgressHelperInterface $progress);
 
     /**

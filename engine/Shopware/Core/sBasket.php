@@ -29,6 +29,7 @@ use Shopware\Components\Cart\BasketHelperInterface;
 use Shopware\Components\Cart\Struct\CartItemStruct;
 use Shopware\Components\Cart\Struct\DiscountContext;
 use Shopware\Components\Random;
+use Symfony\Component\HttpFoundation\Cookie;
 
 /**
  * Shopware Class that handles cart operations
@@ -125,17 +126,6 @@ class sBasket
     private $proportionalTaxCalculation;
 
     /**
-     * @param Enlight_Components_Db_Adapter_Pdo_Mysql|null                 $db
-     * @param Enlight_Event_EventManager|null                              $eventManager
-     * @param Shopware_Components_Snippet_Manager|null                     $snippetManager
-     * @param Shopware_Components_Config|null                              $config
-     * @param Enlight_Components_Session_Namespace|null                    $session
-     * @param Enlight_Controller_Front|null                                $front
-     * @param Shopware_Components_Modules|null                             $moduleManager
-     * @param \sSystem|null                                                $systemModule
-     * @param StoreFrontBundle\Service\ContextServiceInterface|null        $contextService
-     * @param StoreFrontBundle\Service\AdditionalTextServiceInterface|null $additionalTextService
-     *
      * @throws \Exception
      */
     public function __construct(
@@ -272,8 +262,8 @@ class sBasket
      * Get cart amount for certain products / suppliers
      * Used only internally in sBasket
      *
-     * @param array $articles Products numbers to filter
-     * @param int   $supplier Supplier id to filter
+     * @param array|null $articles Products numbers to filter
+     * @param int        $supplier Supplier id to filter
      *
      * @return array Amount of products in current basket that match the current filter
      */
@@ -1440,7 +1430,7 @@ SQL;
 
         if (!empty($cookieData) && empty($uniqueId)) {
             $uniqueId = Random::getAlphanumericString(32);
-            $this->front->Response()->setCookie('sUniqueID', $uniqueId, time() + (86400 * 360), '/');
+            $this->front->Response()->headers->setCookie(new Cookie('sUniqueID', $uniqueId, time() + (86400 * 360), '/'));
         }
 
         // Check if this product is already noted
@@ -2086,9 +2076,6 @@ SQL;
     }
 
     /**
-     * @param ListProduct $product
-     * @param array       $note
-     *
      * @throws \Exception
      *
      * @return array
@@ -2357,15 +2344,13 @@ SQL;
     }
 
     /**
-     * @param array $voucherDetails
-     *
      * @return array
      */
     private function calculateVoucherValues(array $voucherDetails)
     {
         $taxRate = 0;
-        if ($voucherDetails['taxconfig'] === 'none' ||
-            (!$this->sSYSTEM->sUSERGROUPDATA['tax'] && $this->sSYSTEM->sUSERGROUPDATA['id'])
+        if ($voucherDetails['taxconfig'] === 'none'
+            || (!$this->sSYSTEM->sUSERGROUPDATA['tax'] && $this->sSYSTEM->sUSERGROUPDATA['id'])
         ) {
             // if net customer group - calculate without tax
             $tax = $voucherDetails['value'] * -1;
@@ -2503,7 +2488,6 @@ SQL;
      * Loads relevant associated data for the provided products
      * Used in sGetBasket
      *
-     * @param array $getProducts
      *
      * @throws \Exception
      * @throws \Enlight_Event_Exception
@@ -2618,7 +2602,7 @@ SQL;
                 || (!$this->sSYSTEM->sUSERGROUPDATA['tax'] && $this->sSYSTEM->sUSERGROUPDATA['id'])
             ) {
                 if (empty($getProducts[$key]['modus'])) {
-                    $priceWithTax = round($netprice, 2) / 100 * (100 + $tax);
+                    $priceWithTax = Shopware()->Container()->get('shopware.cart.net_rounding')->round($netprice, $tax);
 
                     $getProducts[$key]['amountWithTax'] = $quantity * $priceWithTax;
                     // If basket comprised any discount, calculate brutto-value for the discount
@@ -2937,9 +2921,7 @@ SQL;
     /**
      * Calculates product tax values for sUpdateArticle
      *
-     * @param int   $quantity
-     * @param array $queryNewPrice
-     * @param array $queryAdditionalInfo
+     * @param int $quantity
      *
      * @throws \Enlight_Exception
      *
@@ -2996,8 +2978,8 @@ SQL;
                 false
             );
             $grossPrice = $this->moduleManager->Articles()->sRound($grossPrice);
-            if (($this->config->get('sARTICLESOUTPUTNETTO') && !$this->sSYSTEM->sUSERGROUPDATA['tax']) ||
-                (!$this->sSYSTEM->sUSERGROUPDATA['tax'] && $this->sSYSTEM->sUSERGROUPDATA['id'])
+            if (($this->config->get('sARTICLESOUTPUTNETTO') && !$this->sSYSTEM->sUSERGROUPDATA['tax'])
+                || (!$this->sSYSTEM->sUSERGROUPDATA['tax'] && $this->sSYSTEM->sUSERGROUPDATA['id'])
             ) {
                 $netPrice = $this->moduleManager->Articles()->sRound(
                     $this->moduleManager->Articles()->sGetPricegroupDiscount(
@@ -3018,8 +3000,6 @@ SQL;
     }
 
     /**
-     * @param array $product
-     *
      * @throws \Enlight_Exception
      *
      * @return array
@@ -3158,9 +3138,7 @@ SQL;
     }
 
     /**
-     * @param int   $quantity
-     * @param array $basketProduct
-     * @param array $product
+     * @param int $quantity
      *
      * @return int
      */

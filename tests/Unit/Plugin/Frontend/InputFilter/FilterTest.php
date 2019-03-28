@@ -26,11 +26,6 @@ namespace Shopware\Tests\Unit\Plugin\Frontend\InputFilter;
 
 use PHPUnit\Framework\TestCase;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class FilterTest extends TestCase
 {
     /** @var \Shopware_Plugins_Frontend_InputFilter_Bootstrap */
@@ -129,7 +124,6 @@ class FilterTest extends TestCase
      * @dataProvider striptagsDataProvider
      *
      * @param string $input
-     * @param array  $expected
      */
     public function testStripTagsEnabled($input, array $expected)
     {
@@ -143,7 +137,6 @@ class FilterTest extends TestCase
      * @dataProvider striptagsDataProvider
      *
      * @param string $input
-     * @param array  $expected
      */
     public function testStripTagsDisabled($input, array $expected)
     {

@@ -35,12 +35,6 @@ use Shopware\Models\Media\Settings;
  * This class handles the generation of thumbnails.
  * It uses a passed thumbnail generator which will be used for creating the thumbnails.
  * It expects a passed media object for further information handling.
- *
- * Class Manager
- *
- * @category    Shopware
- *
- * @copyright   Copyright (c) shopware AG (http://www.shopware.de)
  */
 class Manager
 {
@@ -57,7 +51,7 @@ class Manager
     protected $rootDir;
 
     /**
-     * @var \Enlight_Event_EventManager
+     * @var \Enlight_Event_EventManager|null
      */
     protected $eventManager;
 
@@ -70,10 +64,7 @@ class Manager
      * The constructor for the thumbnail manager.
      * Expects a passed generator and the media/destination directory
      *
-     * @param GeneratorInterface          $generator
-     * @param string                      $rootDir      - the full path to the shopware directory e.g. /var/www/shopware/
-     * @param \Enlight_Event_EventManager $eventManager
-     * @param MediaServiceInterface       $mediaService
+     * @param string $rootDir - the full path to the shopware directory e.g. /var/www/shopware/
      */
     public function __construct(GeneratorInterface $generator, $rootDir, \Enlight_Event_EventManager $eventManager, MediaServiceInterface $mediaService)
     {
@@ -89,7 +80,6 @@ class Manager
      * First it loads an image from the media path,
      * then resizes it and saves it to the default thumbnail directory
      *
-     * @param Media $media
      * @param array $thumbnailSizes  - array of all sizes which needs to be generated
      * @param bool  $keepProportions - Whether or not keeping the proportions of the original image, the size can be affected when true
      *
@@ -179,7 +169,6 @@ class Manager
      * @param string $name
      * @param string $type
      * @param string $extension
-     * @param array  $sizes
      *
      * @return array
      */
@@ -198,7 +187,7 @@ class Manager
                 'maxWidth' => $size['width'],
                 'maxHeight' => $size['height'],
                 'source' => $path . $name . '_' . $suffix . '.' . $extension,
-                'retinaSource' => $path . $name . '_' . $suffix . '@2x' . '.' . $extension,
+                'retinaSource' => $path . $name . '_' . $suffix . '@2x.' . $extension,
             ];
         }
 
@@ -207,8 +196,6 @@ class Manager
 
     /**
      * Deletes all thumbnails from the given media object
-     *
-     * @param Media $media
      */
     public function removeMediaThumbnails(Media $media)
     {
@@ -229,7 +216,6 @@ class Manager
     /**
      * Returns an array with a jpg and original extension path if its not a jpg
      *
-     * @param Media  $media
      * @param string $suffix
      *
      * @throws \Exception
@@ -242,7 +228,7 @@ class Manager
 
         $fileName = str_replace(
             '.' . $media->getExtension(),
-            '_' . $suffix . '.' . 'jpg',
+            '_' . $suffix . '.jpg',
             $media->getFileName()
         );
 
@@ -292,7 +278,7 @@ class Manager
      *
      * array('width' => 100, 'height' => 200)
      *
-     * @param string[] $thumbnailSizes
+     * @param int[]|string[]|array<string[]>|array<int[]> $thumbnailSizes
      *
      * @return array
      */
@@ -311,7 +297,7 @@ class Manager
                 }
 
                 if (is_int($size)) {
-                    $size = ['width' => $size[0], 'height' => isset($size[1]) ? $size[1] : $size[0]];
+                    $size = ['width' => $size, 'height' => $size];
                 }
             }
         }
@@ -345,8 +331,6 @@ class Manager
     }
 
     /**
-     * @param Media $media
-     *
      * @throws \Exception
      *
      * @return array
@@ -376,8 +360,6 @@ class Manager
     }
 
     /**
-     * @param Media $media
-     *
      * @return Settings|null
      */
     private function getAlbumSettingsFromMedia(Media $media)

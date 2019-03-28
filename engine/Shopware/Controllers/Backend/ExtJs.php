@@ -22,13 +22,6 @@
  * our trademarks remain entirely with us.
  */
 
-/**
- * Shopware ExtJs Controller
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Shopware_Controllers_Backend_ExtJs extends Enlight_Controller_Action
 {
     /**
@@ -126,7 +119,7 @@ class Shopware_Controllers_Backend_ExtJs extends Enlight_Controller_Action
             return;
         }
 
-        $this->Response()->setHeader('Content-Type', 'application/javascript; charset=utf-8', true);
+        $this->Response()->headers->set('content-type', 'application/javascript; charset=utf-8', true);
         $template = 'snippet:string:';
 
         $this->View()->Engine()->setCompileId($this->View()->Engine()->getCompileId() . '_' . $this->Request()->getControllerName());
@@ -286,6 +279,6 @@ class Shopware_Controllers_Backend_ExtJs extends Enlight_Controller_Action
             return;
         }
 
-        $this->Response()->setHeader('Cache-Control', 'max-age=2592000, public', true);
+        $this->Response()->headers->set('cache-control', 'max-age=2592000, public', true);
     }
 }

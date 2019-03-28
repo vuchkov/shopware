@@ -38,9 +38,6 @@ class Shopware_Components_Acl extends Zend_Acl
      */
     private $em;
 
-    /**
-     * @param ModelManager $em
-     */
     public function __construct(ModelManager $em)
     {
         $this->em = $em;
@@ -77,7 +74,7 @@ class Shopware_Components_Acl extends Zend_Acl
 
         /** @var \Shopware\Models\User\Role $role */
         foreach ($roles as $role) {
-            /** @var \Shopware\Models\User\Role $parent */
+            /** @var \Shopware\Models\User\Role|null $parent */
             $parent = $role->getParent();
 
             // Parent exist and not already added?
@@ -208,7 +205,7 @@ class Shopware_Components_Acl extends Zend_Acl
     {
         $repository = $this->em->getRepository(Resource::class);
 
-        /** @var \Shopware\Models\User\Resource $resource */
+        /** @var \Shopware\Models\User\Resource|null $resource */
         $resource = $repository->findOneBy(['name' => $resourceName]);
         if ($resource === null) {
             return false;

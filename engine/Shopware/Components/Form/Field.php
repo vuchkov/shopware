@@ -27,9 +27,6 @@ namespace Shopware\Components\Form;
 use Shopware\Components\Form\Interfaces\Field as FieldInterface;
 use Shopware\Components\Form\Interfaces\Validate;
 
-/**
- * Class Field
- */
 class Field extends Base implements FieldInterface, Validate
 {
     /**
@@ -111,17 +108,11 @@ class Field extends Base implements FieldInterface, Validate
         return $this->label;
     }
 
-    /**
-     * @return mixed
-     */
     public function getDefaultValue()
     {
         return $this->defaultValue;
     }
 
-    /**
-     * @param mixed $defaultValue
-     */
     public function setDefaultValue($defaultValue)
     {
         $this->defaultValue = $defaultValue;

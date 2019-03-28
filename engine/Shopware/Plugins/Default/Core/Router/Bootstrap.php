@@ -27,13 +27,12 @@ use Shopware\Models\Shop\DetachedShop;
 use Shopware\Models\Shop\Repository;
 use Shopware\Models\Shop\Shop;
 use Shopware\Models\Shop\Template;
+use Symfony\Component\HttpFoundation\Cookie;
 
 /**
  * Shopware Router Plugin
  *
- * @category   Shopware
  *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  * @license    http://shopware.de/license
  */
 class Shopware_Plugins_Core_Router_Bootstrap extends Shopware_Components_Plugin_Bootstrap
@@ -60,8 +59,6 @@ class Shopware_Plugins_Core_Router_Bootstrap extends Shopware_Components_Plugin_
 
     /**
      * Event listener method
-     *
-     * @param Enlight_Controller_EventArgs $args
      */
     public function onRouteStartup(Enlight_Controller_EventArgs $args)
     {
@@ -110,8 +107,6 @@ class Shopware_Plugins_Core_Router_Bootstrap extends Shopware_Components_Plugin_
 
     /**
      * Event listener method
-     *
-     * @param Enlight_Controller_EventArgs $args
      */
     public function onRouteShutdown(Enlight_Controller_EventArgs $args)
     {
@@ -139,7 +134,7 @@ class Shopware_Plugins_Core_Router_Bootstrap extends Shopware_Components_Plugin_
 
             if (isset($newPath)) {
                 // reset the cookie so only one valid cookie will be set IE11 fix
-                $response->setCookie('session-' . $shop->getId(), '', 1);
+                $response->headers->setCookie(new Cookie('session-' . $shop->getId(), '', 1));
                 $response->setRedirect($newPath, 301);
             } else {
                 $this->upgradeShop($request, $response);
@@ -233,7 +228,7 @@ class Shopware_Plugins_Core_Router_Bootstrap extends Shopware_Components_Plugin_
                 // If shop is main, remove the cookie
                 $cookieTime = $newShop->getMain() === null ? time() - 3600 : 0;
 
-                $response->setCookie($cookieKey, $cookieValue, $cookieTime, $cookiePath);
+                $response->headers->setCookie(new Cookie($cookieKey, $cookieValue, $cookieTime, $cookiePath));
 
                 return;
             }
@@ -242,7 +237,7 @@ class Shopware_Plugins_Core_Router_Bootstrap extends Shopware_Components_Plugin_
         //currency switch
         if ($cookieKey === 'currency') {
             $path = rtrim($shop->getBasePath(), '/') . '/';
-            $response->setCookie($cookieKey, $cookieValue, 0, $path);
+            $response->headers->setCookie(new Cookie($cookieKey, $cookieValue, 0, $path));
             $url = sprintf('%s://%s%s',
                 $request->getScheme(),
                 $request->getHttpHost(),
@@ -304,8 +299,6 @@ class Shopware_Plugins_Core_Router_Bootstrap extends Shopware_Components_Plugin_
     }
 
     /**
-     * @param Request $request
-     *
      * @return DetachedShop
      */
     protected function getShopByRequest(Request $request)
@@ -341,9 +334,6 @@ class Shopware_Plugins_Core_Router_Bootstrap extends Shopware_Components_Plugin_
     }
 
     /**
-     * @param Request $request
-     * @param Shop    $newShop
-     *
      * @return string
      */
     protected function getNewShopUrl(
@@ -403,23 +393,18 @@ class Shopware_Plugins_Core_Router_Bootstrap extends Shopware_Components_Plugin_
     }
 
     /**
-     * @param Request $request
-     * @param Shop    $shop
-     *
      * @return bool
      */
     protected function shouldRedirect(Request $request, Shop $shop)
     {
-        return
-            //for example: template preview, direct shop selection via url
+        return //for example: template preview, direct shop selection via url
             (
                 $request->isGet()
                 && $request->getQuery('__shop') !== null
                 && $request->getQuery('__shop') != $shop->getId()
             )
-            ||
             //for example: shop language switch
-            (
+            || (
                 $request->isPost()
                 && $request->getPost('__shop') !== null
                 && $request->getPost('__redirect') !== null
@@ -428,9 +413,6 @@ class Shopware_Plugins_Core_Router_Bootstrap extends Shopware_Components_Plugin_
     }
 
     /**
-     * @param Request $request
-     * @param Shop    $shop
-     *
      * @return string|null
      */
     private function createPathInfo(Request $request, Shop $shop)
@@ -471,7 +453,6 @@ class Shopware_Plugins_Core_Router_Bootstrap extends Shopware_Components_Plugin_
 
     /**
      * @param string $requestUri
-     * @param Shop   $shop
      *
      * @return string
      */
@@ -503,8 +484,6 @@ class Shopware_Plugins_Core_Router_Bootstrap extends Shopware_Components_Plugin_
     }
 
     /**
-     * @param Shop $shop
-     *
      * @throws \RuntimeException
      */
     private function validateShop(Shop $shop)

@@ -44,7 +44,7 @@ use Shopware\Components\Model\ModelEntity;
  * </code>
  *
  * @ORM\Table(name="s_premium_holidays")
- * @ORM\Entity
+ * @ORM\Entity()
  */
 class Holiday extends ModelEntity
 {
@@ -53,7 +53,7 @@ class Holiday extends ModelEntity
      *
      * @var int
      *
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -87,8 +87,6 @@ class Holiday extends ModelEntity
     private $date;
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -97,8 +95,6 @@ class Holiday extends ModelEntity
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      *
      * @return Holiday
@@ -111,8 +107,6 @@ class Holiday extends ModelEntity
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getName()
@@ -121,8 +115,6 @@ class Holiday extends ModelEntity
     }
 
     /**
-     * Set calculation
-     *
      * @param string $calculation
      *
      * @return Holiday
@@ -135,8 +127,6 @@ class Holiday extends ModelEntity
     }
 
     /**
-     * Get calculation
-     *
      * @return string
      */
     public function getCalculation()
@@ -145,8 +135,6 @@ class Holiday extends ModelEntity
     }
 
     /**
-     * Set date
-     *
      * @param \DateTimeInterface $date
      *
      * @return Holiday
@@ -159,8 +147,6 @@ class Holiday extends ModelEntity
     }
 
     /**
-     * Get date
-     *
      * @return \DateTimeInterface
      */
     public function getDate()

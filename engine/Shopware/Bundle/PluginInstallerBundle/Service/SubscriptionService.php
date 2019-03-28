@@ -34,10 +34,8 @@ use Shopware\Bundle\PluginInstallerBundle\Struct\PluginInformationStruct;
 use Shopware\Components\Model\ModelManager;
 use Shopware\Components\ShopwareReleaseStruct;
 use Shopware\Models\Shop\Shop;
+use Symfony\Component\HttpFoundation\Cookie;
 
-/**
- * Class SubscriptionService
- */
 class SubscriptionService
 {
     /**
@@ -70,13 +68,6 @@ class SubscriptionService
      */
     private $exception;
 
-    /**
-     * @param Connection            $connection
-     * @param StoreClient           $storeClient
-     * @param ModelManager          $models
-     * @param PluginLicenceService  $pluginLicenceService
-     * @param ShopwareReleaseStruct $release
-     */
     public function __construct(Connection $connection, StoreClient $storeClient, ModelManager $models, PluginLicenceService $pluginLicenceService, ShopwareReleaseStruct $release)
     {
         $this->connection = $connection;
@@ -136,8 +127,6 @@ class SubscriptionService
     /**
      * Returns information about shop upgrade state and installed plugins.
      *
-     * @param Response $response
-     * @param Request  $request
      *
      * @return PluginInformationResultStruct|bool
      */
@@ -148,7 +137,7 @@ class SubscriptionService
         }
 
         try {
-            $response->setCookie('lastCheckSubscriptionDate', date('dmY'), time() + 60 * 60 * 24);
+            $response->headers->setCookie(new Cookie('lastCheckSubscriptionDate', date('dmY'), time() + 60 * 60 * 24));
 
             return $this->getPluginInformationFromApi();
         } catch (ShopSecretException $e) {
@@ -267,7 +256,6 @@ class SubscriptionService
     /**
      * Check the date of the last subscription-check var
      *
-     * @param Request $request
      *
      * @return bool
      */

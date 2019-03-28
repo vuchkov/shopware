@@ -29,10 +29,6 @@ use Shopware\Bundle\StoreFrontBundle\Struct\Extendable;
 
 /**
  * Defines the search result of the search gateway.
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class ProductNumberSearchResult extends Extendable
 {
@@ -81,9 +77,6 @@ class ProductNumberSearchResult extends Extendable
         return $this->facets;
     }
 
-    /**
-     * @param FacetResultInterface $facet
-     */
     public function addFacet(FacetResultInterface $facet)
     {
         $this->facets[] = $facet;

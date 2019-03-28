@@ -24,6 +24,7 @@
 
 namespace Shopware\Bundle\SearchBundleES\ConditionHandler;
 
+use ONGR\ElasticsearchDSL\Query\Compound\BoolQuery;
 use ONGR\ElasticsearchDSL\Search;
 use Shopware\Bundle\SearchBundle\Condition\CombinedCondition;
 use Shopware\Bundle\SearchBundle\Criteria;
@@ -39,9 +40,6 @@ class CombinedConditionHandler implements PartialConditionHandlerInterface
      */
     private $combinedConditionQueryBuilder;
 
-    /**
-     * @param CombinedConditionQueryBuilder $combinedConditionQueryBuilder
-     */
     public function __construct(CombinedConditionQueryBuilder $combinedConditionQueryBuilder)
     {
         $this->combinedConditionQueryBuilder = $combinedConditionQueryBuilder;
@@ -87,6 +85,6 @@ class CombinedConditionHandler implements PartialConditionHandlerInterface
             $context
         );
 
-        $search->addFilter($query);
+        $search->addQuery($query, BoolQuery::FILTER);
     }
 }

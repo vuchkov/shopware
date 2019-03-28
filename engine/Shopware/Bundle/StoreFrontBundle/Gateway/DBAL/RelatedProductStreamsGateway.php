@@ -28,11 +28,6 @@ use Doctrine\DBAL\Connection;
 use Shopware\Bundle\StoreFrontBundle\Gateway;
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class RelatedProductStreamsGateway implements Gateway\RelatedProductStreamsGatewayInterface
 {
     /**
@@ -50,11 +45,6 @@ class RelatedProductStreamsGateway implements Gateway\RelatedProductStreamsGatew
      */
     private $hydrator;
 
-    /**
-     * @param Connection                     $connection
-     * @param FieldHelper                    $fieldHelper
-     * @param Hydrator\ProductStreamHydrator $hydrator
-     */
     public function __construct(
         Connection $connection,
         FieldHelper $fieldHelper,

@@ -22,7 +22,7 @@
  * our trademarks remain entirely with us.
  */
 
-namespace  Shopware\Tests\Mink\Page;
+namespace Shopware\Tests\Mink\Page;
 
 use SensioLabs\Behat\PageObjectExtension\PageObject\Page;
 use Shopware\Tests\Mink\Element\SitemapGroup;
@@ -46,7 +46,6 @@ class Sitemap extends Page
     /**
      * @param SitemapGroup|string $group
      * @param string              $link
-     * @param array               $sites
      *
      * @throws \Exception
      */
@@ -88,7 +87,6 @@ class Sitemap extends Page
     /**
      * @param string $title
      * @param string $link
-     * @param array  $data
      *
      * @throws \Exception
      */
@@ -122,7 +120,6 @@ class Sitemap extends Page
     /**
      * @param string $title
      * @param string $link
-     * @param array  $data
      *
      * @throws \Exception
      */

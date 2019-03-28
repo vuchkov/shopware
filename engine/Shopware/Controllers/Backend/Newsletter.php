@@ -23,10 +23,8 @@
  */
 
 use Shopware\Components\CSRFWhitelistAware;
+use Symfony\Component\HttpFoundation\Response;
 
-/**
- * Newsletter controller
- */
 class Shopware_Controllers_Backend_Newsletter extends Enlight_Controller_Action implements CSRFWhitelistAware
 {
     /**
@@ -128,7 +126,7 @@ class Shopware_Controllers_Backend_Newsletter extends Enlight_Controller_Action 
                 $body = $this->trackFilter($body, $mailing['id']);
             }
         } else {
-            $this->Response()->setHeader('Content-Type', 'text/plain');
+            $this->Response()->headers->set('content-type', 'text/plain');
             $body = $this->altFilter($body);
         }
 
@@ -273,7 +271,6 @@ class Shopware_Controllers_Backend_Newsletter extends Enlight_Controller_Action 
             }
 
             if (empty($mailingID)) {
-                //echo "Send mail to ".$user['email']."\n";
                 $sql = 'UPDATE s_campaigns_mailaddresses SET lastmailing=? WHERE email=?';
                 Shopware()->Db()->query($sql, [$mailing['id'], $user['email']]);
             }
@@ -298,18 +295,18 @@ class Shopware_Controllers_Backend_Newsletter extends Enlight_Controller_Action 
      */
     public function cronAction()
     {
-        /** @var Shopware_Plugins_Core_Cron_Bootstrap $cronBootstrap */
+        /** @var Shopware_Plugins_Core_Cron_Bootstrap|null $cronBootstrap */
         $cronBootstrap = $this->getPluginBootstrap('Cron');
         if ($cronBootstrap && !$cronBootstrap->authorizeCronAction($this->Request())) {
             $this->Response()
                 ->clearHeaders()
-                ->setHttpResponseCode(403)
+                ->setStatusCode(Response::HTTP_FORBIDDEN)
                 ->appendBody('Forbidden');
 
             return;
         }
 
-        $this->Response()->setHeader('Content-Type', 'text/plain');
+        $this->Response()->headers->set('content-type', 'text/plain');
         $this->mailAction();
     }
 
@@ -347,7 +344,7 @@ class Shopware_Controllers_Backend_Newsletter extends Enlight_Controller_Action 
             Shopware()->Db()->query($sql, [$mailing]);
         }
 
-        $this->Response()->setHeader('Content-Type', 'image/gif');
+        $this->Response()->headers->set('content-type', 'image/gif');
         $bild = imagecreate(1, 1);
         $white = imagecolorallocate($bild, 255, 255, 255);
         imagefill($bild, 1, 1, $white);
@@ -423,7 +420,13 @@ class Shopware_Controllers_Backend_Newsletter extends Enlight_Controller_Action 
         $template->assign('sBasefile', Shopware()->Config()->BaseFile);
         $template->assign('theme', $config);
 
-        if (!$template->isCached($mailing['template'])) {
+        $templatePath = 'newsletter/index/' . $mailing['template'];
+
+        if (!empty($mailing['plaintext'])) {
+            $templatePath = 'newsletter/alt/' . $mailing['template'];
+        }
+
+        if (!$template->isCached($templatePath)) {
             $template->assign('sMailing', $mailing);
             $template->assign('sStart', ($shop->getSecure() ? 'https://' : 'http://') . $shop->getHost() . $shop->getBaseUrl());
             $template->assign('sUserGroup', Shopware()->System()->sUSERGROUP);
@@ -770,7 +773,6 @@ class Shopware_Controllers_Backend_Newsletter extends Enlight_Controller_Action 
     {
         // todo@all Create new method to get same secret hashes for values
         $license = '';
-        //($license = Shopware()->License()->getLicense('sCORE')) || ($license = Shopware()->License()->getLicense('sCOMMUNITY'));
         $parts = func_get_args();
         $parts[] = $license;
 
@@ -795,8 +797,8 @@ class Shopware_Controllers_Backend_Newsletter extends Enlight_Controller_Action 
             return null;
         }
 
-        /** @var \Shopware\Models\Plugin\Plugin $plugin */
-        $plugin = Shopware()->Models()->find('\Shopware\Models\Plugin\Plugin', $pluginBootstrap->getId());
+        /** @var \Shopware\Models\Plugin\Plugin|null $plugin */
+        $plugin = Shopware()->Models()->find(\Shopware\Models\Plugin\Plugin::class, $pluginBootstrap->getId());
         if (!$plugin) {
             return null;
         }

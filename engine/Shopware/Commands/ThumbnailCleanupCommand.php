@@ -35,10 +35,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  *
  * This class is used as a command to delete thumbnails from defined
  * media albums. If no album is defined, all album thumbnails will be removed.
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class ThumbnailCleanupCommand extends ShopwareCommand
 {
@@ -72,9 +68,6 @@ class ThumbnailCleanupCommand extends ShopwareCommand
         $this->removeThumbnails($io);
     }
 
-    /**
-     * @param SymfonyStyle $io
-     */
     private function removeThumbnails(SymfonyStyle $io)
     {
         $mediaService = $this->getContainer()->get('shopware_media.media_service');
@@ -104,9 +97,7 @@ class ThumbnailCleanupCommand extends ShopwareCommand
     }
 
     /**
-     * @param string              $directory
-     * @param FilesystemInterface $filesystem
-     * @param ProgressBar         $progressBar
+     * @param string $directory
      */
     private function processFilesIn($directory, FilesystemInterface $filesystem, ProgressBar $progressBar)
     {
@@ -159,9 +150,6 @@ class ThumbnailCleanupCommand extends ShopwareCommand
     }
 
     /**
-     * @param SymfonyStyle        $io
-     * @param FilesystemInterface $filesystem
-     *
      * @return array
      */
     private function searchThumbnails(SymfonyStyle $io, FilesystemInterface $filesystem)
@@ -189,10 +177,6 @@ class ThumbnailCleanupCommand extends ShopwareCommand
     }
 
     /**
-     * @param SymfonyStyle        $io
-     * @param FilesystemInterface $filesystem
-     * @param array               $thumbnailFiles
-     *
      * @return int
      */
     private function deleteThumbnails(SymfonyStyle $io, FilesystemInterface $filesystem, array $thumbnailFiles)

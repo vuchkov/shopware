@@ -29,11 +29,6 @@ use Enlight_Event_EventManager as EnlightEventManager;
 use Shopware\Components\Routing\Context;
 use Shopware\Components\Routing\MatcherInterface;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class EventMatcher implements MatcherInterface
 {
     /**
@@ -41,9 +36,6 @@ class EventMatcher implements MatcherInterface
      */
     protected $eventManager;
 
-    /**
-     * @param EnlightEventManager $eventManager
-     */
     public function __construct(EnlightEventManager $eventManager)
     {
         $this->eventManager = $eventManager;
@@ -61,7 +53,7 @@ class EventMatcher implements MatcherInterface
             return $pathInfo;
         }
 
-        $request = new EnlightRequest();
+        $request = EnlightRequest::createFromGlobals();
         $request->setBaseUrl($context->getBaseUrl());
         $request->setPathInfo($pathInfo);
 

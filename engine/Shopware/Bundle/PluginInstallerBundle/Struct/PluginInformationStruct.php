@@ -24,9 +24,6 @@
 
 namespace Shopware\Bundle\PluginInstallerBundle\Struct;
 
-/**
- * Class PluginInformationStruct
- */
 class PluginInformationStruct implements \JsonSerializable
 {
     /**
@@ -98,9 +95,6 @@ class PluginInformationStruct implements \JsonSerializable
      */
     private $licenseQuantity;
 
-    /**
-     * @param array $data
-     */
     public function __construct(array $data)
     {
         $this->label = $data['label'];

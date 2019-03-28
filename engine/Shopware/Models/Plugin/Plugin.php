@@ -29,12 +29,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Shopware\Components\Model\ModelEntity;
 
 /**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- *
  * @ORM\Table(name="s_core_plugins")
- * @ORM\Entity
+ * @ORM\Entity()
  */
 class Plugin extends ModelEntity
 {
@@ -49,7 +45,7 @@ class Plugin extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -425,7 +421,7 @@ class Plugin extends ModelEntity
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return \DateTimeInterface|null
      */
     public function getInstalled()
     {

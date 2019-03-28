@@ -31,11 +31,6 @@ use Shopware\Bundle\SearchBundleDBAL\QueryBuilder;
 use Shopware\Bundle\SearchBundleDBAL\VariantHelperInterface;
 use Shopware\Bundle\StoreFrontBundle\Struct\ShopContextInterface;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class VariantConditionHandler implements ConditionHandlerInterface
 {
     /**
@@ -43,9 +38,6 @@ class VariantConditionHandler implements ConditionHandlerInterface
      */
     private $helper;
 
-    /**
-     * @param VariantHelperInterface $helper
-     */
     public function __construct(VariantHelperInterface $helper)
     {
         $this->helper = $helper;

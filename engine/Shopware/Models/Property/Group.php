@@ -49,7 +49,7 @@ class Group extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -87,9 +87,9 @@ class Group extends ModelEntity
      *
      * @ORM\ManyToMany(targetEntity="Option")
      * @ORM\JoinTable(name="s_filter_relations",
-     *      joinColumns={@ORM\JoinColumn(name="groupID", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="optionID", referencedColumnName="id")}
-     *      )
+     *     joinColumns={@ORM\JoinColumn(name="groupID", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="optionID", referencedColumnName="id")}
+     * )
      */
     private $options;
 
@@ -116,8 +116,6 @@ class Group extends ModelEntity
     }
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -126,8 +124,6 @@ class Group extends ModelEntity
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      *
      * @return Group
@@ -140,8 +136,6 @@ class Group extends ModelEntity
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getName()
@@ -150,8 +144,6 @@ class Group extends ModelEntity
     }
 
     /**
-     * Set position
-     *
      * @param int $position
      *
      * @return Group
@@ -164,8 +156,6 @@ class Group extends ModelEntity
     }
 
     /**
-     * Get position
-     *
      * @return int
      */
     public function getPosition()
@@ -174,8 +164,6 @@ class Group extends ModelEntity
     }
 
     /**
-     * Set comparable
-     *
      * @param int $comparable
      *
      * @return Group
@@ -188,8 +176,6 @@ class Group extends ModelEntity
     }
 
     /**
-     * Get comparable
-     *
      * @return int
      */
     public function getComparable()
@@ -212,8 +198,6 @@ class Group extends ModelEntity
     }
 
     /**
-     * Get sortMode
-     *
      * @return int
      */
     public function getSortMode()
@@ -232,8 +216,6 @@ class Group extends ModelEntity
     }
 
     /**
-     * @param Option $option
-     *
      * @return \Shopware\Models\Property\Group
      */
     public function removeOption(Option $option)
@@ -244,8 +226,6 @@ class Group extends ModelEntity
     }
 
     /**
-     * @param Option $option
-     *
      * @return \Shopware\Models\Property\Group
      */
     public function addOption(Option $option)

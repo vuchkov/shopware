@@ -28,9 +28,6 @@ use Doctrine\DBAL\Connection;
 use Shopware\Bundle\StoreFrontBundle\Service\BaseProductFactoryServiceInterface;
 use Shopware\Bundle\StoreFrontBundle\Struct\BaseProduct;
 
-/**
- * Class BaseProductFactory
- */
 class BaseProductFactoryService implements BaseProductFactoryServiceInterface
 {
     /**
@@ -38,9 +35,6 @@ class BaseProductFactoryService implements BaseProductFactoryServiceInterface
      */
     private $connection;
 
-    /**
-     * @param Connection $connection
-     */
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;

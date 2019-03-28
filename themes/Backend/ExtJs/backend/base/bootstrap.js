@@ -166,7 +166,8 @@
 {include file='backend/base/store/salutation.js'}
 {include file='backend/base/store/corner_position.js'}
 {include file='backend/base/store/cookie_mode.js'}
-
+{include file='backend/base/store/voucher_modes.js'}
+{include file='backend/base/store/shipping_calculations_display_modes.js'}
 
 {* Include shopware related components *}
 {include file='backend/base/component/Shopware.button.HoverButton.js'}
@@ -179,7 +180,7 @@
 {include file='backend/base/component/Shopware.grid.HeaderToolTip.js'}
 {include file='backend/base/component/Shopware.Notification.js'}
 {include file='backend/base/component/Shopware.form.PasswordStrengthMeter.js'}
-{include file='backend/base/component/Shopware.form.field.CodeMirror.js'}
+{include file='backend/base/component/Shopware.form.field.AceEditor.js'}
 {include file='backend/base/component/Shopware.form.field.ArticleSearch.js'}
 {include file='backend/base/component/Shopware.form.field.PagingComboBox.js'}
 {include file='backend/base/component/Shopware.container.Viewport.js'}

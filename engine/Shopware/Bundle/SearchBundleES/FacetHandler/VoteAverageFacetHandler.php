@@ -24,7 +24,7 @@
 
 namespace Shopware\Bundle\SearchBundleES\FacetHandler;
 
-use ONGR\ElasticsearchDSL\Aggregation\TermsAggregation;
+use ONGR\ElasticsearchDSL\Aggregation\Bucketing\TermsAggregation;
 use ONGR\ElasticsearchDSL\Search;
 use Shopware\Bundle\SearchBundle\Condition\VoteAverageCondition;
 use Shopware\Bundle\SearchBundle\Criteria;
@@ -37,11 +37,12 @@ use Shopware\Bundle\SearchBundleES\HandlerInterface;
 use Shopware\Bundle\SearchBundleES\ResultHydratorInterface;
 use Shopware\Bundle\StoreFrontBundle\Struct\ShopContextInterface;
 use Shopware\Components\QueryAliasMapper;
+use Shopware_Components_Snippet_Manager;
 
 class VoteAverageFacetHandler implements HandlerInterface, ResultHydratorInterface
 {
     /**
-     * @var \Shopware_Components_Snippet_Manager
+     * @var Shopware_Components_Snippet_Manager
      */
     private $snippetManager;
 
@@ -50,12 +51,8 @@ class VoteAverageFacetHandler implements HandlerInterface, ResultHydratorInterfa
      */
     private $queryAliasMapper;
 
-    /**
-     * @param \Shopware_Components_Snippet_Manager $snippetManager
-     * @param QueryAliasMapper                     $queryAliasMapper
-     */
     public function __construct(
-        \Shopware_Components_Snippet_Manager $snippetManager,
+        Shopware_Components_Snippet_Manager $snippetManager,
         QueryAliasMapper $queryAliasMapper
     ) {
         $this->snippetManager = $snippetManager;
@@ -110,9 +107,6 @@ class VoteAverageFacetHandler implements HandlerInterface, ResultHydratorInterfa
     }
 
     /**
-     * @param Criteria $criteria
-     * @param array    $buckets
-     *
      * @return RadioFacetResult
      */
     private function createFacet(Criteria $criteria, array $buckets)
@@ -126,7 +120,7 @@ class VoteAverageFacetHandler implements HandlerInterface, ResultHydratorInterfa
 
         $values = $this->buildItems($buckets, $activeAverage);
 
-        /** @var VoteAverageFacet $facet */
+        /** @var VoteAverageFacet|null $facet */
         $facet = $criteria->getFacet('vote_average');
         if ($facet && !empty($facet->getLabel())) {
             $label = $facet->getLabel();

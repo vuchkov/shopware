@@ -24,10 +24,10 @@
 
 namespace Shopware\Bundle\SearchBundleES\FacetHandler;
 
-use ONGR\ElasticsearchDSL\Aggregation\FilterAggregation;
-use ONGR\ElasticsearchDSL\Aggregation\TermsAggregation;
-use ONGR\ElasticsearchDSL\Aggregation\ValueCountAggregation;
-use ONGR\ElasticsearchDSL\Query\ExistsQuery;
+use ONGR\ElasticsearchDSL\Aggregation\Bucketing\FilterAggregation;
+use ONGR\ElasticsearchDSL\Aggregation\Bucketing\TermsAggregation;
+use ONGR\ElasticsearchDSL\Aggregation\Metric\ValueCountAggregation;
+use ONGR\ElasticsearchDSL\Query\TermLevel\ExistsQuery;
 use ONGR\ElasticsearchDSL\Search;
 use Shopware\Bundle\AttributeBundle\Service\ConfigurationStruct;
 use Shopware\Bundle\AttributeBundle\Service\CrudService;
@@ -63,11 +63,6 @@ class ProductAttributeFacetHandler implements HandlerInterface, ResultHydratorIn
      */
     private $crudService;
 
-    /**
-     * ProductAttributeFacetHandler constructor.
-     *
-     * @param CrudService $crudService
-     */
     public function __construct(CrudService $crudService)
     {
         $this->crudService = $crudService;
@@ -155,7 +150,7 @@ class ProductAttributeFacetHandler implements HandlerInterface, ResultHydratorIn
                 continue;
             }
 
-            /** @var ConfigurationStruct $attribute */
+            /** @var ConfigurationStruct|null $attribute */
             $attribute = $this->crudService->get('s_articles_attributes', $criteriaPart->getField());
 
             $type = $attribute ? $attribute->getColumnType() : null;
@@ -195,18 +190,12 @@ class ProductAttributeFacetHandler implements HandlerInterface, ResultHydratorIn
     }
 
     /**
-     * @param string                $type
-     * @param FacetResultInterface  $result
-     * @param ProductAttributeFacet $facet
+     * @param string $type
      *
      * @return FacetResultInterface
      */
     private function switchTemplate($type, FacetResultInterface $result, ProductAttributeFacet $facet)
     {
-        if ($result === null) {
-            return $result;
-        }
-
         if (!$result instanceof TemplateSwitchable) {
             return $result;
         }
@@ -235,33 +224,30 @@ class ProductAttributeFacetHandler implements HandlerInterface, ResultHydratorIn
     {
         switch (true) {
             case $type === TypeMapping::TYPE_DATE && $mode === ProductAttributeFacet::MODE_RANGE_RESULT:
-
                 return 'frontend/listing/filter/facet-date-range.tpl';
+
             case $type === TypeMapping::TYPE_DATE && $mode === ProductAttributeFacet::MODE_VALUE_LIST_RESULT:
-
                 return 'frontend/listing/filter/facet-date-multi.tpl';
+
             case $type === TypeMapping::TYPE_DATE && $mode !== ProductAttributeFacet::MODE_BOOLEAN_RESULT:
-
                 return 'frontend/listing/filter/facet-date.tpl';
+
             case $type === TypeMapping::TYPE_DATETIME && $mode === ProductAttributeFacet::MODE_RANGE_RESULT:
-
                 return 'frontend/listing/filter/facet-datetime-range.tpl';
+
             case $type === TypeMapping::TYPE_DATETIME && $mode === ProductAttributeFacet::MODE_VALUE_LIST_RESULT:
-
                 return 'frontend/listing/filter/facet-datetime-multi.tpl';
+
             case $type === TypeMapping::TYPE_DATETIME && $mode !== ProductAttributeFacet::MODE_BOOLEAN_RESULT:
-
                 return 'frontend/listing/filter/facet-datetime.tpl';
-            default:
 
+            default:
                 return $defaultTemplate;
         }
     }
 
     /**
-     * @param ProductAttributeFacet $criteriaPart
-     * @param array                 $data
-     * @param Criteria              $criteria
+     * @param array $data
      *
      * @return RadioFacetResult|ValueListFacetResult|null
      */
@@ -311,9 +297,7 @@ class ProductAttributeFacetHandler implements HandlerInterface, ResultHydratorIn
     }
 
     /**
-     * @param ProductAttributeFacet $criteriaPart
-     * @param array                 $data
-     * @param Criteria              $criteria
+     * @param array $data
      *
      * @return BooleanFacetResult|null
      */
@@ -335,9 +319,7 @@ class ProductAttributeFacetHandler implements HandlerInterface, ResultHydratorIn
     }
 
     /**
-     * @param ProductAttributeFacet $criteriaPart
-     * @param array                 $data
-     * @param Criteria              $criteria
+     * @param array $data
      *
      * @return RangeFacetResult
      */
@@ -374,8 +356,6 @@ class ProductAttributeFacetHandler implements HandlerInterface, ResultHydratorIn
     }
 
     /**
-     * @param array $aggregation
-     *
      * @return array
      */
     private function formatDates(array $aggregation)

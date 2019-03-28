@@ -28,11 +28,6 @@ use Shopware\Components\OpenSSLVerifier;
 use Shopware\Components\ShopwareReleaseStruct;
 use ShopwarePlugins\SwagUpdate\Components\Struct\Version;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class UpdateCheck
 {
     /**
@@ -61,11 +56,9 @@ class UpdateCheck
     private $release;
 
     /**
-     * @param string                $apiEndpoint
-     * @param string                $channel
-     * @param bool                  $verifySignature
-     * @param OpenSSLVerifier       $verificator
-     * @param ShopwareReleaseStruct $release
+     * @param string $apiEndpoint
+     * @param string $channel
+     * @param bool   $verifySignature
      */
     public function __construct($apiEndpoint, $channel, $verifySignature, OpenSSLVerifier $verificator, ShopwareReleaseStruct $release)
     {
@@ -86,7 +79,6 @@ class UpdateCheck
 
     /**
      * @param string $shopwareVersion
-     * @param array  $params
      *
      * @return Version|null
      */

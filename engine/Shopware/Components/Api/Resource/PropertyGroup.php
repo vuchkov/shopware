@@ -28,10 +28,6 @@ use Shopware\Components\Api\Exception as ApiException;
 
 /**
  * Property API Resource
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class PropertyGroup extends Resource
 {
@@ -62,7 +58,7 @@ class PropertyGroup extends Resource
         $filters = [['property' => 'groups.id', 'expression' => '=', 'value' => $id]];
         $query = $this->getRepository()->getListGroupsQuery($filters);
 
-        /** @var \Shopware\Models\Property\Group $property */
+        /** @var \Shopware\Models\Property\Group|null $property */
         $property = $query->getOneOrNullResult($this->getResultMode());
 
         if (!$property) {
@@ -73,10 +69,8 @@ class PropertyGroup extends Resource
     }
 
     /**
-     * @param int   $offset
-     * @param int   $limit
-     * @param array $criteria
-     * @param array $orderBy
+     * @param int $offset
+     * @param int $limit
      *
      * @return array
      */
@@ -99,8 +93,6 @@ class PropertyGroup extends Resource
     }
 
     /**
-     * @param array $params
-     *
      * @throws \Shopware\Components\Api\Exception\ValidationException
      * @throws \Exception
      *
@@ -127,8 +119,7 @@ class PropertyGroup extends Resource
     }
 
     /**
-     * @param int   $id
-     * @param array $params
+     * @param int $id
      *
      * @throws \Shopware\Components\Api\Exception\ValidationException
      * @throws \Shopware\Components\Api\Exception\NotFoundException
@@ -144,7 +135,7 @@ class PropertyGroup extends Resource
             throw new ApiException\ParameterMissingException();
         }
 
-        /** @var \Shopware\Models\Property\Group $propertyGroup */
+        /** @var \Shopware\Models\Property\Group|null $propertyGroup */
         $propertyGroup = $this->getRepository()->find($id);
 
         if (!$propertyGroup) {
@@ -180,7 +171,7 @@ class PropertyGroup extends Resource
             throw new ApiException\ParameterMissingException();
         }
 
-        /** @var \Shopware\Models\Property\Group $propertyGroup */
+        /** @var \Shopware\Models\Property\Group|null $propertyGroup */
         $propertyGroup = $this->getRepository()->find($id);
 
         if (!$propertyGroup) {
@@ -194,7 +185,6 @@ class PropertyGroup extends Resource
     }
 
     /**
-     * @param array      $params
      * @param array|null $propertyGroup
      *
      * @throws ApiException\CustomValidationException

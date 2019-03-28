@@ -24,7 +24,7 @@
 
 namespace Shopware\Bundle\SearchBundleES;
 
-use ONGR\ElasticsearchDSL\Query\BoolQuery;
+use ONGR\ElasticsearchDSL\Query\Compound\BoolQuery;
 use ONGR\ElasticsearchDSL\Search;
 use Shopware\Bundle\SearchBundle\Criteria;
 use Shopware\Bundle\SearchBundle\CriteriaPartInterface;
@@ -38,19 +38,12 @@ class CombinedConditionQueryBuilder
      */
     private $container;
 
-    /**
-     * @param Container $container
-     */
     public function __construct(Container $container)
     {
         $this->container = $container;
     }
 
     /**
-     * @param array                $conditions
-     * @param Criteria             $criteria
-     * @param ShopContextInterface $context
-     *
      * @return BoolQuery
      */
     public function build(array $conditions, Criteria $criteria, ShopContextInterface $context)
@@ -72,8 +65,11 @@ class CombinedConditionQueryBuilder
         if ($search->getPostFilters()) {
             $query->add($search->getPostFilters());
         }
-        if ($search->getFilters()) {
-            $query->add($search->getFilters());
+
+        if ($search->getQueries()->getQueries(BoolQuery::FILTER)) {
+            foreach ($search->getQueries()->getQueries(BoolQuery::FILTER) as $filter) {
+                $query->add($filter, BoolQuery::FILTER);
+            }
         }
         if ($search->getQueries()) {
             $query->add($search->getQueries());
@@ -83,8 +79,6 @@ class CombinedConditionQueryBuilder
     }
 
     /**
-     * @param CriteriaPartInterface $condition
-     *
      * @return PartialConditionHandlerInterface|HandlerInterface
      */
     private function getHandler(CriteriaPartInterface $condition)

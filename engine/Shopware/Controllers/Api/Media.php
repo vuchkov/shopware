@@ -25,7 +25,6 @@
 use Shopware\Bundle\ControllerBundle\RestController;
 use Shopware\Components\Api\Resource\Media;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\FileBag;
 
 class Shopware_Controllers_Api_Media extends RestController
 {
@@ -93,7 +92,7 @@ class Shopware_Controllers_Api_Media extends RestController
         ];
 
         $this->View()->assign(['success' => true, 'data' => $data]);
-        $this->Response()->setHeader('Location', $location);
+        $this->Response()->headers->set('location', $location);
     }
 
     /**
@@ -132,20 +131,13 @@ class Shopware_Controllers_Api_Media extends RestController
     }
 
     /**
-     * @param array $params
-     *
      * @throws Exception
-     *
-     * @return array
      */
     private function prepareUploadedFile(array $params): array
     {
-        $fileBag = new FileBag($_FILES);
-
         // Check for a POSTed file
-        if ($fileBag->has('file')) {
-            /** @var UploadedFile $file */
-            $file = $fileBag->get('file');
+        if ($this->Request()->files->has('file')) {
+            $file = $this->Request()->files->get('file');
             $fileExtension = $file->getClientOriginalExtension();
             $fileName = $file->getClientOriginalName();
 
@@ -175,10 +167,6 @@ class Shopware_Controllers_Api_Media extends RestController
 
     /**
      * Use the ID of the authenticated user as a fallback 'userId'
-     *
-     * @param array $params
-     *
-     * @return array
      */
     private function prepareFallbackUser(array $params): array
     {

@@ -84,9 +84,6 @@ class Utils
         return $results;
     }
 
-    /**
-     * @return mixed
-     */
     public static function getRealIpAddr()
     {
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
@@ -101,8 +98,8 @@ class Utils
     }
 
     /**
-     * @param      $dir
-     * @param bool $includeDir
+     * @param string $dir
+     * @param bool   $includeDir
      */
     public static function deleteDir($dir, $includeDir = false)
     {
@@ -142,7 +139,7 @@ class Utils
      */
     public static function isAllowed($clientIp)
     {
-        $allowed = trim(file_get_contents(UPDATE_PATH . '/' . 'allowed_ip.txt'));
+        $allowed = trim(file_get_contents(UPDATE_PATH . '/allowed_ip.txt'));
         $allowed = explode("\n", $allowed);
         $allowed = array_map('trim', $allowed);
 
@@ -150,8 +147,7 @@ class Utils
     }
 
     /**
-     * @param \Slim\Http\Request $request
-     * @param string             $lang
+     * @param string $lang
      *
      * @return string
      */
@@ -280,17 +276,12 @@ class Utils
         return array_keys($errorFiles);
     }
 
-    /**
-     * @param \PDO $conn
-     */
     protected static function setNonStrictSQLMode(\PDO $conn)
     {
         $conn->exec("SET @@session.sql_mode = ''");
     }
 
     /**
-     * @param \PDO $conn
-     *
      * @throws \RuntimeException
      */
     private static function checkSQLMode(\PDO $conn)

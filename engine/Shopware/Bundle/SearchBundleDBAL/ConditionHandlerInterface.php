@@ -27,17 +27,11 @@ namespace Shopware\Bundle\SearchBundleDBAL;
 use Shopware\Bundle\SearchBundle\ConditionInterface;
 use Shopware\Bundle\StoreFrontBundle\Struct\ShopContextInterface;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 interface ConditionHandlerInterface
 {
     /**
      * Checks if the passed condition can be handled by this class.
      *
-     * @param ConditionInterface $condition
      *
      * @return bool
      */
@@ -47,10 +41,6 @@ interface ConditionHandlerInterface
      * Handles the passed condition object.
      * Extends the provided query builder with the specify conditions.
      * Should use the andWhere function, otherwise other conditions would be overwritten.
-     *
-     * @param ConditionInterface   $condition
-     * @param QueryBuilder         $query
-     * @param ShopContextInterface $context
      */
     public function generateCondition(
         ConditionInterface $condition,

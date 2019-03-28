@@ -28,10 +28,6 @@ use Doctrine\DBAL\Connection;
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
 /**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- *
  * NOTICE:  When doing changes on this file, please remember to do those changes in the CheapestPriceGateway as well!
  */
 class CheapestPriceESGateway extends CheapestPriceGateway
@@ -46,12 +42,6 @@ class CheapestPriceESGateway extends CheapestPriceGateway
      */
     private $connection;
 
-    /**
-     * @param Connection                  $connection
-     * @param FieldHelper                 $fieldHelper
-     * @param Hydrator\PriceHydrator      $priceHydrator
-     * @param \Shopware_Components_Config $config
-     */
     public function __construct(
         Connection $connection,
         FieldHelper $fieldHelper,
@@ -68,8 +58,7 @@ class CheapestPriceESGateway extends CheapestPriceGateway
      * This method misses the laststock subquery where-condition as laststock-products would be indexed without prices otherwise
      * what would lead to broken price filters when ES is used
      *
-     * @param Struct\BaseProduct[]  $products
-     * @param Struct\Customer\Group $customerGroup
+     * @param Struct\BaseProduct[] $products
      *
      * @return array
      */

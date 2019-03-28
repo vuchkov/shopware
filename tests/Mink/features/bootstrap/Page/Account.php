@@ -308,9 +308,7 @@ class Account extends Page implements HelperSelectorInterface
     }
 
     /**
-     * @param AccountOrder $order
-     * @param string       $orderNumber
-     * @param array        $articles
+     * @param string $orderNumber
      */
     public function checkOrder(AccountOrder $order, $orderNumber, array $articles)
     {
@@ -370,8 +368,6 @@ class Account extends Page implements HelperSelectorInterface
 
     /**
      * Fills the fields of the registration form and submits it
-     *
-     * @param array $data
      */
     public function register(array $data)
     {
@@ -382,8 +378,7 @@ class Account extends Page implements HelperSelectorInterface
     }
 
     /**
-     * @param AddressBox $addresses
-     * @param string     $name
+     * @param string $name
      */
     public function chooseAddress(AddressBox $addresses, $name)
     {
@@ -391,7 +386,6 @@ class Account extends Page implements HelperSelectorInterface
     }
 
     /**
-     * @param string $title
      * @param string $salutation
      * @param string $firstname
      * @param string $lastname
@@ -443,12 +437,11 @@ class Account extends Page implements HelperSelectorInterface
      */
     protected function verifyPageLogin()
     {
-        return
-            $this->hasField('email') &&
-            $this->hasField('password') &&
-            Helper::hasNamedLink($this, 'forgotPasswordLink') &&
-            Helper::hasNamedButton($this, 'loginButton') &&
-            $this->verifyPageRegister()
+        return $this->hasField('email')
+            && $this->hasField('password')
+            && Helper::hasNamedLink($this, 'forgotPasswordLink')
+            && Helper::hasNamedButton($this, 'loginButton')
+            && $this->verifyPageRegister()
         ;
     }
 
@@ -459,41 +452,39 @@ class Account extends Page implements HelperSelectorInterface
      */
     protected function verifyPageRegister()
     {
-        return
-            $this->hasSelect('register[personal][customer_type]') &&
-            $this->hasSelect('register[personal][salutation]') &&
-            $this->hasField('register[personal][firstname]') &&
-            $this->hasField('register[personal][lastname]') &&
-            $this->hasField('register[personal][email]') &&
-            $this->hasField('register[personal][password]') &&
+        return $this->hasSelect('register[personal][customer_type]')
+            && $this->hasSelect('register[personal][salutation]')
+            && $this->hasField('register[personal][firstname]')
+            && $this->hasField('register[personal][lastname]')
+            && $this->hasField('register[personal][email]')
+            && $this->hasField('register[personal][password]')
 
-            $this->hasField('register[billing][company]') &&
-            $this->hasField('register[billing][department]') &&
-            $this->hasField('register[billing][vatId]') &&
+            && $this->hasField('register[billing][company]')
+            && $this->hasField('register[billing][department]')
+            && $this->hasField('register[billing][vatId]')
 
-            $this->hasField('register[billing][street]') &&
-            $this->hasField('register[billing][zipcode]') &&
-            $this->hasField('register[billing][city]') &&
-            $this->hasSelect('register[billing][country]') &&
-            $this->hasField('register[billing][shippingAddress]') &&
+            && $this->hasField('register[billing][street]')
+            && $this->hasField('register[billing][zipcode]')
+            && $this->hasField('register[billing][city]')
+            && $this->hasSelect('register[billing][country]')
+            && $this->hasField('register[billing][shippingAddress]')
 
-            $this->hasSelect('register[shipping][salutation]') &&
-            $this->hasField('register[shipping][company]') &&
-            $this->hasField('register[shipping][department]') &&
-            $this->hasField('register[shipping][firstname]') &&
-            $this->hasField('register[shipping][lastname]') &&
-            $this->hasField('register[shipping][street]') &&
-            $this->hasField('register[shipping][zipcode]') &&
-            $this->hasField('register[shipping][city]') &&
-            $this->hasSelect('register[shipping][country]') &&
+            && $this->hasSelect('register[shipping][salutation]')
+            && $this->hasField('register[shipping][company]')
+            && $this->hasField('register[shipping][department]')
+            && $this->hasField('register[shipping][firstname]')
+            && $this->hasField('register[shipping][lastname]')
+            && $this->hasField('register[shipping][street]')
+            && $this->hasField('register[shipping][zipcode]')
+            && $this->hasField('register[shipping][city]')
+            && $this->hasSelect('register[shipping][country]')
 
-            Helper::hasNamedButton($this, 'sendButton')
+            && Helper::hasNamedButton($this, 'sendButton')
         ;
     }
 
     /**
-     * @param AddressBox $addresses
-     * @param string     $name
+     * @param string $name
      *
      * @throws \Exception
      */
@@ -523,8 +514,7 @@ class Account extends Page implements HelperSelectorInterface
     /**
      * Helper method checks the order number
      *
-     * @param AccountOrder $order
-     * @param string       $orderNumber
+     * @param string $orderNumber
      */
     private function checkOrderNumber(AccountOrder $order, $orderNumber)
     {
@@ -550,8 +540,6 @@ class Account extends Page implements HelperSelectorInterface
     /**
      * Helper method checks the order positions
      *
-     * @param AccountOrder $order
-     * @param array        $articles
      *
      * @throws \Exception
      */
@@ -586,7 +574,6 @@ class Account extends Page implements HelperSelectorInterface
      * Helper method checks the ESD articles
      *
      * @param string $date
-     * @param array  $articles
      *
      * @throws \Exception
      */

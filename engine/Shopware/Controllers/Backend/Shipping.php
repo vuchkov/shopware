@@ -29,13 +29,6 @@ use Shopware\Models\Dispatch\Holiday;
 use Shopware\Models\Dispatch\ShippingCost;
 use Shopware\Models\Payment\Payment;
 
-/**
- * Shopware Backend Shipping / Dispatch
- *
- * Controller to handle the ExtJS-Requests
- * Handles the adding, the deletion and the editing of shipping costs by
- * calling the repository-functions
- */
 class Shopware_Controllers_Backend_Shipping extends Shopware_Controllers_Backend_ExtJs
 {
     /**
@@ -543,7 +536,6 @@ class Shopware_Controllers_Backend_Shipping extends Shopware_Controllers_Backend
     /**
      * Extends the database data with additional data for easier usage
      *
-     * @param array $shippingCosts
      *
      * @return array
      */

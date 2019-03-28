@@ -26,13 +26,7 @@ namespace Shopware\Bundle\AccountBundle\Service;
 
 use Shopware\Models\Customer\Customer;
 
-/**
- * Interface AccountServiceInterface
- */
 interface CustomerServiceInterface
 {
-    /**
-     * @param Customer $customer
-     */
     public function update(Customer $customer);
 }

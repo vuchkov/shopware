@@ -22,11 +22,6 @@
  * our trademarks remain entirely with us.
  */
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Shopware_Tests_Controllers_Backend_LogTest extends Enlight_Components_Test_Controller_TestCase
 {
     /**
@@ -60,8 +55,6 @@ class Shopware_Tests_Controllers_Backend_LogTest extends Enlight_Components_Test
     /**
      * This test tests the creating of a new log.
      * This function is called before testDeleteLogs
-     *
-     * @return mixed
      */
     public function testCreateLog()
     {
@@ -94,7 +87,7 @@ class Shopware_Tests_Controllers_Backend_LogTest extends Enlight_Components_Test
      *
      * @depends testCreateLog
      *
-     * @param $lastId
+     * @param string $lastId
      */
     public function testDeleteLogs($lastId)
     {

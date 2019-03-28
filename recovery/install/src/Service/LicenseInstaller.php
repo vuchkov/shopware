@@ -26,11 +26,6 @@ namespace Shopware\Recovery\Install\Service;
 
 use Shopware\Recovery\Install\Struct\LicenseInformation;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class LicenseInstaller
 {
     /**
@@ -38,17 +33,12 @@ class LicenseInstaller
      */
     private $pdo;
 
-    /**
-     * @param \PDO $pdo
-     */
     public function __construct(\PDO $pdo)
     {
         $this->pdo = $pdo;
     }
 
     /**
-     * @param LicenseInformation $license
-     *
      * @throws \RuntimeException
      */
     public function installLicense(LicenseInformation $license)

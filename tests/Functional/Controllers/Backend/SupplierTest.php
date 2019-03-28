@@ -22,11 +22,6 @@
  * our trademarks remain entirely with us.
  */
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Shopware_Tests_Controllers_Backend_SupplierTest extends Enlight_Components_Test_Controller_TestCase
 {
     /**
@@ -96,7 +91,7 @@ class Shopware_Tests_Controllers_Backend_SupplierTest extends Enlight_Components
     /**
      * @depends testAddSupplier
      *
-     * @param $lastSupplier
+     * @param array $lastSupplier
      *
      * @return array
      */
@@ -126,8 +121,6 @@ class Shopware_Tests_Controllers_Backend_SupplierTest extends Enlight_Components
      * The lastId is the id from the last add test
      *
      * @depends testUpdateSupplier
-     *
-     * @param array $lastSupplier
      */
     public function testDeleteSupplier(array $lastSupplier)
     {

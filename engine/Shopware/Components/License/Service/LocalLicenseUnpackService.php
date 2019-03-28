@@ -31,16 +31,9 @@ use Shopware\Components\License\Struct\LicenseInformation;
 use Shopware\Components\License\Struct\LicenseUnpackRequest;
 use Shopware\Components\License\Struct\ShopwareEdition;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class LocalLicenseUnpackService implements LicenseUnpackServiceInterface
 {
     /**
-     * @param LicenseUnpackRequest $request
-     *
      * @throws LicenseHostException
      * @throws LicenseProductKeyException
      *

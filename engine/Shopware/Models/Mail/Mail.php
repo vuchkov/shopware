@@ -45,7 +45,7 @@ use Shopware\Components\Model\ModelEntity;
  *
  * @ORM\Entity(repositoryClass="Repository")
  * @ORM\Table(name="s_core_config_mails")
- * @ORM\HasLifecycleCallbacks
+ * @ORM\HasLifecycleCallbacks()
  */
 class Mail extends ModelEntity
 {
@@ -90,7 +90,7 @@ class Mail extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -183,8 +183,6 @@ class Mail extends ModelEntity
     }
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -193,8 +191,6 @@ class Mail extends ModelEntity
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      *
      * @return \Shopware\Models\Mail\Mail
@@ -207,8 +203,6 @@ class Mail extends ModelEntity
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getName()
@@ -217,9 +211,6 @@ class Mail extends ModelEntity
     }
 
     /**
-     * Set fromMail
-     *
-     *
      * @param string $fromMail
      *
      * @return \Shopware\Models\Mail\Mail
@@ -232,8 +223,6 @@ class Mail extends ModelEntity
     }
 
     /**
-     * Get fromMail
-     *
      * @return string
      */
     public function getFromMail()
@@ -242,8 +231,6 @@ class Mail extends ModelEntity
     }
 
     /**
-     * Set fromName
-     *
      * @param string $fromName
      *
      * @return \Shopware\Models\Mail\Mail
@@ -256,8 +243,6 @@ class Mail extends ModelEntity
     }
 
     /**
-     * Get fromName
-     *
      * @return string
      */
     public function getFromName()
@@ -266,8 +251,6 @@ class Mail extends ModelEntity
     }
 
     /**
-     * Set subject
-     *
      * @param string $subject
      *
      * @return \Shopware\Models\Mail\Mail
@@ -280,8 +263,6 @@ class Mail extends ModelEntity
     }
 
     /**
-     * Get subject
-     *
      * @return string
      */
     public function getSubject()
@@ -290,8 +271,6 @@ class Mail extends ModelEntity
     }
 
     /**
-     * Set content
-     *
      * @param string $content
      *
      * @return \Shopware\Models\Mail\Mail
@@ -304,8 +283,6 @@ class Mail extends ModelEntity
     }
 
     /**
-     * Get content
-     *
      * @return string
      */
     public function getContent()
@@ -314,8 +291,6 @@ class Mail extends ModelEntity
     }
 
     /**
-     * Set contentHtml
-     *
      * @param string $contentHtml
      *
      * @return \Shopware\Models\Mail\Mail
@@ -328,8 +303,6 @@ class Mail extends ModelEntity
     }
 
     /**
-     * Get contentHtml
-     *
      * @return string
      */
     public function getContentHtml()
@@ -338,8 +311,6 @@ class Mail extends ModelEntity
     }
 
     /**
-     * Set isHtml
-     *
      * @param bool $isHtml
      *
      * @return \Shopware\Models\Mail\Mail
@@ -546,7 +517,7 @@ class Mail extends ModelEntity
     }
 
     /**
-     * @return \Shopware\Models\Order\Status
+     * @return \Shopware\Models\Order\Status|null
      */
     public function getStatus()
     {

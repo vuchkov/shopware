@@ -31,18 +31,13 @@ use Zend_Locale_Data;
 /**
  * Wrapper for accessing the used zend cache instance
  * + call of Zend_Locale_Data::setCache.
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class Cache
 {
     /**
-     * @param string                $backend
-     * @param array                 $frontendOptions
-     * @param array                 $backendOptions
-     * @param ShopwareReleaseStruct $release
+     * @param string $backend
+     * @param array  $frontendOptions
+     * @param array  $backendOptions
      *
      * @throws \Zend_Cache_Exception
      *

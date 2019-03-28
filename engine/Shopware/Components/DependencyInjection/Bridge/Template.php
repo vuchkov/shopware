@@ -27,21 +27,9 @@ namespace Shopware\Components\DependencyInjection\Bridge;
 use Shopware\Components\Escaper\EscaperInterface;
 use Shopware\Components\Template\Security;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Template
 {
     /**
-     * @param \Enlight_Event_EventManager          $eventManager
-     * @param \Enlight_Components_Snippet_Resource $snippetResource
-     * @param EscaperInterface                     $escaper
-     * @param array                                $templateConfig
-     * @param array                                $securityConfig
-     * @param array                                $backendOptions
-     *
      * @return \Enlight_Template_Manager
      */
     public function factory(

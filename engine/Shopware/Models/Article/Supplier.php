@@ -103,7 +103,7 @@ class Supplier extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -168,8 +168,6 @@ class Supplier extends ModelEntity
     }
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -366,8 +364,6 @@ class Supplier extends ModelEntity
     }
 
     /**
-     * Set changed
-     *
      * @param \DateTimeInterface|string $changed
      *
      * @return Supplier
@@ -384,8 +380,6 @@ class Supplier extends ModelEntity
     }
 
     /**
-     * Get changed
-     *
      * @return \DateTimeInterface
      */
     public function getChanged()

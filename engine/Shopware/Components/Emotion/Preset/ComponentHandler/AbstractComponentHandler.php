@@ -41,11 +41,6 @@ abstract class AbstractComponentHandler implements ComponentHandlerInterface
      */
     protected $mediaService;
 
-    /**
-     * @param MediaServiceInterface $mediaService
-     * @param MediaResource         $mediaResource
-     * @param ContainerInterface    $container
-     */
     public function __construct(MediaServiceInterface $mediaService, MediaResource $mediaResource, ContainerInterface $container)
     {
         $this->mediaService = $mediaService;
@@ -64,9 +59,7 @@ abstract class AbstractComponentHandler implements ComponentHandlerInterface
     {
         $media = $this->mediaResource->internalCreateMediaByFileLink($assetPath, $albumId);
 
-        if ($media) {
-            $this->mediaResource->getManager()->flush($media);
-        }
+        $this->mediaResource->getManager()->flush($media);
 
         return $media;
     }

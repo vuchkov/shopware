@@ -29,9 +29,6 @@ use Doctrine\DBAL\Connection;
 use Shopware\Bundle\AttributeBundle\Service\TypeMapping;
 use Shopware\Bundle\MediaBundle\Struct\MediaPosition;
 
-/**
- * Class GarbageCollectorFactory
- */
 class GarbageCollectorFactory
 {
     /**
@@ -49,11 +46,6 @@ class GarbageCollectorFactory
      */
     private $mediaService;
 
-    /**
-     * @param \Enlight_Event_EventManager $events
-     * @param Connection                  $connection
-     * @param MediaServiceInterface       $mediaService
-     */
     public function __construct(\Enlight_Event_EventManager $events, Connection $connection, MediaServiceInterface $mediaService)
     {
         $this->connection = $connection;

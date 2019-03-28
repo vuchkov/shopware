@@ -27,9 +27,6 @@ namespace Shopware\Components\Form\Container;
 use Shopware\Components\Form\Container;
 use Shopware\Components\Form\Interfaces\Element;
 
-/**
- * Class TabContainer
- */
 class TabContainer extends Container
 {
     /**
@@ -42,8 +39,6 @@ class TabContainer extends Container
     }
 
     /**
-     * @param Element $element
-     *
      * @throws \InvalidArgumentException
      *
      * @return $this
@@ -60,8 +55,6 @@ class TabContainer extends Container
     }
 
     /**
-     * @param Tab $element
-     *
      * @return $this
      */
     public function addTab(Tab $element)

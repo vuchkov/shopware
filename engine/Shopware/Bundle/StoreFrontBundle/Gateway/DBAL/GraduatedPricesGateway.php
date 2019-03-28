@@ -28,11 +28,6 @@ use Doctrine\DBAL\Connection;
 use Shopware\Bundle\StoreFrontBundle\Gateway;
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class GraduatedPricesGateway implements Gateway\GraduatedPricesGatewayInterface
 {
     /**
@@ -60,11 +55,6 @@ class GraduatedPricesGateway implements Gateway\GraduatedPricesGatewayInterface
      */
     private $connection;
 
-    /**
-     * @param Connection             $connection
-     * @param FieldHelper            $fieldHelper
-     * @param Hydrator\PriceHydrator $priceHydrator
-     */
     public function __construct(
         Connection $connection,
         FieldHelper $fieldHelper,

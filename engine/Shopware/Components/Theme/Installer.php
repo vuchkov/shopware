@@ -39,10 +39,6 @@ use Shopware\Models\Shop;
  * Within the synchronization process the installer class
  * uses the Theme\Configurator class to synchronize the
  * theme configuration with the database.
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class Installer
 {
@@ -86,15 +82,6 @@ class Installer
      */
     private $service;
 
-    /**
-     * @param ModelManager    $entityManager
-     * @param Configurator    $configurator
-     * @param PathResolver    $pathResolver
-     * @param Util            $util
-     * @param DatabaseHandler $snippetWriter
-     * @param Service         $service
-     * @param array           $snippetConfig
-     */
     public function __construct(
         ModelManager $entityManager,
         Configurator $configurator,
@@ -174,7 +161,6 @@ class Installer
      * Helper function which iterates the engine\Shopware\Themes directory
      * and registers all stored themes within the directory as \Shopware\Models\Shop\Template.
      *
-     * @param \DirectoryIterator             $directories
      * @param \Shopware\Models\Plugin\Plugin $plugin
      *
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -292,8 +278,6 @@ class Installer
      * into the database.
      *
      * The theme snippet namespace are prefixed with themes/theme-name
-     *
-     * @param Shop\Template $template
      */
     private function synchronizeSnippets(Shop\Template $template)
     {
@@ -318,7 +302,6 @@ class Installer
      * Used to update the Shopware\Models\Shop\Template entity with
      * the theme data.
      *
-     * @param Theme $theme
      *
      * @return array
      */
@@ -366,7 +349,6 @@ class Installer
      * Helper function which resolves the theme parent for each
      * passed theme
      *
-     * @param array $themes
      *
      * @throws \Exception
      */

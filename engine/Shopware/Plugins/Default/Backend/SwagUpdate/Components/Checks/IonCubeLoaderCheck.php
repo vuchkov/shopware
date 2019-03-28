@@ -28,11 +28,6 @@ use Enlight_Components_Snippet_Namespace as SnippetNamespace;
 use ShopwarePlugins\SwagUpdate\Components\CheckInterface;
 use ShopwarePlugins\SwagUpdate\Components\Validation;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.com)
- */
 class IonCubeLoaderCheck implements CheckInterface
 {
     const CHECK_TYPE = 'ioncubeloaderversion';
@@ -42,9 +37,6 @@ class IonCubeLoaderCheck implements CheckInterface
      */
     private $namespace;
 
-    /**
-     * @param SnippetNamespace $namespace
-     */
     public function __construct(SnippetNamespace $namespace)
     {
         $this->namespace = $namespace;

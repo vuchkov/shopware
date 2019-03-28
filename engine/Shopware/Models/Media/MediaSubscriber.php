@@ -29,11 +29,6 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
 use Shopware\Components\DependencyInjection\Container;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class MediaSubscriber implements EventSubscriber
 {
     /**
@@ -64,8 +59,6 @@ class MediaSubscriber implements EventSubscriber
 
     /**
      * Set meta data on load
-     *
-     * @param LifecycleEventArgs $eventArgs
      */
     public function postLoad(LifecycleEventArgs $eventArgs)
     {
@@ -74,8 +67,6 @@ class MediaSubscriber implements EventSubscriber
 
     /**
      * Set meta data on save
-     *
-     * @param LifecycleEventArgs $eventArgs
      */
     public function prePersist(LifecycleEventArgs $eventArgs)
     {
@@ -85,7 +76,6 @@ class MediaSubscriber implements EventSubscriber
     /**
      * Live migration to fill width/height
      *
-     * @param LifecycleEventArgs $eventArgs
      *
      * @throws \Exception
      */
@@ -107,9 +97,10 @@ class MediaSubscriber implements EventSubscriber
 
                 case Media::TYPE_VECTOR:
                     if (
-                        $media->getExtension() === 'svg' &&
-                        $xml = simplexml_load_string($mediaService->read($media->getPath()))
+                        $media->getExtension() === 'svg'
+                        && $xml = simplexml_load_string($mediaService->read($media->getPath()))
                     ) {
+                        /** @var \SimpleXMLElement|null $attr */
                         $attr = $xml->attributes();
 
                         if ((int) $attr->width > 0 && (int) $attr->height > 0) {

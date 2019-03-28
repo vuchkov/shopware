@@ -26,11 +26,6 @@ namespace Shopware\Bundle\StoreFrontBundle\Gateway;
 
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 interface PriceGroupDiscountGatewayInterface
 {
     /**
@@ -38,8 +33,6 @@ interface PriceGroupDiscountGatewayInterface
      * - Price group base data
      * - Price group discounts for the provided customer group
      *
-     * @param Struct\Customer\Group       $customerGroup
-     * @param Struct\ShopContextInterface $context
      *
      * @return Struct\Product\PriceGroup[] Indexed by the price group id
      */

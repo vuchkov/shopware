@@ -26,13 +26,6 @@ use Shopware\Components\BasketSignature\BasketPersister;
 use Shopware\Components\BasketSignature\BasketSignatureGeneratorInterface;
 use Shopware\Components\Random;
 
-/**
- * Shopware Payment Controller
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 abstract class Shopware_Controllers_Frontend_Payment extends Enlight_Controller_Action
 {
     /**
@@ -273,8 +266,7 @@ abstract class Shopware_Controllers_Frontend_Payment extends Enlight_Controller_
     }
 
     /**
-     * @param string      $signature
-     * @param ArrayObject $basket
+     * @param string $signature
      *
      * @throws RuntimeException if signature does not match with provided basket
      */

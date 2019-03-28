@@ -27,11 +27,6 @@ namespace Shopware\Components;
 use Shopware\Components\DependencyInjection\Container;
 use Shopware\Components\Theme\PathResolver;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class CacheManager
 {
     const CACHE_TAG_TEMPLATE = 'template';
@@ -83,9 +78,6 @@ class CacheManager
      */
     private $themePathResolver;
 
-    /**
-     * @param Container $container
-     */
     public function __construct(Container $container)
     {
         $this->container = $container;
@@ -247,7 +239,7 @@ class CacheManager
     /**
      * Returns cache information
      *
-     * @param null $request
+     * @param \Enlight_Controller_Request_Request|null $request
      *
      * @return array
      */

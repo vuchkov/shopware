@@ -24,11 +24,6 @@
 
 namespace Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class ShopPage extends Extendable
 {
     /**
@@ -421,9 +416,6 @@ class ShopPage extends Extendable
         return $this->changed;
     }
 
-    /**
-     * @param \DateTimeInterface $changed
-     */
     public function setChanged(\DateTimeInterface $changed)
     {
         $this->changed = $changed;

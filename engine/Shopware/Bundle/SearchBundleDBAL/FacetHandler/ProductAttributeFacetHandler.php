@@ -43,26 +43,18 @@ use Shopware\Bundle\SearchBundleDBAL\QueryBuilderFactoryInterface;
 use Shopware\Bundle\StoreFrontBundle\Struct;
 use Shopware\Bundle\StoreFrontBundle\Struct\ShopContextInterface;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class ProductAttributeFacetHandler implements PartialFacetHandlerInterface
 {
     /**
      * @var QueryBuilderFactoryInterface
      */
     private $queryBuilderFactory;
+
     /**
      * @var CrudService
      */
     private $crudService;
 
-    /**
-     * @param QueryBuilderFactoryInterface $queryBuilderFactory
-     * @param CrudService                  $crudService
-     */
     public function __construct(
         QueryBuilderFactoryInterface $queryBuilderFactory,
         CrudService $crudService
@@ -81,9 +73,6 @@ class ProductAttributeFacetHandler implements PartialFacetHandlerInterface
 
     /**
      * @param FacetInterface|ProductAttributeFacet $facet
-     * @param Criteria                             $reverted
-     * @param Criteria                             $criteria
-     * @param ShopContextInterface                 $context
      *
      * @return FacetResultInterface|null
      */
@@ -101,7 +90,7 @@ class ProductAttributeFacetHandler implements PartialFacetHandlerInterface
         $query->andWhere($sqlField . ' IS NOT NULL')
             ->andWhere($sqlField . " NOT IN ('', '0', '0000-00-00')");
 
-        /** @var ConfigurationStruct $attribute */
+        /** @var ConfigurationStruct|null $attribute */
         $attribute = $this->crudService->get('s_articles_attributes', $facet->getField());
 
         $type = $attribute ? $attribute->getColumnType() : null;
@@ -143,11 +132,6 @@ class ProductAttributeFacetHandler implements PartialFacetHandlerInterface
     }
 
     /**
-     * @param QueryBuilder                $query
-     * @param ProductAttributeFacet       $facet
-     * @param Criteria                    $criteria
-     * @param Struct\ShopContextInterface $context
-     *
      * @return RadioFacetResult|ValueListFacetResult|null
      */
     private function createValueListFacetResult(
@@ -211,10 +195,6 @@ class ProductAttributeFacetHandler implements PartialFacetHandlerInterface
     }
 
     /**
-     * @param QueryBuilder          $query
-     * @param ProductAttributeFacet $facet
-     * @param Criteria              $criteria
-     *
      * @return RangeFacetResult|null
      */
     private function createRangeFacetResult(
@@ -271,10 +251,6 @@ class ProductAttributeFacetHandler implements PartialFacetHandlerInterface
     }
 
     /**
-     * @param QueryBuilder          $query
-     * @param ProductAttributeFacet $facet
-     * @param Criteria              $criteria
-     *
      * @return BooleanFacetResult|null
      */
     private function createBooleanFacetResult(

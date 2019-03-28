@@ -1,24 +1,25 @@
 <?php
 /**
- * Enlight
+ * Shopware 5
+ * Copyright (c) shopware AG
  *
- * LICENSE
+ * According to our dual licensing model, this program can be used either
+ * under the terms of the GNU Affero General Public License, version 3,
+ * or under a proprietary license.
  *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://enlight.de/license
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@shopware.de so we can send you a copy immediately.
+ * The texts of the GNU Affero General Public License with an additional
+ * permission and of our proprietary license can be found at and
+ * in the LICENSE file you have received along with this program.
  *
- * @category   Enlight
- * @package    Enlight_Snippet
- * @copyright  Copyright (c) 2011, shopware AG (http://www.shopware.de)
- * @license    http://enlight.de/license     New BSD License
- * @version    $Id$
- * @author     Heiner Lohaus
- * @author     $Author$
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * "Shopware" is a registered trademark of shopware AG.
+ * The licensing of the program under the AGPLv3 does not imply a
+ * trademark license. Therefore any rights, title and interest in
+ * our trademarks remain entirely with us.
  */
 
 /**
@@ -27,7 +28,7 @@
  * The Enlight_Components_Snippet_Namespace represents a single snippet namespace with all according snippets.
  *
  * @category   Enlight
- * @package    Enlight_Snippet
+ *
  * @copyright  Copyright (c) 2011, shopware AG (http://www.shopware.de)
  * @license    http://enlight.de/license     New BSD License
  */
@@ -36,7 +37,7 @@ class Enlight_Components_Snippet_Namespace extends Enlight_Config
     /**
      * Whether in-memory modifications to configuration data are allowed
      *
-     * @var boolean
+     * @var bool
      */
     protected $_allowModifications = true;
 
@@ -46,7 +47,18 @@ class Enlight_Components_Snippet_Namespace extends Enlight_Config
     protected $fallback;
 
     /**
-     * @return Enlight_Components_Snippet_Namespace
+     * @param array|bool $options
+     */
+    public function __construct($options = null)
+    {
+        $name = $options['name'] !== null ? $options['name'] : '';
+        unset($options['name']);
+        parent::__construct($name, $options);
+        $this->read();
+    }
+
+    /**
+     * @return Enlight_Components_Snippet_Namespace|null
      */
     public function getFallback()
     {
@@ -62,25 +74,13 @@ class Enlight_Components_Snippet_Namespace extends Enlight_Config
     }
 
     /**
-     * Constructor method
-     *
-     * @param array|bool $options
-     */
-    public function __construct($options = null)
-    {
-        $name = $options['name'] !== null ? $options['name'] : '';
-        unset($options['name']);
-        parent::__construct($name, $options);
-        $this->read();
-    }
-
-    /**
      * Retrieves a value and returns $default if there is no element set.
      *
-     * @param   string $name
-     * @param   mixed $default
-     * @param   bool $save
-     * @return  mixed
+     * @param string $name
+     * @param mixed  $default
+     * @param bool   $save
+     *
+     * @return mixed
      */
     public function get($name, $default = null, $save = false)
     {
@@ -97,6 +97,7 @@ class Enlight_Components_Snippet_Namespace extends Enlight_Config
             $this->set($name, $default);
             $this->write();
         }
+
         return $default;
     }
 }

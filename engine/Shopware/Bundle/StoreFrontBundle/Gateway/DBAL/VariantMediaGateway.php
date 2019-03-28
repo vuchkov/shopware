@@ -28,11 +28,6 @@ use Doctrine\DBAL\Connection;
 use Shopware\Bundle\StoreFrontBundle\Gateway;
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class VariantMediaGateway implements Gateway\VariantMediaGatewayInterface
 {
     /**
@@ -50,11 +45,6 @@ class VariantMediaGateway implements Gateway\VariantMediaGatewayInterface
      */
     private $hydrator;
 
-    /**
-     * @param Connection             $connection
-     * @param FieldHelper            $fieldHelper
-     * @param Hydrator\MediaHydrator $hydrator
-     */
     public function __construct(
         Connection $connection,
         FieldHelper $fieldHelper,

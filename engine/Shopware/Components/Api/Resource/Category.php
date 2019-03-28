@@ -34,10 +34,6 @@ use Shopware_Components_Translation as TranslationComponent;
 
 /**
  * Category API Resource
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class Category extends Resource
 {
@@ -46,9 +42,6 @@ class Category extends Resource
      */
     private $translationComponent;
 
-    /**
-     * @param TranslationComponent|null $translationComponent
-     */
     public function __construct(TranslationComponent $translationComponent = null)
     {
         $this->translationComponent = $translationComponent ?: Shopware()->Container()->get('translation');
@@ -119,10 +112,8 @@ class Category extends Resource
     }
 
     /**
-     * @param int   $offset
-     * @param int   $limit
-     * @param array $criteria
-     * @param array $orderBy
+     * @param int $offset
+     * @param int $limit
      *
      * @return array
      */
@@ -145,8 +136,6 @@ class Category extends Resource
     }
 
     /**
-     * @param array $params
-     *
      * @throws ApiException\ValidationException
      * @throws \Exception
      *
@@ -186,8 +175,7 @@ class Category extends Resource
     }
 
     /**
-     * @param int   $id
-     * @param array $params
+     * @param int $id
      *
      * @throws ApiException\ValidationException
      * @throws ApiException\NotFoundException
@@ -204,7 +192,7 @@ class Category extends Resource
             throw new ApiException\ParameterMissingException();
         }
 
-        /** @var CategoryModel $category */
+        /** @var CategoryModel|null $category */
         $category = $this->getRepository()->find($id);
 
         if (!$category) {
@@ -245,7 +233,7 @@ class Category extends Resource
             throw new ApiException\ParameterMissingException();
         }
 
-        /** @var CategoryModel $category */
+        /** @var CategoryModel|null $category */
         $category = $this->getRepository()->find($id);
 
         if (!$category) {
@@ -298,7 +286,7 @@ class Category extends Resource
                 break;
             }
 
-            /** @var CategoryModel $categoryModel */
+            /** @var CategoryModel|null $categoryModel */
             $categoryModel = $this->getRepository()->findOneBy(['name' => $categoryName, 'parentId' => $parentId]);
             if (!$categoryModel) {
                 if (!$create) {
@@ -306,7 +294,7 @@ class Category extends Resource
                 }
 
                 if ($parent === null) {
-                    /** @var CategoryModel $parent */
+                    /** @var CategoryModel|null $parent */
                     $parent = $this->getRepository()->find($parentId);
                     if (!$parent) {
                         throw new RuntimeException(sprintf('Could not find parent %s', $parentId));
@@ -355,8 +343,6 @@ class Category extends Resource
     }
 
     /**
-     * @param array $params
-     *
      * @throws ApiException\CustomValidationException
      *
      * @return array
@@ -395,9 +381,6 @@ class Category extends Resource
     }
 
     /**
-     * @param array         $data
-     * @param CategoryModel $categoryModel
-     *
      * @throws ApiException\CustomValidationException
      *
      * @return array

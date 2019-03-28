@@ -37,15 +37,11 @@ use Shopware\Models\Widget\Widget;
 
 /**
  * Shopware Plugin Bootstrap
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 abstract class Shopware_Components_Plugin_Bootstrap extends Enlight_Plugin_Bootstrap_Config
 {
     /**
-     * @var Enlight_Config
+     * @var Enlight_Config|null
      */
     protected $info;
 
@@ -121,7 +117,7 @@ abstract class Shopware_Components_Plugin_Bootstrap extends Enlight_Plugin_Boots
     /**
      * Install plugin method
      *
-     * @return array|bool
+     * @return bool|array
      */
     public function install()
     {
@@ -131,7 +127,7 @@ abstract class Shopware_Components_Plugin_Bootstrap extends Enlight_Plugin_Boots
     /**
      * Uninstall plugin method
      *
-     * @return array|bool
+     * @return bool|array
      */
     public function uninstall()
     {
@@ -141,7 +137,7 @@ abstract class Shopware_Components_Plugin_Bootstrap extends Enlight_Plugin_Boots
     /**
      * Secure uninstall plugin method
      *
-     * @return bool
+     * @return bool|array
      */
     public function secureUninstall()
     {
@@ -157,7 +153,7 @@ abstract class Shopware_Components_Plugin_Bootstrap extends Enlight_Plugin_Boots
      *
      * @param string $version
      *
-     * @return array|bool
+     * @return bool|array
      */
     public function update($version)
     {
@@ -171,7 +167,7 @@ abstract class Shopware_Components_Plugin_Bootstrap extends Enlight_Plugin_Boots
     /**
      * Enable plugin method
      *
-     * @return bool
+     * @return bool|array
      */
     public function enable()
     {
@@ -181,7 +177,7 @@ abstract class Shopware_Components_Plugin_Bootstrap extends Enlight_Plugin_Boots
     /**
      * Disable plugin method
      *
-     * @return bool
+     * @return bool|array
      */
     public function disable()
     {
@@ -300,7 +296,6 @@ abstract class Shopware_Components_Plugin_Bootstrap extends Enlight_Plugin_Boots
     /**
      * Create a new menu item instance
      *
-     * @param array $options
      *
      * @return Menu|null
      */
@@ -330,9 +325,9 @@ abstract class Shopware_Components_Plugin_Bootstrap extends Enlight_Plugin_Boots
     /**
      * Create a new payment instance
      *
-     * @param array $options
-     * @param null  $description
-     * @param null  $action
+     * @param string|array $options
+     * @param string|null  $description
+     * @param string|null  $action
      *
      * @return Payment
      */
@@ -366,7 +361,7 @@ abstract class Shopware_Components_Plugin_Bootstrap extends Enlight_Plugin_Boots
         if (is_string($options)) {
             $options = ['template' => $options];
         }
-        /** @var Template $template */
+        /** @var Template|null $template */
         $template = $this->Payments()->findOneBy(['template' => $options['template']]);
         if ($template === null) {
             $template = new Template();
@@ -512,7 +507,6 @@ abstract class Shopware_Components_Plugin_Bootstrap extends Enlight_Plugin_Boots
      *  2. The 'Snippets' plugin directory is added as a config directory.
      *  3. The 'Components' plugin directory is added as a component namespace.
      *
-     * @param Enlight_Event_EventArgs $arguments
      *
      * @throws Exception
      *
@@ -626,7 +620,7 @@ abstract class Shopware_Components_Plugin_Bootstrap extends Enlight_Plugin_Boots
      *
      * @final
      *
-     * @return string
+     * @return string|null
      */
     final public function getSource()
     {
@@ -719,8 +713,6 @@ abstract class Shopware_Components_Plugin_Bootstrap extends Enlight_Plugin_Boots
     /**
      * Event listener of the post dispatch event of the backend and widgets emotion controller
      * to load the plugin emotion template extensions.
-     *
-     * @param Enlight_Controller_ActionEventArgs $args
      */
     public function extendsEmotionTemplates(Enlight_Controller_ActionEventArgs $args)
     {
@@ -896,7 +888,6 @@ abstract class Shopware_Components_Plugin_Bootstrap extends Enlight_Plugin_Boots
      * Check if a list of given plugins is currently available
      * and active
      *
-     * @param array $plugins
      *
      * @return bool
      */
@@ -948,7 +939,6 @@ abstract class Shopware_Components_Plugin_Bootstrap extends Enlight_Plugin_Boots
     /**
      * @param string $route
      * @param int    $time
-     * @param array  $invalidateTags
      *
      * @return bool
      */

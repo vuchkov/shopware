@@ -24,18 +24,9 @@
 
 namespace Shopware\Components\DependencyInjection\Bridge;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class MailTransport
 {
     /**
-     * @param \Enlight_Loader             $loader
-     * @param \Shopware_Components_Config $config
-     * @param array                       $options
-     *
      * @return \Enlight_Class|\Zend_Mail_Transport_Abstract
      */
     public function factory(\Enlight_Loader $loader, \Shopware_Components_Config $config, array $options)

@@ -24,18 +24,12 @@
 
 use Shopware\Bundle\PluginInstallerBundle\Service\ZipUtils;
 use Shopware\Components\CSRFWhitelistAware;
+use Shopware\Components\OptinServiceInterface;
 use Shopware\Models\Shop\Shop;
 use Shopware\Models\Shop\Template;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-/**
- * Backend controller for the theme manager 2.0
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class Shopware_Controllers_Backend_Theme extends Shopware_Controllers_Backend_Application implements CSRFWhitelistAware
 {
     /**
@@ -95,8 +89,10 @@ class Shopware_Controllers_Backend_Theme extends Shopware_Controllers_Backend_Ap
         $shop = $this->getManager()->getRepository('Shopware\Models\Shop\Shop')->getActiveById($shopId);
         $shop->registerResources();
 
-        Shopware()->Session()->template = $theme->getTemplate();
-        Shopware()->Session()->Admin = true;
+        $session = $this->get('session');
+
+        $session->template = $theme->getTemplate();
+        $session->Admin = true;
 
         if (!$this->Request()->isXmlHttpRequest()) {
             $this->get('events')->notify('Shopware_Theme_Preview_Starts', [
@@ -105,10 +101,15 @@ class Shopware_Controllers_Backend_Theme extends Shopware_Controllers_Backend_Ap
                 'theme' => $theme,
             ]);
 
+            $hash = $this->container->get('shopware.components.optin_service')->add(OptinServiceInterface::TYPE_THEME_PREVIEW, 300, [
+                'sessionName' => session_name(),
+                'sessionValue' => $session->get('sessionId'),
+            ]);
+
             $url = $this->Front()->Router()->assemble([
                 'module' => 'frontend',
                 'controller' => 'index',
-                'appendSession' => true,
+                'themeHash' => $hash,
             ]);
 
             $this->redirect($url);
@@ -317,7 +318,6 @@ class Shopware_Controllers_Backend_Theme extends Shopware_Controllers_Backend_Ap
     /**
      * Override to get all snippet definitions for the loaded theme configuration.
      *
-     * @param array $data
      *
      * @return array
      */
@@ -425,8 +425,7 @@ class Shopware_Controllers_Backend_Theme extends Shopware_Controllers_Backend_Ap
     /**
      * Helper function to decompress zip files.
      *
-     * @param UploadedFile $file
-     * @param string       $targetDirectory
+     * @param string $targetDirectory
      *
      * @throws Exception
      */
@@ -441,7 +440,6 @@ class Shopware_Controllers_Backend_Theme extends Shopware_Controllers_Backend_Ap
      * Helper function which checks if the passed template
      * or the inheritance templates has configuration sets.
      *
-     * @param Template $template
      *
      * @return bool
      */
@@ -472,8 +470,6 @@ class Shopware_Controllers_Backend_Theme extends Shopware_Controllers_Backend_Ap
     }
 
     /**
-     * @param Template $template
-     *
      * @return string|null
      */
     private function getThemeInfo(Template $template)

@@ -26,10 +26,6 @@ namespace Shopware\Components\Password;
 
 /**
  * Password Manager
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class Manager
 {
@@ -43,17 +39,12 @@ class Manager
      */
     protected $config;
 
-    /**
-     * @param \Shopware_Components_Config $config
-     */
     public function __construct(\Shopware_Components_Config $config)
     {
         $this->config = $config;
     }
 
     /**
-     * @param Encoder\PasswordEncoderInterface $encoder
-     *
      * @throws \Exception
      */
     public function addEncoder(Encoder\PasswordEncoderInterface $encoder)

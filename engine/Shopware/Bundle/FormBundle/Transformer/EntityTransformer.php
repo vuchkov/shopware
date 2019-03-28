@@ -41,10 +41,7 @@ class EntityTransformer implements DataTransformerInterface
     private $entityName;
 
     /**
-     * CustomerEntityTransformer constructor.
-     *
-     * @param ModelManager $models
-     * @param string       $entityName
+     * @param string $entityName
      */
     public function __construct(ModelManager $models, $entityName)
     {

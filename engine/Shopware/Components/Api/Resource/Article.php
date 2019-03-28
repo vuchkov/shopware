@@ -52,10 +52,6 @@ use Shopware_Components_Translation;
 
 /**
  * Article API Resource
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class Article extends Resource implements BatchInterface
 {
@@ -64,9 +60,6 @@ class Article extends Resource implements BatchInterface
      */
     private $translationComponent;
 
-    /**
-     * @param Shopware_Components_Translation|null $translationComponent
-     */
     public function __construct(Shopware_Components_Translation $translationComponent = null)
     {
         $this->translationComponent = $translationComponent ?: Shopware()->Container()->get('translation');
@@ -104,7 +97,7 @@ class Article extends Resource implements BatchInterface
             throw new ApiException\ParameterMissingException();
         }
 
-        /** @var Detail $productVariant */
+        /** @var Detail|null $productVariant */
         $productVariant = $this->getDetailRepository()->findOneBy(['number' => $number]);
 
         if (!$productVariant) {
@@ -120,7 +113,6 @@ class Article extends Resource implements BatchInterface
      * Convenience method to get a product by number
      *
      * @param string $number
-     * @param array  $options
      *
      * @return array|ProductModel
      */
@@ -132,8 +124,7 @@ class Article extends Resource implements BatchInterface
     }
 
     /**
-     * @param int   $id
-     * @param array $options
+     * @param int $id
      *
      * @throws \Shopware\Components\Api\Exception\NotFoundException
      * @throws \Shopware\Components\Api\Exception\ParameterMissingException
@@ -257,11 +248,8 @@ class Article extends Resource implements BatchInterface
     }
 
     /**
-     * @param int   $offset
-     * @param int   $limit
-     * @param array $criteria
-     * @param array $orderBy
-     * @param array $options
+     * @param int $offset
+     * @param int $limit
      *
      * @return array
      */
@@ -272,7 +260,6 @@ class Article extends Resource implements BatchInterface
         /** @var QueryBuilder $builder */
         $builder = $this->getRepository()->createQueryBuilder('article')
             ->addSelect(['mainDetail', 'attribute'])
-            ->addSelect('mainDetail.lastStock')
             ->leftJoin('article.mainDetail', 'mainDetail')
             ->leftJoin('mainDetail.attribute', 'attribute')
             ->addFilter($criteria)
@@ -289,18 +276,7 @@ class Article extends Resource implements BatchInterface
         // Returns the total count of the query
         $totalResult = $paginator->count();
 
-        /**
-         * @Deprecated Since 5.4, to be removed in 5.6
-         *
-         * To support Shopware <= 5.3 we make sure the lastStock-column of the main variant is being used instead of the
-         * one on the product itself.
-         */
-        $products = array_map(function (array $val) {
-            $val[0]['lastStock'] = $val['lastStock'];
-            unset($val['lastStock']);
-
-            return $val[0];
-        }, $paginator->getIterator()->getArrayCopy());
+        $products = $paginator->getIterator()->getArrayCopy();
 
         if ($this->getResultMode() === self::HYDRATE_ARRAY
             && isset($options['language'])
@@ -322,8 +298,6 @@ class Article extends Resource implements BatchInterface
     }
 
     /**
-     * @param array $params
-     *
      * @throws ApiException\CustomValidationException
      * @throws \Shopware\Components\Api\Exception\ValidationException
      *
@@ -357,21 +331,6 @@ class Article extends Resource implements BatchInterface
             $this->writeTranslations($product->getId(), $translations);
         }
 
-        /*
-         * @Deprecated Since 5.4, to be removed in 5.6
-         *
-         * Necessary for backward compatibility with < 5.4, will be removed in 5.6
-         *
-         * If `lastStock` was only defined on the main product, apply it to all it's variants
-         */
-        if (!array_key_exists('mainDetail', $params) && array_key_exists('lastStock', $params)) {
-            $db = $this->getContainer()->get('dbal_connection');
-            $db->executeQuery('UPDATE `s_articles_details` SET lastStock=:lastStock WHERE `articleID`=:articleId', [
-                'lastStock' => $product->getLastStock(),
-                'articleId' => $product->getId(),
-            ]);
-        }
-
         return $product;
     }
 
@@ -379,7 +338,6 @@ class Article extends Resource implements BatchInterface
      * Convenience method to update a article by number
      *
      * @param string $number
-     * @param array  $params
      *
      * @throws \Shopware\Components\Api\Exception\ValidationException
      * @throws \Shopware\Components\Api\Exception\NotFoundException
@@ -395,8 +353,7 @@ class Article extends Resource implements BatchInterface
     }
 
     /**
-     * @param int   $id
-     * @param array $params
+     * @param int $id
      *
      * @throws \Shopware\Components\Api\Exception\ValidationException
      * @throws \Shopware\Components\Api\Exception\NotFoundException
@@ -430,7 +387,7 @@ class Article extends Resource implements BatchInterface
             ->where('product.id = ?1')
             ->setParameter(1, $id);
 
-        /** @var ProductModel $product */
+        /** @var ProductModel|null $product */
         $product = $builder->getQuery()->getOneOrNullResult(self::HYDRATE_OBJECT);
 
         if (!$product) {
@@ -488,7 +445,7 @@ class Article extends Resource implements BatchInterface
             throw new ApiException\ParameterMissingException();
         }
 
-        /** @var ProductModel $product */
+        /** @var ProductModel|null $product */
         $product = $this->getRepository()->find($id);
 
         if (!$product) {
@@ -517,8 +474,6 @@ class Article extends Resource implements BatchInterface
     /**
      * Helper function which converts the passed data for the main variant of the product.
      *
-     * @param array        $data
-     * @param ProductModel $article
      *
      * @return array
      */
@@ -544,8 +499,7 @@ class Article extends Resource implements BatchInterface
     /**
      * Short method to completely generate all images from an product, main images and variant images
      *
-     * @param ProductModel $article
-     * @param bool         $force   Force all images to be regenerated
+     * @param bool $force Force all images to be regenerated
      *
      * @see \Shopware\Components\Api\Resource\Article::generateMainThumbnails()
      * @see \Shopware\Components\Api\Resource\Article::generateVariantImages()
@@ -559,8 +513,7 @@ class Article extends Resource implements BatchInterface
     /**
      * Generate the main thumbnails of an product
      *
-     * @param ProductModel $article
-     * @param bool         $force   Force to regenerate main thumbnails
+     * @param bool $force Force to regenerate main thumbnails
      */
     public function generateMainThumbnails(ProductModel $article, $force = false)
     {
@@ -589,8 +542,7 @@ class Article extends Resource implements BatchInterface
      * This method generates all variant image entities for a given product model instance.
      * The method expects that the variants and the mapping of the product images already exist.
      *
-     * @param ProductModel $article
-     * @param bool         $force   Force variant image regeneration
+     * @param bool $force Force variant image regeneration
      */
     public function generateVariantImages(ProductModel $article, $force = false)
     {
@@ -632,8 +584,6 @@ class Article extends Resource implements BatchInterface
     /**
      * Helper function which creates a new product image with the passed media object.
      *
-     * @param ProductModel $article
-     * @param MediaModel   $media
      *
      * @return Image
      */
@@ -654,9 +604,6 @@ class Article extends Resource implements BatchInterface
     /**
      * Helper function to map the media data into an product image
      *
-     * @param ProductModel $article
-     * @param Image        $image
-     * @param MediaModel   $media
      *
      * @return Image
      */
@@ -784,8 +731,6 @@ class Article extends Resource implements BatchInterface
      * The groups are sorted by the position value.
      *
      * @param int $articleId
-     *
-     * @return mixed
      */
     protected function getArticleConfiguratorSet($articleId)
     {
@@ -887,8 +832,6 @@ class Article extends Resource implements BatchInterface
      * Helper function which selects all similar products of the passed product id.
      *
      * @param int $articleId
-     *
-     * @return mixed
      */
     protected function getArticleSimilar($articleId)
     {
@@ -908,8 +851,6 @@ class Article extends Resource implements BatchInterface
      * Helper function which selects all accessory products of the passed product id.
      *
      * @param int $articleId
-     *
-     * @return mixed
      */
     protected function getArticleRelated($articleId)
     {
@@ -993,8 +934,7 @@ class Article extends Resource implements BatchInterface
     }
 
     /**
-     * @param array        $data
-     * @param ProductModel $article
+     * @param array $data
      *
      * @return array
      */
@@ -1037,8 +977,7 @@ class Article extends Resource implements BatchInterface
     }
 
     /**
-     * @param array        $data
-     * @param ProductModel $article
+     * @param array $data
      *
      * @throws ApiException\CustomValidationException
      *
@@ -1088,17 +1027,6 @@ class Article extends Resource implements BatchInterface
         }
 
         foreach ($data['variants'] as $variantData) {
-            /*
-             * @Deprecated Since 5.4, to be removed in 5.6
-             *
-             * Necessary for backward compatibility with <= 5.3, will be removed in 5.6
-             *
-             * If `lastStock` was only defined on the main product, apply it to all it's variants
-             */
-            if (!isset($variantData['lastStock'])) {
-                $variantData['lastStock'] = $article->getLastStock();
-            }
-
             if (isset($variantData['id'])) {
                 $variant = $this->getVariantResource()->internalUpdate(
                     $variantData['id'],
@@ -1197,8 +1125,7 @@ class Article extends Resource implements BatchInterface
     }
 
     /**
-     * @param array        $data
-     * @param ProductModel $article
+     * @param array $data
      *
      * @throws ApiException\CustomValidationException
      * @throws \Exception
@@ -1279,7 +1206,10 @@ class Article extends Resource implements BatchInterface
 
                 $option->fromArray($optionData);
                 $option->setGroup($group);
-                if (!isset($optionData['position'])) {
+
+                // Only set new position if option doesn't exist yet
+                // Otherwise the position might have been set manually already and we do not want to change that
+                if (!isset($optionData['position']) && !$option->getId()) {
                     $option->setPosition($optionPosition++);
                 }
                 $allOptions[] = $option;
@@ -1308,8 +1238,7 @@ class Article extends Resource implements BatchInterface
     }
 
     /**
-     * @param array        $data
-     * @param ProductModel $article
+     * @param array $data
      *
      * @throws ApiException\CustomValidationException
      *
@@ -1384,8 +1313,7 @@ class Article extends Resource implements BatchInterface
     }
 
     /**
-     * @param array        $data
-     * @param ProductModel $article
+     * @param array $data
      *
      * @return array
      */
@@ -1403,8 +1331,7 @@ class Article extends Resource implements BatchInterface
     }
 
     /**
-     * @param array        $data
-     * @param ProductModel $article
+     * @param array $data
      *
      * @throws ApiException\CustomValidationException
      *
@@ -1464,8 +1391,7 @@ class Article extends Resource implements BatchInterface
     }
 
     /**
-     * @param array        $data
-     * @param ProductModel $article
+     * @param array $data
      *
      * @throws ApiException\CustomValidationException
      *
@@ -1493,7 +1419,7 @@ class Article extends Resource implements BatchInterface
             );
 
             if (isset($categoryData['shopId'])) {
-                /** @var Shop $shop */
+                /** @var Shop|null $shop */
                 $shop = $this->manager->find(
                     Shop::class,
                     $categoryData['shopId']
@@ -1515,7 +1441,7 @@ class Article extends Resource implements BatchInterface
             }
 
             if (isset($categoryData['categoryId'])) {
-                /** @var Category $category */
+                /** @var Category|null $category */
                 $category = $this->manager->find(
                     Category::class,
                     $categoryData['categoryId']
@@ -1564,8 +1490,7 @@ class Article extends Resource implements BatchInterface
     }
 
     /**
-     * @param array        $data
-     * @param ProductModel $article
+     * @param array $data
      *
      * @throws ApiException\CustomValidationException
      *
@@ -1593,8 +1518,7 @@ class Article extends Resource implements BatchInterface
     }
 
     /**
-     * @param array        $data
-     * @param ProductModel $article
+     * @param array $data
      *
      * @throws ApiException\CustomValidationException
      *
@@ -1657,8 +1581,7 @@ class Article extends Resource implements BatchInterface
     }
 
     /**
-     * @param array        $data
-     * @param ProductModel $article
+     * @param array $data
      *
      * @throws ApiException\CustomValidationException
      *
@@ -1721,8 +1644,7 @@ class Article extends Resource implements BatchInterface
     }
 
     /**
-     * @param array        $data
-     * @param ProductModel $article
+     * @param array $data
      *
      * @throws ApiException\CustomValidationException
      *
@@ -1769,9 +1691,9 @@ class Article extends Resource implements BatchInterface
                 }
                 // Get / create value by name
             } elseif (isset($valueData['value'])) {
-                //get option
+                // Get option
                 if (isset($valueData['option'])) {
-                    // get option by id
+                    // Get option by id
                     if (isset($valueData['option']['id'])) {
                         $option = $this->getManager()->getRepository(Option::class)->find($valueData['option']['id']);
                         if (!$option) {
@@ -1782,21 +1704,21 @@ class Article extends Resource implements BatchInterface
                             ['property' => 'groups.id', 'expression' => '=', 'value' => $propertyGroup->getId()],
                         ];
                         $query = $propertyRepository->getPropertyRelationQuery($filters, null, 1, 0);
-                        /** @var \Shopware\Models\Property\Relation $relation */
+                        /** @var \Shopware\Models\Property\Relation|null $relation */
                         $relation = $query->getOneOrNullResult(self::HYDRATE_OBJECT);
                         if (!$relation) {
                             $propertyGroup->addOption($option);
                         }
                         // get/create option depending on associated filter groups
                     } elseif (isset($valueData['option']['name'])) {
-                        // if a name is passed and there is a matching option/group relation, get this option
-                        // if only a name is passed, create a new option
+                        // If a name is passed and there is a matching option/group relation, get this option
+                        // If only a name is passed, create a new option
                         $filters = [
                             ['property' => 'options.name', 'expression' => '=', 'value' => $valueData['option']['name']],
                             ['property' => 'groups.name', 'expression' => '=', 'value' => $propertyGroup->getName()],
                         ];
                         $query = $propertyRepository->getPropertyRelationQuery($filters, null, 1, 0);
-                        /** @var \Shopware\Models\Property\Relation $relation */
+                        /** @var \Shopware\Models\Property\Relation|null $relation */
                         $relation = $query->getOneOrNullResult(self::HYDRATE_OBJECT);
                         if (!$relation) {
                             //checks if a new option was created
@@ -1806,7 +1728,7 @@ class Article extends Resource implements BatchInterface
                                 'name',
                                 $valueData['option']['name']
                             );
-                            //creates a new option
+                            // Creates a new option
                             if ($groupOption === null) {
                                 $option = new Option();
                                 $propertyGroup->addOption($option);
@@ -1826,7 +1748,7 @@ class Article extends Resource implements BatchInterface
                 } else {
                     throw new ApiException\CustomValidationException('A property option needs to be given for each property value');
                 }
-                // create the value
+                // Create the value
                 // If there is a filter value with matching name and option, load this value, else create a new one
                 $value = $this->getManager()->getRepository(Value::class)->findOneBy([
                     'value' => $valueData['value'],
@@ -1875,8 +1797,6 @@ class Article extends Resource implements BatchInterface
      * Checks if the passed product image is already created
      * as variant image.
      *
-     * @param Detail $variant
-     * @param Image  $image
      *
      * @return bool
      */
@@ -1927,9 +1847,6 @@ class Article extends Resource implements BatchInterface
      *    array('name' => 'blue')
      * )
      *
-     * @param Image        $image
-     * @param ProductModel $article
-     * @param array        $mappings
      *
      * @throws ApiException\CustomValidationException
      */
@@ -1981,8 +1898,6 @@ class Article extends Resource implements BatchInterface
     /**
      * Translate the whole product array.
      *
-     * @param array $data
-     * @param Shop  $shop
      *
      * @return array
      */
@@ -2086,9 +2001,6 @@ class Article extends Resource implements BatchInterface
      * Translates the passed values array with the passed shop entity.
      *
      * @param array $values
-     * @param Shop  $shop
-     *
-     * @return mixed
      */
     protected function translatePropertyValues($values, Shop $shop)
     {
@@ -2121,7 +2033,6 @@ class Article extends Resource implements BatchInterface
      * Translates the passed supplier data.
      *
      * @param array $supplier
-     * @param Shop  $shop
      *
      * @return array
      */
@@ -2150,7 +2061,6 @@ class Article extends Resource implements BatchInterface
      * Translates the passed property group data.
      *
      * @param array $groupData
-     * @param Shop  $shop
      *
      * @return array
      */
@@ -2182,9 +2092,6 @@ class Article extends Resource implements BatchInterface
      * Translates the passed variants array and all associated data.
      *
      * @param array $details
-     * @param Shop  $shop
-     *
-     * @return mixed
      */
     protected function translateVariants($details, Shop $shop)
     {
@@ -2259,8 +2166,6 @@ class Article extends Resource implements BatchInterface
     /**
      * Helper function which translates associated array data.
      *
-     * @param array  $association
-     * @param Shop   $shop
      * @param string $type
      *
      * @return array
@@ -2307,7 +2212,6 @@ class Article extends Resource implements BatchInterface
      * to get a single row of the query builder result for the current resource result mode
      * using the query paginator.
      *
-     * @param QueryBuilder $builder
      *
      * @return array
      */
@@ -2325,7 +2229,6 @@ class Article extends Resource implements BatchInterface
      * to get the full query builder result for the current resource result mode
      * using the query paginator.
      *
-     * @param QueryBuilder $builder
      *
      * @return array
      */
@@ -2344,9 +2247,6 @@ class Article extends Resource implements BatchInterface
      * If the data key __options_categories => replace is set to true,
      * the function removes the assigned product categories from the
      * s_articles_categories and s_articles_categories_ro table.
-     *
-     * @param array        $data
-     * @param ProductModel $product
      */
     private function resetProductCategoryAssignment(array $data, ProductModel $product)
     {
@@ -2374,8 +2274,7 @@ class Article extends Resource implements BatchInterface
     }
 
     /**
-     * @param array        $data
-     * @param ProductModel $product
+     * @param array $data
      *
      * @throws ApiException\CustomValidationException
      *
@@ -2431,8 +2330,7 @@ class Article extends Resource implements BatchInterface
      * Resolves the passed images data to valid Shopware\Models\Article\Image
      * entities.
      *
-     * @param array        $data
-     * @param ProductModel $product
+     * @param array $data
      *
      * @throws ApiException\CustomValidationException
      *

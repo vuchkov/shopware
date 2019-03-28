@@ -26,11 +26,6 @@ namespace Shopware\Bundle\StoreFrontBundle\Gateway\DBAL\Hydrator;
 
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class CategoryHydrator extends Hydrator
 {
     /**
@@ -48,11 +43,6 @@ class CategoryHydrator extends Hydrator
      */
     private $productStreamHydrator;
 
-    /**
-     * @param AttributeHydrator     $attributeHydrator
-     * @param MediaHydrator         $mediaHydrator
-     * @param ProductStreamHydrator $productStreamHydrator
-     */
     public function __construct(
         AttributeHydrator $attributeHydrator,
         MediaHydrator $mediaHydrator,
@@ -64,8 +54,6 @@ class CategoryHydrator extends Hydrator
     }
 
     /**
-     * @param array $data
-     *
      * @return Struct\Category
      */
     public function hydrate(array $data)
@@ -99,10 +87,6 @@ class CategoryHydrator extends Hydrator
         return $category;
     }
 
-    /**
-     * @param Struct\Category $category
-     * @param array           $data
-     */
     private function assignCategoryData(Struct\Category $category, array $data)
     {
         if (isset($data['__category_id'])) {

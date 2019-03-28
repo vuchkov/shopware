@@ -31,7 +31,7 @@ use Shopware\Components\Model\ModelEntity;
  * Shopware Price Model
  *
  * @ORM\Table(name="s_core_pricegroups_discounts")
- * @ORM\Entity
+ * @ORM\Entity()
  */
 class Discount extends ModelEntity
 {
@@ -39,7 +39,7 @@ class Discount extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -89,8 +89,6 @@ class Discount extends ModelEntity
     private $groupId = null;
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -99,8 +97,6 @@ class Discount extends ModelEntity
     }
 
     /**
-     * Set group
-     *
      * @param Group $group
      *
      * @return Discount
@@ -113,8 +109,6 @@ class Discount extends ModelEntity
     }
 
     /**
-     * Get group
-     *
      * @return Group
      */
     public function getGroup()
@@ -123,8 +117,6 @@ class Discount extends ModelEntity
     }
 
     /**
-     * Set customerGroup
-     *
      * @param \Shopware\Models\Customer\Group $customerGroup
      *
      * @return Discount
@@ -137,8 +129,6 @@ class Discount extends ModelEntity
     }
 
     /**
-     * Get customerGroup
-     *
      * @return \Shopware\Models\Customer\Group
      */
     public function getCustomerGroup()
@@ -147,8 +137,6 @@ class Discount extends ModelEntity
     }
 
     /**
-     * Set discount
-     *
      * @param float $discount
      *
      * @return Discount
@@ -161,8 +149,6 @@ class Discount extends ModelEntity
     }
 
     /**
-     * Get discount
-     *
      * @return float
      */
     public function getDiscount()
@@ -171,8 +157,6 @@ class Discount extends ModelEntity
     }
 
     /**
-     * Set start
-     *
      * @param float $start
      *
      * @return Discount
@@ -185,8 +169,6 @@ class Discount extends ModelEntity
     }
 
     /**
-     * Get start
-     *
      * @return float
      */
     public function getStart()

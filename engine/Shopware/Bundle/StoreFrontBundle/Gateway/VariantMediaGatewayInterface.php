@@ -26,11 +26,6 @@ namespace Shopware\Bundle\StoreFrontBundle\Gateway;
 
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 interface VariantMediaGatewayInterface
 {
     /**
@@ -58,8 +53,7 @@ interface VariantMediaGatewayInterface
      * )
      * </php>
      *
-     * @param Struct\BaseProduct[]        $products
-     * @param Struct\ShopContextInterface $context
+     * @param Struct\BaseProduct[] $products
      *
      * @return array Indexed by product number. Each element contains a \Shopware\Bundle\StoreFrontBundle\Struct\Media array.
      */
@@ -79,8 +73,6 @@ interface VariantMediaGatewayInterface
      * - Selects only product media which has no configurator configuration
      * - Sorted ascending by the image main flag and position
      *
-     * @param Struct\BaseProduct          $product
-     * @param Struct\ShopContextInterface $context
      *
      * @return Struct\Media
      */
@@ -100,8 +92,6 @@ interface VariantMediaGatewayInterface
      * - Selects only product media which has a configurator configuration for the provided variants.
      * - Sorted ascending by the image main flag and image position
      *
-     * @param Struct\BaseProduct          $product
-     * @param Struct\ShopContextInterface $context
      *
      * @return Struct\Media[]
      */
@@ -126,8 +116,7 @@ interface VariantMediaGatewayInterface
      * )
      * </php>
      *
-     * @param Struct\BaseProduct[]        $products
-     * @param Struct\ShopContextInterface $context
+     * @param Struct\BaseProduct[] $products
      *
      * @return Struct\Media[] Indexed by the product order number
      */

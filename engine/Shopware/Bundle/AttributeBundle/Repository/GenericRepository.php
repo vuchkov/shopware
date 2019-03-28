@@ -28,11 +28,6 @@ use Shopware\Bundle\AttributeBundle\Repository\Reader\ReaderInterface;
 use Shopware\Bundle\AttributeBundle\Repository\Searcher\SearcherInterface;
 use Shopware\Components\Model\ModelManager;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.com)
- */
 class GenericRepository implements RepositoryInterface
 {
     /**
@@ -56,10 +51,7 @@ class GenericRepository implements RepositoryInterface
     protected $entity;
 
     /**
-     * @param string            $entity
-     * @param ModelManager      $entityManager
-     * @param ReaderInterface   $reader
-     * @param SearcherInterface $searcher
+     * @param string $entity
      */
     public function __construct(
         $entity,
@@ -84,8 +76,6 @@ class GenericRepository implements RepositoryInterface
     }
 
     /**
-     * @param SearchCriteria $criteria
-     *
      * @return SearchResult
      */
     public function search(SearchCriteria $criteria)

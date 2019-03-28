@@ -32,11 +32,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Shopware Emotion Model - Template
  *
- * @category   Shopware
  *
- * @copyright  Copyright (c) shopware AG (http://www.shopware.de)
  *
- * @ORM\Entity
+ * @ORM\Entity()
  * @ORM\Table(name="s_emotion_presets")
  */
 class Preset extends ModelEntity
@@ -61,7 +59,7 @@ class Preset extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;

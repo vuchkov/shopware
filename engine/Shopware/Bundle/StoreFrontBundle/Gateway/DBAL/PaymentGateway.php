@@ -29,11 +29,6 @@ use Shopware\Bundle\StoreFrontBundle\Gateway;
 use Shopware\Bundle\StoreFrontBundle\Gateway\DBAL\Hydrator\PaymentHydrator;
 use Shopware\Bundle\StoreFrontBundle\Struct;
 
-/**
- * @category  Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class PaymentGateway implements Gateway\PaymentGatewayInterface
 {
     /**
@@ -61,11 +56,6 @@ class PaymentGateway implements Gateway\PaymentGatewayInterface
      */
     private $paymentHydrator;
 
-    /**
-     * @param Connection      $connection
-     * @param FieldHelper     $fieldHelper
-     * @param PaymentHydrator $paymentHydrator
-     */
     public function __construct(
         Connection $connection,
         FieldHelper $fieldHelper,

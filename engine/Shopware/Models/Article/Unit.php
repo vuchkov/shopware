@@ -29,7 +29,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Shopware\Components\Model\ModelEntity;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity()
  * @ORM\Table(name="s_core_units")
  */
 class Unit extends ModelEntity
@@ -47,7 +47,7 @@ class Unit extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -72,8 +72,6 @@ class Unit extends ModelEntity
     }
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -82,8 +80,6 @@ class Unit extends ModelEntity
     }
 
     /**
-     * Set unit
-     *
      * @param string $unit
      *
      * @return Unit
@@ -96,8 +92,6 @@ class Unit extends ModelEntity
     }
 
     /**
-     * Get unit
-     *
      * @return string
      */
     public function getUnit()
@@ -106,8 +100,6 @@ class Unit extends ModelEntity
     }
 
     /**
-     * Set description
-     *
      * @param string $name
      *
      * @return Unit
@@ -120,8 +112,6 @@ class Unit extends ModelEntity
     }
 
     /**
-     * Get description
-     *
      * @return string
      */
     public function getName()

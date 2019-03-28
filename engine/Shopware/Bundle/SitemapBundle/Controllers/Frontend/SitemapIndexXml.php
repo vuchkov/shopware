@@ -46,11 +46,6 @@ class SitemapIndexXml extends Controller
      */
     private $sitemapExporter;
 
-    /**
-     * @param SitemapListerInterface      $sitemapLister
-     * @param SitemapExporterInterface    $sitemapExporter
-     * @param \Shopware_Components_Config $config
-     */
     public function __construct(SitemapListerInterface $sitemapLister, SitemapExporterInterface $sitemapExporter, \Shopware_Components_Config $config)
     {
         parent::__construct();
@@ -79,8 +74,8 @@ class SitemapIndexXml extends Controller
         $refreshInterval = $this->config->get('sitemapRefreshTime');
 
         // If there are no sitemaps yet (or they are too old) and the generation strategy is "live", generate sitemaps
-        if ((empty($sitemaps) || time() > $refreshInterval + $lastGenerated) &&
-            $this->config->get('sitemapRefreshStrategy') === SitemapExporterInterface::STRATEGY_LIVE) {
+        if ((empty($sitemaps) || time() > $refreshInterval + $lastGenerated)
+            && $this->config->get('sitemapRefreshStrategy') === SitemapExporterInterface::STRATEGY_LIVE) {
             // Close session to prevent session locking from waiting in case there is another request coming in
             session_write_close();
 
@@ -93,7 +88,7 @@ class SitemapIndexXml extends Controller
             $sitemaps = $this->sitemapLister->getSitemaps($this->get('shop')->getId());
         }
 
-        $this->Response()->setHeader('Content-Type', 'text/xml; charset=utf-8');
+        $this->Response()->headers->set('content-type', 'text/xml; charset=utf-8');
         $this->View()->assign('sitemaps', $sitemaps);
     }
 }

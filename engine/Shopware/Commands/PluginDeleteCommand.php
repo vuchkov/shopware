@@ -31,11 +31,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class PluginDeleteCommand extends ShopwareCommand
 {
     public function deletePath($path)
@@ -93,12 +88,7 @@ EOF
             return 1;
         }
 
-        $pluginPath = Shopware()->AppPath(implode('_', [
-            'Plugins',
-            $plugin->getSource(),
-            $plugin->getNamespace(),
-            $plugin->getName(),
-        ]));
+        $pluginPath = $pluginManager->getPluginPath($pluginName);
 
         $message = null;
         if ($plugin->getSource() === 'Default') {

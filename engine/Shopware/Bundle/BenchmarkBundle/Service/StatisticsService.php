@@ -61,13 +61,6 @@ class StatisticsService
      */
     private $connection;
 
-    /**
-     * @param BenchmarkCollectorInterface $benchmarkCollector
-     * @param StatisticsClientInterface   $statisticsClient
-     * @param BenchmarkRepository         $benchmarkRepository
-     * @param ContextServiceInterface     $contextService
-     * @param Connection                  $connection
-     */
     public function __construct(
         BenchmarkCollectorInterface $benchmarkCollector,
         StatisticsClientInterface $statisticsClient,
@@ -83,8 +76,7 @@ class StatisticsService
     }
 
     /**
-     * @param BenchmarkConfig $config
-     * @param int             $batchSize
+     * @param int $batchSize
      *
      * @throws TransmissionNotNecessaryException
      *
@@ -100,8 +92,8 @@ class StatisticsService
         $analyticsCount = count($benchmarkData['analytics']['list']);
 
         // If all entity counts are below the batch size (or the batch size is null), we are likely to be in the last iteration
-        if ($batchSize === null ||
-            ($ordersCount < $batchSize && $customersCount < $batchSize && $productsCount < $batchSize && $analyticsCount < $batchSize)) {
+        if ($batchSize === null
+            || ($ordersCount < $batchSize && $customersCount < $batchSize && $productsCount < $batchSize && $analyticsCount < $batchSize)) {
             $config->setLastSent(new \DateTime('now', new \DateTimeZone('UTC')));
             $this->benchmarkRepository->save($config);
         }
@@ -127,10 +119,6 @@ class StatisticsService
         return $statisticsResponse;
     }
 
-    /**
-     * @param BenchmarkConfig $config
-     * @param array           $benchmarkData
-     */
     private function updateLastIds(BenchmarkConfig $config, array $benchmarkData)
     {
         if (!empty($benchmarkData['orders']['list']) && (!array_key_exists('moved', $benchmarkData['updated_orders']) || !$benchmarkData['updated_orders']['moved'])) {
@@ -159,10 +147,6 @@ class StatisticsService
         $this->handleLastUpdatedOrdersDate($config, $benchmarkData);
     }
 
-    /**
-     * @param BenchmarkConfig $config
-     * @param array           $benchmarkData
-     */
     private function handleLastUpdatedOrdersDate(BenchmarkConfig $config, array $benchmarkData)
     {
         // If the column is still NULL, set it to "NOW()" for the first time

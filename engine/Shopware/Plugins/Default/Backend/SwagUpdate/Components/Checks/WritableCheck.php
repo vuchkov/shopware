@@ -29,11 +29,6 @@ use ShopwarePlugins\SwagUpdate\Components\CheckInterface;
 use ShopwarePlugins\SwagUpdate\Components\FileSystem;
 use ShopwarePlugins\SwagUpdate\Components\Validation;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.com)
- */
 class WritableCheck implements CheckInterface
 {
     const CHECK_TYPE = 'writable';
@@ -48,10 +43,6 @@ class WritableCheck implements CheckInterface
      */
     private $fileSystem;
 
-    /**
-     * @param FileSystem       $fileSystem
-     * @param SnippetNamespace $namespace
-     */
     public function __construct(FileSystem $fileSystem, SnippetNamespace $namespace)
     {
         $this->namespace = $namespace;

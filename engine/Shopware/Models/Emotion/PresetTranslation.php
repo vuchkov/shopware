@@ -30,11 +30,9 @@ use Shopware\Components\Model\ModelEntity;
 /**
  * Shopware Emotion Model - Preset translation
  *
- * @category   Shopware
  *
- * @copyright  Copyright (c) shopware AG (http://www.shopware.de)
  *
- * @ORM\Entity
+ * @ORM\Entity()
  * @ORM\Table(name="s_emotion_preset_translations")
  */
 class PresetTranslation extends ModelEntity
@@ -53,7 +51,7 @@ class PresetTranslation extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -157,9 +155,6 @@ class PresetTranslation extends ModelEntity
         return $this->preset;
     }
 
-    /**
-     * @param Preset $preset
-     */
     public function setPreset(Preset $preset)
     {
         $this->preset = $preset;

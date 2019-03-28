@@ -27,9 +27,6 @@ namespace Shopware\Bundle\MediaBundle\Subscriber;
 use Enlight\Event\SubscriberInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * Class ServiceSubscriber
- */
 class ServiceSubscriber implements SubscriberInterface
 {
     /**
@@ -37,9 +34,6 @@ class ServiceSubscriber implements SubscriberInterface
      */
     private $container;
 
-    /**
-     * @param ContainerInterface $container
-     */
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;

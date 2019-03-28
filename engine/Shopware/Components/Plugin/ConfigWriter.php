@@ -53,9 +53,6 @@ class ConfigWriter
      */
     private $valueRepository;
 
-    /**
-     * @param ModelManager $em
-     */
     public function __construct(ModelManager $em)
     {
         $this->em = $em;
@@ -66,9 +63,7 @@ class ConfigWriter
     }
 
     /**
-     * @param Plugin $plugin
-     * @param array  $elements
-     * @param Shop   $shop
+     * @param array $elements
      */
     public function savePluginConfig(Plugin $plugin, $elements, Shop $shop)
     {
@@ -78,10 +73,7 @@ class ConfigWriter
     }
 
     /**
-     * @param Plugin $plugin
      * @param string $name
-     * @param mixed  $value
-     * @param Shop   $shop
      *
      * @throws \Exception
      */
@@ -90,7 +82,7 @@ class ConfigWriter
         /** @var Form $form */
         $form = $this->formRepository->findOneBy(['pluginId' => $plugin->getId()]);
 
-        /** @var Element $element */
+        /** @var Element|null $element */
         $element = $this->elementRepository->findOneBy(['form' => $form, 'name' => $name]);
         if (!$element) {
             throw new \Exception(sprintf('Config element "%s" not found.', $name));
@@ -102,7 +94,7 @@ class ConfigWriter
 
         $defaultValue = $element->getValue();
 
-        /** @var Value $valueModel */
+        /** @var Value|null $valueModel */
         $valueModel = $this->valueRepository->findOneBy(['shop' => $shop, 'element' => $element]);
 
         if (!$valueModel) {

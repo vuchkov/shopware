@@ -27,21 +27,14 @@ namespace Shopware\Bundle\AccountBundle\Service\Validator;
 use Shopware\Components\Api\Exception\ValidationException;
 use Shopware\Models\Customer\Customer;
 
-/**
- * Interface CustomerValidatorInterface
- */
 interface CustomerValidatorInterface
 {
     /**
-     * @param Customer $customer
-     *
      * @throws ValidationException
      */
     public function validate(Customer $customer);
 
     /**
-     * @param Customer $customer
-     *
      * @return bool
      */
     public function isValid(Customer $customer);

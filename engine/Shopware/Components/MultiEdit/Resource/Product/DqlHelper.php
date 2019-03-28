@@ -45,8 +45,6 @@ use Shopware\Models\Tax\Tax;
 
 /**
  * The dql helper class holds some general helper methods used by various components
- *
- * Class DqlHelper
  */
 class DqlHelper
 {
@@ -138,11 +136,6 @@ class DqlHelper
     protected $columns = [];
     protected $columnInfo = [];
 
-    /**
-     * @param \Enlight_Components_Db_Adapter_Pdo_Mysql $db
-     * @param ModelManager                             $em
-     * @param \Enlight_Event_EventManager              $eventManager
-     */
     public function __construct(
         \Enlight_Components_Db_Adapter_Pdo_Mysql $db,
         ModelManager $em,
@@ -198,8 +191,6 @@ class DqlHelper
      * e.g. ARTICLE.ID => id
      *
      * @param string $attribute
-     *
-     * @return mixed
      */
     public function getColumnForAttribute($attribute)
     {
@@ -213,8 +204,6 @@ class DqlHelper
      * e.g. ARTICLE.ID => \Shopware\Models\Article\Article
      *
      * @param string $attribute
-     *
-     * @return mixed
      */
     public function getEntityForAttribute($attribute)
     {
@@ -236,8 +225,6 @@ class DqlHelper
      * e.g. article => \Shopware\Models\Article\Article
      *
      * @param string $prefix
-     *
-     * @return mixed
      */
     public function getEntityForPrefix($prefix)
     {
@@ -249,8 +236,6 @@ class DqlHelper
      * e.g. \Shopware\Models\Article\Article => article
      *
      * @param string $entity
-     *
-     * @return mixed
      */
     public function getPrefixForEntity($entity)
     {
@@ -292,8 +277,6 @@ class DqlHelper
      * Returns a single row with (almost) all possibly relevant information of a product
      *
      * @param int $detailId
-     *
-     * @return mixed
      */
     public function getProductForListing($detailId)
     {
@@ -664,14 +647,8 @@ class DqlHelper
     {
         $params = [];
         $newTokens = [];
-        $skipNext = false;
 
         foreach ($tokens as $key => $token) {
-            if ($skipNext) {
-                $skipNext = false;
-                continue;
-            }
-
             // Allow anyone to subscribe to any token and replace it with his own logic
             // Also allows you to add own tokens
             if ($event = $this->getEventManager()->notifyUntil(
@@ -815,8 +792,6 @@ class DqlHelper
      *
      * @param string $foreignPrefix
      * @param int[]  $detailIds
-     *
-     * @return mixed
      */
     public function getIdForForeignEntity($foreignPrefix, $detailIds)
     {
@@ -838,8 +813,6 @@ class DqlHelper
      *
      * @param string $foreignPrefix
      * @param int[]  $detailIds
-     *
-     * @return mixed
      */
     public function getIdForForeignEntityInternal($foreignPrefix, $detailIds)
     {

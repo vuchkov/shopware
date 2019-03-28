@@ -42,12 +42,6 @@ class LocationService implements LocationServiceInterface
      */
     private $connection;
 
-    /**
-     * LocationService constructor.
-     *
-     * @param CountryGatewayInterface $gateway
-     * @param Connection              $connection
-     */
     public function __construct(CountryGatewayInterface $gateway, Connection $connection)
     {
         $this->gateway = $gateway;
@@ -56,8 +50,6 @@ class LocationService implements LocationServiceInterface
 
     /**
      * Returns all available countries for the provided shop context
-     *
-     * @param ShopContextInterface $context
      *
      * @return Country[] indexed by id
      */

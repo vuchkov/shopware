@@ -79,8 +79,8 @@ class BackendContext extends SubContext
      *
      * @see http://docs.behat.org/en/v2.5/cookbook/using_spin_functions.html#adding-a-timeout
      *
-     * @param $lambda
-     * @param int $wait
+     * @param callable $lambda
+     * @param int      $wait
      *
      * @throws \Exception
      *
@@ -110,8 +110,8 @@ class BackendContext extends SubContext
      *
      * @see http://docs.behat.org/en/v2.5/cookbook/using_spin_functions.html#adding-a-timeout
      *
-     * @param $lambda
-     * @param int $wait
+     * @param callable $lambda
+     * @param int      $wait
      *
      * @return bool
      */
@@ -137,8 +137,7 @@ class BackendContext extends SubContext
     /**
      * Checks via a string exists
      *
-     * @param string     $text
-     * @param SubContext $context
+     * @param string $text
      *
      * @return bool
      */

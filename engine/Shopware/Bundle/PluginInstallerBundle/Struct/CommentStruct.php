@@ -24,9 +24,6 @@
 
 namespace Shopware\Bundle\PluginInstallerBundle\Struct;
 
-/**
- * Class CommentStruct
- */
 class CommentStruct implements \JsonSerializable
 {
     /**
@@ -134,9 +131,6 @@ class CommentStruct implements \JsonSerializable
         return $this->creationDate;
     }
 
-    /**
-     * @param \DateTimeInterface $creationDate
-     */
     public function setCreationDate(\DateTimeInterface $creationDate)
     {
         $this->creationDate = $creationDate;

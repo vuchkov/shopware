@@ -36,7 +36,7 @@ use Shopware\Components\Model\ModelEntity;
  *  - PRIMARY KEY (`id`)
  * </code>
  *
- * @ORM\Entity
+ * @ORM\Entity()
  * @ORM\Table(name="s_core_states")
  */
 class Status extends ModelEntity
@@ -97,7 +97,7 @@ class Status extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      */
     private $id;
 
@@ -130,8 +130,6 @@ class Status extends ModelEntity
     private $sendMail;
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -164,8 +162,6 @@ class Status extends ModelEntity
     }
 
     /**
-     * Set position
-     *
      * @param int $position
      *
      * @return Status
@@ -178,8 +174,6 @@ class Status extends ModelEntity
     }
 
     /**
-     * Get position
-     *
      * @return int
      */
     public function getPosition()
@@ -188,8 +182,6 @@ class Status extends ModelEntity
     }
 
     /**
-     * Set group
-     *
      * @param string $group
      *
      * @return Status
@@ -202,8 +194,6 @@ class Status extends ModelEntity
     }
 
     /**
-     * Get group
-     *
      * @return string
      */
     public function getGroup()
@@ -212,8 +202,6 @@ class Status extends ModelEntity
     }
 
     /**
-     * Set sendMail
-     *
      * @param int $sendMail
      *
      * @return Status
@@ -226,8 +214,6 @@ class Status extends ModelEntity
     }
 
     /**
-     * Get sendMail
-     *
      * @return int
      */
     public function getSendMail()

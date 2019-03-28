@@ -36,9 +36,6 @@ class PaymentInstaller
      */
     private $em;
 
-    /**
-     * @param ModelManager $em
-     */
     public function __construct(ModelManager $em)
     {
         $this->em = $em;
@@ -48,7 +45,6 @@ class PaymentInstaller
      * Inserts or updates the payment row
      *
      * @param string $pluginName
-     * @param array  $options
      *
      * @return Payment
      */
@@ -57,7 +53,7 @@ class PaymentInstaller
         Assertion::notEmptyKey($options, 'name', 'Payment name must not be empty');
 
         $paymentRepository = $this->em->getRepository(Payment::class);
-        /** @var Payment $payment */
+        /** @var Payment|null $payment */
         $payment = $paymentRepository->findOneBy([
             'name' => $options['name'],
         ]);

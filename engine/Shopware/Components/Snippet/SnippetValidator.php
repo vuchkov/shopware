@@ -26,11 +26,6 @@ namespace Shopware\Components\Snippet;
 
 use Doctrine\DBAL\Connection;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class SnippetValidator
 {
     /**
@@ -38,9 +33,6 @@ class SnippetValidator
      */
     private $db;
 
-    /**
-     * @param Connection $db
-     */
     public function __construct(Connection $db)
     {
         $this->db = $db;

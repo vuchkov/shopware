@@ -30,16 +30,10 @@ use Shopware\Components\Session\PdoSessionHandler;
 /**
  * Session Dependency Injection Bridge
  * Starts and handles the session
- *
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
  */
 class Session
 {
     /**
-     * @param Container $container
-     *
      * @return \SessionHandlerInterface|null
      */
     public function createSaveHandler(Container $container)
@@ -66,9 +60,6 @@ class Session
     }
 
     /**
-     * @param Container                     $container
-     * @param \SessionHandlerInterface|null $saveHandler
-     *
      * @return \Enlight_Components_Session_Namespace
      */
     public function createSession(Container $container, \SessionHandlerInterface $saveHandler = null)

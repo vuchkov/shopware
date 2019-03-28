@@ -44,8 +44,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * </code>
  *
  * @ORM\Table(name="s_order_details")
- * @ORM\Entity
- * @ORM\HasLifecycleCallbacks
+ * @ORM\Entity()
+ * @ORM\HasLifecycleCallbacks()
  */
 class Detail extends ModelEntity
 {
@@ -60,7 +60,7 @@ class Detail extends ModelEntity
     /**
      * @var \Shopware\Models\Order\Status
      *
-     * @Assert\NotBlank
+     * @Assert\NotBlank()
      *
      * @var \Shopware\Models\Order\Status
      *
@@ -107,7 +107,7 @@ class Detail extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -122,7 +122,7 @@ class Detail extends ModelEntity
     /**
      * @var int
      *
-     * @Assert\NotBlank
+     * @Assert\NotBlank()
      *
      * @ORM\Column(name="articleID", type="integer", nullable=false)
      */
@@ -138,7 +138,7 @@ class Detail extends ModelEntity
     /**
      * @var float
      *
-     * @Assert\NotBlank
+     * @Assert\NotBlank()
      *
      * @ORM\Column(name="tax_rate", type="float", nullable=false)
      */
@@ -168,7 +168,7 @@ class Detail extends ModelEntity
     /**
      * @var string
      *
-     * @Assert\NotBlank
+     * @Assert\NotBlank()
      *
      * @ORM\Column(name="articleordernumber", type="string", length=255, nullable=false)
      */
@@ -177,7 +177,7 @@ class Detail extends ModelEntity
     /**
      * @var float
      *
-     * @Assert\NotBlank
+     * @Assert\NotBlank()
      *
      * @ORM\Column(name="price", type="float", nullable=false)
      */
@@ -186,7 +186,7 @@ class Detail extends ModelEntity
     /**
      * @var int
      *
-     * @Assert\NotBlank
+     * @Assert\NotBlank()
      *
      * @ORM\Column(name="quantity", type="integer", nullable=false)
      */
@@ -195,7 +195,7 @@ class Detail extends ModelEntity
     /**
      * @var string
      *
-     * @Assert\NotBlank
+     * @Assert\NotBlank()
      *
      * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
@@ -265,8 +265,6 @@ class Detail extends ModelEntity
     private $packUnit;
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -275,8 +273,6 @@ class Detail extends ModelEntity
     }
 
     /**
-     * Set number
-     *
      * @param string $number
      *
      * @return Detail
@@ -289,8 +285,6 @@ class Detail extends ModelEntity
     }
 
     /**
-     * Get number
-     *
      * @return string
      */
     public function getNumber()
@@ -299,8 +293,6 @@ class Detail extends ModelEntity
     }
 
     /**
-     * Set articleId
-     *
      * @param int $articleId
      *
      * @return Detail
@@ -313,8 +305,6 @@ class Detail extends ModelEntity
     }
 
     /**
-     * Get articleId
-     *
      * @return int
      */
     public function getArticleId()
@@ -323,8 +313,6 @@ class Detail extends ModelEntity
     }
 
     /**
-     * Set price
-     *
      * @param float $price
      *
      * @return Detail
@@ -337,8 +325,6 @@ class Detail extends ModelEntity
     }
 
     /**
-     * Get price
-     *
      * @return float
      */
     public function getPrice()
@@ -347,8 +333,6 @@ class Detail extends ModelEntity
     }
 
     /**
-     * Set quantity
-     *
      * @param int $quantity
      *
      * @return Detail
@@ -361,8 +345,6 @@ class Detail extends ModelEntity
     }
 
     /**
-     * Get quantity
-     *
      * @return int
      */
     public function getQuantity()
@@ -371,8 +353,6 @@ class Detail extends ModelEntity
     }
 
     /**
-     * Set articleName
-     *
      * @param string $articleName
      *
      * @return Detail
@@ -385,8 +365,6 @@ class Detail extends ModelEntity
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getArticleName()
@@ -402,17 +380,12 @@ class Detail extends ModelEntity
         return $this->articleDetail;
     }
 
-    /**
-     * @param ArticleDetail|null $articleDetail
-     */
     public function setArticleDetail(ArticleDetail $articleDetail = null)
     {
         $this->articleDetail = $articleDetail;
     }
 
     /**
-     * Set shipped
-     *
      * @param int $shipped
      *
      * @return Detail
@@ -425,8 +398,6 @@ class Detail extends ModelEntity
     }
 
     /**
-     * Get shipped
-     *
      * @return int
      */
     public function getShipped()
@@ -435,8 +406,6 @@ class Detail extends ModelEntity
     }
 
     /**
-     * Set shippedGroup
-     *
      * @param int $shippedGroup
      *
      * @return Detail
@@ -449,8 +418,6 @@ class Detail extends ModelEntity
     }
 
     /**
-     * Get shippedGroup
-     *
      * @return int
      */
     public function getShippedGroup()
@@ -459,8 +426,6 @@ class Detail extends ModelEntity
     }
 
     /**
-     * Set releaseDate
-     *
      * @param \DateTimeInterface $releaseDate
      *
      * @return Detail
@@ -473,8 +438,6 @@ class Detail extends ModelEntity
     }
 
     /**
-     * Get releaseDate
-     *
      * @return \DateTimeInterface
      */
     public function getReleaseDate()
@@ -483,8 +446,6 @@ class Detail extends ModelEntity
     }
 
     /**
-     * Set mode
-     *
      * @param int $mode
      *
      * @return Detail
@@ -497,8 +458,6 @@ class Detail extends ModelEntity
     }
 
     /**
-     * Get mode
-     *
      * @return int
      */
     public function getMode()
@@ -507,8 +466,6 @@ class Detail extends ModelEntity
     }
 
     /**
-     * Set esdArticle
-     *
      * @param int $esdArticle
      *
      * @return Detail
@@ -521,8 +478,6 @@ class Detail extends ModelEntity
     }
 
     /**
-     * Get esdArticle
-     *
      * @return int
      */
     public function getEsdArticle()
@@ -531,8 +486,6 @@ class Detail extends ModelEntity
     }
 
     /**
-     * Set config
-     *
      * @param string $config
      *
      * @return Detail
@@ -545,8 +498,6 @@ class Detail extends ModelEntity
     }
 
     /**
-     * Get config
-     *
      * @return string
      */
     public function getConfig()
@@ -607,7 +558,7 @@ class Detail extends ModelEntity
      * The prePersist and preUpdate function call the calculateOrderAmount function to recalculate the
      * order invoice amount, the after remove function can't handle this logic,
      *
-     * @ORM\PreRemove
+     * @ORM\PreRemove()
      */
     public function afterRemove()
     {
@@ -631,7 +582,7 @@ class Detail extends ModelEntity
     /**
      * If an position is added, the order amount has to be recalculated
      *
-     * @ORM\PrePersist
+     * @ORM\PrePersist()
      */
     public function beforeInsert()
     {
@@ -640,7 +591,7 @@ class Detail extends ModelEntity
     /**
      * If an position is added, the stock of the article will be reduced by the ordered quantity.
      *
-     * @ORM\PostPersist
+     * @ORM\PostPersist()
      */
     public function afterInsert()
     {
@@ -662,7 +613,7 @@ class Detail extends ModelEntity
      * If the position article has been changed, the old article stock must be increased based on the (old) ordering quantity.
      * The stock of the new article will be reduced by the (new) ordered quantity.
      *
-     * @ORM\PreUpdate
+     * @ORM\PreUpdate()
      */
     public function beforeUpdate()
     {

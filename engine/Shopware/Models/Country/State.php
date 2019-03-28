@@ -28,7 +28,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Shopware\Components\Model\ModelEntity;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity()
  * @ORM\Table(name="s_core_countries_states")
  */
 class State extends ModelEntity
@@ -58,7 +58,7 @@ class State extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -99,8 +99,6 @@ class State extends ModelEntity
     private $active;
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -109,8 +107,6 @@ class State extends ModelEntity
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      *
      * @return State
@@ -123,8 +119,6 @@ class State extends ModelEntity
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getName()
@@ -133,8 +127,6 @@ class State extends ModelEntity
     }
 
     /**
-     * Set shortCode
-     *
      * @param string $shortCode
      *
      * @return State
@@ -147,8 +139,6 @@ class State extends ModelEntity
     }
 
     /**
-     * Get shortCode
-     *
      * @return string
      */
     public function getShortCode()
@@ -157,8 +147,6 @@ class State extends ModelEntity
     }
 
     /**
-     * Set active
-     *
      * @param int $active
      *
      * @return State
@@ -171,8 +159,6 @@ class State extends ModelEntity
     }
 
     /**
-     * Get active
-     *
      * @return int
      */
     public function getActive()

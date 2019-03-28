@@ -27,11 +27,6 @@ namespace Shopware\Components\Routing\GeneratorFilters;
 use Shopware\Components\Routing\Context;
 use Shopware\Components\Routing\PostFilterInterface;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class FrontendPostFilter implements PostFilterInterface
 {
     /**
@@ -47,19 +42,10 @@ class FrontendPostFilter implements PostFilterInterface
                 . '/' . $url;
         }
 
-        //@todo make session postfilter
-        if (!empty($params['appendSession'])) {
-            $url .= strpos($url, '?') === false ? '?' : '&';
-            $url .= session_name() . '=' . session_id();
-            $url .= '&__shop=' . $context->getShopId();
-        }
-
         return $url;
     }
 
     /**
-     * @param array $params
-     *
      * @return bool
      */
     private function isFullPath(array $params)

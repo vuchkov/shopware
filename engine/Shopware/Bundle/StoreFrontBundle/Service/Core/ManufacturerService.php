@@ -30,11 +30,6 @@ use Shopware\Bundle\StoreFrontBundle\Struct;
 use Shopware\Bundle\StoreFrontBundle\Struct\Product\Manufacturer;
 use Shopware\Components\Routing\RouterInterface;
 
-/**
- * @category Shopware
- *
- * @copyright Copyright (c) shopware AG (http://www.shopware.de)
- */
 class ManufacturerService implements Service\ManufacturerServiceInterface
 {
     /**
@@ -47,10 +42,6 @@ class ManufacturerService implements Service\ManufacturerServiceInterface
      */
     private $router;
 
-    /**
-     * @param Gateway\ManufacturerGatewayInterface $manufacturerGateway
-     * @param RouterInterface                      $router
-     */
     public function __construct(
         Gateway\ManufacturerGatewayInterface $manufacturerGateway,
         RouterInterface $router

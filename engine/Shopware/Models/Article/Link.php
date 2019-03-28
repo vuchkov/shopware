@@ -30,7 +30,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="s_articles_information")
- * @ORM\Entity
+ * @ORM\Entity()
  */
 class Link extends ModelEntity
 {
@@ -57,7 +57,7 @@ class Link extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -72,7 +72,7 @@ class Link extends ModelEntity
     /**
      * @var string
      *
-     * @Assert\NotBlank
+     * @Assert\NotBlank()
      *
      * @ORM\Column(name="description", type="string", nullable=false)
      */
@@ -81,8 +81,8 @@ class Link extends ModelEntity
     /**
      * @var string
      *
-     * @Assert\Url
-     * @Assert\NotBlank
+     * @Assert\Url()
+     * @Assert\NotBlank()
      *
      * @ORM\Column(name="link", type="string", nullable=false)
      */
@@ -96,8 +96,6 @@ class Link extends ModelEntity
     private $target = '_blank';
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -106,8 +104,6 @@ class Link extends ModelEntity
     }
 
     /**
-     * Set article
-     *
      * @param Article $article
      *
      * @return Link
@@ -130,8 +126,6 @@ class Link extends ModelEntity
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      *
      * @return Link
@@ -144,8 +138,6 @@ class Link extends ModelEntity
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getName()
@@ -154,8 +146,6 @@ class Link extends ModelEntity
     }
 
     /**
-     * Set link
-     *
      * @param string $link
      *
      * @return Link
@@ -168,8 +158,6 @@ class Link extends ModelEntity
     }
 
     /**
-     * Get link
-     *
      * @return string
      */
     public function getLink()
@@ -178,8 +166,6 @@ class Link extends ModelEntity
     }
 
     /**
-     * Set target
-     *
      * @param string $target
      *
      * @return Link
@@ -192,8 +178,6 @@ class Link extends ModelEntity
     }
 
     /**
-     * Get target
-     *
      * @return string
      */
     public function getTarget()

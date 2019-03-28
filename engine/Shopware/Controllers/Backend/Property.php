@@ -27,9 +27,6 @@ use Shopware\Models\Property\Group;
 use Shopware\Models\Property\Option;
 use Shopware\Models\Property\Value;
 
-/**
- * Shopware Backend Controller for the property module
- */
 class Shopware_Controllers_Backend_Property extends Shopware_Controllers_Backend_ExtJs
 {
     /**
@@ -197,7 +194,7 @@ class Shopware_Controllers_Backend_Property extends Shopware_Controllers_Backend
             return;
         }
 
-        /* @var Option $option */
+        /* @var Option|null $option */
         $option = Shopware()->Models()->getReference(Option::class, $optionId);
         if (!$option) {
             $this->View()->assign(['success' => false, 'message' => 'Option not found']);
@@ -397,7 +394,7 @@ class Shopware_Controllers_Backend_Property extends Shopware_Controllers_Backend
             return;
         }
 
-        /* @var Option $option */
+        /* @var Option|null $option */
         $option = Shopware()->Models()->getReference(Option::class, $optionId);
         if (!$option) {
             $this->View()->assign(['success' => false, 'message' => 'Option not found']);

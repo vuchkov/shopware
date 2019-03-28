@@ -24,7 +24,7 @@
 
 namespace Shopware\Bundle\SearchBundleES\FacetHandler;
 
-use ONGR\ElasticsearchDSL\Aggregation\StatsAggregation;
+use ONGR\ElasticsearchDSL\Aggregation\Metric\StatsAggregation;
 use ONGR\ElasticsearchDSL\Search;
 use Shopware\Bundle\SearchBundle\Condition\HeightCondition;
 use Shopware\Bundle\SearchBundle\Condition\LengthCondition;
@@ -47,14 +47,10 @@ class ProductDimensionsFacetHandler implements HandlerInterface, ResultHydratorI
 {
     public function supports(CriteriaPartInterface $criteriaPart)
     {
-        return
-            $criteriaPart instanceof WeightFacet
-            ||
-            $criteriaPart instanceof WidthFacet
-            ||
-            $criteriaPart instanceof LengthFacet
-            ||
-            $criteriaPart instanceof HeightFacet
+        return $criteriaPart instanceof WeightFacet
+            || $criteriaPart instanceof WidthFacet
+            || $criteriaPart instanceof LengthFacet
+            || $criteriaPart instanceof HeightFacet
         ;
     }
 
@@ -102,8 +98,6 @@ class ProductDimensionsFacetHandler implements HandlerInterface, ResultHydratorI
 
     /**
      * @param WeightFacet|WidthFacet|LengthFacet|HeightFacet|FacetInterface $facet
-     * @param array                                                         $stats
-     * @param Criteria                                                      $criteria
      *
      * @return RangeFacetResult|null
      */

@@ -43,7 +43,7 @@ use Shopware\Components\Model\ModelEntity;
  *
  * @ORM\Entity(repositoryClass="Repository")
  * @ORM\Table(name="s_premium_shippingcosts")
- * @ORM\HasLifecycleCallbacks
+ * @ORM\HasLifecycleCallbacks()
  */
 class ShippingCost extends ModelEntity
 {
@@ -63,7 +63,7 @@ class ShippingCost extends ModelEntity
      * @var int
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
@@ -105,8 +105,6 @@ class ShippingCost extends ModelEntity
     private $dispatchId;
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -115,8 +113,6 @@ class ShippingCost extends ModelEntity
     }
 
     /**
-     * Set from
-     *
      * @param float $from
      *
      * @return ShippingCost
@@ -129,8 +125,6 @@ class ShippingCost extends ModelEntity
     }
 
     /**
-     * Get from
-     *
      * @return float
      */
     public function getFrom()
@@ -139,8 +133,6 @@ class ShippingCost extends ModelEntity
     }
 
     /**
-     * Set value
-     *
      * @param float $value
      *
      * @return ShippingCost
@@ -153,8 +145,6 @@ class ShippingCost extends ModelEntity
     }
 
     /**
-     * Get value
-     *
      * @return float
      */
     public function getValue()
@@ -163,8 +153,6 @@ class ShippingCost extends ModelEntity
     }
 
     /**
-     * Set factor
-     *
      * @param float $factor
      *
      * @return ShippingCost
@@ -177,8 +165,6 @@ class ShippingCost extends ModelEntity
     }
 
     /**
-     * Get factor
-     *
      * @return float
      */
     public function getFactor()

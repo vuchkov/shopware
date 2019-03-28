@@ -29,10 +29,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class ContainerAwareEventManager extends \Enlight_Event_EventManager
 {
     /**
-     * @var array Contains all registered event listeners. A listener can be registered by the
-     *            registerListener(Enlight_Event_Handler $handler) function.
+     * Contains all registered event listeners. A listener can be registered by the
+     * registerListener(Enlight_Event_Handler $handler) function.
+     *
+     * @var array<string, array<string, callable>>
      */
     protected $containerListeners = [];
+
     /**
      * @var ContainerInterface;
      */
@@ -43,9 +46,6 @@ class ContainerAwareEventManager extends \Enlight_Event_EventManager
      */
     private $listenerIds = [];
 
-    /**
-     * @param ContainerInterface $container
-     */
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
